@@ -1,0 +1,13 @@
+﻿@model WebProject.ConnectedUsers
+
+@{
+    ViewData["Title"] = "ShowConnectedUsers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>ShowConnectedUsers</h1>
+
+@foreach(var user in WebProject.ConnectedUsers.myConnectedUsers)
+{
+    <li>@user</li>
+}
