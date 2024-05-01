@@ -1,19 +1,32 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 using Motel.Models;
 using System.Diagnostics;
+using WebProject.Models;
+using Motel.Utility.Database;
 
 namespace Motel.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IMongoCollection<UserAccount> _userAccountCollection;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IOptions<DatabaseSettings> databaseSettings)
         {
-            _logger = logger;
+            var mongoClient = new MongoClient(databaseSettings.Value.ConnectionString);
+            var database = mongoClient.GetDatabase(databaseSettings.Value.DatabaseName);
+
+            _userAccountCollection = database.GetCollection<UserAccount>
+                (databaseSettings.Value.UserAccountsCollectionName);
         }
 
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult ShowConnectedUsers()
         {
             return View();
         }

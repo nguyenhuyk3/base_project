@@ -2,7 +2,7 @@
 using MongoDB.Bson;
 using System.Text.Json.Serialization;
 
-namespace WebProject.Models
+namespace Motel.Models
 {
     public class Info
     {
@@ -15,13 +15,17 @@ namespace WebProject.Models
         [JsonPropertyName("full_name")]
         public string FullName { get; set; } = null!;
 
-        [BsonElement("age")]
-        [JsonPropertyName("age")]
-        public uint Age { get; set; }
+        [BsonElement("birth_day")]
+        [JsonPropertyName("birth_day")]
+        public DateTime BirthDay { get; set; }
+
+        //[BsonElement("age")]
+        //[JsonPropertyName("age")]
+        //public uint Age { get; set; }
 
         [BsonElement("sex")]
         [JsonPropertyName("sex")]
-        public string Sex { get; set; } = null!;
+        public bool Sex { get; set; }
 
         [BsonElement("email")]
         [JsonPropertyName("email")]
@@ -29,6 +33,7 @@ namespace WebProject.Models
 
         [BsonElement("phone")]
         [JsonPropertyName("phone")]
-        public string Phone { get; set; } = null!;
+        [BsonIgnoreIfNull]
+        public string? Phone { get; set; } = null;
     }
 }

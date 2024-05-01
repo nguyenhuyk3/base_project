@@ -1,5 +1,5 @@
-using WebProject.Utility.Database;
-using WebProject.Utility.Hubs;
+using Motel.Utility.Database;
+using Motel.Utility.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,6 +42,15 @@ app.UseAuthorization();
             it sends a request to the application's "/chatHub" address.
 */
 app.MapHub<ChatHub>("/chatHub");
+
+//app.MapAreaControllerRoute(
+//    name: "MyAreaProducts",
+//    areaName: "Post",
+//    pattern: "Post/{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "MyArea",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllerRoute(
     name: "default",

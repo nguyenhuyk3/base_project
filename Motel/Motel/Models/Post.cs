@@ -1,9 +1,8 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.Text.Json.Serialization;
-using WebProject.Models;
 
-namespace WebProject.Models
+namespace Motel.Models
 {
     public class Post
     {

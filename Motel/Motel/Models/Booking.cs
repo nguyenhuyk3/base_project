@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using System.Text.Json.Serialization;
 
-namespace WebProject.Models
+namespace Motel.Models
 {
     public class Booking
     {

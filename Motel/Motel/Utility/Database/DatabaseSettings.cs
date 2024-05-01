@@ -1,4 +1,4 @@
-﻿namespace WebProject.Utility.Database
+﻿namespace Motel.Utility.Database
 {
     public class DatabaseSettings
     {

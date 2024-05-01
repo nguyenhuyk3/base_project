@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Motel")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bdf1b423cdac8b2eb2eb2ba9ea8f65aa67361a9d")]
 [assembly: System.Reflection.AssemblyProductAttribute("Motel")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Motel")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

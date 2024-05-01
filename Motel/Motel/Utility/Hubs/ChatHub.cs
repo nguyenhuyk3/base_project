@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 
-namespace WebProject.Utility.Hubs
+namespace Motel.Utility.Hubs
 {
     public class ChatHub : Hub
     {
 
         public override Task OnConnectedAsync()
         {
+
             ConnectedUsers.myConnectedUsers.Add(Context.ConnectionId);
+
 
             return base.OnConnectedAsync();
         }
@@ -43,5 +45,7 @@ namespace WebProject.Utility.Hubs
                 await Clients.Client(user).SendAsync("ReceiveMessage", user, message);
             }
         }
+
+
     }
 }

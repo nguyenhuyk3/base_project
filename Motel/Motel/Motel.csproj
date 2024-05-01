@@ -7,12 +7,30 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\css\Post\Home\Index\Index.css" />
+    <Content Remove="wwwroot\css\Post\Home\Index\Search.css" />
+    <Content Remove="wwwroot\css\Post\Home\Index\Style.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
     <PackageReference Include="MongoDB.Driver" Version="2.25.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Post\Data\" />
+    <Folder Include="Areas\Post\Models\" />
+    <Folder Include="Areas\UserAccount\Data\" />
+    <Folder Include="Areas\UserAccount\Models\" />
     <Folder Include="Repository\" />
+    <Folder Include="Views\Shared\Account\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\Post\Home\Index\Index.css" />
+    <None Include="wwwroot\css\Post\Home\Index\Search.css" />
+    <None Include="wwwroot\css\Post\Home\Index\Style.css" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace WebProject
+﻿namespace Motel
 {
     public class ConnectedUsers
     {

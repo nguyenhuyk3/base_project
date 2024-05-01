@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 using System.Text.Json.Serialization;
 using MongoDB.Driver;
 
-namespace WebProject.ViewModels
+namespace Motel.ViewModels
 {
     public class PostViewModel
     {

@@ -2,7 +2,7 @@
 using MongoDB.Bson;
 using System.Text.Json.Serialization;
 
-namespace WebProject.Models
+namespace Motel.Models
 {
     public class Bill
     {
