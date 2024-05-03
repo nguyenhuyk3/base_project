@@ -10,18 +10,11 @@ namespace Motel.Areas.UserAccount.Controllers
     [Area("UserAccount")]
     public class UserAccountController : Controller
     {
-        private readonly IMongoCollection<Motel.Models.UserAccount> _userAccountCollection;
-        private readonly IMongoCollection<Role> _roleCollection;
+        private readonly DatabaseConstructor _databaseConstuctor;
 
         public UserAccountController(IOptions<DatabaseSettings> databaseSettings)
         {
-            var mongoClient = new MongoClient(databaseSettings.Value.ConnectionString);
-            var database = mongoClient.GetDatabase(databaseSettings.Value.DatabaseName);
-
-            _userAccountCollection = database.GetCollection<Motel.Models.UserAccount>
-                (databaseSettings.Value.UserAccountsCollectionName);
-            _roleCollection = database.GetCollection<Role>
-                (databaseSettings.Value.RolesCollectionName);
+            _databaseConstuctor = new DatabaseConstructor(databaseSettings);
         }
 
         public void DeleteCookie()
@@ -44,7 +37,8 @@ namespace Motel.Areas.UserAccount.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userAccount = await _userAccountCollection
+                var userAccount = await _databaseConstuctor
+                                        .UserAccountCollection
                                         .Find(user => user.Email == model.Email)
                                         .FirstOrDefaultAsync();
 
@@ -56,7 +50,8 @@ namespace Motel.Areas.UserAccount.Controllers
                         // Will find out later
                         HttpOnly = true,
                     };
-
+                    
+                    // Cookie
                     var keyValuePairs = new[]
                     {
                         new KeyValuePair<string, string>("id", userAccount.Id.ToString()),
@@ -92,9 +87,10 @@ namespace Motel.Areas.UserAccount.Controllers
 
             if (ModelState.IsValid)
             {
-                var existingUser = await _userAccountCollection
-                                       .Find(user => user.Email == model.Email)
-                                       .FirstOrDefaultAsync();
+                var existingUser = await _databaseConstuctor
+                                        .UserAccountCollection
+                                        .Find(user => user.Email == model.Email)
+                                        .FirstOrDefaultAsync();
 
                 if (existingUser != null)
                 {
@@ -104,7 +100,8 @@ namespace Motel.Areas.UserAccount.Controllers
                 }
 
                 // I will convert "Customer" to id later
-                var role = await _roleCollection
+                var role = await _databaseConstuctor
+                                .RoleCollection
                                 .Find(r => r.Name == "Customer")
                                 .FirstOrDefaultAsync();
 
@@ -135,12 +132,12 @@ namespace Motel.Areas.UserAccount.Controllers
                         Name = "Customer"
                     };
 
-                    await _roleCollection.InsertOneAsync(newRole);
+                    await _databaseConstuctor.RoleCollection.InsertOneAsync(newRole);
 
                     userAccount.Role = newRole.Id.ToString();
                 }
 
-                await _userAccountCollection.InsertOneAsync(userAccount);
+                await _databaseConstuctor.UserAccountCollection.InsertOneAsync(userAccount);
 
                 var cookie = new CookieOptions
                 {
@@ -149,6 +146,7 @@ namespace Motel.Areas.UserAccount.Controllers
                     HttpOnly = true
                 };
 
+                // Cookie
                 var keyValuePairs = new[]
                 {
                     new KeyValuePair<string, string>("id", userAccount.Id.ToString()),

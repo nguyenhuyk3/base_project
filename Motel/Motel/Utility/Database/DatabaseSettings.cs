@@ -6,7 +6,7 @@
         public string DatabaseName { get; set; } = null!;
         public string CitiesCollectionName { get; set; } = null!;
         public string DistrictsCollectionName { get; set; } = null!;
-        public string AwardsCollectionName { get; set; } = null!;
+        public string WardsCollectionName { get; set; } = null!;
         public string StreetsCollectionName { get; set; } = null!;
         public string RolesCollectionName { get; set; } = null!;
         public string CategoriesCollectionName { get; set; } = null!;

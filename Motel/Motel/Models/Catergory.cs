@@ -16,8 +16,8 @@ namespace Motel.Models
         [JsonPropertyName("name")]
         public string Name { get; set; } = null!;
 
-        [BsonElement("toggle")]
-        [JsonPropertyName("toggle")]
+        [BsonElement("is_toggled")]
+        [JsonPropertyName("is_toggled")]
         public bool IsToggled { get; set; } = true;
     }
 }

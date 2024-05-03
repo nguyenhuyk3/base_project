@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace WebProject.Models.Address
 {
-    public class Award
+    public class Ward
     {
         [BsonId]
         [BsonElement("id")]

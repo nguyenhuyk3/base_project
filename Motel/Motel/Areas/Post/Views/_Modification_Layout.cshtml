@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "_Modification_Layout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles {
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link href="~/css/post/_modification_layout.css" rel="stylesheet" />
+}
+
+<div class="container-fluid">
+    <div class="row-cols-2 d-flex">
+        <div class="col-4">
+            <div class="left">
+                <div class="left-item emp-info"></div>
+                <div class="left-item services">
+                    <a href="#" class="link-service">
+                        <i class="fa-solid fa-list"></i>
+                        <p>Đăng Tin</p>
+                        <i class="fa-solid fa-angle-right"></i>
+                    </a>
+                </div>
+                <div class="left-item services">
+                    <a href="#" class="link-service">
+                        <i class="fa-regular fa-circle-user"></i>
+                        <p>Danh Sách Tin</p>
+                        <i class="fa-solid fa-angle-right"></i>
+                    </a>
+                </div>
+                <div class="left-item services">
+                    <a href="#" class="link-service">
+                        <i class="fa-solid fa-star"></i>
+                        <p>Thông Tin Tài Khoản</p>
+                        <i class="fa-solid fa-angle-right"></i>
+                    </a>
+                </div>
+                <div class="left-item services">
+                    <a href="#" class="link-service">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <p>Nạp tiền</p>
+                        <i class="fa-solid fa-angle-right"></i>
+                    </a>
+                </div>
+                <div class="left-item services">
+                    <a href="#" class="link-service">
+                        <i class="fa-solid fa-user"></i>
+                        <p>Cài Đặt Tài Khoản</p>
+                        <i class="fa-solid fa-angle-right"></i>
+                    </a>
+                </div>
+                <div class="left-item services">
+                    <a href="#" class="link-service">
+                        <i class="fa-solid fa-building"></i>
+                        <p>Lịch Sử Giao Dịch</p>
+                        <i class="fa-solid fa-angle-right"></i>
+                    </a>
+                </div>
+                <div class="left-item services">
+                    <a href="#" class="link-service">
+                        <i class="fa-solid fa-paperclip"></i>
+                        <p>Hướng Dẫn</p>
+                        <i class="fa-solid fa-angle-right"></i>
+                    </a>
+                </div>
+                <div class="left-item services">
+                    <a href="#" class="link-service">
+                        <i class="fa-solid fa-gear"></i>
+                        <p>Tiện Ích</p>
+                        <i class="fa-solid fa-angle-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-8">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+@await RenderSectionAsync("_Modification_Layout", required: false)
+

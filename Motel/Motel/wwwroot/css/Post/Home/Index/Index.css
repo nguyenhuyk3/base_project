@@ -14,7 +14,6 @@
 
 /* Định dạng tiêu đề trong mô tả */
 .describe h4 {
-    height: 150px;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 100%;
@@ -87,10 +86,10 @@ h6 {
 /* Màu mặc định cho thẻ a */
 a {
     color: black;
-    text-decoration: none; /* Loại bỏ gạch chân mặc định */
+    text-decoration: none;
 }
 
     /* Màu khi hover vào thẻ a */
     a:hover {
-        color: #007bff; /* Màu xanh nhạt */
+        color: #007bff;
     }

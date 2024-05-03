@@ -17,7 +17,7 @@ namespace WebProject.Models.Address
 
         [BsonElement("api_id")]
         [JsonPropertyName("api_id")]
-        public uint ApiId { get; set; } = 0;
+        public int ApiId { get; set; } = 0;
 
         [BsonElement("is_toggled")]
         [JsonPropertyName("is_toggled")]

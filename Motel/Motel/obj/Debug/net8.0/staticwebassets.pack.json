@@ -5,28 +5,68 @@
       "PackagePath": "staticwebassets\\Motel.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\wwwroot\\css\\animate.css",
-      "PackagePath": "staticwebassets\\css\\animate.css"
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\Home\\Index\\animate.css",
+      "PackagePath": "staticwebassets\\css\\Post\\Home\\Index\\animate.css"
     },
     {
-      "Id": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\wwwroot\\css\\owl.css",
-      "PackagePath": "staticwebassets\\css\\owl.css"
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\Home\\Index\\fontawesome.css",
+      "PackagePath": "staticwebassets\\css\\Post\\Home\\Index\\fontawesome.css"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\Home\\Index\\owl.css",
+      "PackagePath": "staticwebassets\\css\\Post\\Home\\Index\\owl.css"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\Home\\Index\\templatemo-villa-agency.css",
+      "PackagePath": "staticwebassets\\css\\Post\\Home\\Index\\templatemo-villa-agency.css"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\_Modification_Layout.css",
+      "PackagePath": "staticwebassets\\css\\Post\\_Modification_Layout.css"
     },
     {
       "Id": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
-      "Id": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\wwwroot\\css\\templatemo-villa-agency.css",
-      "PackagePath": "staticwebassets\\css\\templatemo-villa-agency.css"
-    },
-    {
       "Id": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\wwwroot\\images\\banner-01.jpg",
+      "PackagePath": "staticwebassets\\images\\banner-01.jpg"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\wwwroot\\images\\banner-02.jpg",
+      "PackagePath": "staticwebassets\\images\\banner-02.jpg"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\wwwroot\\images\\banner-03.jpg",
+      "PackagePath": "staticwebassets\\images\\banner-03.jpg"
+    },
+    {
       "Id": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Home\\Index.js",
       "PackagePath": "staticwebassets\\js\\Home\\Index.js"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Home\\Index\\counter.js",
+      "PackagePath": "staticwebassets\\js\\Post\\Home\\Index\\counter.js"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Home\\Index\\custom.js",
+      "PackagePath": "staticwebassets\\js\\Post\\Home\\Index\\custom.js"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Home\\Index\\isotope.min.js",
+      "PackagePath": "staticwebassets\\js\\Post\\Home\\Index\\isotope.min.js"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Home\\Index\\owl-carousel.js",
+      "PackagePath": "staticwebassets\\js\\Post\\Home\\Index\\owl-carousel.js"
+    },
+    {
+      "Id": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Modification\\DropList.js",
+      "PackagePath": "staticwebassets\\js\\Post\\Modification\\DropList.js"
     },
     {
       "Id": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Shared\\_Layout.js",
@@ -35,22 +75,6 @@
     {
       "Id": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\wwwroot\\js\\chat.js",
       "PackagePath": "staticwebassets\\js\\chat.js"
-    },
-    {
-      "Id": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\wwwroot\\js\\counter.js",
-      "PackagePath": "staticwebassets\\js\\counter.js"
-    },
-    {
-      "Id": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\wwwroot\\js\\custom.js",
-      "PackagePath": "staticwebassets\\js\\custom.js"
-    },
-    {
-      "Id": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\wwwroot\\js\\isotope.min.js",
-      "PackagePath": "staticwebassets\\js\\isotope.min.js"
-    },
-    {
-      "Id": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\wwwroot\\js\\owl-carousel.js",
-      "PackagePath": "staticwebassets\\js\\owl-carousel.js"
     },
     {
       "Id": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\wwwroot\\js\\signalr\\dist\\browser\\signalr.js",

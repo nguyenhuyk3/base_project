@@ -6,61 +6,47 @@
 @section Styles {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
           rel="stylesheet">
-    <link href="~/css/templatemo-villa-agency.css" rel="stylesheet" />
-    <link href="~/css/owl.css" rel="stylesheet" />
-    <link href="~/css/animate.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!--Additional cSS files-->
+    <link href="~/css/post/home/index/animate.css"
+          rel="stylesheet" />
+    <link href="~/css/post/home/index/fontawesome.css"
+          rel="stylesheet" />
+    <!--Addtional links-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          rel="stylesheet" />
+    <link href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
+          rel="stylesheet" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
+          rel='stylesheet'>
+    <!--Css created by members-->
     <link href="~/css/post/home/index/index.css" rel="stylesheet" />
     <link href="~/css/post/home/index/search.css" rel="stylesheet" />
     <link href="~/css/post/home/index/style.css" rel="stylesheet" />
 }
 
-<div class="container-fluid">
-    <div class="main-banner">
-        <div class="owl-carousel owl-banner">
-            <div class="item item-1">
-                <div class="header-text">
-                    <span class="category">Toronto, <em>Canada</em></span>
-                    <h2>Hurry!<br>Get the Best Villa for you</h2>
-                </div>
-            </div>
-            <div class="item item-2">
-                <div class="header-text">
-                    <span class="category">Melbourne, <em>Australia</em></span>
-                    <h2>Be Quick!<br>Get the best villa in town</h2>
-                </div>
-            </div>
-            <div class="item item-3">
-                <div class="header-text">
-                    <span class="category">Miami, <em>South Florida</em></span>
-                    <h2>Act Now!<br>Get the highest level penthouse</h2>
-                </div>
-            </div>
-        </div>
-    </div>
-
+<div class="container-fluid" style="padding: 0">
     <div class="overlay">
         <div class="search">
-            <select class="select-search" name="loai-nha-dat" id="">
-                <option value="">Loại nhà đất</option>
-                <option value=""></option>
-            </select>
-            <select class="select-search" name="khu-vuc" id="">
-                <option value="">Khu vực</option>
-            </select>
-            <select class="select-search" name="muc-gia" id="">
+            <select class="select-search" name="muc-gia" id="muc-gia">
                 <option value="">Mức giá</option>
             </select>
-            <select class="select-search" name="dien-tich" id="">
+
+            <select class="select-search" name="khu-vuc" id="khu-vuc">
+                <option value="">Khu vực</option>
+            </select>
+
+            <select class="select-search" name="muc-gia" id="muc-gia">
+                <option value="">Mức giá</option>
+            </select>
+
+            <select class="select-search" name="dien-tich" id="dien-tich">
                 <option value="">Diện tích</option>
             </select>
         </div>
     </div>
 
-    <section class="container mt-4">
-        <div class="col-md-3">
+    <section class="container mt-4 p-2">
+        <div class="col-md-3 mx-3">
             <div class="container border mb-3">
                 <h6>Lọc theo khoảng giá</h6>
                 <ul class="list-unstyled">
@@ -90,28 +76,25 @@
             <div class="col-md-12 border mb-3">
                 <div class="row" style="height: 100%;">
                     <div class="col-md-6">
-                        <img src="assets/images/images1.jpg" alt="" style="height: 100%;">
+                        <img src="~/images/banner-03.jpg" alt="Alternate Text" style="width:100%" />
                     </div>
                     <div class="col-md-6">
                         <div class="describe">
-                            <h4>
-                                Cho thuê căn hộ Vinhomes Central Park 1,2,3,4PN và Landmark 81 giá tốt nhất. Hoàng Phúc
-                                0916 946 ***
-                            </h4>
+                            <h4>Cho thuê căn hộ Vinhomes Central Park 1,2,3,4PN và Landmark 81 giá tốt nhất. Hoàng Phúc 0916 946 *** </h4>
                         </div>
                         <div class="info">
                             <h6><i class='bx bx-area'></i> Diện tích: </h6>
                             <h6><i class='bx bx-dollar'></i> Giá cho thuê: </h6>
                         </div>
 
-                        <div class="favorite">
+                        <div class="">
                             <div class="icon-text">
                                 <i class='bx bxs-shopping-bag'></i> <span>Môi giới</span>
                             </div>
                             <div class="icon-text">
                                 <i class='bx bx-medal'></i> <span>Tin ưu tiên</span>
                             </div>
-                            <div class="icon-text">
+                            <div class="icoC:\Users\Admin\Documents\Giaodien\doancoso\assets\imagesn-text">
                                 <i class='bx bxs-location-plus'></i> <span>Tp Hồ Chí Minh</span>
                             </div>
                             <div class="icon-text">
@@ -125,21 +108,18 @@
             <div class="col-md-12 border mb-3">
                 <div class="row" style="height: 100%;">
                     <div class="col-md-6">
-                        <img src="assets/images/images1.jpg" alt="" style="height: 100%;">
+                        <img src="~/images/banner-03.jpg" alt="Alternate Text" style="width:100%" />
                     </div>
                     <div class="col-md-6">
                         <div class="describe">
-                            <h4>
-                                Cho thuê căn hộ Vinhomes Central Park 1,2,3,4PN và Landmark 81 giá tốt nhất. Hoàng Phúc
-                                0916 946 ***
-                            </h4>
+                            <h4>Cho thuê căn hộ Vinhomes Central Park 1,2,3,4PN và Landmark 81 giá tốt nhất. Hoàng Phúc 0916 946 *** </h4>
                         </div>
                         <div class="info">
                             <h6><i class='bx bx-area'></i> Diện tích: </h6>
                             <h6><i class='bx bx-dollar'></i> Giá cho thuê: </h6>
                         </div>
 
-                        <div class="favorite">
+                        <div class="">
                             <div class="icon-text">
                                 <i class='bx bxs-shopping-bag'></i> <span>Môi giới</span>
                             </div>
@@ -161,8 +141,8 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/counter.js"></script>
-    <script src="~/js/custom.js"></script>
-    <script src="~/js/isotope.min.js"></script>
-    <script src="~/js/owl-carousel.js"></script>
+    <script src="~/js/post/home/index/counter.js"></script>
+    <script src="~/js/post/home/index/custom.js"></script>
+    <script src="~/js/post/home/index/isotope.min.js"></script>
+    <script src="~/js/post/home/index/owl-carousel.js"></script>
 }

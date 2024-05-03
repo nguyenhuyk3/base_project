@@ -104,32 +104,6 @@ a {
         color: #ddd;
     }
 
-.overlay {
-    /* bottom: 50px; */
-    /* width: calc(100% - 18px); */
-    width: 100%;
-    height: 70px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 4px;
-}
-
-.select-search {
-    height: 35px;
-    width: 200px;
-    margin-right: 20px;
-    text-align: center;
-    font-size: 1.0rem;
-    text-decoration: none;
-}
-
-    .select-search:hover {
-        background-color: #f2eeee;
-    }
-
 .btn-list {
     background-color: #4682B4;
     padding: 10px 20px;
