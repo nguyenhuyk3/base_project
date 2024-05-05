@@ -12,14 +12,14 @@ namespace Motel.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
 
-        [BsonElement("vip")]
-        [JsonPropertyName("vip")]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Vip { get; set; } = null!;
+        //[BsonElement("vip")]
+        //[JsonPropertyName("vip")]
+        //[BsonRepresentation(BsonType.ObjectId)]
+        //public string Vip { get; set; } = null!;
 
-        [BsonElement("category")]
-        [JsonPropertyName("category")]
-        public string Category { get; set; } = null!;
+        [BsonElement("category_name")]
+        [JsonPropertyName("category_name")]
+        public string CategoryName { get; set; } = null!;
 
         [BsonElement("subject_on_site")]
         [JsonPropertyName("subject_on_site")]
@@ -39,7 +39,7 @@ namespace Motel.Models
 
         [BsonElement("contact_info")]
         [JsonPropertyName("contact_info")]
-        public PostDetail ContactInfo { get; set; } = null!;
+        public ContactInfo ContactInfo { get; set; } = null!;
 
         [BsonElement("created_at")]
         [JsonPropertyName("created_at")]

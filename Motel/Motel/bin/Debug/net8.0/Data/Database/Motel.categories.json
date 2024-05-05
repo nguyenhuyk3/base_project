@@ -1,0 +1,21 @@
+[{
+  "_id": {
+    "$oid": "66343834e6f1a776866afe3b"
+  },
+  "name": "Nhà trọ",
+  "is_toggled": true
+},
+{
+  "_id": {
+    "$oid": "66343879e6f1a776866afe3c"
+  },
+  "name": "Nhà nguyên căn",
+  "is_toggled": true
+},
+{
+  "_id": {
+    "$oid": "6634389ae6f1a776866afe3d"
+  },
+  "name": "Căn hộ mini",
+  "is_toggled": true
+}]

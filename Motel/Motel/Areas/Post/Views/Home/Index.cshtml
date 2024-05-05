@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<Motel.Models.Post>
+@{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -71,72 +72,55 @@
                 </ul>
             </div>
         </div>
+        
+        @foreach (var item in Model)
+        {
+            <div class="row">
+                <div class="col-md-12 border mb-3">
+                    <div class="row" style="height: 100%;">
+                        <div class="col-md-6">
+                            <img src="@item.PostDetail.Images[0].Url" alt="Alternate Text" style="width:100%" />
+                        </div>
+                        <div class="col-md-6">
+                            <div class="describe">
+                                <h4>@item.SubjectOnSite</h4>
+                            </div>
+                            <div class="info">
+                                <h6>
+                                    <i class='bx bx-area'></i> Diện tích:
+                                    @item.PostDetail.HomeInformation.SquareMeter m2
+                                </h6>
+                                <h6>
+                                    <i class='bx bx-dollar'></i> Giá cho thuê:
+                                    @item.PostDetail.PriceString
+                                </h6>
+                            </div>
 
-        <div class="row">
-            <div class="col-md-12 border mb-3">
-                <div class="row" style="height: 100%;">
-                    <div class="col-md-6">
-                        <img src="~/images/banner-03.jpg" alt="Alternate Text" style="width:100%" />
-                    </div>
-                    <div class="col-md-6">
-                        <div class="describe">
-                            <h4>Cho thuê căn hộ Vinhomes Central Park 1,2,3,4PN và Landmark 81 giá tốt nhất. Hoàng Phúc 0916 946 *** </h4>
-                        </div>
-                        <div class="info">
-                            <h6><i class='bx bx-area'></i> Diện tích: </h6>
-                            <h6><i class='bx bx-dollar'></i> Giá cho thuê: </h6>
-                        </div>
+                            <div class="mb-3">
+                                <p>Địa chỉ: @item.PostDetail.AddressDetail.Address</p>
+                            </div>
 
-                        <div class="">
-                            <div class="icon-text">
-                                <i class='bx bxs-shopping-bag'></i> <span>Môi giới</span>
-                            </div>
-                            <div class="icon-text">
-                                <i class='bx bx-medal'></i> <span>Tin ưu tiên</span>
-                            </div>
-                            <div class="icoC:\Users\Admin\Documents\Giaodien\doancoso\assets\imagesn-text">
-                                <i class='bx bxs-location-plus'></i> <span>Tp Hồ Chí Minh</span>
-                            </div>
-                            <div class="icon-text">
-                                <a href="#"><i class='bx bxs-heart'></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-12 border mb-3">
-                <div class="row" style="height: 100%;">
-                    <div class="col-md-6">
-                        <img src="~/images/banner-03.jpg" alt="Alternate Text" style="width:100%" />
-                    </div>
-                    <div class="col-md-6">
-                        <div class="describe">
-                            <h4>Cho thuê căn hộ Vinhomes Central Park 1,2,3,4PN và Landmark 81 giá tốt nhất. Hoàng Phúc 0916 946 *** </h4>
-                        </div>
-                        <div class="info">
-                            <h6><i class='bx bx-area'></i> Diện tích: </h6>
-                            <h6><i class='bx bx-dollar'></i> Giá cho thuê: </h6>
-                        </div>
-
-                        <div class="">
-                            <div class="icon-text">
-                                <i class='bx bxs-shopping-bag'></i> <span>Môi giới</span>
-                            </div>
-                            <div class="icon-text">
-                                <i class='bx bx-medal'></i> <span>Tin ưu tiên</span>
-                            </div>
-                            <div class="icon-text">
-                                <i class='bx bxs-location-plus'></i> <span>Tp Hồ Chí Minh</span>
-                            </div>
-                            <div class="icon-text">
-                                <a href="#"><i class='bx bxs-heart'></i></a>
+                            <div class="d-flex">
+                                <div class="icon-text">
+                                    <i class='bx bxs-shopping-bag'></i> <span>Môi giới</span>
+                                </div>
+                                <div class="icon-text">
+                                    <i class='bx bx-medal'></i> <span>Tin ưu tiên</span>
+                                </div>
+                                <div class="icoC:\Users\Admin\Documents\Giaodien\doancoso\assets\imagesn-text">
+                                    <i class='bx bxs-location-plus'></i> <span>
+                                        @item.PostDetail.AddressDetail.City
+                                    </span>
+                                </div>
+                                <div class="icon-text">
+                                    <a href="#"><i class='bx bxs-heart'></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        }
     </section>
 </div>
 

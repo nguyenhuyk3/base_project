@@ -1,4 +1,6 @@
-﻿@model Motel.ViewModels.LoginUserAccount
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Motel.ViewModels.LoginUserAccount
+
 
 @{
     ViewBag.Title = "Đăng nhập";
@@ -6,7 +8,7 @@
 }
 
 <!DOCTYPE html>
-<html class="mh-100">
+<html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Login</title>
@@ -20,7 +22,10 @@
          style="background-color: rgb(210, 210, 210); height: 100vh;">
         <div class="container-fluid">
             <div>
-                @Html.ActionLink("Trang chủ", "Index", "Post", null, new { @class = "fas fa-home text-decoration-none fs-5 text-dark" })
+                <a class="fas fa-home text-decoration-none fs-5 text-dark"
+                   asp-area="Post" asp-controller="Home" asp-action="Index">
+                    Trang chủ
+                </a>
             </div>
             <div class="row gx-lg-5 align-items-center">
                 <div class="col-lg-6 mb-5 mb-lg-0">
@@ -39,7 +44,8 @@
                     <div class="card card--login">
                         <div class="card-body py-5 px-md-5">
                             <h3 class="mb-5">Đăng nhập</h3>
-                            <form asp-action="Register" asp-controller="UserAccount" method="post">
+                            <form asp-action="Register" asp-controller="UserAccount"
+                                  method="post">
                                 @Html.AntiForgeryToken()
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 

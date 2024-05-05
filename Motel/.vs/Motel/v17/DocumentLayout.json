@@ -1,30 +1,26 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\LENOVO\\OneDrive\\M\u00E1y t\u00EDnh\\MotelProject\\Motel\\",
+  "WorkspaceRootPath": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\lenovo\\onedrive\\m\u00E1y t\u00EDnh\\motelproject\\motel\\motel\\areas\\post\\views\\modification\\add.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\areas\\post\\views\\modification\\add.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\lenovo\\onedrive\\m\u00E1y t\u00EDnh\\motelproject\\motel\\motel\\areas\\post\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\areas\\useraccount\\views\\useraccount\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\areas\\useraccount\\views\\useraccount\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\areas\\useraccount\\views\\useraccount\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\areas\\useraccount\\views\\useraccount\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\areas\\post\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\areas\\post\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\lenovo\\onedrive\\m\u00E1y t\u00EDnh\\motelproject\\motel\\motel\\wwwroot\\js\\post\\modification\\add.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\wwwroot\\js\\post\\modification\\add.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\lenovo\\onedrive\\m\u00E1y t\u00EDnh\\motelproject\\motel\\motel\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\lenovo\\onedrive\\m\u00E1y t\u00EDnh\\motelproject\\motel\\motel\\areas\\useraccount\\controllers\\useraccountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\areas\\useraccount\\controllers\\useraccountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\lenovo\\onedrive\\m\u00E1y t\u00EDnh\\motelproject\\motel\\motel\\utility\\address\\addressapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\utility\\address\\addressapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,80 +42,67 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\OneDrive\\M\u00E1y t\u00EDnh\\MotelProject\\Motel\\Motel\\Areas\\Post\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "Motel\\Areas\\Post\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\LENOVO\\OneDrive\\M\u00E1y t\u00EDnh\\MotelProject\\Motel\\Motel\\Areas\\Post\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "Motel\\Areas\\Post\\Views\\Home\\Index.cshtml",
-              "ViewState": "AQIAAHcAAAAAAAAAAAAAAIwAAAAGAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-03T02:56:11.298Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\OneDrive\\M\u00E1y t\u00EDnh\\MotelProject\\Motel\\Motel\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "Motel\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\OneDrive\\M\u00E1y t\u00EDnh\\MotelProject\\Motel\\Motel\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "Motel\\Controllers\\HomeController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Program.cs",
+              "RelativeDocumentMoniker": "Motel\\Program.cs",
+              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Program.cs",
+              "RelativeToolTip": "Motel\\Program.cs",
+              "ViewState": "AQIAADYAAAAAAAAAAAAAAE0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-03T02:51:10.968Z",
+              "WhenOpened": "2024-05-05T11:11:15.285Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "UserAccountController.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\OneDrive\\M\u00E1y t\u00EDnh\\MotelProject\\Motel\\Motel\\Areas\\UserAccount\\Controllers\\UserAccountController.cs",
-              "RelativeDocumentMoniker": "Motel\\Areas\\UserAccount\\Controllers\\UserAccountController.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\OneDrive\\M\u00E1y t\u00EDnh\\MotelProject\\Motel\\Motel\\Areas\\UserAccount\\Controllers\\UserAccountController.cs",
-              "RelativeToolTip": "Motel\\Areas\\UserAccount\\Controllers\\UserAccountController.cs",
-              "ViewState": "AQIAAKAAAAAAAAAAAAAAAH8AAAAUAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-03T02:47:54.062Z",
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Motel\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Motel\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-05T10:53:06.122Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Add.cshtml",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\OneDrive\\M\u00E1y t\u00EDnh\\MotelProject\\Motel\\Motel\\Areas\\Post\\Views\\Modification\\Add.cshtml",
-              "RelativeDocumentMoniker": "Motel\\Areas\\Post\\Views\\Modification\\Add.cshtml",
-              "ToolTip": "C:\\Users\\LENOVO\\OneDrive\\M\u00E1y t\u00EDnh\\MotelProject\\Motel\\Motel\\Areas\\Post\\Views\\Modification\\Add.cshtml",
-              "RelativeToolTip": "Motel\\Areas\\Post\\Views\\Modification\\Add.cshtml",
-              "ViewState": "AQIAAP8AAAAAAAAAAAAAABQAAAAoAAAA",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Post\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Motel\\Areas\\Post\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Post\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Motel\\Areas\\Post\\Views\\Home\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAHkAAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-03T02:46:53.459Z",
+              "WhenOpened": "2024-05-05T07:59:12.978Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\UserAccount\\Views\\UserAccount\\Register.cshtml",
+              "RelativeDocumentMoniker": "Motel\\Areas\\UserAccount\\Views\\UserAccount\\Register.cshtml",
+              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\UserAccount\\Views\\UserAccount\\Register.cshtml",
+              "RelativeToolTip": "Motel\\Areas\\UserAccount\\Views\\UserAccount\\Register.cshtml",
+              "ViewState": "AQIAACcAAAAAAAAAAAAAAFkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-05T07:55:28.337Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Add.js",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\OneDrive\\M\u00E1y t\u00EDnh\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Modification\\Add.js",
-              "RelativeDocumentMoniker": "Motel\\wwwroot\\js\\Post\\Modification\\Add.js",
-              "ToolTip": "C:\\Users\\LENOVO\\OneDrive\\M\u00E1y t\u00EDnh\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Modification\\Add.js",
-              "RelativeToolTip": "Motel\\wwwroot\\js\\Post\\Modification\\Add.js",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-05-03T02:46:39.969Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "AddressApi.cs",
-              "DocumentMoniker": "C:\\Users\\LENOVO\\OneDrive\\M\u00E1y t\u00EDnh\\MotelProject\\Motel\\Motel\\Utility\\Address\\AddressApi.cs",
-              "RelativeDocumentMoniker": "Motel\\Utility\\Address\\AddressApi.cs",
-              "ToolTip": "C:\\Users\\LENOVO\\OneDrive\\M\u00E1y t\u00EDnh\\MotelProject\\Motel\\Motel\\Utility\\Address\\AddressApi.cs",
-              "RelativeToolTip": "Motel\\Utility\\Address\\AddressApi.cs",
-              "ViewState": "AQIAAIAAAAAAAAAAAAAgwJAAAAAiAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-03T02:21:07.35Z",
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\UserAccount\\Views\\UserAccount\\Login.cshtml",
+              "RelativeDocumentMoniker": "Motel\\Areas\\UserAccount\\Views\\UserAccount\\Login.cshtml",
+              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\UserAccount\\Views\\UserAccount\\Login.cshtml",
+              "RelativeToolTip": "Motel\\Areas\\UserAccount\\Views\\UserAccount\\Login.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-05-05T07:46:05.145Z",
               "EditorCaption": ""
             }
           ]

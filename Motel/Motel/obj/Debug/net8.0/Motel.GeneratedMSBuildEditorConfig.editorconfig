@@ -17,63 +17,63 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Motel
 build_property.RootNamespace = Motel
-build_property.ProjectDir = C:\Users\LENOVO\OneDrive\Máy tính\MotelProject\Motel\Motel\
+build_property.ProjectDir = C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\LENOVO\OneDrive\Máy tính\MotelProject\Motel\Motel
+build_property.MSBuildProjectDirectory = C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/LENOVO/OneDrive/Máy tính/MotelProject/Motel/Motel/Areas/Post/Views/Home/Index.cshtml]
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Post/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUG9zdFxWaWV3c1xIb21lXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/OneDrive/Máy tính/MotelProject/Motel/Motel/Areas/Post/Views/Modification/Add.cshtml]
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Post/Views/Modification/Add.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUG9zdFxWaWV3c1xNb2RpZmljYXRpb25cQWRkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/OneDrive/Máy tính/MotelProject/Motel/Motel/Areas/Post/Views/_Modification_Layout.cshtml]
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Post/Views/_Modification_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUG9zdFxWaWV3c1xfTW9kaWZpY2F0aW9uX0xheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/OneDrive/Máy tính/MotelProject/Motel/Motel/Areas/UserAccount/Views/UserAccount/Login.cshtml]
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/UserAccount/Views/UserAccount/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlckFjY291bnRcVmlld3NcVXNlckFjY291bnRcTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/OneDrive/Máy tính/MotelProject/Motel/Motel/Areas/UserAccount/Views/UserAccount/Register.cshtml]
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/UserAccount/Views/UserAccount/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlckFjY291bnRcVmlld3NcVXNlckFjY291bnRcUmVnaXN0ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/OneDrive/Máy tính/MotelProject/Motel/Motel/Views/Home/Index.cshtml]
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/OneDrive/Máy tính/MotelProject/Motel/Motel/Views/Home/Privacy.cshtml]
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/OneDrive/Máy tính/MotelProject/Motel/Motel/Views/Home/ShowConnectedUsers.cshtml]
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Views/Home/ShowConnectedUsers.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTaG93Q29ubmVjdGVkVXNlcnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/OneDrive/Máy tính/MotelProject/Motel/Motel/Views/Shared/Error.cshtml]
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/OneDrive/Máy tính/MotelProject/Motel/Motel/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/OneDrive/Máy tính/MotelProject/Motel/Motel/Views/_ViewImports.cshtml]
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/OneDrive/Máy tính/MotelProject/Motel/Motel/Views/_ViewStart.cshtml]
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/LENOVO/OneDrive/Máy tính/MotelProject/Motel/Motel/Views/Shared/_Layout.cshtml]
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-dauxqon66n

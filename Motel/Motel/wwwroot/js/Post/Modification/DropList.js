@@ -5,9 +5,10 @@
     // Add event listener for change event
     apiIdDropdown.addEventListener('change', function () {
         var apiId = this.value;
-
+       
         // Send GET request to server to get districts
         var xhr = new XMLHttpRequest();
+
         xhr.open('GET', '/Address/GetDistricts?apiId=' + apiId);
         xhr.onload = function () {
             if (xhr.status === 200) {

@@ -5,9 +5,9 @@ namespace Motel.Models
 {
     public class AddressDetail
     {
-        [BsonElement("address_string")]
-        [JsonPropertyName("address_string")]
-        public string AddressString { get; set; } = null!;
+        [BsonElement("address")]
+        [JsonPropertyName("address")]
+        public string Address { get; set; } = null!;
 
         [BsonElement("city")]
         [JsonPropertyName("city")]
@@ -17,9 +17,9 @@ namespace Motel.Models
         [JsonPropertyName("district")]
         public string District { get; set; } = null!;
 
-        [BsonElement("award")]
-        [JsonPropertyName("award")]
-        public string Award { get; set; } = null!;
+        [BsonElement("ward")]
+        [JsonPropertyName("ward")]
+        public string Ward { get; set; } = null!;
 
         [BsonElement("street")]
         [JsonPropertyName("street")]

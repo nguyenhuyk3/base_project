@@ -1,4 +1,6 @@
-﻿@{
+﻿@model Motel.Areas.Post.Models.PostAdd
+
+@{
     ViewData["Title"] = "Add";
     Layout = "~/Areas/Post/Views/_Modification_Layout.cshtml";
 }
@@ -14,9 +16,7 @@
     <div class="row">
         <!--This area will show form-->
         <div>
-            @using (@Html.BeginForm("Add", "Post",
-            FormMethod.Post,
-            new { @id = "PostForm", enctype = "multipart/form-data" }))
+            @using (Html.BeginForm("Add", "Modification", FormMethod.Post, new { @id = "PostForm", enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
                 <!--Address information-->
@@ -25,10 +25,10 @@
                     <div class="row row-cols-1">
                         <div class="form-group">
                             <label class="control-label mb-2">Loại hình cho thuê</label>
-                            @Html.DropDownList("Categories", ViewBag.Categories as SelectList, "", new
+                            @Html.DropDownList("CategoryId", ViewBag.Categories as SelectList, "", new
                                 {
                                     @class = "form-control rounded-1",
-                                    id = "Categories",
+                                    id = "CategoryId",
                                     style = "max-width: 100%;"
                                 })
                         </div>
@@ -61,9 +61,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label mt-3 mb-2" for="AddressDetail">Địa chỉ hiển thị trên tin đăng</label>
+                        <label class="control-label mt-3 mb-2" for="Address">Địa chỉ hiển thị trên tin đăng</label>
                         <input class="form-control" type="text"
-                               id="AddressDetail" name="AddressDetail"
+                               id="Address" name="Address"
                                style="max-width: 100%">
                     </div>
                 </section>
@@ -72,9 +72,9 @@
                 <section class="container-fluid border border-opacity-50 border-1 p-4 mt-3">
                     <h5>Thông tin bài viết</h5>
                     <div class="form-group">
-                        <label class="label-control mb-2" for="Subject">Tiêu đề</label>
+                        <label class="label-control mb-2" for="SubjectOnSite">Tiêu đề</label>
                         <textarea class="form-control" style="max-width: 100%" type="text"
-                                  id="Subject" name="Subject"
+                                  id="SubjectOnSite" name="SubjectOnSite"
                                   placeholder="VD: Bán nhà riêng 50m2 chính chủ tại Cầu Giấy"></textarea>
                         <p class="small mb-0">Đây là thông tin sẽ hiển thị ở đầu bài viết</p>
                     </div>
@@ -92,9 +92,9 @@
                 <section class="container border border-opacity-50 border-1 p-4 mt-3">
                     <h5>Thông tin bất động sản</h5>
                     <div class="form-group">
-                        <label class="mb-2" for="Acreage">Diện tích</label>
+                        <label class="mb-2" for="SquareMeter">Diện tích</label>
                         <input type="text" class="form-control"
-                               id="Acreage" name="Acreage"
+                               id="SquareMeter" name="SquareMeter"
                                placeholder="Nhập diện tích, VD: 80m2">
                     </div>
                     <div class="form-group">
@@ -124,18 +124,18 @@
                                 </div>
                             </div>
                         </div>
-                        @* @Html.HiddenFor(model => model.Furniture, new { @id = "Furniture" }) *@
+                        @Html.HiddenFor(model => model.Furniture, new { @id = "Furniture" })
                     </div>
                     <!---->
                     <!--These are basic infomation of (motel room or retal house)-->
                     <div class="form-group mt-5 d-flex">
-                        <label class="label-control my-2 w-50" for="Bedrooms">Phòng ngủ</label>
+                        <label class="label-control my-2 w-50" for="Bedroom">Phòng ngủ</label>
                         <div class="input-group">
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-secondary btn-decrease-bedroom">-</button>
                             </span>
                             <input type="text" class="form-control text-center mx-3"
-                                   id="Bedrooms" name="Bedrooms"
+                                   id="Bedroom" name="Bedroom"
                                    value="0" readonly>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-secondary btn-increase-bedroom">+</button>
@@ -145,13 +145,13 @@
                     @*   @Html.HiddenFor(model => model.Bedroom, new { @name = "Bedroom", id = "Bedroom" }) *@
 
                     <div class="form-group mt-2 d-flex">
-                        <label class="label-control my-2 w-50" for="Toilets">Toilet</label>
+                        <label class="label-control my-2 w-50" for="Toilet">Toilet</label>
                         <div class="input-group">
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-secondary btn-decrease-toilet">-</button>
                             </span>
                             <input type="text" class="form-control text-center mx-3"
-                                   id="Toilets" name="Toilets"
+                                   id="Toilet" name="Toilet"
                                    value="0" readonly>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-secondary btn-increase-toilet">+</button>
@@ -161,13 +161,13 @@
                     @*  @Html.HiddenFor(model => model.Toilet, new { @name = "Toilet", id = "Toilet" }) *@
 
                     <div class="form-group mt-2 d-flex">
-                        <label class="label-control my-2 w-50" for="Floors">Tầng</label>
+                        <label class="label-control my-2 w-50" for="Floor">Tầng</label>
                         <div class="input-group">
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-secondary btn-decrease-floor">-</button>
                             </span>
                             <input type="text" class="form-control text-center mx-3"
-                                   id="Floors" name="Floors"
+                                   id="Floor" name="Floor"
                                    value="0" readonly>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-secondary btn-increase-floor">+</button>
@@ -203,25 +203,25 @@
 
                     <div class="row row-cols-2">
                         <div class="form-group">
-                            <label class="label-control mb-2" for="YourName">Tên liên hệ</label>
+                            <label class="label-control mb-2" for="Name">Tên liên hệ</label>
                             <input type="text" class="form-control mb-2"
-                                   id="YourName" name="YourName"
+                                   id="Name" name="Name"
                             @* value="@Model.Info.Name" *@
                                    placeholder="Nhập tên của bạn">
                         </div>
 
                         <div class="form-group">
-                            <label class="label-control mb-2" for="YourPhone">Số điện thoại</label>
+                            <label class="label-control mb-2" for="Phone">Số điện thoại</label>
                             <input type="tel" class="form-control"
-                                   id="YourPhone" name="YourPhone"
+                                   id="Phone" name="Phone"
                             @* value="@Model.Info.Phone" *@
                                    placeholder="Nhập số điện thoại">
                         </div>
 
                         <div class="form-group">
-                            <label class="label-control mb-2" for="YourEmail">Email</label>
+                            <label class="label-control mb-2" for="Email">Email</label>
                             <input type="email" class="form-control"
-                                   id="YourEmail" name="YourEmail"
+                                   id="Email" name="Email"
                             @* value="@Model.Info.UserAccount.Email" *@
                                    placeholder="Nhập email">
                         </div>
@@ -279,4 +279,3 @@
     <script src="~/js/post/modification/droplist.js"></script>
     <script src="~/js/post/modification/add.js"></script>
 }
-

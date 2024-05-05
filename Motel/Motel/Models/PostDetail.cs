@@ -6,13 +6,17 @@ namespace Motel.Models
 {
     public class PostDetail
     {
-        [BsonElement("subject_on_site")]
-        [JsonPropertyName("subject_on_site")]
-        public string SubjectOnSite { get; set; } = null!;
+        //[BsonElement("subject_on_site")]
+        //[JsonPropertyName("subject_on_site")]
+        //public string SubjectOnSite { get; set; } = null!;
 
-        [BsonElement("address")]
-        [JsonPropertyName("address")]
+        [BsonElement("address_detail")]
+        [JsonPropertyName("address_detail")]
         public AddressDetail AddressDetail { get; set; } = null!;
+
+        [BsonElement("description")]
+        [JsonPropertyName("description")]
+        public string Description { get; set; } = null!;
 
         [BsonElement("home_information")]
         [JsonPropertyName("home_information")]
@@ -24,7 +28,7 @@ namespace Motel.Models
 
         [BsonElement("number_of_image")]
         [JsonPropertyName("number_of_image")]
-        public uint NumberOfImage { get; set; } = 0;
+        public int NumberOfImage { get; set; } = 0;
 
         [BsonElement("price")]
         [JsonPropertyName("price")]

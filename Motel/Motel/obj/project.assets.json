@@ -6338,24 +6338,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\LENOVO\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\CYBORG\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\Motel.csproj",
+      "projectUniqueName": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Motel.csproj",
       "projectName": "Motel",
-      "projectPath": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\Motel.csproj",
-      "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\LENOVO\\OneDrive\\Máy tính\\MotelProject\\Motel\\Motel\\obj\\",
+      "projectPath": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Motel.csproj",
+      "packagesPath": "C:\\Users\\CYBORG\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\CYBORG\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6363,7 +6358,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -6419,7 +6413,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

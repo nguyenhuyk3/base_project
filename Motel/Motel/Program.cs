@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Hosting;
 using Motel.Utility.Database;
 using Motel.Utility.Hubs;
 
@@ -7,12 +9,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
 
+builder.Services.AddAuthentication(
+    CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(option =>
+    {
+        option.LoginPath = "/Access/Login";
+        option.ExpireTimeSpan = TimeSpan.FromDays(1);
+    });
+
 builder.Services.Configure<DatabaseSettings>(
     builder.Configuration.GetSection("BaseProjectDatabase")
 );
-//var client = new MongoClient("mongodb://localhost:27017");
-//var database = client.GetDatabase("Motel");
-//builder.Services.AddSingleton<IMongoCollection<UserAccount>>(database.GetCollection<UserAccount>("user_accounts"));
 
 var app = builder.Build();
 
@@ -48,9 +55,22 @@ app.MapHub<ChatHub>("/chatHub");
 //    areaName: "Post",
 //    pattern: "Post/{controller=Home}/{action=Index}/{id?}");
 
+//app.UseEndpoints(endpoints =>
+//{
+//    endpoints.MapAreaControllerRoute(
+//       name: "areaRoute",
+//       areaName: "Post",
+//       pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+//    endpoints.MapControllerRoute(
+//        name: "default",
+//        pattern: "{controller=Home}/{action=Index}/{id?}");
+//});
+
 app.MapControllerRoute(
     name: "MyArea",
-    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}",
+    defaults: new { area = "Post", controller = "Home", action = "Index" });
 
 app.MapControllerRoute(
     name: "default",
