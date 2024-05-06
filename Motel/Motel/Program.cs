@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Hosting;
+using Motel.Middleware;
 using Motel.Utility.Database;
 using Motel.Utility.Hubs;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,13 +11,20 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddSignalR();
 
-builder.Services.AddAuthentication(
-    CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(option =>
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(
+    options =>
     {
-        option.LoginPath = "/Access/Login";
-        option.ExpireTimeSpan = TimeSpan.FromDays(1);
+        options.LoginPath = "/Post";
     });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireAdmin", policy =>
+      policy.RequireClaim(ClaimTypes.Role, "Admin"));
+    options.AddPolicy("RequireCustomer", policy =>
+        policy.RequireClaim(ClaimTypes.Role, "Customer")
+    );
+});
 
 builder.Services.Configure<DatabaseSettings>(
     builder.Configuration.GetSection("BaseProjectDatabase")
@@ -36,7 +45,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
+
 app.UseAuthorization();
+
 
 // Performs the mapping of a hub to a specific endpoint in your application.
 /* 

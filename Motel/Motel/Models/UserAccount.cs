@@ -47,7 +47,7 @@ namespace Motel.Models
         [JsonPropertyName("password")]
         public string Password { get; set; } = null!;
 
-        [BsonRepresentation(BsonType.ObjectId)]
+        //[BsonRepresentation(BsonType.ObjectId)]
         [BsonElement("role")]
         [JsonPropertyName("role")]
         public string Role { get; set; } = null!;

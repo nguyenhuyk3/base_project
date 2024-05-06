@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using Motel.Areas.Post.Models;
 using Motel.Models;
 using Motel.Utility.Database;
+using System.Security.Cryptography;
 
 
 namespace Motel.Areas.Post.Controllers
@@ -22,6 +24,7 @@ namespace Motel.Areas.Post.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "RequireCustomer")]
         public IActionResult Add()
         {
             var categories = _databaseConstructor.CategoryCollection
@@ -123,8 +126,6 @@ namespace Motel.Areas.Post.Controllers
         [HttpGet]
         public IActionResult Edit()
         {
-
-
             return View();
         }
     }

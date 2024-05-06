@@ -1,0 +1,4 @@
+﻿#LogoutButton:focus,
+#LogoutButton:active {
+    outline: none;
+}
