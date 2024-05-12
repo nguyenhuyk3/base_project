@@ -7,7 +7,27 @@
 
 <h1>ShowConnectedUsers</h1>
 
-@foreach(var user in Motel.ConnectedUsers.myConnectedUsers)
-{
-    <li>@user</li>
-}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Group</th>
+            <th>Members</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pair in Motel.ConnectedUsers.mappings)
+        {
+            <tr>
+                <td>@pair.Key</td>
+                <td>
+                    <ul>
+                        @foreach (var connectionId in pair.Value)
+                        {
+                            <li>@connectionId</li>
+                        }
+                    </ul>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

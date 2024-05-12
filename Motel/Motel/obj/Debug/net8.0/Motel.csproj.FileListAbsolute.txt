@@ -308,6 +308,8 @@ C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\bin\Debug\net8.0\System.Reflect
 C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\bin\Debug\net8.0\System.Security.Permissions.dll
 C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\bin\Debug\net8.0\System.Windows.Extensions.dll
+C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\bin\Debug\net8.0\X.PagedList.dll
+C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\bin\Debug\net8.0\X.PagedList.Mvc.Core.dll
 C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\bin\Debug\net8.0\ZstdSharp.dll
 C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\bin\Debug\net8.0\af\Humanizer.resources.dll
 C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\bin\Debug\net8.0\ar\Humanizer.resources.dll
@@ -460,6 +462,7 @@ C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\obj\Debug\net8.0\Motel.Generate
 C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\obj\Debug\net8.0\Motel.AssemblyInfoInputs.cache
 C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\obj\Debug\net8.0\Motel.AssemblyInfo.cs
 C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\obj\Debug\net8.0\Motel.csproj.CoreCompileInputs.cache
+C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\obj\Debug\net8.0\Motel.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\obj\Debug\net8.0\Motel.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\obj\Debug\net8.0\Motel.RazorAssemblyInfo.cache
 C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\obj\Debug\net8.0\Motel.RazorAssemblyInfo.cs

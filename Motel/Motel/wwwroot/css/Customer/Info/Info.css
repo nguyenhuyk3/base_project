@@ -1,0 +1,149 @@
+﻿html, body {
+    height: 100%;
+}
+
+.container-fluid {
+    height: 100%;
+}
+/* 
+.header {
+    position: relative;
+    height: 100%;
+
+} */
+
+.header-news {
+    width: 100%;
+}
+
+    .header-news a {
+        padding: 1px 3px;
+        text-decoration: none;
+        color: #333; /* Text color */
+        background-color: white; /* Background color */
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+        .header-news a:hover {
+            background-color: #bfefff; /* Hover background color */
+        }
+
+.sale-posting {
+    height: 300px;
+    width: 30%px;
+}
+
+    .sale-posting img {
+        width: 100%;
+        height: 150px;
+    }
+
+h6 {
+    display: flex;
+    align-items: center; /* Canh giữa nội dung của thẻ h6 và thẻ i */
+}
+
+    h6 i {
+        margin-right: 5px; /* Tạo khoảng cách giữa biểu tượng và chữ trong thẻ h6 */
+    }
+
+h6 {
+    font-size: 14px; /* Điều chỉnh kích thước chữ trong thẻ h6 */
+    font-weight: 400;
+}
+
+
+.info-post {
+    display: flex;
+    flex-direction: column;
+    max-height: fit-content; /* Đảm bảo chiều cao của thẻ không vượt quá nội dung bên trong */
+    overflow: hidden; /* Ẩn phần dư thừa nếu nội dung quá dài */
+}
+
+    .info-post h6.describle {
+        white-space: nowrap; /* Không để phần nội dung này bị xuống dòng */
+        overflow: hidden; /* Ẩn phần dư thừa nếu nội dung quá dài */
+        text-overflow: ellipsis; /* Hiển thị dấu chấm (...) nếu nội dung bị ẩn */
+        margin: 0; /* Xóa margin để tránh khoảng trắng không mong muốn */
+    }
+
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
+.col-md-6 {
+    text-align: center; /* Căn giữa nội dung trong cột */
+}
+
+    .col-md-6 a {
+        display: inline-block; /* Đảm bảo thẻ a không chiếm toàn bộ chiều rộng của cột */
+    }
+
+    .col-md-6 img {
+        max-width: 100%; /* Đảm bảo kích thước của hình ảnh không vượt quá kích thước của thẻ a */
+        height: auto; /* Đảm bảo tỷ lệ chiều cao tự động điều chỉnh */
+    }
+
+.info-rental a {
+    display: inline-block;
+    position: relative;
+}
+
+    .info-rental a img {
+        width: 50px; /* Đảm bảo hình ảnh điều chỉnh kích thước để vừa với kích thước của thẻ a */
+        height: 50px; /* Đảm bảo tỷ lệ chiều cao tự động điều chỉnh cho phù hợp */
+    }
+
+/* a:hover img {
+    opacity: 0.8;
+    transition: opacity 0.3s ease; 
+} */
+
+.info-rental a {
+    border: 2px solid #ccc; /* Tạo khung viền cho thẻ a */
+    padding: 5px; /* Tạo khoảng trắng giữa khung viền và nội dung bên trong thẻ a */
+    border-radius: 10px; /* Bo góc của khung viền */
+    text-decoration: none; /* Loại bỏ gạch chân mặc định */
+}
+
+    .info-rental a:hover {
+        background-color: #bfefff; /* Hover background color */
+        transition: opacity 0.3s ease;
+    }
+
+.rental-link {
+    margin-top: 50px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+    .rental-link a {
+        border: 2px solid #ccc; /* Tạo khung viền cho thẻ a */
+
+        width: 100%;
+    }
+
+        .rental-link a img {
+            width: 35px; /* Đảm bảo hình ảnh điều chỉnh kích thước để vừa với kích thước của thẻ a */
+            height: 35px; /* Đảm bảo tỷ lệ chiều cao tự động điều chỉnh cho phù hợp */
+        }
+
+.rental-posting {
+    height: 300px;
+    width: 30%px;
+}
+
+    .rental-posting img {
+        width: 100%;
+        height: 150px;
+    }
+
+
+/* ------------------------------------------------------------------------------------------------------------------------------- */
+.sale-post, .rental-post {
+    display: none;
+}
+
+.title {
+    text-align: center;
+}

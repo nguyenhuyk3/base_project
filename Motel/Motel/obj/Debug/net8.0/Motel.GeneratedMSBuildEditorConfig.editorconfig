@@ -26,6 +26,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Customer/Views/Customer/Info.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcQ3VzdG9tZXJcSW5mby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Post/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUG9zdFxWaWV3c1xIb21lXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -44,10 +48,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/UserAccount/Views/UserAccount/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlckFjY291bnRcVmlld3NcVXNlckFjY291bnRcUmVnaXN0ZXIuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Views/Home/Privacy.cshtml]

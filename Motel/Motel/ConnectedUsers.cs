@@ -2,6 +2,6 @@
 {
     public class ConnectedUsers
     {
-        public static List<string> myConnectedUsers = new List<string>();
+        public static Dictionary<string, List<string>> mappings = new Dictionary<string, List<string>>();
     }
 }

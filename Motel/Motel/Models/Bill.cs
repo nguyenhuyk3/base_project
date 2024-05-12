@@ -12,9 +12,9 @@ namespace Motel.Models
         [JsonPropertyName("id")]
         public string? Id { get; set; }
 
-        [BsonElement("token")]
-        [JsonPropertyName("token")]
-        public int Token { get; set; } = 0;
+        [BsonElement("cost")]
+        [JsonPropertyName("cost")]
+        public int Cost { get; set; } = 0;
 
         [BsonElement("created_at")]
         [JsonPropertyName("created_at")]

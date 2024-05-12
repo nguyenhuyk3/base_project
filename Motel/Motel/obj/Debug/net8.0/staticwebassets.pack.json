@@ -5,6 +5,26 @@
       "PackagePath": "staticwebassets\\Motel.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Customer\\Info\\Avatar.css",
+      "PackagePath": "staticwebassets\\css\\Customer\\Info\\Avatar.css"
+    },
+    {
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Customer\\Info\\Info.css",
+      "PackagePath": "staticwebassets\\css\\Customer\\Info\\Info.css"
+    },
+    {
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Customer\\Info\\Pagination.css",
+      "PackagePath": "staticwebassets\\css\\Customer\\Info\\Pagination.css"
+    },
+    {
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Customer\\Info\\Rating.css",
+      "PackagePath": "staticwebassets\\css\\Customer\\Info\\Rating.css"
+    },
+    {
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\Home\\Index\\SearchBar.css",
+      "PackagePath": "staticwebassets\\css\\Post\\Home\\Index\\SearchBar.css"
+    },
+    {
       "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\Home\\Index\\animate.css",
       "PackagePath": "staticwebassets\\css\\Post\\Home\\Index\\animate.css"
     },
@@ -35,6 +55,46 @@
     {
       "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\images\\images.jpg",
+      "PackagePath": "staticwebassets\\images\\images.jpg"
+    },
+    {
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\images\\tải xuống (1).jpg",
+      "PackagePath": "staticwebassets\\images\\tải xuống (1).jpg"
+    },
+    {
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\images\\tải xuống (2).jpg",
+      "PackagePath": "staticwebassets\\images\\tải xuống (2).jpg"
+    },
+    {
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\images\\tải xuống (3).jpg",
+      "PackagePath": "staticwebassets\\images\\tải xuống (3).jpg"
+    },
+    {
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\images\\tải xuống.jpg",
+      "PackagePath": "staticwebassets\\images\\tải xuống.jpg"
+    },
+    {
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Customer\\Info\\Info.js",
+      "PackagePath": "staticwebassets\\js\\Customer\\Info\\Info.js"
+    },
+    {
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Customer\\Info\\Pagination.js",
+      "PackagePath": "staticwebassets\\js\\Customer\\Info\\Pagination.js"
+    },
+    {
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Customer\\Info\\RatingElement.js",
+      "PackagePath": "staticwebassets\\js\\Customer\\Info\\RatingElement.js"
+    },
+    {
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Customer\\Info\\RatingGroup.js",
+      "PackagePath": "staticwebassets\\js\\Customer\\Info\\RatingGroup.js"
+    },
+    {
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Customer\\Info\\RatingStarts.js",
+      "PackagePath": "staticwebassets\\js\\Customer\\Info\\RatingStarts.js"
     },
     {
       "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Home\\Index.js",
@@ -75,6 +135,10 @@
     {
       "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\chat.js",
       "PackagePath": "staticwebassets\\js\\chat.js"
+    },
+    {
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\createConnection.js",
+      "PackagePath": "staticwebassets\\js\\createConnection.js"
     },
     {
       "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\signalr\\dist\\browser\\signalr.js",
@@ -323,6 +387,14 @@
     {
       "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\notification\\ikr.notificationPlugin.js",
       "PackagePath": "staticwebassets\\notification\\ikr.notificationPlugin.js"
+    },
+    {
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\toast\\toast.css",
+      "PackagePath": "staticwebassets\\toast\\toast.css"
+    },
+    {
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\toast\\toast.js",
+      "PackagePath": "staticwebassets\\toast\\toast.js"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Motel.Microsoft.AspNetCore.StaticWebAssets.props",

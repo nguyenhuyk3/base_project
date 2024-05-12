@@ -2,10 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using Motel.Areas.Post.Models;
+using Motel.Areas.UserAccount.Controllers;
 using Motel.Models;
+using Motel.Utility.Checking;
 using Motel.Utility.Database;
+using System.Security.Claims;
 using System.Security.Cryptography;
 
 
@@ -16,11 +20,13 @@ namespace Motel.Areas.Post.Controllers
     {
         private readonly DatabaseConstructor _databaseConstructor;
         private readonly IWebHostEnvironment _hostingEnvironment;
+        private readonly Getter _getter;
 
         public Modification(IOptions<DatabaseSettings> databaseSettings, IWebHostEnvironment hostingEnvironment)
         {
             _databaseConstructor = new DatabaseConstructor(databaseSettings);
             _hostingEnvironment = hostingEnvironment;
+            _getter = new Getter(new HttpContextAccessor());
         }
 
         [HttpGet]
@@ -83,6 +89,7 @@ namespace Motel.Areas.Post.Controllers
 
             Motel.Models.Post post = new Motel.Models.Post()
             {
+                Owner = _getter.GetLoginId(),
                 CategoryName = categoryName,
                 SubjectOnSite = model.SubjectOnSite,
                 State = new State(),
@@ -118,7 +125,31 @@ namespace Motel.Areas.Post.Controllers
                 ExpiredAt = DateTime.Now,
             };
 
-            _databaseConstructor.PostCollection.InsertOne(post);
+            await _databaseConstructor.PostCollection.InsertOneAsync(post);
+
+            var result = await _databaseConstructor.PostCollection
+                                .Find(f => f.Id == post.Id).FirstOrDefaultAsync();
+            var userAccount = _databaseConstructor.UserAccountCollection
+                              .Find(userAccount => userAccount.Id == _getter.GetLoginId())
+                              .FirstOrDefault();
+            var posts = userAccount.Posts;
+
+            if (posts == null)
+            {
+                posts = new List<Motel.Models.Post>();
+
+                posts.Add(result);
+            }
+            else
+            {
+                posts.Add(result);
+            }
+
+            var objectId = new ObjectId(_getter.GetLoginId());
+            var userAccountFilter = Builders<Motel.Models.UserAccount>.Filter.Eq("_id", objectId);
+            var userAccountUpdate = Builders<Motel.Models.UserAccount>.Update.Set("posts", posts);
+
+            await _databaseConstructor.UserAccountCollection.UpdateOneAsync(userAccountFilter, userAccountUpdate);
 
             return RedirectToAction("Index", "Home");
         }

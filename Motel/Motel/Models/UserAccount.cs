@@ -56,9 +56,37 @@ namespace Motel.Models
         [JsonPropertyName("rating")]
         public int Rating { get; set; } = 0;
 
-        [BsonElement("token")]
-        [JsonPropertyName("token")]
-        public int Token { get; set; } = 0;
+        [BsonElement("balance")]
+        [JsonPropertyName("balance")]
+        public int Balance { get; set; } = 0;
+
+        [BsonElement("posts")]
+        [BsonIgnoreIfNull]
+        [JsonPropertyName("posts")]
+        public List<Post>? Posts { get; set; } = null;
+
+        [BsonElement("preference_list")]
+        [BsonIgnoreIfNull]
+        [JsonPropertyName("preference_list")]
+        public List<Post>? PreferenceList { get; set; } = null;
+
+        [BsonElement("bills")]
+        [BsonIgnoreIfNull]
+        [JsonPropertyName("bills")]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public List<string>? Bills { get; set; } = null;
+
+        // This field will save the reviews that users leave to rate 
+        [BsonElement("active_reviews")]
+        [BsonIgnoreIfNull]
+        [JsonPropertyName("active_reviews")]
+        public List<Review>? ActiveReviews { get; set; } = null;
+
+        // This field will save the reviews received by the user
+        [BsonElement("passive_reviews")]
+        [BsonIgnoreIfNull]
+        [JsonPropertyName("passive_reviews")]
+        public List<Review>? PassiveReviews { get; set; } = null;
 
         [BsonElement("created_at")]
         [JsonPropertyName("created_at")]
@@ -67,23 +95,6 @@ namespace Motel.Models
         [BsonElement("updated_at")]
         [JsonPropertyName("updated_at")]
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
-
-        [BsonElement("posts")]
-        [BsonIgnoreIfNull]
-        [JsonPropertyName("posts")]
-        //[BsonRepresentation(BsonType.ObjectId)]
-        public List<Post>? Posts { get; set; } = null;
-
-        [BsonElement("bills")]
-        [BsonIgnoreIfNull]
-        [JsonPropertyName("bills")]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public List<string>? Bills { get; set; } = null;
-
-        [BsonElement("reviews")]
-        [BsonIgnoreIfNull]
-        [JsonPropertyName("reviews")]
-        public List<Review>? Reviews { get; set; } = null;
     }
 }
 

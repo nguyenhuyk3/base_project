@@ -12,7 +12,7 @@ namespace Motel.Areas.UserAccount.Models
         public string FullName { get; set; }
 
         [Display(Name = "Ngày sinh")]
-        public DateTime BirthDay { get; set; }
+        public DateTime DayOfBirth { get; set; }
 
         [Display(Name = "Giới tính")]
         public bool Sex { get; set; }

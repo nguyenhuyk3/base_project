@@ -23,8 +23,21 @@
     <link href="~/css/post/home/index/index.css" rel="stylesheet" />
     <link href="~/css/post/home/index/search.css" rel="stylesheet" />
     <link href="~/css/post/home/index/style.css" rel="stylesheet" />
+    <link href="~/css/post/home/index/searchbar.css" rel="stylesheet" />
+    <!--Js-->
 }
 
+<!--Search bar-->
+<div class="container-fluid" style="padding: 0">
+    <div class="search-text mb-3">
+        <input type="search" name="Tìm kiếm" placeholder="Tìm kiếm của bạn ...">
+        <a href="#" class="search-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </a>
+    </div>
+</div>
+<!---->
+<!--Content-->
 <div class="container-fluid" style="padding: 0">
     <div class="overlay">
         <div class="search">
@@ -47,36 +60,35 @@
     </div>
 
     <section class="container mt-4 p-2">
-        <div class="col-md-3 mx-3">
-            <div class="container border mb-3">
-                <h6>Lọc theo khoảng giá</h6>
-                <ul class="list-unstyled">
-                    <li><a href="#">Dưới 5 triệu</a></li>
-                    <li><a href="#">5 - 10 triệu</a></li>
-                    <li><a href="#">10 - 15 triệu</a></li>
-                    <li><a href="#">15 - 20 triệu</a></li>
-                    <li><a href="#">20 - 25 triệu</a></li>
-                    <li><a href="#">30 - 35 triệu</a></li>
-                </ul>
-            </div>
+        <div class="row">
+            <div class="col-md-3 mx-3 position-absolute" style="right: 0;">
+                <div class="container border mb-3">
+                    <h6>Lọc theo khoảng giá</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Dưới 5 triệu</a></li>
+                        <li><a href="#">5 - 10 triệu</a></li>
+                        <li><a href="#">10 - 15 triệu</a></li>
+                        <li><a href="#">15 - 20 triệu</a></li>
+                        <li><a href="#">20 - 25 triệu</a></li>
+                        <li><a href="#">30 - 35 triệu</a></li>
+                    </ul>
+                </div>
 
-            <div class="container border mb-3">
-                <h6>Lọc theo diện tích</h6>
-                <ul class="list-unstyled">
-                    <li><a href="#">Dưới m²</a></li>
-                    <li><a href="#">50 - 70m²</a></li>
-                    <li><a href="#">70 - 100m²</a></li>
-                    <li><a href="#">100 - 150m²</a></li>
-                    <li><a href="#">150 - 200m²</a></li>
-                    <li><a href="#">200 - 400m²</a></li>
-                </ul>
+                <div class="container border mb-3">
+                    <h6>Lọc theo diện tích</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Dưới m²</a></li>
+                        <li><a href="#">50 - 70m²</a></li>
+                        <li><a href="#">70 - 100m²</a></li>
+                        <li><a href="#">100 - 150m²</a></li>
+                        <li><a href="#">150 - 200m²</a></li>
+                        <li><a href="#">200 - 400m²</a></li>
+                    </ul>
+                </div>
             </div>
-        </div>
-        
-        @foreach (var item in Model)
-        {
-            <div class="row">
-                <div class="col-md-12 border mb-3">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-9 border mb-3">
                     <div class="row" style="height: 100%;">
                         <div class="col-md-6">
                             <img src="@item.PostDetail.Images[0].Url" alt="Alternate Text" style="width:100%" />
@@ -119,14 +131,17 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </section>
 </div>
+<!---->
 
 @section Scripts {
     <script src="~/js/post/home/index/counter.js"></script>
     <script src="~/js/post/home/index/custom.js"></script>
     <script src="~/js/post/home/index/isotope.min.js"></script>
     <script src="~/js/post/home/index/owl-carousel.js"></script>
-}
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/createconnection.js"></script>
+}   

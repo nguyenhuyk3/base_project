@@ -5,7 +5,7 @@
     border-radius: 50%;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
-    background: #2e467c;
+  /*  background: #2e467c*/;
     margin: -3px 10px 0 10px;
     cursor: pointer
 }
@@ -29,13 +29,14 @@
     display: none;
     width: 300px;
     position: absolute;
-    top: 30px;
-    left: 0;
+    top: 50px;
+    right: 0px;
     background: #fff;
     border: solid 1px rgba(100,100,100,.2);
     -webkit-box-shadow: 0 3px 8px rgba(0,0,0,.2);
-    z-index: 1000
+    z-index: 1000;
 }
+
 
     .ikrNotifications:before {
         content: '';

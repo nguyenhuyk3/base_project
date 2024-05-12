@@ -12,6 +12,10 @@ namespace Motel.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
 
+        [BsonElement("owner")]
+        [JsonPropertyName("owner")]
+        public string Owner { get; set; } = null!;
+
         //[BsonElement("vip")]
         //[JsonPropertyName("vip")]
         //[BsonRepresentation(BsonType.ObjectId)]

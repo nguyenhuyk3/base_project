@@ -1,0 +1,283 @@
+﻿@using X.PagedList.Mvc.Core
+@addTagHelper *, Mircosoft.AspNetCore.Mvs.TagHelpers
+
+@model Motel.Areas.Customer.Models.InfoViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    bool isClient = (bool)ViewData["isClient"];
+
+    // This ís email of client
+    var sender = User.Identity.Name;
+}
+
+@section Styles {
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <!--Bootstrap CSS-->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!--Font Awesome-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <!--Self-written Css-->
+    <link href="~/css/customer/info/info.css" rel="stylesheet" />
+    <link href="~/css/customer/info/rating.css" rel="stylesheet" />
+    <link href="~/css/customer/info/pagination.css" rel="stylesheet" />
+    <link href="~/css/customer/info/avatar.css" rel="stylesheet" />
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <!--Infomation-->
+        <div class="col-md-4 mx-4 bg-light">
+            <div class="card-body d-flex flex-column align-items-center"
+                 style="padding: 20px 0px 0px !important">
+                <div class="rounded-circle overflow-hidden d-flex justify-content-center align-items-center avatar-of-owner">
+                    <!--If else here-->
+                    <img src="~/images/images.jpg" />" class="img-fluid" alt="Avatar">
+                </div>
+                <div class="card-body text-center">
+                    <h5 class="card-title">@Model.Owner.Info.FullName</h5>
+                    <p class="card-text mb-2">
+                        <span class="badge badge-success">Điểm đánh giá trung bình:</span> <strong>4.5</strong>
+                    </p>
+                    <p class="card-text mb-2">
+                        <span class="badge badge-secondary">Có tổng cộng:</span> <strong>@Model.Owner.PassiveReviews.Count lượt đánh giá</strong>
+                    </p>
+                    <p class="card-text mb-2">
+                        <span class="badge badge-secondary">Có tổng cộng:</span> <strong>@Model.Owner.Posts.Count bài viết</strong>
+                    </p>
+                    <div class="d-flex justify-content-between">
+                        <p class="card-text mb-0 mr-2">
+                            <span class="badge badge-primary">Số điện thoại:</span> <strong>0931251034</strong>
+                        </p>
+                        <p class="card-text mb-0">
+                            <span class="badge badge-primary">Email:</span> <strong>@Model.Owner.Info.Email</strong>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!---->
+        <!--Tab-->
+        <div class="col-md-7 mx-4 bg-light">
+            <ul class="nav nav-tabs mb-1" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="tab1-tab" data-toggle="tab" href="#tab1" role="tab" aria-controls="tab1" aria-selected="true">Tin cho thuê</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tab2-tab" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false">Danh sách yêu thích</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <!--Conent of tab 1-->
+                <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            @if (Model.Owner.Posts.Count == 0)
+                            {
+                                <div class="carousel-item active">
+                                    <p>Không có bài viết nào</p>
+                                </div>
+                            }
+                            else
+                            {
+                                @for (int i = 0; i < Model.Owner.Posts.Count; i += 3)
+                                {
+                                    <div class="carousel-item @(i == 0 ? "active" : "")">
+                                        <div class="row">
+                                            @for (int j = i; j < i + 3 && j < Model.Owner.Posts.Count; j++)
+                                            {
+                                                var post = Model.Owner.Posts[j];
+                                                <div class="col-md-4">
+                                                    <div class="card">
+                                                        <img class="card-img-top" src="@post.PostDetail.Images[0].Url" alt="Hình ảnh nhà trọ cho thuê"
+                                                             style="width: 100%; height: 200px;">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title"
+                                                                style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                                                                @post.SubjectOnSite
+                                                            </h5>
+                                                            <p class="card-text">
+                                                                <i class='bx bx-dollar'></i> Giá tiền: @post.PostDetail.PriceString
+                                                            </p>
+                                                            <p class="card-text">
+                                                                <i class='bx bxs-area'></i> Diện tích: @post.PostDetail.HomeInformation.SquareMeter
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+                            }
+
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev" style="margin-left: -30px;">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next" style="margin-right: -30px;">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+                <!---->
+                <!--Conent of tab 2-->
+                <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+                </div>
+                <!---->
+            </div>
+        </div>
+        <!---->
+    </div>
+</div>
+
+<!--Email of the owner of this information page-->
+<input type="hidden" asp-for="Email"
+       id="receiver" name="receiver"
+       value="@Model.Owner.Email" />
+<!--Id of receiver-->
+<input type="hidden"
+       name="receiverId" id="receiverId"
+       value="@Model.Owner.Id" />
+
+@if (isClient && !string.IsNullOrEmpty(sender))
+{
+    <div class="container-fluid mx-2 mt-3">
+        <!--Button to trigger modal-->
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ratingModal">
+            Đánh giá người đăng tin
+        </button>
+        <!---->
+        <!--Modal-->
+        <div class="modal fade" id="ratingModal" tabindex="-1" role="dialog" aria-labelledby="ratingModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ratingModalLabel">Đánh giá người đăng tin</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!--Email of sender-->
+                    <input type="hidden"
+                           name="sender" id="sender"
+                           value="@sender" />
+                    <!--Id of sender-->
+                    <input type="hidden"
+                           name="senderId" id="senderId"
+                           value="@Model.SenderId" />
+                    <div class="modal-body">
+                        <!--Rating stars-->
+                        <div class="rating">
+                            <input type="radio" name="rating" id="star5" value="5"><label for="star5"><i class="fas fa-star"></i></label>
+                            <input type="radio" name="rating" id="star4" value="4"><label for="star4"><i class="fas fa-star"></i></label>
+                            <input type="radio" name="rating" id="star3" value="3"><label for="star3"><i class="fas fa-star"></i></label>
+                            <input type="radio" name="rating" id="star2" value="2"><label for="star2"><i class="fas fa-star"></i></label>
+                            <input type="radio" name="rating" id="star1" value="1"><label for="star1"><i class="fas fa-star"></i></label>
+                        </div>
+                        <!--Rating start input-->
+                        <input type="hidden"
+                               id="ratingValue" name="ratingValue"
+                               value="0" />
+                        <!--Review input-->
+                        <div class="form-group mt-3">
+                            <label for="review">Đánh giá của bạn:</label>
+                            <textarea class="form-control" id="comment" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                        <button type="button" class="btn btn-primary"
+                                id="sendButton">
+                            Gửi đánh giá
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!---->
+    </div>
+}
+
+<!-- Phần hiển thị danh sách đánh giá -->
+<div class="container mt-5">
+    <h3 class="text-center">Danh sách đánh giá</h3>
+    <div id="review-list">
+        @if (Model.ReviewsOnSite != null && Model.ReviewsOnSite.Count > 0)
+        {
+            @foreach (var review in Model.ReviewsOnSite)
+            {
+                <div class="card mb-2">
+                    <div class="card-body d-flex align-items-center">
+                        <div class="avatar rounded-circle overflow-hidden mr-3">
+                            <img src="~/images/images.jpg" alt="Avatar" class="img-fluid avatar-of-commenter">
+                        </div>
+                        <div>
+                            <h5 class="card-title">
+                                <span>@review.SenderEmail</span> đã đánh giá @review.Rating sao
+                            </h5>
+                            <p class="card-text">@review.Comment</p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            <!-- Hiển thị phân trang -->
+            <div class="pagination justify-content-center">
+                <ul class="pagination">
+                    @Html.PagedListPager(Model.ReviewsOnSite, page => Url.Action("Info", new { userAccountId = Model.Owner.Id, page }), PagedListRenderOptions.PageNumbersOnly)
+                </ul>
+            </div>
+        }
+        else
+        {
+            <p class="text-center">Không có đánh giá nào.</p>
+        }
+    </div>
+</div>
+
+
+@section Scripts {
+    <!--SingalR-->
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <!--Bootstrap JS-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    @*  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script> *@
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!--Font Awesome JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <!--Self-written JS-->
+    <script src="~/js/customer/info/info.js"></script>
+    <script src="~/js/customer/info/ratingstarts.js"></script>
+    <script src="~/js/customer/info/ratinggroup.js"></script>
+    <script>
+        var carousel = document.getElementById('carouselExampleControls');
+
+        var carouselInterval = setInterval(function () {
+            var currentIndex = $('.carousel-item.active').index();
+            var totalItems = $('.carousel-item').length;
+            var nextIndex = (currentIndex + 1) % totalItems;
+            $('#carouselExampleControls').carousel(nextIndex);
+        }, 5000);
+
+        carousel.addEventListener('mouseover', function () {
+            clearInterval(carouselInterval);
+        });
+
+        carousel.addEventListener('mouseout', function () {
+            carouselInterval = setInterval(function () {
+                var currentIndex = $('.carousel-item.active').index();
+                var totalItems = $('.carousel-item').length;
+                var nextIndex = (currentIndex + 1) % totalItems;
+                $('#carouselExampleControls').carousel(nextIndex);
+            }, 5000);
+        });
+    </script>
+}

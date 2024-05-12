@@ -13,9 +13,13 @@ namespace Motel.Models
         public string? Id { get; set; }
 
         [BsonRepresentation(BsonType.ObjectId)]
-        [BsonElement("user_account_id")]
-        [JsonPropertyName("user_account_id")]
-        public string UserAccountId { get; set; } = null!;
+        [BsonElement("sender")]
+        [JsonPropertyName("sender")]
+        public string Sender { get; set; } = null!;
+
+        [BsonElement("sender_email")]
+        [JsonPropertyName("sender_email")]
+        public string SenderEmail { get; set; } = null!;
 
         [BsonElement("comment")]
         [JsonPropertyName("comment")]

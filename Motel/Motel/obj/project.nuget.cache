@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "d4cSHDO7NFYMQ7fsiPRMGCpvyLZNotvguwFgqZyxGuhJ6ilHHQMLJnHWqGh6FhMKJU4l+jn0L+25/wHTSPohYg==",
+  "dgSpecHash": "hj3LwnWUFt2Ktey6NjBatUgF+V4319NcN+iGnJy2yfOMRCRjoc89BNAK91EPTeiRa721jVjjghpCNHVAfoj6Rw==",
   "success": true,
   "projectFilePath": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Motel.csproj",
   "expectedPackageFiles": [
@@ -135,6 +135,8 @@
     "C:\\Users\\CYBORG\\.nuget\\packages\\system.threading.channels\\7.0.0\\system.threading.channels.7.0.0.nupkg.sha512",
     "C:\\Users\\CYBORG\\.nuget\\packages\\system.threading.tasks.dataflow\\7.0.0\\system.threading.tasks.dataflow.7.0.0.nupkg.sha512",
     "C:\\Users\\CYBORG\\.nuget\\packages\\system.windows.extensions\\7.0.0\\system.windows.extensions.7.0.0.nupkg.sha512",
+    "C:\\Users\\CYBORG\\.nuget\\packages\\x.pagedlist\\9.1.2\\x.pagedlist.9.1.2.nupkg.sha512",
+    "C:\\Users\\CYBORG\\.nuget\\packages\\x.pagedlist.mvc.core\\9.1.2\\x.pagedlist.mvc.core.9.1.2.nupkg.sha512",
     "C:\\Users\\CYBORG\\.nuget\\packages\\zstdsharp.port\\0.7.3\\zstdsharp.port.0.7.3.nupkg.sha512"
   ],
   "logs": []

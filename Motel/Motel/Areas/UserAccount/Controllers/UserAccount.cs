@@ -55,7 +55,7 @@ namespace Motel.Areas.UserAccount.Controllers
                 Info info = new Info()
                 {
                     FullName = model.FullName,
-                    BirthDay = model.BirthDay,
+                    DayOfBirth = model.DayOfBirth,
                     Sex = model.Sex,
                     Email = model.Email,
                 };
@@ -121,6 +121,7 @@ namespace Motel.Areas.UserAccount.Controllers
                         in the context of authentication and authorization operations.
                     */
                     var claims = new List<Claim>() {
+                        new Claim(ClaimTypes.NameIdentifier, userAccount.Id.ToString()),
                         new Claim(ClaimTypes.Name, userAccount.Email),
                         new Claim(ClaimTypes.Role, userAccount.Role),
                     };

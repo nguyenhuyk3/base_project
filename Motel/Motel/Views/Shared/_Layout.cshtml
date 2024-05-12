@@ -4,19 +4,25 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - WebProject</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+          integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+          crossorigin="anonymous" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Motel.styles.css" asp-append-version="true" />
-    <!--Notification css-->
-    @*  <link href="~/notification/ikr.notification.css" rel="stylesheet" /> *@
-    <!---->
-    @*   <script src="~/js/chat.js"></script> *@
+    <!--Toast-->
+    <link href="~/toast/toast.css" rel="stylesheet" />
+    <!--Notification-->
+    <link href="~/notification/ikr.notification.css" rel="stylesheet" />
     @RenderSection("Styles", required: false)
 </head>
 <body>
     @{
         bool isLogginedIn = User.Identity.IsAuthenticated;
     }
+    
+    <div id="toast-notification"></div>
+
     <header>
         <!--Nav-->
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -57,6 +63,25 @@
                     }
                     else
                     {
+                        <div id="noti_Container">
+                            <div class="ikrNoti_Counter">1</div>
+                            <!--Button-->
+                            <div class="ikrNoti_Button">
+                                     <i class="fas fa-bell"></i>
+                            </div>
+                            <!---->
+                            <div class="ikrNotifications"
+                                 style="display: none !important">
+                                <h3>Notifications (<span class="notiCounterOnHead">1</span>)</h3>
+                                <div class="ikrNotificationItems">
+                                    <ul id="messagesList">
+                                    </ul>
+                                </div>
+                                <div class="ikrSeeAll">
+                                    <a href="#">See all</a>
+                                </div>
+                            </div>
+                        </div>
                         <form class="form-inline"
                               asp-area="UserAccount" asp-controller="UserAccount" asp-action="Logout"
                               method="post" id="LogoutForm">
@@ -73,24 +98,29 @@
         </nav>
         <!---->
     </header>
+
     <div class="container-fluid" style="padding: 0">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+   @*  <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2024 - WebProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>
+    </footer> *@
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <!--Self-written css-->
+    <!--Self-written CSS-->
     <link href="~/css/_layout.css" rel="stylesheet" />
-    <!--Notification js-->
-    @* <script src="~/notification/ikr.notificationplugin.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script> *@
+    <!--Self-written JS-->
+    <script src="~/js/home/index.js"></script>
+    <!--Toast JS-->
+    <script src="~/toast/toast.js"></script>
+    <!--Notification JS-->
+    <script src="~/notification/ikr.notificationplugin.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

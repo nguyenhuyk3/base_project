@@ -18,40 +18,99 @@
 var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
 // Disable the send button until connection is established.
-document.getElementById("sendButton").disabled = true;
+if (document.getElementById("sendButton")?.disabled !== undefined) {
+    document.getElementById("sendButton").disabled = true;
+}
 
 // When receive message it will show new message
-connection.on("ReceiveMessage", function (user, message) {
-    var li = document.createElement("li");
+connection.on("ReceiveMessage", function (sender, content) {
+    console.log(content)
+    toastNotification({
+        title: "Thành công!",
+        message: `${sender} vừa mới đánh giá cho bạn.`,
+        type: "success",
+        duration: 5000
+    });
 
-    document.getElementById("messagesList").appendChild(li);
+    var card = document.createElement("div");
 
+    card.className = "card mb-2";
+
+    var cardBody = document.createElement("div");
+
+    cardBody.className = "card-body";
+
+    var cardTitle = document.createElement("h5");
+
+    cardTitle.className = "card-title";
+
+    var span = document.createElement("span");
+
+    span.textContent = sender;
+
+    var ratingText = document.createTextNode(` đã đánh giá ${content.rating} sao`);
+
+    cardTitle.appendChild(span);
+    cardTitle.appendChild(ratingText);
+
+    var cardText = document.createElement("p");
+
+    cardText.className = "card-text";
+    cardText.textContent = content.comment;
+
+    cardBody.appendChild(cardTitle);
+    cardBody.appendChild(cardText);
+    card.appendChild(cardBody);
+
+    var reviewList = document.getElementById("review-list");
+
+    // Lấy phần tử đầu tiên trong danh sách
+    var firstCard = reviewList.firstChild;
+
+    // Chèn thẻ mới vào trước phần tử đầu tiên
+    if (firstCard) {
+        reviewList.insertBefore(card, firstCard);
+    } else {
+        reviewList.appendChild(card); // Nếu danh sách rỗng, thêm vào cuối danh sách
+    }
     // We can assign user-supplied strings to an element's textContent because it
     // is not interpreted as markup. If you're assigning in any other way, you 
     // should be aware of possible script injection concerns.
-    li.textContent = `${user} says ${message}`;
 });
 
 // `connection.start()`: This method is used to start the connection process to the SignalR server.
 connection.start().then(function () {
-    document.getElementById("sendButton").disabled = false;
+    if (document.getElementById("sendButton")?.disabled !== undefined) {
+        document.getElementById("sendButton").disabled = false;
+    }
 }).catch(function (err) {
     return console.error(err.toString());
 });
 
-document.getElementById("sendButton").addEventListener("click", function (event) {
-    var user = document.getElementById("userInput").value;
-    // var userAccountId = document.getElementById("userAccountId").value
-    var message = document.getElementById("messageInput").value;
+if (document.getElementById("sendButton")) {
+    document.getElementById("sendButton").addEventListener("click", function (event) {
+        var sender = document.getElementById("sender").value;
+        var receiver = document.getElementById("receiver").value;
+        var ratingString = document.getElementById("ratingValue").value;
+        var ratingNumber = parseInt(ratingString);
+        var comment = document.getElementById("comment").value;
 
-    // The `invoke()` method is used to send a request to 
-    // the server to call a specific method on the hub.
-    connection.invoke("SendMessage", user, message).catch(function (err) {
-        return console.error(err.toString());
+        const content = {
+            rating: ratingNumber,
+            comment: comment
+        }
+
+        if (receiver.length > 0) {
+            connection
+                .invoke("SendMessageToReceiver", sender, receiver, content)
+                .catch(function (err) {
+                    return console.error(err.toString());
+                });
+        }
+
+        event.preventDefault();
     });
-
-    event.preventDefault();
-});
+}
 
 
 
