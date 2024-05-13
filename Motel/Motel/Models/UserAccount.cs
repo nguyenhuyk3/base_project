@@ -88,6 +88,16 @@ namespace Motel.Models
         [JsonPropertyName("passive_reviews")]
         public List<Review>? PassiveReviews { get; set; } = null;
 
+        [BsonElement("unreaded_notification")]
+        [BsonIgnoreIfNull]
+        [JsonPropertyName("unreaded_notification")]
+        public List<Notification>? UnreadedNotifications { get; set; } = null;
+
+        [BsonElement("readed_notification")]
+        [BsonIgnoreIfNull]
+        [JsonPropertyName("readed_notification")]
+        public List<Notification>? ReadedNotifications { get; set; } = null;
+
         [BsonElement("created_at")]
         [JsonPropertyName("created_at")]
         public DateTime CreatedAt { get; set; } = DateTime.Now;

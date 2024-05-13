@@ -2,7 +2,9 @@
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.Options;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using MongoDB.Driver;
 using Motel.Areas.Customer.Models;
+using Motel.Models;
 using Motel.Utility.Checking;
 using Motel.Utility.Database;
 using NuGet.Protocol.Plugins;
@@ -15,6 +17,12 @@ namespace Motel.Utility.Hubs
         // This `Dictionary` will be stored as key-value "email: List of id"
         private static Dictionary<string, List<string>> emailToIdsMapping = new Dictionary<string, List<string>>();
         private static Dictionary<string, List<string>> groups = new Dictionary<string, List<string>>();
+        private readonly DatabaseConstructor _databaseConstructor;
+
+        public ChatHub(IOptions<DatabaseSettings> databaseSettings)
+        {
+            _databaseConstructor = new DatabaseConstructor(databaseSettings);
+        }
 
         public override Task OnConnectedAsync()
         {
@@ -80,6 +88,39 @@ namespace Motel.Utility.Hubs
             }
         }
 
+        // Single
+        public async Task SendRatingToReceiver(string senderId, string receiverId, Content content)
+        {
+            var receiver = await _databaseConstructor.UserAccountCollection
+                                        .Find(userAccount => userAccount.Id == receiverId)
+                                        .FirstOrDefaultAsync();
+            var sender = await _databaseConstructor.UserAccountCollection
+                                        .Find(userAccount => userAccount.Id == senderId)
+                                        .FirstOrDefaultAsync();
+            // `receiver` is email
+            var receiverIds = emailToIdsMapping.GetValueOrDefault(receiver.Email);
+
+            Notification notification = new Notification()
+            {
+                Sender = sender.Id,
+                Content = content
+            };
+
+            receiver?.UnreadedNotifications.Add(notification);
+
+            //var update = Builders<UserAccount>.Update.Push(f => f.UnreadedNotification, notification);
+            //var filter = Builders<UserAccount>.Filter.Eq(f => f.Id, receiverDocument.Id);
+
+            _databaseConstructor.UserAccountCollection.
+                    UpdateOneAsync(f => f.Id == receiver.Id, 
+                                    Builders<UserAccount>.Update.Push(f => f.UnreadedNotifications, notification));
+
+            if (receiverIds.Count > 0)
+            {
+                await Clients.User(receiverIds.FirstOrDefault()).SendAsync("ReceiveNotification", sender, content);
+            }
+        }
+
         //public async Task SendMessage(string user, string message)
         //{
         //    if (string.IsNullOrEmpty(user))
@@ -126,9 +167,9 @@ namespace Motel.Utility.Hubs
 
             Motel.ConnectedUsers.mappings = groups.ToDictionary(pair => pair.Key, pair => pair.Value);
 
-            var senderId = emailToIdsMapping.GetValueOrDefault(sender);
+            var senderIds = emailToIdsMapping.GetValueOrDefault(sender);
 
-            if (senderId.Count > 0)
+            if (senderIds.Count > 0)
             {
                 // The logged in clients will use their id for joining group
                 // Group name will be email's owner of page 
@@ -147,11 +188,11 @@ namespace Motel.Utility.Hubs
 
             Motel.ConnectedUsers.mappings = groups.ToDictionary(pair => pair.Key, pair => pair.Value);
 
-            var senderId = emailToIdsMapping.GetValueOrDefault(sender);
+            var senderIds = emailToIdsMapping.GetValueOrDefault(sender);
 
-            if (senderId.Count > 0)
+            if (senderIds.Count > 0)
             {
-                await Groups.RemoveFromGroupAsync(senderId.FirstOrDefault(), receiver);
+                await Groups.RemoveFromGroupAsync(senderIds.FirstOrDefault(), receiver);
             }
         }
 

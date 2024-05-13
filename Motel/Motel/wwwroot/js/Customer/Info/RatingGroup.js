@@ -48,12 +48,18 @@ if (document.getElementById("sendButton")?.disabled !== undefined) {
 
 // Listen for events when the `SendRatingToGroup` method is called
 connection.on("ReceiveRating", function (sender, content) {
-    toastNotification({
-        title: "Thành công!",
-        message: `${sender} vừa mới đánh giá.`,
-        type: "success",
-        duration: 5000
-    });
+    var senderOnsite = document.getElementById("sender")?.value
+
+    // Check if the client on the page is the sender
+    // If not, receive this notification
+    if (sender !== senderOnsite) {
+        toastNotification({
+            title: "Thành công!",
+            message: `${sender} vừa mới đánh giá.`,
+            type: "success",
+            duration: 5000
+        });
+    }
 
     const review = {
         sender: sender,
@@ -114,7 +120,7 @@ connection.on("ReceiveRating", function (sender, content) {
 
     var reviewList = document.getElementById("review-list");
     var firstCard = reviewList.firstChild;
- 
+
     if (firstCard) {
         reviewList.insertBefore(cardDiv, firstCard);
     } else {

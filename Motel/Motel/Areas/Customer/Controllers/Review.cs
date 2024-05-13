@@ -66,6 +66,21 @@ namespace Motel.Areas.Customer.Controllers
 
             return new JsonResult(new { success, message });
         }
+
+        public async Task<JsonResult> GetUnreadedNotification(string receiverId)
+        {
+            var receiver = _databaseConstructor.UserAccountCollection
+                               .Find(receiver => receiver.Id == receiverId)
+                               .FirstOrDefault();
+
+            var NotiData = new
+            {
+                Count = receiver.UnreadedNotifications.Count,
+                UnreadedNotifications = receiver.UnreadedNotifications
+            };
+
+            return new JsonResult(NotiData);
+        }
     }
 }
 
