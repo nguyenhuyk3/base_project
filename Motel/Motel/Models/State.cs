@@ -16,5 +16,9 @@ namespace Motel.Models
         [BsonElement("is_edited")]
         [JsonPropertyName("is_edited")]
         public bool IsEdited { get; set; } = false;
+
+        [BsonElement("is_deleted")]
+        [JsonPropertyName("is_deleted")]
+        public bool IsDeleted { get; set; } = false;
     }
 }

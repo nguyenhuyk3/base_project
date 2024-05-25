@@ -32,6 +32,8 @@ namespace Motel.Models
         is used to specify the name of a field or 
         property when converting between a .NET object and JSON.
         */
+
+        // public ObjectId 
         public string? Id { get; set; }
 
         [BsonElement("info")]
@@ -47,10 +49,9 @@ namespace Motel.Models
         [JsonPropertyName("password")]
         public string Password { get; set; } = null!;
 
-        //[BsonRepresentation(BsonType.ObjectId)]
-        [BsonElement("role")]
-        [JsonPropertyName("role")]
-        public string Role { get; set; } = null!;
+        [BsonElement("role_name")]
+        [JsonPropertyName("role_name")]
+        public string RoleName { get; set; } = null!;
 
         [BsonElement("rating")]
         [JsonPropertyName("rating")]
@@ -73,8 +74,7 @@ namespace Motel.Models
         [BsonElement("bills")]
         [BsonIgnoreIfNull]
         [JsonPropertyName("bills")]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public List<string>? Bills { get; set; } = null;
+        public List<Bill>? Bills { get; set; } = null;
 
         // This field will save the reviews that users leave to rate 
         [BsonElement("active_reviews")]
@@ -88,15 +88,15 @@ namespace Motel.Models
         [JsonPropertyName("passive_reviews")]
         public List<Review>? PassiveReviews { get; set; } = null;
 
-        [BsonElement("unreaded_notification")]
+        [BsonElement("notifications")]
         [BsonIgnoreIfNull]
-        [JsonPropertyName("unreaded_notification")]
-        public List<Notification>? UnreadedNotifications { get; set; } = null;
+        [JsonPropertyName("notifications")]
+        public List<Notification>? Notifications { get; set; } = null;
 
-        [BsonElement("readed_notification")]
-        [BsonIgnoreIfNull]
-        [JsonPropertyName("readed_notification")]
-        public List<Notification>? ReadedNotifications { get; set; } = null;
+        //[BsonElement("readed_notification")]
+        //[BsonIgnoreIfNull]
+        //[JsonPropertyName("readed_notification")]
+        //public List<Notification>? ReadedNotifications { get; set; } = null;
 
         [BsonElement("created_at")]
         [JsonPropertyName("created_at")]

@@ -70,7 +70,7 @@ namespace Motel.Areas.UserAccount.Controllers
 
                 if (role != null)
                 {
-                    userAccount.Role = role.Name;
+                    userAccount.RoleName = role.Name;
                 }
                 else
                 {
@@ -81,7 +81,7 @@ namespace Motel.Areas.UserAccount.Controllers
 
                     await _databaseConstuctor.RoleCollection.InsertOneAsync(newRole);
 
-                    userAccount.Role = newRole.Name.ToString();
+                    userAccount.RoleName = newRole.Name.ToString();
                 }
 
                 await _databaseConstuctor.UserAccountCollection.InsertOneAsync(userAccount);
@@ -123,7 +123,7 @@ namespace Motel.Areas.UserAccount.Controllers
                     var claims = new List<Claim>() {
                         new Claim(ClaimTypes.NameIdentifier, userAccount.Id.ToString()),
                         new Claim(ClaimTypes.Name, userAccount.Email),
-                        new Claim(ClaimTypes.Role, userAccount.Role),
+                        new Claim(ClaimTypes.Role, userAccount.RoleName),
                     };
 
                     // Initialize a new instance of the ClaimsIdentity with the claims and authentication scheme    

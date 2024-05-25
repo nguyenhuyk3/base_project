@@ -1,0 +1,78 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Motel.ViewModels.ModificationLayoutViewModel
+
+@{
+    ViewData["Title"] = "ListPosts";
+    Layout = "~/Areas/Post/Views/_Modification_Layout.cshtml";
+}
+
+@section _Modification_Layout_Styles {
+    <!--Self-written CSS-->
+    <link rel="stylesheet"
+          href="~/css/customer/customer/postinglist/styles.css" />
+}
+
+<div class="container-fluid mt-5">
+    <div class="row" id="articles">
+        @foreach (var post in Model.Owner.Posts)
+        {
+            <div class="col-md-6 mb-3 article">
+                <a asp-area="Post" asp-controller="Modification" asp-action="Detail" asp-route-postId="@post.Id">
+                    <div class="card">
+                        @if (post.VipName == "v6")
+                        {
+                            <div class="vip-badge">VIP KIM CƯƠNG</div>
+                        }
+                        <div id="carousel-@post.Id" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                @for (int i = 0; i < post.PostDetail.Images.Count; i++)
+                                {
+                                    <div class="carousel-item @(i == 0 ? "active" : "")">
+                                        <img src="@post.PostDetail.Images[i].Url" class="d-block w-100" alt="Hình ảnh @(i + 1)">
+                                    </div>
+                                }
+                            </div>
+                            <a class="carousel-control-prev" href="#carousel-@post.Id" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Trước</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carousel-@post.Id" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Tiếp</span>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title text-truncate-custom">@post.PostDetail.Description</h5>
+                            <p class="card-text text-danger font-weight-bold">
+                                @post.PostDetail.PriceString/tháng ·
+                                @post.PostDetail.HomeInformation.SquareMeter m² ·
+                                @post.PostDetail.HomeInformation.Bedroom 🛏️ ·
+                                @post.PostDetail.HomeInformation.Toilet 🛁 ·
+                                @post.PostDetail.AddressDetail.Address
+                            </p>
+                            <p class="card-text text-truncate-custom">@post.PostDetail.Description</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="media align-items-center">
+                                    <div class="media-body">
+                                        <small>Đăng vào lúc @post.CreatedAt</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+    <div class="text-center mt-4" id="loadMoreButtonContainer">
+        <button id="loadMore" class="btn btn-primary">Xem Thêm</button>
+    </div>
+</div>
+
+@section _Modification_Layout {
+    <!--Self-written JS-->
+    <script src="~/js/customer/customer/postinglist/showmoreposts.js"></script>
+}
+
+
+

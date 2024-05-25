@@ -1,4 +1,6 @@
 ﻿@model List<Motel.Models.Post>
+@using System.Security.Claims
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,7 +9,7 @@
 @section Styles {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
           rel="stylesheet">
-    <!--Additional cSS files-->
+    <!--Additional CSS files-->
     <link href="~/css/post/home/index/animate.css"
           rel="stylesheet" />
     <link href="~/css/post/home/index/fontawesome.css"
@@ -19,14 +21,42 @@
           rel="stylesheet" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
           rel='stylesheet'>
-    <!--Css created by members-->
-    <link href="~/css/post/home/index/index.css" rel="stylesheet" />
-    <link href="~/css/post/home/index/search.css" rel="stylesheet" />
-    <link href="~/css/post/home/index/style.css" rel="stylesheet" />
-    <link href="~/css/post/home/index/searchbar.css" rel="stylesheet" />
-    <!--Js-->
+    <!--Self-written CSS-->
+    <link href="~/css/post/home/index/styles.css" rel="stylesheet" />
 }
 
+<div class="container-fluid" style="padding: 0">
+    <div id="carouselExampleCaptions" class="carousel slide">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="~/images/banner-01.jpg" class="d-block-background w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block"></div>
+            </div>
+            <div class="carousel-item">
+                <img src="~/images/banner-02.jpg" class="d-block-background w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block"></div>
+            </div>
+            <div class="carousel-item">
+                <img src="~/images/banner-03.jpg" class="d-block-background w-100" alt="...">
+                <div class="carousel-caption d-none d-md-block"></div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+</div>
 <!--Search bar-->
 <div class="container-fluid" style="padding: 0">
     <div class="search-text mb-3">
@@ -59,89 +89,146 @@
         </div>
     </div>
 
-    <section class="container mt-4 p-2">
-        <div class="row">
-            <div class="col-md-3 mx-3 position-absolute" style="right: 0;">
-                <div class="container border mb-3">
-                    <h6>Lọc theo khoảng giá</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="#">Dưới 5 triệu</a></li>
-                        <li><a href="#">5 - 10 triệu</a></li>
-                        <li><a href="#">10 - 15 triệu</a></li>
-                        <li><a href="#">15 - 20 triệu</a></li>
-                        <li><a href="#">20 - 25 triệu</a></li>
-                        <li><a href="#">30 - 35 triệu</a></li>
-                    </ul>
-                </div>
+    <div class="col-md-3 table-price">
+        <div class="container border mb-3 search-by-price">
+            <h6>Lọc theo khoảng giá</h6>
+            <ul class="list-unstyled">
+                <li><a href="#">Dưới 5 triệu</a></li>
+                <li><a href="#">5 - 10 triệu</a></li>
+                <li><a href="#">10 - 15 triệu</a></li>
+                <li><a href="#">15 - 20 triệu</a></li>
+                <li><a href="#">20 - 25 triệu</a></li>
+                <li><a href="#">30 - 35 triệu</a></li>
+            </ul>
+        </div>
+        <div class="container border mb-3 search-by-price">
+            <h6>Lọc theo diện tích</h6>
+            <ul class="list-unstyled">
+                <li><a href="#">Dưới 50m²</a></li>
+                <li><a href="#">50 - 70m²</a></li>
+                <li><a href="#">70 - 100m²</a></li>
+                <li><a href="#">100 - 150m²</a></li>
+                <li><a href="#">150 - 200m²</a></li>
+                <li><a href="#">200 - 400m²</a></li>
+            </ul>
+        </div>
+    </div>
 
-                <div class="container border mb-3">
-                    <h6>Lọc theo diện tích</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="#">Dưới m²</a></li>
-                        <li><a href="#">50 - 70m²</a></li>
-                        <li><a href="#">70 - 100m²</a></li>
-                        <li><a href="#">100 - 150m²</a></li>
-                        <li><a href="#">150 - 200m²</a></li>
-                        <li><a href="#">200 - 400m²</a></li>
-                    </ul>
-                </div>
-            </div>
-            @foreach (var item in Model)
-            {
-                <div class="col-md-9 border mb-3">
-                    <div class="row" style="height: 100%;">
-                        <div class="col-md-6">
-                            <img src="@item.PostDetail.Images[0].Url" alt="Alternate Text" style="width:100%" />
+    <section class="info container mt-4">
+        @foreach (var post in Model)
+        {
+            <div class="card mt-3">
+                <div class="vip-badge">VIP KIM CƯƠNG</div>
+                <img src="@post.PostDetail.Images[0].Url" class="d-block w-100" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">@post.SubjectOnSite</h5>
+                    <p class="card-text text-danger font-weight-bold">@post.PostDetail.Price triệu/tháng · @post.PostDetail.HomeInformation.SquareMeter m² · @post.PostDetail.HomeInformation.Bedroom 🛏️ ·  @post.PostDetail.HomeInformation.Toilet 🛁 · @post.PostDetail.AddressDetail.City</p>
+                    <p class="card-text">@post.PostDetail.Description</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="media align-items-center">
+                            <img src="https://via.placeholder.com/40" class="mr-3 rounded-circle" alt="Agent image">
+                            <div class="media-body">
+                                <h6 class="mt-0 mb-0">@post.ContactInfo.Name</h6>
+                                <small>Đăng hôm nay</small>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="describe">
-                                <h4>@item.SubjectOnSite</h4>
-                            </div>
-                            <div class="info">
-                                <h6>
-                                    <i class='bx bx-area'></i> Diện tích:
-                                    @item.PostDetail.HomeInformation.SquareMeter m2
-                                </h6>
-                                <h6>
-                                    <i class='bx bx-dollar'></i> Giá cho thuê:
-                                    @item.PostDetail.PriceString
-                                </h6>
-                            </div>
-
-                            <div class="mb-3">
-                                <p>Địa chỉ: @item.PostDetail.AddressDetail.Address</p>
-                            </div>
-
-                            <div class="d-flex">
-                                <div class="icon-text">
-                                    <i class='bx bxs-shopping-bag'></i> <span>Môi giới</span>
+                        <div>
+                            <form class="favorite-form" data-postid="@post.Id" data-userid="@ViewData["UserAccountId"]">
+                                <div class="d-flex justify-content-end align-items-center h-100">
+                                    <input type="hidden" class="post-id" value="@post.Id" />
+                                    <input type="hidden" class="is-liked" value="@post.IsLiked" />
+                                    <button type="button" class="favorite-btn @(post.IsLiked ? "active" : "")">
+                                        <i class='bx bxs-heart'></i>
+                                    </button>
                                 </div>
-                                <div class="icon-text">
-                                    <i class='bx bx-medal'></i> <span>Tin ưu tiên</span>
-                                </div>
-                                <div class="icoC:\Users\Admin\Documents\Giaodien\doancoso\assets\imagesn-text">
-                                    <i class='bx bxs-location-plus'></i> <span>
-                                        @item.PostDetail.AddressDetail.City
-                                    </span>
-                                </div>
-                                <div class="icon-text">
-                                    <a href="#"><i class='bx bxs-heart'></i></a>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-            }
-        </div>
+            </div>
+        }
     </section>
+
 </div>
 <!---->
-
+<!-- Notification Element -->
+<div id="notification" class="notification"></div>
 @section Scripts {
-    <script src="~/js/post/home/index/counter.js"></script>
-    <script src="~/js/post/home/index/custom.js"></script>
-    <script src="~/js/post/home/index/isotope.min.js"></script>
-    <script src="~/js/post/home/index/owl-carousel.js"></script>
     <script src="~/js/signalr/dist/browser/signalr.js"></script>
     <script src="~/js/createconnection.js"></script>
-}   
+    <script>
+        $(document).ready(function () {
+            // Function to toggle favorite status and update local storage
+            function toggleFavoriteStatus(postId, button) {
+                // Get current liked status from local storage for current user
+                var userId = button.closest(".favorite-form").data("userid");
+                var key = userId + "_" + postId;
+                var isLiked = localStorage.getItem(key) === "true";
+
+                // Toggle liked status
+                isLiked = !isLiked;
+
+                // Update local storage for current user only
+                localStorage.setItem(key, isLiked.toString());
+
+                // Toggle button color
+                button.toggleClass("active", isLiked);
+
+                return isLiked;
+            }
+
+            // Set initial state of favorite buttons based on local storage
+            $(".favorite-btn").each(function () {
+                var button = $(this);
+                var postId = button.closest(".favorite-form").data("postid");
+                var userId = button.closest(".favorite-form").data("userid");
+                var key = userId + "_" + postId;
+
+                var isLiked = localStorage.getItem(key) === "true";
+                button.toggleClass("active", isLiked);
+            });
+
+            // Handle click event for favorite button
+            $(".favorite-btn").click(function () {
+                var button = $(this);
+                var postId = button.closest(".favorite-form").data("postid");
+
+                // Toggle favorite status
+                var isLiked = toggleFavoriteStatus(postId, button);
+
+                // Send AJAX request to add or remove from favorites
+                $.ajax({
+                    type: "POST",
+                    url: isLiked ? "/Post/Home/AddToFavorites" : "/Post/Home/RemoveFromFavorites",
+                    data: { postId: postId },
+                    success: function (response) {
+                        if (response.success) {
+
+                        } else {
+                            // Rollback local storage if server request fails
+                            toggleFavoriteStatus(postId, button);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                        // Rollback local storage if server request fails
+                        toggleFavoriteStatus(postId, button);
+                        showNotification("Đã xảy ra lỗi khi thực hiện thao tác.", 'error');
+                    }
+                });
+            });
+
+            function showNotification(message, type) {
+                var notification = $('#notification');
+                notification.removeClass('success error');
+                notification.addClass(type);
+                notification.text(message);
+                notification.fadeIn();
+
+                setTimeout(function () {
+                    notification.fadeOut();
+                }, 3000); // Hide after 3 seconds
+            }
+        });
+    </script>
+}

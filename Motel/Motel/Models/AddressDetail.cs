@@ -25,14 +25,14 @@ namespace Motel.Models
         [JsonPropertyName("street")]
         public string Street { get; set; } = null!;
 
-        [BsonElement("longitude")]
-        [BsonIgnoreIfNull]
-        [JsonPropertyName("longitude")]
-        public string? Longitude { get; set; } = null;
-
         [BsonElement("laitude")]
         [BsonIgnoreIfNull]
         [JsonPropertyName("laitude")]
-        public string? Latitude { get; set; } = null;
+        public double? Latitude { get; set; } = null;
+
+        [BsonElement("longitude")]
+        [BsonIgnoreIfNull]
+        [JsonPropertyName("longitude")]
+        public double? Longitude { get; set; } = null;
     }
 }

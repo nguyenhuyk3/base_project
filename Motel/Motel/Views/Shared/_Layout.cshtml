@@ -19,13 +19,17 @@
 <body>
     @{
         bool isLogginedIn = User.Identity.IsAuthenticated;
+        var receiverEmail = User.Identity.Name;
     }
-    
+
     <div id="toast-notification"></div>
+    <input type="hidden"
+           name="receiverEmail" id="receiverEmail"
+           value="@receiverEmail" />
 
     <header>
         <!--Nav-->
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 fixed-top">
             <div class="container-fluid">
                 <a class="navbar-brand"
                    asp-area="Post" asp-controller="Home" asp-action="Index">
@@ -64,17 +68,24 @@
                     else
                     {
                         <div id="noti_Container">
-                            <div class="ikrNoti_Counter">1</div>
+                            <div class="ikrNoti_Counter"
+                                 id="ikrNoti_Counter">
+                                0
+                            </div>
                             <!--Button-->
-                            <div class="ikrNoti_Button">
-                                     <i class="fas fa-bell"></i>
+                            <div class="ikrNoti_Button"
+                                 id="ikrNoti_Button">
+                                <i class="fas fa-bell"></i>
                             </div>
                             <!---->
                             <div class="ikrNotifications"
                                  style="display: none !important">
-                                <h3>Notifications (<span class="notiCounterOnHead">1</span>)</h3>
+                                <h3>
+                                    Notifications (<span class="notiCounterOnHead"
+                                                         id="notiCounterOnHead">0</span>)
+                                </h3>
                                 <div class="ikrNotificationItems">
-                                    <ul id="messagesList">
+                                    <ul class="list-group" id="notificationList">
                                     </ul>
                                 </div>
                                 <div class="ikrSeeAll">
@@ -100,15 +111,15 @@
     </header>
 
     <div class="container-fluid" style="padding: 0">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3" style="margin-top: 70px">
             @RenderBody()
         </main>
     </div>
 
-   @*  <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - WebProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+    @*  <footer class="border-top footer text-muted">
+    <div class="container">
+    &copy; 2024 - WebProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>
     </footer> *@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -121,6 +132,9 @@
     <script src="~/toast/toast.js"></script>
     <!--Notification JS-->
     <script src="~/notification/ikr.notificationplugin.js"></script>
+    <!--SingalR-->
+    <script src="~/js/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/getnotifications.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -5,40 +5,44 @@
       "PackagePath": "staticwebassets\\Motel.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Customer\\Info\\Avatar.css",
-      "PackagePath": "staticwebassets\\css\\Customer\\Info\\Avatar.css"
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Customer\\Customer\\Info\\Avatar.css",
+      "PackagePath": "staticwebassets\\css\\Customer\\Customer\\Info\\Avatar.css"
     },
     {
-      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Customer\\Info\\Info.css",
-      "PackagePath": "staticwebassets\\css\\Customer\\Info\\Info.css"
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Customer\\Customer\\Info\\Info.css",
+      "PackagePath": "staticwebassets\\css\\Customer\\Customer\\Info\\Info.css"
     },
     {
-      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Customer\\Info\\Pagination.css",
-      "PackagePath": "staticwebassets\\css\\Customer\\Info\\Pagination.css"
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Customer\\Customer\\Info\\Pagination.css",
+      "PackagePath": "staticwebassets\\css\\Customer\\Customer\\Info\\Pagination.css"
     },
     {
-      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Customer\\Info\\Rating.css",
-      "PackagePath": "staticwebassets\\css\\Customer\\Info\\Rating.css"
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Customer\\Customer\\Info\\Rating.css",
+      "PackagePath": "staticwebassets\\css\\Customer\\Customer\\Info\\Rating.css"
     },
     {
-      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\Home\\Index\\SearchBar.css",
-      "PackagePath": "staticwebassets\\css\\Post\\Home\\Index\\SearchBar.css"
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Customer\\Customer\\Payment\\Styles.css",
+      "PackagePath": "staticwebassets\\css\\Customer\\Customer\\Payment\\Styles.css"
     },
     {
-      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\Home\\Index\\animate.css",
-      "PackagePath": "staticwebassets\\css\\Post\\Home\\Index\\animate.css"
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Customer\\Customer\\PostingList\\Styles.css",
+      "PackagePath": "staticwebassets\\css\\Customer\\Customer\\PostingList\\Styles.css"
     },
     {
-      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\Home\\Index\\fontawesome.css",
-      "PackagePath": "staticwebassets\\css\\Post\\Home\\Index\\fontawesome.css"
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\Home\\FavoritePosts\\Styles.css",
+      "PackagePath": "staticwebassets\\css\\Post\\Home\\FavoritePosts\\Styles.css"
     },
     {
-      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\Home\\Index\\owl.css",
-      "PackagePath": "staticwebassets\\css\\Post\\Home\\Index\\owl.css"
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\Home\\Index\\Styles.css",
+      "PackagePath": "staticwebassets\\css\\Post\\Home\\Index\\Styles.css"
     },
     {
-      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\Home\\Index\\templatemo-villa-agency.css",
-      "PackagePath": "staticwebassets\\css\\Post\\Home\\Index\\templatemo-villa-agency.css"
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\Modification\\Detail\\Styles.css",
+      "PackagePath": "staticwebassets\\css\\Post\\Modification\\Detail\\Styles.css"
+    },
+    {
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\Modification\\Styles.css",
+      "PackagePath": "staticwebassets\\css\\Post\\Modification\\Styles.css"
     },
     {
       "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\_Modification_Layout.css",
@@ -77,60 +81,68 @@
       "PackagePath": "staticwebassets\\images\\tải xuống.jpg"
     },
     {
-      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Customer\\Info\\Info.js",
-      "PackagePath": "staticwebassets\\js\\Customer\\Info\\Info.js"
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Customer\\Customer\\Info\\Pagination.js",
+      "PackagePath": "staticwebassets\\js\\Customer\\Customer\\Info\\Pagination.js"
     },
     {
-      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Customer\\Info\\Pagination.js",
-      "PackagePath": "staticwebassets\\js\\Customer\\Info\\Pagination.js"
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Customer\\Customer\\Info\\RatingGroup.js",
+      "PackagePath": "staticwebassets\\js\\Customer\\Customer\\Info\\RatingGroup.js"
     },
     {
-      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Customer\\Info\\RatingElement.js",
-      "PackagePath": "staticwebassets\\js\\Customer\\Info\\RatingElement.js"
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Customer\\Customer\\Info\\RatingStarts.js",
+      "PackagePath": "staticwebassets\\js\\Customer\\Customer\\Info\\RatingStarts.js"
     },
     {
-      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Customer\\Info\\RatingGroup.js",
-      "PackagePath": "staticwebassets\\js\\Customer\\Info\\RatingGroup.js"
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Customer\\Customer\\PostingList\\ShowMorePosts.js",
+      "PackagePath": "staticwebassets\\js\\Customer\\Customer\\PostingList\\ShowMorePosts.js"
     },
     {
-      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Customer\\Info\\RatingStarts.js",
-      "PackagePath": "staticwebassets\\js\\Customer\\Info\\RatingStarts.js"
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Customer\\Customer\\ReturnUrl\\Countdown.js",
+      "PackagePath": "staticwebassets\\js\\Customer\\Customer\\ReturnUrl\\Countdown.js"
     },
     {
       "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Home\\Index.js",
       "PackagePath": "staticwebassets\\js\\Home\\Index.js"
     },
     {
-      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Home\\Index\\counter.js",
-      "PackagePath": "staticwebassets\\js\\Post\\Home\\Index\\counter.js"
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Modification\\Add\\CheckBalance.js",
+      "PackagePath": "staticwebassets\\js\\Post\\Modification\\Add\\CheckBalance.js"
     },
     {
-      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Home\\Index\\custom.js",
-      "PackagePath": "staticwebassets\\js\\Post\\Home\\Index\\custom.js"
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Modification\\Add\\ChooseVip.js",
+      "PackagePath": "staticwebassets\\js\\Post\\Modification\\Add\\ChooseVip.js"
     },
     {
-      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Home\\Index\\isotope.min.js",
-      "PackagePath": "staticwebassets\\js\\Post\\Home\\Index\\isotope.min.js"
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Modification\\Add\\DropList.js",
+      "PackagePath": "staticwebassets\\js\\Post\\Modification\\Add\\DropList.js"
     },
     {
-      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Home\\Index\\owl-carousel.js",
-      "PackagePath": "staticwebassets\\js\\Post\\Home\\Index\\owl-carousel.js"
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Modification\\Add\\UpdateValue.js",
+      "PackagePath": "staticwebassets\\js\\Post\\Modification\\Add\\UpdateValue.js"
     },
     {
-      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Modification\\Add.js",
-      "PackagePath": "staticwebassets\\js\\Post\\Modification\\Add.js"
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Modification\\Detail\\ChangeImage.js",
+      "PackagePath": "staticwebassets\\js\\Post\\Modification\\Detail\\ChangeImage.js"
     },
     {
-      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Modification\\DropList.js",
-      "PackagePath": "staticwebassets\\js\\Post\\Modification\\DropList.js"
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Modification\\Detail\\Map.js",
+      "PackagePath": "staticwebassets\\js\\Post\\Modification\\Detail\\Map.js"
+    },
+    {
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Modification\\Detail\\SlickSlider.js",
+      "PackagePath": "staticwebassets\\js\\Post\\Modification\\Detail\\SlickSlider.js"
+    },
+    {
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Shared\\CreateNotificationElement.js",
+      "PackagePath": "staticwebassets\\js\\Shared\\CreateNotificationElement.js"
     },
     {
       "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Shared\\_Layout.js",
       "PackagePath": "staticwebassets\\js\\Shared\\_Layout.js"
     },
     {
-      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\UserAccount\\UserAccount\\Login.js",
-      "PackagePath": "staticwebassets\\js\\UserAccount\\UserAccount\\Login.js"
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\UserAccount\\UserAccount\\Login\\RememberLogin.js",
+      "PackagePath": "staticwebassets\\js\\UserAccount\\UserAccount\\Login\\RememberLogin.js"
     },
     {
       "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\chat.js",
@@ -139,6 +151,14 @@
     {
       "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\createConnection.js",
       "PackagePath": "staticwebassets\\js\\createConnection.js"
+    },
+    {
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\createRatingElement.js",
+      "PackagePath": "staticwebassets\\js\\createRatingElement.js"
+    },
+    {
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\getNotifications.js",
+      "PackagePath": "staticwebassets\\js\\getNotifications.js"
     },
     {
       "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\signalr\\dist\\browser\\signalr.js",

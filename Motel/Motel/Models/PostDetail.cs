@@ -10,13 +10,14 @@ namespace Motel.Models
         //[JsonPropertyName("subject_on_site")]
         //public string SubjectOnSite { get; set; } = null!;
 
-        [BsonElement("address_detail")]
-        [JsonPropertyName("address_detail")]
-        public AddressDetail AddressDetail { get; set; } = null!;
 
         [BsonElement("description")]
         [JsonPropertyName("description")]
         public string Description { get; set; } = null!;
+
+        [BsonElement("address_detail")]
+        [JsonPropertyName("address_detail")]
+        public AddressDetail AddressDetail { get; set; } = null!;
 
         [BsonElement("home_information")]
         [JsonPropertyName("home_information")]

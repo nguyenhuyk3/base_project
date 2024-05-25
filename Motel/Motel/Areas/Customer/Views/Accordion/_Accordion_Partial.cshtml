@@ -1,0 +1,82 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Motel.Models.UserAccount
+
+<div class="left position-fixed mt-3">
+    <div class="avatar-container">
+        <div class="avatar">
+            <img src="https://via.placeholder.com/50" alt="User Avatar">
+        </div>
+        <div class="user-info">
+            <h5>@Model.Info.FullName</h5>
+            <p>@Model.Rating điểm đánh giá trung bình</p>
+        </div>
+    </div>
+    <div class="card mt-3">
+        <div class="card-body">
+            <h6>Số dư tài khoản</h6>
+            <input type="hidden"
+                   id="Balance" name="Balance"
+                   value="@Model.Balance" />
+            <p>Tài khoản chính: <strong>@Model.Balance</strong> VND</p>
+            <p>Id: <strong>@Model.Id</strong></p>
+            <button class="btn btn-danger float-end">Nạp tiền</button>
+        </div>
+    </div>
+    <div class="left-item emp-info"></div>
+    <div class="left-item services">
+        <a asp-area="Post" asp-controller="Modification" asp-action="Add" class="link-service">
+            <i class="fa-solid fa-list"></i>
+            <p>Đăng Tin</p>
+            <i class="fa-solid fa-angle-right"></i>
+        </a>
+    </div>
+    <div class="left-item services">
+        <a asp-area="Customer" asp-controller="Customer" asp-action="PostingList" asp-route-ownerId="@Model.Id" class="link-service">
+            <i class="fa-regular fa-circle-user"></i>
+            <p>Danh Sách Tin</p>
+            <i class="fa-solid fa-angle-right"></i>
+        </a>
+    </div>
+    <div class="left-item services">
+        <a href="#" class="link-service">
+            <i class="fa-solid fa-star"></i>
+            <p>Thông Tin Tài Khoản</p>
+            <i class="fa-solid fa-angle-right"></i>
+        </a>
+    </div>
+    <div class="left-item services">
+        <a href="#" class="link-service">
+            <i class="fa-solid fa-chart-line"></i>
+            <p>Nạp tiền</p>
+            <i class="fa-solid fa-angle-right"></i>
+        </a>
+    </div>
+    @* <div class="left-item services">
+        <a href="#" class="link-service">
+            <i class="fa-solid fa-user"></i>
+            <p>Cài Đặt Tài Khoản</p>
+            <i class="fa-solid fa-angle-right"></i>
+        </a>
+    </div> *@
+    <div class="left-item services">
+        <a href="#" class="link-service">
+            <i class="fa-solid fa-building"></i>
+            <p>Lịch Sử Giao Dịch</p>
+            <i class="fa-solid fa-angle-right"></i>
+        </a>
+    </div>
+    @* <div class="left-item services">
+        <a href="#" class="link-service">
+            <i class="fa-solid fa-paperclip"></i>
+            <p>Hướng Dẫn</p>
+            <i class="fa-solid fa-angle-right"></i>
+        </a>
+    </div> *@
+    <div class="left-item services">
+        <a href="#" class="link-service">
+            <i class="fa-solid fa-gear"></i>
+            <p>Tiện Ích</p>
+            <i class="fa-solid fa-angle-right"></i>
+        </a>
+    </div>
+</div>

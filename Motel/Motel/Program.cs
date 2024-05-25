@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Hosting;
 using Motel.Middleware;
+using Motel.Utility.Address;
 using Motel.Utility.Database;
 using Motel.Utility.Hubs;
 using System.Security.Claims;

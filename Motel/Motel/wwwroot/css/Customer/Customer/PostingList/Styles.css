@@ -1,0 +1,38 @@
+﻿.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.vip-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: red;
+    color: white;
+    z-index: 99;
+    padding: 5px 10px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.card {
+    position: relative
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.hidden {
+    display: none;
+}
+
+.text-truncate-custom {
+    display: block; /* Chúng ta sử dụng block hoặc inline-block để áp dụng max-width */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%; /* Điều chỉnh giá trị này theo nhu cầu của bạn */
+}

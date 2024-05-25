@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "Nạp tiền";
+    Layout = "~/Areas/Post/Views/_Modification_Layout.cshtml";
+}
+
+@section _Modification_Layout_Styles {
+    <link href="~/css/customer/customer/payment/styles.css" rel="stylesheet" />
+}
+
+<div class="container mt-5">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" href="#">QR code (VNPAY)</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Thẻ ATM nội địa</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Thẻ quốc tế</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Ví MoMo</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Chuyển khoản</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Trả góp qua thẻ tín dụng</a>
+        </li>
+    </ul>
+
+    <div class="card mt-3">
+        <div class="card-body">
+            <div class="form-group">
+                <label class="mb-3" for="amount">Nhập số tiền bạn muốn nạp (đ) *</label>
+                <input type="text"
+                       class="form-control mb-4"
+                       id="price"
+                       placeholder="Tối thiều là 10.000 VND">
+            </div>
+            <div class="row quick-select">
+                <div class="col-4 p-1">
+                    <button type="button" class="btn btn-outline-secondary">500.000 đ</button>
+                </div>
+                <div class="col-4 p-1">
+                    <button type="button" class="btn btn-outline-secondary">1.000.000 đ</button>
+                </div>
+                <div class="col-4 p-1">
+                    <button type="button" class="btn btn-outline-secondary">
+                        2.000.000 đ <br> <span class="bonus">Tặng: 54.545 đ</span>
+                    </button>
+                </div>
+                <div class="col-4 p-1">
+                    <button type="button" class="btn btn-outline-secondary">
+                        3.000.000 đ <br> <span class="bonus">Tặng: 81.818 đ</span>
+                    </button>
+                </div>
+                <div class="col-4 p-1">
+                    <button type="button" class="btn btn-outline-secondary">
+                        5.000.000 đ <br> <span class="bonus">Tặng: 227.273 đ</span>
+                    </button>
+                </div>
+                <div class="col-4 p-1">
+                    <button type="button" class="btn btn-outline-secondary">
+                        10.000.000 đ <br> <span class="bonus">Tặng: 454.545 đ</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="/Customer/Checkout"
+       class="btn btn-danger float-end text-decoration-none mt-3"
+       id="checkoutLink">Thanh toán</a>
+</div>
+
+<script>
+    var priceInput = document.getElementById('price')
+   
+    priceInput.addEventListener('input', function () {
+        var inputValue = priceInput.value
+        var newHref = "/Customer/Customer/Checkout?price=" + inputValue
+
+        document.getElementById('checkoutLink').href = newHref
+    });
+</script>

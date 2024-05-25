@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ouhVfI8LBeQZfVsP+mXd3KmhLxdlmHD6KO7M+qBGqPA=",
+  "Hash": "kU5KxNb5xJXF+QRE489ebkRkWecE7sSK6Iw232hYL18=",
   "Source": "Motel",
   "BasePath": "_content/Motel",
   "Mode": "Default",
@@ -74,12 +74,12 @@
       "OriginalItemSpec": "wwwroot\\css\\_Layout.css"
     },
     {
-      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Customer\\Info\\Avatar.css",
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Customer\\Customer\\Info\\Avatar.css",
       "SourceId": "Motel",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
       "BasePath": "_content/Motel",
-      "RelativePath": "css/Customer/Info/Avatar.css",
+      "RelativePath": "css/Customer/Customer/Info/Avatar.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -90,15 +90,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\Customer\\Info\\Avatar.css"
+      "OriginalItemSpec": "wwwroot\\css\\Customer\\Customer\\Info\\Avatar.css"
     },
     {
-      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Customer\\Info\\Info.css",
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Customer\\Customer\\Info\\Info.css",
       "SourceId": "Motel",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
       "BasePath": "_content/Motel",
-      "RelativePath": "css/Customer/Info/Info.css",
+      "RelativePath": "css/Customer/Customer/Info/Info.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -109,15 +109,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\Customer\\Info\\Info.css"
+      "OriginalItemSpec": "wwwroot\\css\\Customer\\Customer\\Info\\Info.css"
     },
     {
-      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Customer\\Info\\Pagination.css",
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Customer\\Customer\\Info\\Pagination.css",
       "SourceId": "Motel",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
       "BasePath": "_content/Motel",
-      "RelativePath": "css/Customer/Info/Pagination.css",
+      "RelativePath": "css/Customer/Customer/Info/Pagination.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -128,15 +128,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\Customer\\Info\\Pagination.css"
+      "OriginalItemSpec": "wwwroot\\css\\Customer\\Customer\\Info\\Pagination.css"
     },
     {
-      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Customer\\Info\\Rating.css",
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Customer\\Customer\\Info\\Rating.css",
       "SourceId": "Motel",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
       "BasePath": "_content/Motel",
-      "RelativePath": "css/Customer/Info/Rating.css",
+      "RelativePath": "css/Customer/Customer/Info/Rating.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -147,7 +147,45 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\Customer\\Info\\Rating.css"
+      "OriginalItemSpec": "wwwroot\\css\\Customer\\Customer\\Info\\Rating.css"
+    },
+    {
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Customer\\Customer\\Payment\\Styles.css",
+      "SourceId": "Motel",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
+      "BasePath": "_content/Motel",
+      "RelativePath": "css/Customer/Customer/Payment/Styles.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Customer\\Customer\\Payment\\Styles.css"
+    },
+    {
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Customer\\Customer\\PostingList\\Styles.css",
+      "SourceId": "Motel",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
+      "BasePath": "_content/Motel",
+      "RelativePath": "css/Customer/Customer/PostingList/Styles.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Customer\\Customer\\PostingList\\Styles.css"
     },
     {
       "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\_Modification_Layout.css",
@@ -169,12 +207,12 @@
       "OriginalItemSpec": "wwwroot\\css\\Post\\_Modification_Layout.css"
     },
     {
-      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\Home\\Index\\animate.css",
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\Home\\FavoritePosts\\Styles.css",
       "SourceId": "Motel",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
       "BasePath": "_content/Motel",
-      "RelativePath": "css/Post/Home/Index/animate.css",
+      "RelativePath": "css/Post/Home/FavoritePosts/Styles.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -185,15 +223,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\Post\\Home\\Index\\animate.css"
+      "OriginalItemSpec": "wwwroot\\css\\Post\\Home\\FavoritePosts\\Styles.css"
     },
     {
-      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\Home\\Index\\fontawesome.css",
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\Home\\Index\\Styles.css",
       "SourceId": "Motel",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
       "BasePath": "_content/Motel",
-      "RelativePath": "css/Post/Home/Index/fontawesome.css",
+      "RelativePath": "css/Post/Home/Index/Styles.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -204,15 +242,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\Post\\Home\\Index\\fontawesome.css"
+      "OriginalItemSpec": "wwwroot\\css\\Post\\Home\\Index\\Styles.css"
     },
     {
-      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\Home\\Index\\owl.css",
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\Modification\\Detail\\Styles.css",
       "SourceId": "Motel",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
       "BasePath": "_content/Motel",
-      "RelativePath": "css/Post/Home/Index/owl.css",
+      "RelativePath": "css/Post/Modification/Detail/Styles.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -223,15 +261,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\Post\\Home\\Index\\owl.css"
+      "OriginalItemSpec": "wwwroot\\css\\Post\\Modification\\Detail\\Styles.css"
     },
     {
-      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\Home\\Index\\SearchBar.css",
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\Modification\\Styles.css",
       "SourceId": "Motel",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
       "BasePath": "_content/Motel",
-      "RelativePath": "css/Post/Home/Index/SearchBar.css",
+      "RelativePath": "css/Post/Modification/Styles.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -242,26 +280,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\Post\\Home\\Index\\SearchBar.css"
-    },
-    {
-      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\Post\\Home\\Index\\templatemo-villa-agency.css",
-      "SourceId": "Motel",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
-      "BasePath": "_content/Motel",
-      "RelativePath": "css/Post/Home/Index/templatemo-villa-agency.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\Post\\Home\\Index\\templatemo-villa-agency.css"
+      "OriginalItemSpec": "wwwroot\\css\\Post\\Modification\\Styles.css"
     },
     {
       "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\css\\site.css",
@@ -435,12 +454,12 @@
       "OriginalItemSpec": "wwwroot\\js\\createConnection.js"
     },
     {
-      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Customer\\Info\\Info.js",
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\createRatingElement.js",
       "SourceId": "Motel",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
       "BasePath": "_content/Motel",
-      "RelativePath": "js/Customer/Info/Info.js",
+      "RelativePath": "js/createRatingElement.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -451,15 +470,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\Customer\\Info\\Info.js"
+      "OriginalItemSpec": "wwwroot\\js\\createRatingElement.js"
     },
     {
-      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Customer\\Info\\Pagination.js",
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Customer\\Customer\\Info\\Pagination.js",
       "SourceId": "Motel",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
       "BasePath": "_content/Motel",
-      "RelativePath": "js/Customer/Info/Pagination.js",
+      "RelativePath": "js/Customer/Customer/Info/Pagination.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -470,15 +489,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\Customer\\Info\\Pagination.js"
+      "OriginalItemSpec": "wwwroot\\js\\Customer\\Customer\\Info\\Pagination.js"
     },
     {
-      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Customer\\Info\\RatingElement.js",
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Customer\\Customer\\Info\\RatingGroup.js",
       "SourceId": "Motel",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
       "BasePath": "_content/Motel",
-      "RelativePath": "js/Customer/Info/RatingElement.js",
+      "RelativePath": "js/Customer/Customer/Info/RatingGroup.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -489,15 +508,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\Customer\\Info\\RatingElement.js"
+      "OriginalItemSpec": "wwwroot\\js\\Customer\\Customer\\Info\\RatingGroup.js"
     },
     {
-      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Customer\\Info\\RatingGroup.js",
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Customer\\Customer\\Info\\RatingStarts.js",
       "SourceId": "Motel",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
       "BasePath": "_content/Motel",
-      "RelativePath": "js/Customer/Info/RatingGroup.js",
+      "RelativePath": "js/Customer/Customer/Info/RatingStarts.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -508,15 +527,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\Customer\\Info\\RatingGroup.js"
+      "OriginalItemSpec": "wwwroot\\js\\Customer\\Customer\\Info\\RatingStarts.js"
     },
     {
-      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Customer\\Info\\RatingStarts.js",
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Customer\\Customer\\PostingList\\ShowMorePosts.js",
       "SourceId": "Motel",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
       "BasePath": "_content/Motel",
-      "RelativePath": "js/Customer/Info/RatingStarts.js",
+      "RelativePath": "js/Customer/Customer/PostingList/ShowMorePosts.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -527,7 +546,45 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\Customer\\Info\\RatingStarts.js"
+      "OriginalItemSpec": "wwwroot\\js\\Customer\\Customer\\PostingList\\ShowMorePosts.js"
+    },
+    {
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Customer\\Customer\\ReturnUrl\\Countdown.js",
+      "SourceId": "Motel",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
+      "BasePath": "_content/Motel",
+      "RelativePath": "js/Customer/Customer/ReturnUrl/Countdown.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Customer\\Customer\\ReturnUrl\\Countdown.js"
+    },
+    {
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\getNotifications.js",
+      "SourceId": "Motel",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
+      "BasePath": "_content/Motel",
+      "RelativePath": "js/getNotifications.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\getNotifications.js"
     },
     {
       "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Home\\Index.js",
@@ -549,12 +606,12 @@
       "OriginalItemSpec": "wwwroot\\js\\Home\\Index.js"
     },
     {
-      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Home\\Index\\counter.js",
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Modification\\Add\\CheckBalance.js",
       "SourceId": "Motel",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
       "BasePath": "_content/Motel",
-      "RelativePath": "js/Post/Home/Index/counter.js",
+      "RelativePath": "js/Post/Modification/Add/CheckBalance.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -565,15 +622,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\Post\\Home\\Index\\counter.js"
+      "OriginalItemSpec": "wwwroot\\js\\Post\\Modification\\Add\\CheckBalance.js"
     },
     {
-      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Home\\Index\\custom.js",
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Modification\\Add\\ChooseVip.js",
       "SourceId": "Motel",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
       "BasePath": "_content/Motel",
-      "RelativePath": "js/Post/Home/Index/custom.js",
+      "RelativePath": "js/Post/Modification/Add/ChooseVip.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -584,15 +641,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\Post\\Home\\Index\\custom.js"
+      "OriginalItemSpec": "wwwroot\\js\\Post\\Modification\\Add\\ChooseVip.js"
     },
     {
-      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Home\\Index\\isotope.min.js",
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Modification\\Add\\DropList.js",
       "SourceId": "Motel",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
       "BasePath": "_content/Motel",
-      "RelativePath": "js/Post/Home/Index/isotope.min.js",
+      "RelativePath": "js/Post/Modification/Add/DropList.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -603,15 +660,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\Post\\Home\\Index\\isotope.min.js"
+      "OriginalItemSpec": "wwwroot\\js\\Post\\Modification\\Add\\DropList.js"
     },
     {
-      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Home\\Index\\owl-carousel.js",
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Modification\\Add\\UpdateValue.js",
       "SourceId": "Motel",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
       "BasePath": "_content/Motel",
-      "RelativePath": "js/Post/Home/Index/owl-carousel.js",
+      "RelativePath": "js/Post/Modification/Add/UpdateValue.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -622,15 +679,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\Post\\Home\\Index\\owl-carousel.js"
+      "OriginalItemSpec": "wwwroot\\js\\Post\\Modification\\Add\\UpdateValue.js"
     },
     {
-      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Modification\\Add.js",
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Modification\\Detail\\ChangeImage.js",
       "SourceId": "Motel",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
       "BasePath": "_content/Motel",
-      "RelativePath": "js/Post/Modification/Add.js",
+      "RelativePath": "js/Post/Modification/Detail/ChangeImage.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -641,15 +698,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\Post\\Modification\\Add.js"
+      "OriginalItemSpec": "wwwroot\\js\\Post\\Modification\\Detail\\ChangeImage.js"
     },
     {
-      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Modification\\DropList.js",
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Modification\\Detail\\Map.js",
       "SourceId": "Motel",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
       "BasePath": "_content/Motel",
-      "RelativePath": "js/Post/Modification/DropList.js",
+      "RelativePath": "js/Post/Modification/Detail/Map.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -660,7 +717,26 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\Post\\Modification\\DropList.js"
+      "OriginalItemSpec": "wwwroot\\js\\Post\\Modification\\Detail\\Map.js"
+    },
+    {
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Modification\\Detail\\SlickSlider.js",
+      "SourceId": "Motel",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
+      "BasePath": "_content/Motel",
+      "RelativePath": "js/Post/Modification/Detail/SlickSlider.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Post\\Modification\\Detail\\SlickSlider.js"
     },
     {
       "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Shared\\_Layout.js",
@@ -680,6 +756,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\Shared\\_Layout.js"
+    },
+    {
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Shared\\CreateNotificationElement.js",
+      "SourceId": "Motel",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
+      "BasePath": "_content/Motel",
+      "RelativePath": "js/Shared/CreateNotificationElement.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Shared\\CreateNotificationElement.js"
     },
     {
       "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\signalr\\dist\\browser\\signalr.js",
@@ -739,12 +834,12 @@
       "OriginalItemSpec": "wwwroot\\js\\site.js"
     },
     {
-      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\UserAccount\\UserAccount\\Login.js",
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\UserAccount\\UserAccount\\Login\\RememberLogin.js",
       "SourceId": "Motel",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
       "BasePath": "_content/Motel",
-      "RelativePath": "js/UserAccount/UserAccount/Login.js",
+      "RelativePath": "js/UserAccount/UserAccount/Login/RememberLogin.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -755,7 +850,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\UserAccount\\UserAccount\\Login.js"
+      "OriginalItemSpec": "wwwroot\\js\\UserAccount\\UserAccount\\Login\\RememberLogin.js"
     },
     {
       "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",

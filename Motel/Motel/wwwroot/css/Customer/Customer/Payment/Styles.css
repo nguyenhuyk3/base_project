@@ -1,0 +1,45 @@
+﻿.quick-select .btn {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.bonus {
+    color: green;
+}
+
+.quick-select {
+    margin-bottom: 20px;
+}
+
+    .quick-select .btn.active {
+        background-color: #e6f7ff;
+        border-color: #91d5ff;
+    }
+
+.nav-tabs .nav-link.active {
+    border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.col-4 {
+    display: flex;
+}
+
+.btn:focus {
+    outline: none !important;
+    box-shadow: none;
+}

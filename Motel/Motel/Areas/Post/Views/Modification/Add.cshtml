@@ -1,23 +1,23 @@
-﻿@model Motel.Areas.Post.Models.PostAdd
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model Motel.ViewModels.ModificationLayoutViewModel
 
 @{
-    ViewData["Title"] = "Add";
+    ViewData["Title"] = "Thêm bài viết";
     Layout = "~/Areas/Post/Views/_Modification_Layout.cshtml";
 }
 
+@section _Modification_Layout_Styles {
+}
+
 <main class="container-fluid">
-    <style>
-        .preview-image {
-            max-width: 200px; /* Độ rộng tối đa là 100px */
-            max-height: 200px; /* Chiều cao tối đa là 100px */
-            margin: 5px; /* Khoảng cách giữa các hình ảnh */
-        }
-    </style>
+    <div asp-validation-summary="All" class="text-danger"></div>
     <div class="row">
         <!--This area will show form-->
         <div>
-            @using (Html.BeginForm("Add", "Modification", FormMethod.Post, new { @id = "PostForm", enctype = "multipart/form-data" }))
-            {
+            <form asp-action="Add" asp-controller="Modification"
+                  method="post" id="PostForm" enctype="multipart/form-data"
+                  onsubmit="return checkBalance()">
                 @Html.AntiForgeryToken()
                 <!--Address information-->
                 <section class="container-fluid border border-opacity-50 border-1 p-4">
@@ -25,45 +25,52 @@
                     <div class="row row-cols-1">
                         <div class="form-group">
                             <label class="control-label mb-2">Loại hình cho thuê</label>
-                            @Html.DropDownList("CategoryId", ViewBag.Categories as SelectList, "", new
+                            <select asp-for="PostAdd.CategoryId"
+                                    class="form-control rounded-1"
+                                    id="CategoryId"
+                                    style="max-width: 100%;">
+                                <option value=""> </option>
+                                @foreach (var item in ViewBag.Categories)
                                 {
-                                    @class = "form-control rounded-1",
-                                    id = "CategoryId",
-                                    style = "max-width: 100%;"
-                                })
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
                         </div>
                     </div>
                     <div class="row row-cols-2">
                         <div class="form-group">
                             <label class="control-label my-2" for="ApiId">Tỉnh/Thành phố</label>
-                            @Html.DropDownList("ApiId", ViewBag.Cities as SelectList, "", new
+                            <select asp-for="PostAdd.ApiId"
+                                    class="form-control rounded-1"
+                                    id="ApiId">
+                                <option value=""> </option>
+                                @foreach (var item in ViewBag.Cities)
                                 {
-                                    @class = "form-control rounded-1",
-                                    id = "ApiId",
-                                })
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
                         </div>
                         <div class="form-group">
                             <label class="control-label my-2" for="District">Quận/Huyện</label>
                             <select class="form-control"
-                                    id="District" name="District">
-                            </select>
+                                    asp-for="PostAdd.District" id="District"></select>
                         </div>
                         <div class="form-group">
                             <label class="control-label my-2" for="Ward">Phường/Xã</label>
                             <select class="form-control"
-                                    id="Ward" name="Ward">
-                            </select>
+                                    asp-for="PostAdd.Ward" id="Ward"></select>
                         </div>
                         <div class="form-group">
                             <label class="control-label my-2" for="Street">Đường/Phố</label>
-                            <input type="text" class="form-control"
-                                   id="Street" name="Street">
+                            <select class="form-control"
+                                    asp-for="PostAdd.Street" id="Street"></select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label mt-3 mb-2" for="Address">Địa chỉ hiển thị trên tin đăng</label>
-                        <input class="form-control" type="text"
-                               id="Address" name="Address"
+                        <input class="form-control"
+                               asp-for="PostAdd.Address"
+                               id="Address"
                                style="max-width: 100%">
                     </div>
                 </section>
@@ -73,18 +80,19 @@
                     <h5>Thông tin bài viết</h5>
                     <div class="form-group">
                         <label class="label-control mb-2" for="SubjectOnSite">Tiêu đề</label>
-                        <textarea class="form-control" style="max-width: 100%" type="text"
-                                  id="SubjectOnSite" name="SubjectOnSite"
+                        <textarea class="form-control"
+                                  asp-for="PostAdd.SubjectOnSite"
+                                  style="max-width: 100%"
                                   placeholder="VD: Bán nhà riêng 50m2 chính chủ tại Cầu Giấy"></textarea>
                         <p class="small mb-0">Đây là thông tin sẽ hiển thị ở đầu bài viết</p>
                     </div>
                     <div class="form-group mt-3">
                         <label class="label-control mb-2" for="Description">Mô tả</label>
-                        <textarea class="form-control" style="max-width: 100%" type="text"
-                                  id="Description" name="Description"
-                                  placeholder="Nhập mô tả chung về bất động sản của bạn. Ví dụ: Khu nhà có vị trí thuận lợi, gần công viên, gần trường học"
-                                  minlength="30" maxlength="3000"></textarea>
-
+                        <textarea class="form-control"
+                                  asp-for="PostAdd.Description"
+                                  style="max-width: 100%"
+                                  placeholder="Nhập mô tả chung về bất động sản của bạn. Ví dụ: Khu nhà có vị trí thuận lợi, gần công viên, gần trường học" minlength="30" maxlength="3000">
+                                                              </textarea>
                     </div>
                 </section>
                 <!---->
@@ -94,19 +102,22 @@
                     <div class="form-group">
                         <label class="mb-2" for="SquareMeter">Diện tích</label>
                         <input type="text" class="form-control"
-                               id="SquareMeter" name="SquareMeter"
+                               asp-for="PostAdd.SquareMeter"
+                               value="@(Model.PostAdd.SquareMeter == 0 ? "" : Model.PostAdd.SquareMeter.ToString())"
                                placeholder="Nhập diện tích, VD: 80m2">
                     </div>
                     <div class="form-group">
                         <label class="my-2" for="PriceString">Mức giá</label>
                         <div class="d-flex">
-                            <input type="text" class="form-control" style="margin-right: 15px;"
-                                   id="PriceString" name="Price"
+                            <input type="text" class="form-control"
+                                   asp-for="PostAdd.Price"
+                                   value="@(Model.PostAdd.Price == 0 ? "" : Model.PostAdd.Price.ToString())"
+                                   style="margin-right: 15px;"
                                    placeholder="Nhập giá, VD 1.000.000">
                             <span class="input-group-text">VND</span>
                         </div>
                     </div>
-                    <!--This is 3 buttons allow customer choose furrniture for post-->
+                    <!--This is 3 buttons allow customer choose furniture for post-->
                     <div class="form-group">
                         <label class="my-2" for="Furniture">Nội thất</label>
                         <div class="row d-flex">
@@ -124,10 +135,10 @@
                                 </div>
                             </div>
                         </div>
-                        @Html.HiddenFor(model => model.Furniture, new { @id = "Furniture" })
+                        <input type="hidden" asp-for="PostAdd.Furniture" id="Furniture" />
                     </div>
                     <!---->
-                    <!--These are basic infomation of (motel room or retal house)-->
+                    <!--These are basic information of (motel room or rental house)-->
                     <div class="form-group mt-5 d-flex">
                         <label class="label-control my-2 w-50" for="Bedroom">Phòng ngủ</label>
                         <div class="input-group">
@@ -135,15 +146,13 @@
                                 <button type="button" class="btn btn-secondary btn-decrease-bedroom">-</button>
                             </span>
                             <input type="text" class="form-control text-center mx-3"
-                                   id="Bedroom" name="Bedroom"
+                                   asp-for="PostAdd.Bedroom" id="Bedroom"
                                    value="0" readonly>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-secondary btn-increase-bedroom">+</button>
                             </span>
                         </div>
                     </div>
-                    @*   @Html.HiddenFor(model => model.Bedroom, new { @name = "Bedroom", id = "Bedroom" }) *@
-
                     <div class="form-group mt-2 d-flex">
                         <label class="label-control my-2 w-50" for="Toilet">Toilet</label>
                         <div class="input-group">
@@ -151,15 +160,13 @@
                                 <button type="button" class="btn btn-secondary btn-decrease-toilet">-</button>
                             </span>
                             <input type="text" class="form-control text-center mx-3"
-                                   id="Toilet" name="Toilet"
+                                   asp-for="PostAdd.Toilet" id="Toilet"
                                    value="0" readonly>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-secondary btn-increase-toilet">+</button>
                             </span>
                         </div>
                     </div>
-                    @*  @Html.HiddenFor(model => model.Toilet, new { @name = "Toilet", id = "Toilet" }) *@
-
                     <div class="form-group mt-2 d-flex">
                         <label class="label-control my-2 w-50" for="Floor">Tầng</label>
                         <div class="input-group">
@@ -167,33 +174,27 @@
                                 <button type="button" class="btn btn-secondary btn-decrease-floor">-</button>
                             </span>
                             <input type="text" class="form-control text-center mx-3"
-                                   id="Floor" name="Floor"
+                                   asp-for="PostAdd.Floor" id="Floor"
                                    value="0" readonly>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-secondary btn-increase-floor">+</button>
                             </span>
                         </div>
                     </div>
-                    @* @Html.HiddenFor(model => model.Floor, new { @name = "Floor", @id = "Floor" }) *@
-                    <!---->
                 </section>
                 <!---->
                 <!--Part of chosing image-->
                 <section class="container border border-opacity-50 border-1 p-4 mt-3">
                     <h4>Hình ảnh & Video</h4>
                     <p>Quy định đăng hình & video</p>
-
                     <ul>
                         <li class="text-danger">Ảnh đầu tiên sẽ là ảnh chính cho bài đăng</li>
                         <li>Hãy dùng ảnh thật, không trùng, không chèn SĐT</li>
                         <li>Tối đa là 10 ảnh</li>
                         <li>Mô tả ảnh tối đa 45 kí tự.</li>
                     </ul>
-
                     <button type="button" id="ChooseImageButton" class="btn btn-primary">Chọn ảnh</button>
-
                     <input type="file" id="FileInput" name="FileInput" accept="image/*" multiple style="display: none;">
-
                     <div id="ImagePreview"></div>
                 </section>
                 <!---->
@@ -204,78 +205,98 @@
                     <div class="row row-cols-2">
                         <div class="form-group">
                             <label class="label-control mb-2" for="Name">Tên liên hệ</label>
-                            <input type="text" class="form-control mb-2"
-                                   id="Name" name="Name"
-                            @* value="@Model.Info.Name" *@
-                                   placeholder="Nhập tên của bạn">
+                            <input type="text"
+                                   class="form-control mb-2"
+                                   asp-for="PostAdd.Name" id="Name"
+                                   placeholder="Nhập tên của bạn" />
                         </div>
 
                         <div class="form-group">
                             <label class="label-control mb-2" for="Phone">Số điện thoại</label>
-                            <input type="tel" class="form-control"
-                                   id="Phone" name="Phone"
-                            @* value="@Model.Info.Phone" *@
-                                   placeholder="Nhập số điện thoại">
+                            <input type="text"
+                                   class="form-control mb-2"
+                                   asp-for="PostAdd.Phone" id="Phone"
+                                   placeholder="Nhập số điện thoại" />
                         </div>
 
                         <div class="form-group">
                             <label class="label-control mb-2" for="Email">Email</label>
-                            <input type="email" class="form-control"
-                                   id="Email" name="Email"
-                            @* value="@Model.Info.UserAccount.Email" *@
-                                   placeholder="Nhập email">
+                            <input type="text"
+                                   class="form-control mb-2"
+                                   asp-for="PostAdd.Email" id="Email"
+                                   placeholder="Nhập email" />
                         </div>
                     </div>
                 </section>
                 <!---->
                 <!--Chossing VIP for post-->
-                @*  <section class="container border border-opacity-50 border-1 p-4 mt-3 d-flex justify-content-between">
-            <div class="btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-secondary my-1">
-            <input type="radio"
-            name="options" id="V1"
-            value="V1" autocomplete="on"
-            checked> 10 Token và 1 ngày đăng
-            </label>
-            <label class="btn btn-secondary my-1">
-            <input type="radio"
-            name="options" id="V2"
-            value="V2" autocomplete="off"> 20 Token và 2 ngày đăng
-            </label>
-            <label class="btn btn-secondary my-1">
-            <input type="radio"
-            name="options" id="V3"
-            value="V3" autocomplete="off"> 30 Token và 3 ngày đăng
-            </label>
-            <label class="btn btn-secondary my-1">
-            <input type="radio"
-            name="options" id="V4"
-            value="V4" autocomplete="off"> 40 Token và 4 ngày đăng
-            </label>
-            <label class="btn btn-secondary my-1">
-            <input type="radio"
-            name="options" id="V5"
-            value="V5" autocomplete="off"> 50 Token và 5 ngày đăng
-            </label>
-            <label class="btn btn-secondary my-1">
-            <input type="radio"
-            name="options" id="V6"
-            value="V6" autocomplete="off"> 60 Token và 6 ngày đăng
-            </label>
-            </div>
-            </section> *@
-                @* @Html.HiddenFor(model => model.VipName, new { @id = "VipName", @name = "VipName" }) *@
+                <section class="container border border-opacity-50 border-1 p-4 mt-3">
+                    <style>
+                        .btn-group-toggle .btn {
+                            width: 100%;
+                            text-align: left;
+                        }
+
+                            .btn-group-toggle .btn.active {
+                                background-color: #007bff;
+                                color: white;
+                            }
+                    </style>
+                    <div class="row-cols-3 d-flex justify-content-between">
+                        <div>
+                            <div class="btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary my-1">
+                                    <input type="radio" name="options" id="v1" value="v1-10000" checked>
+                                    10.000 VND và 1 ngày đăng
+                                </label>
+                                <label class="btn btn-secondary my-1">
+                                    <input type="radio" name="options" id="v2" value="v2-20000" autocomplete="off">
+                                    20.000 VND và 2 ngày đăng
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary my-1">
+                                    <input type="radio" name="options" id="v3" value="v3-30000" autocomplete="off">
+                                    30.000 VND và 3 ngày đăng
+                                </label>
+                                <label class="btn btn-secondary my-1">
+                                    <input type="radio" name="options" id="v4" value="v4-40000" autocomplete="off">
+                                    40.000 VND và 4 ngày đăng
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-secondary my-1">
+                                    <input type="radio" name="options" id="v5" value="v5-50000" autocomplete="off">
+                                    50.000 VND và 5 ngày đăng
+                                </label>
+                                <label class="btn btn-secondary my-1">
+                                    <input type="radio" name="options" id="v6" value="v6-60000" autocomplete="off">
+                                    60.000 VND và 6 ngày đăng
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <input type="hidden"
+                       class="form-control mb-2"
+                       asp-for="PostAdd.VipName" id="VipName" />
                 <!---->
                 <div class="text-end">
                     <button type="submit" class="btn btn-danger mt-3 float-end">Đăng bài</button>
                 </div>
-            }
+            </form>
         </div>
         <!---->
     </div>
 </main>
 
 @section _Modification_Layout {
-    <script src="~/js/post/modification/droplist.js"></script>
-    <script src="~/js/post/modification/add.js"></script>
+    <script src="~/js/post/modification/add/droplist.js"></script>
+    <script src="~/js/post/modification/add/updatevalue.js"></script>
+    <script src="~/js/post/modification/add/checkbalance.js"></script>
+    <script src="~/js/post/modification/add/choosevip.js"></script>
 }

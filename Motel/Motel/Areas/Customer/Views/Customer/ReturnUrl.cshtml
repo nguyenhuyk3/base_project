@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewData["Title"] = "ReturnUrl";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    bool isSucessful = (bool)ViewData["IsSuccessful"];
+}
+
+<div class="container h-100 d-flex justify-content-center align-items-center">
+    <div class="card text-center">
+        <div class="card-body">
+            @if (isSucessful)
+            {
+                <h5 class="card-title text-success">Bạn đã thanh toán thành công!</h5>
+                <p class="card-text">Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi.</p>
+            }else
+            {
+                <h5 class="card-title text-error">Bạn đã thanh toán thất bại!</h5>
+            }
+            <p class="card-text">Bạn sẽ được chuyển hướng sau <span id="countdown">3</span> giây.</p>
+            <a href="https://localhost:7244/" class="btn btn-primary">Chuyển ngay</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/customer/customer/returnurl/countdown.js"></script>
+}

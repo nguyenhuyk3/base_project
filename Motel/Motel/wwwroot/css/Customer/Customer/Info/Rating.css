@@ -1,0 +1,31 @@
+﻿/*
+    This file will relate with "Rating part"
+*/
+.rating input {
+    display: none;
+}
+
+.rating label {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+    .rating label:hover,
+    .rating label:hover ~ label {
+        color: orange;
+    }
+
+.rating input:checked ~ label,
+.rating:not(:checked) > label:hover,
+.rating input:checked ~ label:hover ~ label {
+    color: orange;
+}
+
+    .rating input:checked ~ label:hover,
+    .rating input:checked ~ label:hover ~ label {
+        color: orange;
+    }
+
+.rating {
+    direction: rtl; /* Đảo ngược thứ tự của các nút radio */
+}

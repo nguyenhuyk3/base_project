@@ -1,0 +1,36 @@
+﻿/*
+    Avatar
+*/
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+/*
+    Slick Slider
+*/
+.thumbnail-gallery img {
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: auto;
+}
+
+.slick-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 5px;
+}
+
+    .slick-slide img {
+        width: 100%;
+        height: auto;
+    }

@@ -12,5 +12,10 @@ function toggleNotifications() {
     notificationsElement.style.display = boxCss;
 }
 
-document.querySelector('.ikrNoti_Button').addEventListener("click", toggleNotifications);
-document.querySelector('.ikrNotifications').addEventListener("click", toggleNotifications);
+if (document.querySelector('.ikrNoti_Button') != null) {
+    document.querySelector('.ikrNoti_Button').addEventListener("click", toggleNotifications);
+}
+
+if (document.querySelector('.ikrNotifications') != null) {
+    document.querySelector('.ikrNotifications').addEventListener("click", toggleNotifications);
+}

@@ -12,9 +12,18 @@ namespace Motel.Models
         [JsonPropertyName("id")]
         public string? Id { get; set; }
 
+        [BsonElement("owner")]
+        [JsonPropertyName("owner")]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Owner { get; set; } = null!;
+
         [BsonElement("cost")]
         [JsonPropertyName("cost")]
         public int Cost { get; set; } = 0;
+
+        [BsonElement("cost_string")]
+        [JsonPropertyName("cost_string")]
+        public string CostString { get; set; } = "0 VND";
 
         [BsonElement("created_at")]
         [JsonPropertyName("created_at")]

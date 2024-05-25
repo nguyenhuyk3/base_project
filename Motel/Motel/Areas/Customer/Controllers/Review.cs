@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using Motel.Areas.Customer.Models;
+using Motel.Models;
 using Motel.Utility.Database;
 using Newtonsoft.Json;
 using ZstdSharp.Unsafe;
@@ -67,17 +68,47 @@ namespace Motel.Areas.Customer.Controllers
             return new JsonResult(new { success, message });
         }
 
-        public async Task<JsonResult> GetUnreadedNotification(string receiverId)
+        // This function will take unread notifications
+        // and add them to the list of read notifications
+        [HttpGet]
+        public async Task<JsonResult> GetUnreadedNotifications(string receiverEmail)
         {
-            var receiver = _databaseConstructor.UserAccountCollection
-                               .Find(receiver => receiver.Id == receiverId)
+            var receiverDocument = _databaseConstructor.UserAccountCollection
+                               .Find(f => f.Email == receiverEmail)
                                .FirstOrDefault();
+            var unreadNotifications = receiverDocument?.Notifications;
+            var unreadedNotificationCount = 0;
+
+            foreach (var notification in unreadNotifications)
+            {
+                if (!notification.IsReaded)
+                {
+                    notification.IsReaded = true;
+                    unreadedNotificationCount++;
+
+                    var filterNotification = Builders<Motel.Models.UserAccount>.Filter.Eq(f => f.Id, receiverDocument.Id);
+                    var updateNotification = Builders<Motel.Models.UserAccount>.Update.Set(u => u.Notifications, unreadNotifications);
+
+                    await _databaseConstructor.UserAccountCollection.UpdateOneAsync(filterNotification, updateNotification);
+                }
+            }
 
             var NotiData = new
             {
-                Count = receiver.UnreadedNotifications.Count,
-                UnreadedNotifications = receiver.UnreadedNotifications
+                Count = unreadedNotificationCount,
+                UnreadedNotifications = unreadNotifications
             };
+
+            //receiverDocument.ReadedNotifications ??= new List<Notification>();
+            //receiverDocument.ReadedNotifications.AddRange(unreadNotifications);
+            //receiverDocument.UnreadedNotifications.Clear();
+
+            //var filter = Builders<Motel.Models.UserAccount>.Filter.Eq(u => u.Id, receiverDocument.Id);
+            //var update = Builders<Motel.Models.UserAccount>.Update
+            //           .Set(u => u.ReadedNotifications, receiverDocument.ReadedNotifications)
+            //           .Set(u => u.UnreadedNotifications, receiverDocument.UnreadedNotifications);
+
+            //await _databaseConstructor.UserAccountCollection.UpdateOneAsync(filter, update);
 
             return new JsonResult(NotiData);
         }

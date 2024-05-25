@@ -1,0 +1,119 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model Motel.ViewModels.ModificationLayoutViewModel
+
+@{
+    ViewData["Title"] = "Danh sách yêu thích";
+    Layout = "~/Areas/Post/Views/_Modification_Layout.cshtml";
+}
+
+@section _Modification_Layout_Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    <!--Self-written CSS-->
+    <link href="~/css/post/home/favoriteposts/styles.css" rel="stylesheet" />
+}
+
+<h2>Tin Đăng Đã Lưu</h2>
+
+<div class="container-fluid">
+    @if (Model.FavoritePosts != null)
+    {
+        @foreach (var post in Model.FavoritePosts)
+        {
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="position-relative">
+                            <img src="@post.PostDetail.Images[0].Url" class="card-img-top" alt="Ảnh phòng trọ">
+                            @if (post.VipName == "v6" || post.VipName == "v5")
+                            {
+                                <div class="vip-label">VIP KIM CƯƠNG</div>
+                            }
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title text-truncate-custom">@post.PostDetail.Description</h5>
+                            <p class="card-text text-truncate-custom">@post.PostDetail.Description</p>
+                            <div class="d-flex justify-content-between align-items-center mt-2">
+                                <button type="button" class="favorite-btn" data-postid="@post.Id" data-userid="@ViewData["UserId"]">
+                                    <i class="bx @(post.IsLiked ? "bxs-heart" : "bx-heart")"></i>
+                                </button>
+                                <span class="badge badge-secondary">@post.CreatedAt</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <h3>Không có bài viết nào</h3>
+    }
+</div>
+
+@section _Modification_Layout {s
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--Self-written JS-->
+    <script>
+        $(document).ready(function () {
+            function showNotification(message, type) {
+                var notification = $('#notification');
+                notification.removeClass('success error').addClass(type).text(message).fadeIn();
+                setTimeout(function () {
+                    notification.fadeOut();
+                }, 3000); // Hide after 3 seconds
+            }
+
+            $(".favorite-btn").click(function () {
+                var button = $(this);
+                var postId = button.data("postid");
+                var isLiked = button.hasClass("active");
+                var url = isLiked ? "/Post/Home/RemoveFromFavorites" : "/Post/Home/AddToFavorites";
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: { postId: postId },
+                    success: function (response) {
+                        if (response.success) {
+                            button.toggleClass("active");
+                            button.find('i').toggleClass("bxs-heart bx-heart");
+                            showNotification(response.message, 'success');
+                            if (isLiked) {
+                                button.closest(".row").remove(); // Remove the post from the list
+                                var userId = button.data("userid");
+                                var key = userId + "_" + postId;
+                                localStorage.setItem(key, "false"); // Set isLiked to false
+
+                            }
+                        } else {
+                            showNotification(response.message, 'error');
+                        }
+                    },
+                    error: function () {
+                        showNotification("Đã xảy ra lỗi khi thực hiện thao tác.", 'error');
+                    }
+                });
+            });
+            // Initialize favorite buttons based on local storage
+            $(".favorite-btn").each(function () {
+                var button = $(this);
+                var postId = button.data("postid");
+                var userId = button.data("userid");
+                var key = userId + "_" + postId;
+                var isLiked = localStorage.getItem(key) === "true";
+
+                // Update local storage for current user only
+                localStorage.setItem(key, isLiked.toString());
+
+                // Toggle button color
+                button.toggleClass("active", isLiked);
+
+                return isLiked;
+            });
+        });
+    </script>
+
+
+}

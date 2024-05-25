@@ -14,12 +14,12 @@ namespace Motel.Models
 
         [BsonElement("owner")]
         [JsonPropertyName("owner")]
+        [BsonRepresentation(BsonType.ObjectId)]
         public string Owner { get; set; } = null!;
 
-        //[BsonElement("vip")]
-        //[JsonPropertyName("vip")]
-        //[BsonRepresentation(BsonType.ObjectId)]
-        //public string Vip { get; set; } = null!;
+        [BsonElement("vip_name")]
+        [JsonPropertyName("vip_name")]
+        public string VipName { get; set; } = null!;
 
         [BsonElement("category_name")]
         [JsonPropertyName("category_name")]
@@ -45,6 +45,15 @@ namespace Motel.Models
         [JsonPropertyName("contact_info")]
         public ContactInfo ContactInfo { get; set; } = null!;
 
+        [BsonElement("is_liked")]
+        [JsonPropertyName("is_liked")]
+        public bool IsLiked { get; set; } = false;
+
+        [BsonElement("bookings")]
+        [BsonIgnoreIfNull]
+        [JsonPropertyName("bookings")]
+        public List<Booking>? Bookings { get; set; } = null;
+
         [BsonElement("created_at")]
         [JsonPropertyName("created_at")]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
@@ -56,10 +65,5 @@ namespace Motel.Models
         [BsonElement("expired_at")]
         [JsonPropertyName("expired_at")]
         public DateTime ExpiredAt { get; set; }
-
-        [BsonElement("booking")]
-        [BsonIgnoreIfNull]
-        [JsonPropertyName("booking")]
-        public List<Booking>? Booking { get; set; } = null;
     }
 }

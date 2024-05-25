@@ -16,12 +16,12 @@ namespace Motel.Models
         [JsonPropertyName("name")]
         public string Name { get; set; } = null!;
 
-        [BsonElement("token")]
-        [JsonPropertyName("token")]
-        public int Token { get; set; } = 0;
+        [BsonElement("cost")]
+        [JsonPropertyName("cost")]
+        public int Cost { get; set; } = 0;
 
-        [BsonElement("toggle")]
-        [JsonPropertyName("toggle")]
-        public bool Toggle { get; set; } = true;
+        [BsonElement("is_toggled")]
+        [JsonPropertyName("is_toggled")]
+        public bool IsToggled { get; set; } = true;
     }
 }

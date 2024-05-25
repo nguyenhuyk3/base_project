@@ -1,6 +1,5 @@
 ﻿@using X.PagedList.Mvc.Core
 @addTagHelper *, Mircosoft.AspNetCore.Mvs.TagHelpers
-
 @model Motel.Areas.Customer.Models.InfoViewModel
 
 @{
@@ -17,15 +16,13 @@
 
 @section Styles {
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-    <!--Bootstrap CSS-->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!--Font Awesome-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <!--Self-written Css-->
-    <link href="~/css/customer/info/info.css" rel="stylesheet" />
-    <link href="~/css/customer/info/rating.css" rel="stylesheet" />
-    <link href="~/css/customer/info/pagination.css" rel="stylesheet" />
-    <link href="~/css/customer/info/avatar.css" rel="stylesheet" />
+    <link href="~/css/customer/customer/info/info.css" rel="stylesheet" />
+    <link href="~/css/customer/customer/info/rating.css" rel="stylesheet" />
+    <link href="~/css/customer/customer/info/pagination.css" rel="stylesheet" />
+    <link href="~/css/customer/customer/info/avatar.css" rel="stylesheet" />
 }
 
 <div class="container-fluid">
@@ -44,7 +41,7 @@
                         <span class="badge badge-success">Điểm đánh giá trung bình:</span> <strong>4.5</strong>
                     </p>
                     <p class="card-text mb-2">
-                        <span class="badge badge-secondary">Có tổng cộng:</span> <strong>@Model.Owner.PassiveReviews.Count lượt đánh giá</strong>
+                        <span class="badge badge-secondary">Có tổng cộng:</span> <strong>@Model.Owner.PassiveReviews?.Count lượt đánh giá</strong>
                     </p>
                     <p class="card-text mb-2">
                         <span class="badge badge-secondary">Có tổng cộng:</span> <strong>@Model.Owner.Posts.Count bài viết</strong>
@@ -73,7 +70,7 @@
                 </li>
             </ul>
             <div class="tab-content" id="myTabContent">
-                <!--Conent of tab 1-->
+                <!--Content of tab 1-->
                 <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
                     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
@@ -130,6 +127,7 @@
                 <!---->
                 <!--Conent of tab 2-->
                 <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+
                 </div>
                 <!---->
             </div>
@@ -254,9 +252,9 @@
     <!--Font Awesome JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
     <!--Self-written JS-->
-    <script src="~/js/customer/info/info.js"></script>
-    <script src="~/js/customer/info/ratingstarts.js"></script>
-    <script src="~/js/customer/info/ratinggroup.js"></script>
+    <script src="~/js/customer/customer/info/info.js"></script>
+    <script src="~/js/customer/customer/info/ratingstarts.js"></script>
+    <script src="~/js/customer/customer/info/ratinggroup.js"></script>
     <script>
         var carousel = document.getElementById('carouselExampleControls');
 
