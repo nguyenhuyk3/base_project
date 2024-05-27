@@ -1,36 +1,32 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using System.Text.Json.Serialization;
 
 namespace Motel.Models
 {
     public class Booking
     {
-        [BsonElement("months")]
-        [JsonPropertyName("months")]
-        public uint Months { get; set; } = 1;
+        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonElement("owner")]
+        [JsonPropertyName("owner")]
+        public string Owner { get; set; } = null!;
 
-        [BsonElement("price")]
-        [JsonPropertyName("price")]
-        public decimal Price { get; set; } = 0;
+        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonElement("sender")]
+        [JsonPropertyName("sender")]
+        public string Sender { get; set; } = null!;
 
-        [BsonElement("price_string")]
-        [JsonPropertyName("price_string")]
-        public string PriceString { get; set; } = "0 VND";
+        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonElement("post_id")]
+        [JsonPropertyName("post_id")]
+        public string PostId { get; set; } = null!;
 
-        [BsonElement("total_price")]
-        [JsonPropertyName("total_price")]
-        public decimal TotalPrice { get; set; } = 0;
+        [BsonElement("is_readed")]
+        [JsonPropertyName("is_readed")]
+        public bool IsReaded { get; set; } = false!;
 
-        [BsonElement("total_price_string")]
-        [JsonPropertyName("total_price_string")]
-        public string TotalPriceString { get; set; } = "0 VND"!;
-
-        [BsonElement("start_at")]
-        [JsonPropertyName("start_at")]
-        public DateTime StartAt { get; set; } = DateTime.Now;
-
-        [BsonElement("end_at")]
-        [JsonPropertyName("end_at")]
-        public DateTime EndAt { get; set; }
+        [BsonElement("created_at")]
+        [JsonPropertyName("created_at")]
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
 }

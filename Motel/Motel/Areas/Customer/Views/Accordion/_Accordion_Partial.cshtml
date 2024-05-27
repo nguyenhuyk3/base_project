@@ -19,7 +19,11 @@
                    value="@Model.Balance" />
             <p>Tài khoản chính: <strong>@Model.Balance</strong> VND</p>
             <p>Id: <strong>@Model.Id</strong></p>
-            <button class="btn btn-danger float-end">Nạp tiền</button>
+            <a asp-area="Customer" asp-controller="Customer" asp-action="Payment"
+               class="btn btn-danger float-end text-decoration-none">
+                Nạp tiền
+            </a>
+            @*  <button class="btn btn-danger float-end">Nạp tiền</button> *@
         </div>
     </div>
     <div class="left-item emp-info"></div>
@@ -29,6 +33,19 @@
             <p>Đăng Tin</p>
             <i class="fa-solid fa-angle-right"></i>
         </a>
+    </div>
+    <div class="section">
+        <div class="dropdown" onclick="toggleDropdown()">
+            <i class="fa-regular fa-circle-user"></i>
+            <p>Danh Sách Tin</p>
+            <i class="fa-solid fa-angle-right"></i>
+        </div>
+        <div class="dropdown-content" id="dropdown-content">
+            <a href="#">Tin đăng</a>
+            <a href="#">Tin bị cấm</a>
+            <a href="#">Tin hết hạn</a>
+            <a href="#">Tin bị xóa</a>
+        </div>
     </div>
     <div class="left-item services">
         <a asp-area="Customer" asp-controller="Customer" asp-action="PostingList" asp-route-ownerId="@Model.Id" class="link-service">
@@ -52,11 +69,11 @@
         </a>
     </div>
     @* <div class="left-item services">
-        <a href="#" class="link-service">
-            <i class="fa-solid fa-user"></i>
-            <p>Cài Đặt Tài Khoản</p>
-            <i class="fa-solid fa-angle-right"></i>
-        </a>
+    <a href="#" class="link-service">
+    <i class="fa-solid fa-user"></i>
+    <p>Cài Đặt Tài Khoản</p>
+    <i class="fa-solid fa-angle-right"></i>
+    </a>
     </div> *@
     <div class="left-item services">
         <a href="#" class="link-service">
@@ -66,11 +83,11 @@
         </a>
     </div>
     @* <div class="left-item services">
-        <a href="#" class="link-service">
-            <i class="fa-solid fa-paperclip"></i>
-            <p>Hướng Dẫn</p>
-            <i class="fa-solid fa-angle-right"></i>
-        </a>
+    <a href="#" class="link-service">
+    <i class="fa-solid fa-paperclip"></i>
+    <p>Hướng Dẫn</p>
+    <i class="fa-solid fa-angle-right"></i>
+    </a>
     </div> *@
     <div class="left-item services">
         <a href="#" class="link-service">
@@ -80,3 +97,14 @@
         </a>
     </div>
 </div>
+
+<script>
+    function toggleDropdown() {
+        var content = document.getElementById("dropdown-content");
+        if (content.style.display === "block") {
+            content.style.display = "none";
+        } else {
+            content.style.display = "block";
+        }
+    }
+</script>

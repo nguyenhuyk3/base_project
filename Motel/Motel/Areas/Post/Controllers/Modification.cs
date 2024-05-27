@@ -36,7 +36,7 @@ namespace Motel.Areas.Post.Controllers
         }
 
         [HttpGet]
-        [Authorize(Policy = " ")]
+        [Authorize(Policy = "RequireCustomer")]
         public async Task<IActionResult> Add()
         {
             var ownerDoc = await _databaseConstructor.UserAccountCollection
@@ -176,20 +176,56 @@ namespace Motel.Areas.Post.Controllers
         public async Task<IActionResult> Detail(string postId)
         {
             var postDoc = await _databaseConstructor.PostCollection
-                                            .Find(f => f.Id == postId)
-                                            .FirstOrDefaultAsync();
+                                                        .Find(f => f.Id == postId)
+                                                        .FirstOrDefaultAsync();
             var ownerDoc = await _databaseConstructor.UserAccountCollection
                                                         .Find(f => f.Id == postDoc.Owner)
                                                         .FirstOrDefaultAsync();
+            var senderId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (ownerDoc.Id == senderId)
+            {
+                ViewData["isOwner"] = true;
+            }
+            else
+            {
+                ViewData["isOwner"] = false;
+            }
+
+            ViewData["PostId"] = postId;
+
+            // Check if this user has received advice for this post
+            if (!string.IsNullOrEmpty(senderId))
+            {
+                if (ownerDoc.Bookings != null)
+                {
+                    foreach (var booking in ownerDoc.Bookings)
+                    {
+                        if (booking.Sender == senderId)
+                        {
+                            ViewData["Booked"] = true;
+
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    ViewData["Booked"] = false;
+                }
+            }
+           
             var model = new Models.PostDetail
             {
                 Post = postDoc,
+                OwnerId = ownerDoc.Id,
                 Avatar = ownerDoc.Info.Avatar,
                 Name = ownerDoc.Info.FullName,
                 Phone = ownerDoc.Info.Phone,
                 Email = ownerDoc.Info.Email,
             };
 
+            // Sends coordinates 
             ViewBag.Latitude = postDoc.PostDetail.AddressDetail.Latitude;
             ViewBag.Longitude = postDoc.PostDetail.AddressDetail.Longitude;
 

@@ -37,8 +37,8 @@ namespace Motel.Areas.Customer.Controllers
 
             await _databaseConstructor.ReviewCollection.InsertOneAsync(review);
 
-            sender?.ActiveReviews?.Add(review);
-            receiver?.PassiveReviews?.Add(review);
+            //sender?.ActiveReviews?.Add(review);
+            //receiver?.PassiveReviews?.Add(review);
 
             var updateTasks = new List<Task<UpdateResult>>();
 
@@ -76,7 +76,8 @@ namespace Motel.Areas.Customer.Controllers
             var receiverDocument = _databaseConstructor.UserAccountCollection
                                .Find(f => f.Email == receiverEmail)
                                .FirstOrDefault();
-            var unreadNotifications = receiverDocument?.Notifications;
+
+            var unreadNotifications = receiverDocument.Notifications ??= new List<Notification>();
             var unreadedNotificationCount = 0;
 
             foreach (var notification in unreadNotifications)

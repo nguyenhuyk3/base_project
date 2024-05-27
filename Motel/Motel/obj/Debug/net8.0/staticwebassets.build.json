@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "kU5KxNb5xJXF+QRE489ebkRkWecE7sSK6Iw232hYL18=",
+  "Hash": "vNnRTfgVj7K73aXseEYaImbLK0ggyiF2qpo+CHpsOlU=",
   "Source": "Motel",
   "BasePath": "_content/Motel",
   "Mode": "Default",
@@ -321,12 +321,12 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\images\\images.jpg",
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\images\\banner-01.jpg",
       "SourceId": "Motel",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
       "BasePath": "_content/Motel",
-      "RelativePath": "images/images.jpg",
+      "RelativePath": "images/banner-01.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -337,15 +337,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\images.jpg"
+      "OriginalItemSpec": "wwwroot\\images\\banner-01.jpg"
     },
     {
-      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\images\\tải xuống (1).jpg",
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\images\\banner-02.jpg",
       "SourceId": "Motel",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
       "BasePath": "_content/Motel",
-      "RelativePath": "images/tải xuống (1).jpg",
+      "RelativePath": "images/banner-02.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -356,15 +356,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\tải xuống (1).jpg"
+      "OriginalItemSpec": "wwwroot\\images\\banner-02.jpg"
     },
     {
-      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\images\\tải xuống (2).jpg",
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\images\\banner-03.jpg",
       "SourceId": "Motel",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
       "BasePath": "_content/Motel",
-      "RelativePath": "images/tải xuống (2).jpg",
+      "RelativePath": "images/banner-03.jpg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -375,15 +375,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\tải xuống (2).jpg"
+      "OriginalItemSpec": "wwwroot\\images\\banner-03.jpg"
     },
     {
-      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\images\\tải xuống (3).jpg",
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\_Layout.js",
       "SourceId": "Motel",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
       "BasePath": "_content/Motel",
-      "RelativePath": "images/tải xuống (3).jpg",
+      "RelativePath": "js/_Layout.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -394,26 +394,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\tải xuống (3).jpg"
-    },
-    {
-      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\images\\tải xuống.jpg",
-      "SourceId": "Motel",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
-      "BasePath": "_content/Motel",
-      "RelativePath": "images/tải xuống.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\tải xuống.jpg"
+      "OriginalItemSpec": "wwwroot\\js\\_Layout.js"
     },
     {
       "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\chat.js",
@@ -699,6 +680,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\js\\Post\\Modification\\Detail\\ChangeImage.js"
+    },
+    {
+      "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Modification\\Detail\\CreateBooking.js",
+      "SourceId": "Motel",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\",
+      "BasePath": "_content/Motel",
+      "RelativePath": "js/Post/Modification/Detail/CreateBooking.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Post\\Modification\\Detail\\CreateBooking.js"
     },
     {
       "Identity": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Modification\\Detail\\Map.js",

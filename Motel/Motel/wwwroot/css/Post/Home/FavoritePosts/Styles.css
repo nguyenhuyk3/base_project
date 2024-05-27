@@ -34,45 +34,20 @@
     max-width: 100%; /* Điều chỉnh giá trị này theo nhu cầu của bạn */
 }
 
-.truncate {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.card-title.truncate {
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* Number of lines to show */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-    height: 3em; /* Adjust based on the number of lines and line height */
-}
-
-.describe.truncate {
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* Number of lines to show */
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-    height: 3em; /* Adjust based on the number of lines and line height */
-}
-
 .favorite-btn {
-    display: inline-flex;
-    align-items: center;
+    /*display: inline-flex;*/
+  /*  align-items: center;*/
     background-color: #1da1f2d1;
     border: none;
     font-size: 16px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-    position: absolute;
+    height: 37.6px;
+   /* position: absolute;*/
     padding: 10px 15px;
-    bottom: 36px;
-    right: 23px;
+  /*  bottom: 36px;
+    right: 23px;*/
 }
 
     .favorite-btn i {

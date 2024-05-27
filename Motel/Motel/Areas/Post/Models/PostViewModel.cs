@@ -25,6 +25,7 @@
     public class PostDetail
     {
         public Motel.Models.Post Post { get; set; } = null!;
+        public string OwnerId { get; set; } = null!;
         public string Avatar { get; set; } = null!;
         public string Name { get; set; } = null!;
         public string Phone { get; set; } = null!;

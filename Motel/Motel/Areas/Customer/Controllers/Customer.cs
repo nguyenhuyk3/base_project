@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Humanizer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using Motel.Areas.Customer.Models;
@@ -13,6 +15,7 @@ using Newtonsoft.Json.Linq;
 using System.Net;
 using System.Security.Claims;
 using X.PagedList;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Motel.Areas.Customer.Controllers
 {
@@ -40,12 +43,10 @@ namespace Motel.Areas.Customer.Controllers
             int pageNum = page ?? 1;
 
             var owner = _databaseConstructor.UserAccountCollection
-                              .Find(userAccount => userAccount.Id == userAccountId)
-                              .FirstOrDefault();
+                                                .Find(userAccount => userAccount.Id == userAccountId)
+                                                .FirstOrDefault();
             var clientId = _getter.GetLoginId();
-
-            bool isClient = owner.Id != clientId;
-
+            var isClient = owner.Id != clientId;
             var reversedPassiveReviews = owner.PassiveReviews?.ToList();
 
             reversedPassiveReviews?.Reverse();
@@ -65,6 +66,7 @@ namespace Motel.Areas.Customer.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "RequireCustomer")]
         public async Task<IActionResult> PostingList(string ownerId)
         {
             var ownerDoc = await _databaseConstructor.UserAccountCollection
@@ -79,9 +81,124 @@ namespace Motel.Areas.Customer.Controllers
             return View(model);
         }
 
-        public IActionResult Payment()
+        [HttpGet]
+        [Authorize(Policy = "RequireCustomer")]
+        public async Task<IActionResult> Payment()
         {
-            return View();
+            var ownerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var ownerDoc = await _databaseConstructor.UserAccountCollection
+                                                        .Find(f => f.Id == ownerId)
+                                                        .FirstOrDefaultAsync();
+            var model = new ModificationLayoutViewModel() { 
+                Owner = ownerDoc, 
+            };
+
+            return View(model);
+        }
+
+        // In the post detail page, when clicking the "Nhận tư vấn" button,
+        // it will activate this function
+        [HttpPost]
+        public async Task<JsonResult> CreateBooking(string ownerId, string postId)
+        {
+            var senderId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            // Check if the person accessing the page is the owner or not
+            if (senderId == ownerId)
+            {
+                return Json(new { logginedIn = false });
+            }
+
+            if (string.IsNullOrEmpty(senderId))
+            {
+                return Json(new { message = "Bạn phải đăng nhập để có thể nhận tư vấn!", sucess = false });
+            }
+
+            var senderDoc = await _databaseConstructor.UserAccountCollection
+                                                        .Find(f => f.Id == senderId)
+                                                        .FirstOrDefaultAsync();
+
+            if (string.IsNullOrEmpty(senderDoc.Info.Phone))
+            {
+                return Json(new { message = "Bạn chưa cập nhập số điện thoại!", sucess = false });
+            }
+
+            Booking booking = new Booking()
+            {
+                Owner = ownerId,
+                Sender = senderId,
+                PostId = postId
+            };
+
+            // I will reverse List<Booking> later
+
+            var ownerDoc = await _databaseConstructor.UserAccountCollection
+                                                        .Find(f => f.Id == ownerId)
+                                                        .FirstOrDefaultAsync();
+
+            await _databaseConstructor.UserAccountCollection.UpdateOneAsync(
+                    f => f.Id == ownerId,
+                    Builders<Motel.Models.UserAccount>.Update.Push(f => f.Bookings, booking)
+                  );
+
+            return Json(new { message = "Bạn sẽ nhận được phản hồi từ chủ bài viết!", sucess = true });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Bookings()
+        {
+            var ownerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var ownerDoc = await _databaseConstructor.UserAccountCollection
+                                                .Find(f => f.Id == ownerId)
+                                                .FirstOrDefaultAsync();
+            var model = new ModificationLayoutViewModel
+            {
+                Owner = ownerDoc,
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> ReadBooking(string senderId, string postId)
+        {
+            var ownerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var ownerDoc = await _databaseConstructor.UserAccountCollection
+                                                     .Find(f => f.Id == ownerId)
+                                                     .FirstOrDefaultAsync();
+            var found = false;
+
+            for (int i = 0; i < ownerDoc.Bookings.Count; i++)
+            {
+                var booking = ownerDoc.Bookings[i];
+
+                if (booking.Sender == senderId && booking.PostId == postId)
+                {
+                    booking.IsReaded = true;
+                    found = true;
+
+                    break;
+                }
+
+                if (i == ownerDoc.Bookings.Count - 1)
+                {
+                    booking.IsReaded = true;
+                }
+            }
+
+            var filter = Builders<Motel.Models.UserAccount>.Filter.Eq(f => f.Id, ownerId);
+            var update = Builders<Motel.Models.UserAccount>.Update.Set(f => f.Bookings, ownerDoc.Bookings);
+
+            await _databaseConstructor.UserAccountCollection.ReplaceOneAsync(filter, ownerDoc);
+
+            if (found)
+            {
+                return Json(new { isFirst = false });
+            }
+            else
+            {
+                return Json(new { message = "Bạn có thể đánh giá chủ bài viết!", isFirst = true });
+            }
         }
 
         public IActionResult Checkout(string price)
@@ -197,7 +314,7 @@ namespace Motel.Areas.Customer.Controllers
 
                 ownerDoc.Bills ??= new List<Bill>();
                 ownerDoc.Bills.Add(bill);
-                
+
                 var filterUserAccount = Builders<Motel.Models.UserAccount>.Filter.Eq(f => f.Id, ownerId);
                 var updateUserAccount = Builders<Motel.Models.UserAccount>.Update
                                                 .Inc(f => f.Balance, bill.Cost)

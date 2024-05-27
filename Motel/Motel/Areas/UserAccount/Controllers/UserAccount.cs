@@ -122,7 +122,8 @@ namespace Motel.Areas.UserAccount.Controllers
                     */
                     var claims = new List<Claim>() {
                         new Claim(ClaimTypes.NameIdentifier, userAccount.Id.ToString()),
-                        new Claim(ClaimTypes.Name, userAccount.Email),
+                        new Claim(ClaimTypes.Name, userAccount.Info.FullName),
+                        new Claim(ClaimTypes.Email, userAccount.Email),
                         new Claim(ClaimTypes.Role, userAccount.RoleName),
                     };
 

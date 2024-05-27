@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -14,12 +16,15 @@
     <link href="~/toast/toast.css" rel="stylesheet" />
     <!--Notification-->
     <link href="~/notification/ikr.notification.css" rel="stylesheet" />
+    <!--Self-Written CSS-->
+    <link href="~/css/_layout.css" rel="stylesheet" />
     @RenderSection("Styles", required: false)
 </head>
 <body>
     @{
-        bool isLogginedIn = User.Identity.IsAuthenticated;
-        var receiverEmail = User.Identity.Name;
+        var isLogginedIn = User.Identity.IsAuthenticated;
+        var receiverEmail = User.Claims.FirstOrDefault(f => f.Type == ClaimTypes.Email)?.Value;
+        var receiverName = User.Claims.FirstOrDefault(f => f.Type == ClaimTypes.Name)?.Value;
     }
 
     <div id="toast-notification"></div>
@@ -67,42 +72,49 @@
                     }
                     else
                     {
-                        <div id="noti_Container">
-                            <div class="ikrNoti_Counter"
-                                 id="ikrNoti_Counter">
-                                0
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="d-inline-block favorite-list mr-1">
+                                <button class="btn-list">
+                                    <i class="fa-regular fa-heart"></i>
+                                </button>
                             </div>
-                            <!--Button-->
-                            <div class="ikrNoti_Button"
-                                 id="ikrNoti_Button">
-                                <i class="fas fa-bell"></i>
-                            </div>
-                            <!---->
-                            <div class="ikrNotifications"
-                                 style="display: none !important">
-                                <h3>
-                                    Notifications (<span class="notiCounterOnHead"
-                                                         id="notiCounterOnHead">0</span>)
-                                </h3>
-                                <div class="ikrNotificationItems">
-                                    <ul class="list-group" id="notificationList">
-                                    </ul>
+
+                            <div class="d-inline-block mr-1" id="noti_Container">
+                                <div class="ikrNoti_Counter" id="ikrNoti_Counter">0</div>
+                                <div class="ikrNoti_Button" id="ikrNoti_Button">
+                                    <i class="fas fa-bell"></i>
                                 </div>
-                                <div class="ikrSeeAll">
-                                    <a href="#">See all</a>
+                                <div class="ikrNotifications" style="display: none !important">
+                                    <h3>
+                                        Notifications (<span class="notiCounterOnHead" id="notiCounterOnHead">0</span>)
+                                    </h3>
+                                    <div class="ikrNotificationItems">
+                                        <ul class="list-group" id="notificationList"></ul>
+                                    </div>
+                                    <div class="ikrSeeAll">
+                                        <a href="#">See all</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @receiverName
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#">Nạp tiền</a>
+                                    <div class="dropdown-item">
+                                        <form class="form-inline" asp-area="UserAccount" asp-controller="UserAccount" asp-action="Logout" method="post" id="LogoutForm">
+                                            @Html.AntiForgeryToken()
+                                            <button type="submit" class="btn btn-link text-dark text-decoration-none p-0" id="LogoutButton">
+                                                Đăng xuất
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <a class="dropdown-item" href="#">Another link</a>
                                 </div>
                             </div>
                         </div>
-                        <form class="form-inline"
-                              asp-area="UserAccount" asp-controller="UserAccount" asp-action="Logout"
-                              method="post" id="LogoutForm">
-                            @Html.AntiForgeryToken()
-
-                            <button type="submit" class="btn btn-link text-dark text-decoration-none"
-                                    id="LogoutButton">
-                                Đăng xuất
-                            </button>
-                        </form>
                     }
                 </div>
             </div>
@@ -124,10 +136,6 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <!--Self-written CSS-->
-    <link href="~/css/_layout.css" rel="stylesheet" />
-    <!--Self-written JS-->
-    <script src="~/js/home/index.js"></script>
     <!--Toast JS-->
     <script src="~/toast/toast.js"></script>
     <!--Notification JS-->
@@ -135,6 +143,16 @@
     <!--SingalR-->
     <script src="~/js/signalr/dist/browser/signalr.js"></script>
     <script src="~/js/getnotifications.js"></script>
+    <!--Self-written JS-->
+    <script>
+        document.querySelector('.dropdown').addEventListener('mouseover', function () {
+            this.querySelector('.dropdown-menu').style.display = 'block';
+        });
+
+        document.querySelector('.dropdown').addEventListener('mouseleave', function () {
+            this.querySelector('.dropdown-menu').style.display = 'none';
+        });
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

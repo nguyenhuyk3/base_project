@@ -18,6 +18,7 @@ namespace Motel.Utility.Database
         private readonly IMongoCollection<Post> _postCollection;
         private readonly IMongoCollection<Review> _reviewCollection;
         private readonly IMongoCollection<Bill> _billCollection;
+        private readonly IMongoCollection<Booking> _bookingCollection;
 
         public IMongoCollection<City> CityCollection => _cityCollection;
         public IMongoCollection<District> DistrictCollection => _districtCollection;
@@ -30,6 +31,7 @@ namespace Motel.Utility.Database
         public IMongoCollection<Post> PostCollection => _postCollection;
         public IMongoCollection<Review> ReviewCollection => _reviewCollection;
         public IMongoCollection<Bill> BillCollection => _billCollection;
+        public IMongoCollection<Booking> BookingCollection => _bookingCollection;
 
         public DatabaseConstructor(IOptions<DatabaseSettings> databaseSettings)
         {
@@ -58,6 +60,8 @@ namespace Motel.Utility.Database
             (databaseSettings.Value.ReviewsCollectionName);
             _billCollection = database.GetCollection<Bill>
                (databaseSettings.Value.BillsCollectionName);
+            _bookingCollection = database.GetCollection<Booking>
+               (databaseSettings.Value.BookingsCollectionName);
         }
     }
 }

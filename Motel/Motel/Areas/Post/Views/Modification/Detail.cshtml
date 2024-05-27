@@ -1,8 +1,13 @@
-﻿@model Motel.Areas.Post.Models.PostDetail
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Motel.Areas.Post.Models.PostDetail
 
 @{
     ViewData["Title"] = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var postId = ViewData["PostId"] as string;
+    var isOwner = (bool)ViewData["IsOwner"];
+    var booked = (bool)ViewData["Booked"];
 }
 
 @section Styles {
@@ -111,15 +116,6 @@
                 </div>
                 <h3 class="mt-4 mb-3">Đặc điểm phòng trọ</h3>
                 <div class="row">
-                    <style>
-                        .icon {
-                            width: 24px;
-                            height: 24px;
-                            display: inline-block;
-                            vertical-align: middle;
-                            margin-right: 10px;
-                        }
-                    </style>
                     <div class="col-md-6">
                         <div class="row mb-2">
                             <div class="col-6">
@@ -206,12 +202,30 @@
                         {
                             <img src="@Model.Avatar" alt="Avatar" class="avatar mb-2">
                         }
+                        <input type="hidden" asp-for="@Model.OwnerId" />
+                        <input type="hidden" id="PostId" value="@postId" />
                         <h5 class="card-title mt-1 mb-0 text-center">@Model.Name</h5>
                     </div>
                     <p class="text-center"><strong>Liên hệ:</strong> Do info chưa có SDT</p>
                     <div class="d-flex flex-column align-items-center w-100">
                         <p class="w-100 btn btn-primary w-100 mb-2">Hiện số</p>
-                        <p class="w-100 btn btn-outline-info w-100 mb-2">Nhận tư vấn</p>
+                        @if (!isOwner)
+                        {
+                            if (booked)
+                            {
+                                <button class="w-100 btn mb-2 btn-success"
+                                        id="GetBooking" disabled>
+                                    Đã nhận tư vấn
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="w-100 btn btn-outline-info w-100 mb-2"
+                                        id="GetBooking">
+                                    Nhận tư vấn
+                                </button>
+                            }
+                        }
                     </div>
                 </div>
             </div>
@@ -228,6 +242,7 @@
     <!--Self-written JS-->
     <script src="~/js/post/modification/detail/changeimage.js"></script>
     <script src="~/js/post/modification/detail/slickslider.js"></script>
+    <script src="~/js/post/modification/detail/createbooking.js"></script>
     <!--Google maps API-->
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaExchm2U82YZk2kI1xztt_cXV1dCoVwM&callback=initMap">

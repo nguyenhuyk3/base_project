@@ -93,6 +93,11 @@ namespace Motel.Models
         [JsonPropertyName("notifications")]
         public List<Notification>? Notifications { get; set; } = null;
 
+        [BsonElement("bookings")]
+        [BsonIgnoreIfNull]
+        [JsonPropertyName("bookings")]
+        public List<Booking>? Bookings { get; set; } = null;
+
         //[BsonElement("readed_notification")]
         //[BsonIgnoreIfNull]
         //[JsonPropertyName("readed_notification")]

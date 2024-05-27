@@ -15,6 +15,7 @@
         public string PostsCollectionName { get; set; } = null!;
         public string ReviewsCollectionName { get; set; } = null!;
         public string BillsCollectionName { get; set; } = null!;
+        public string BookingsCollectionName { get; set; } = null!;
 
     }
 }

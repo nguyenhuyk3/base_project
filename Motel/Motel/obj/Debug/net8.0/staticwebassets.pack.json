@@ -61,24 +61,16 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\images\\images.jpg",
-      "PackagePath": "staticwebassets\\images\\images.jpg"
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\images\\banner-01.jpg",
+      "PackagePath": "staticwebassets\\images\\banner-01.jpg"
     },
     {
-      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\images\\tải xuống (1).jpg",
-      "PackagePath": "staticwebassets\\images\\tải xuống (1).jpg"
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\images\\banner-02.jpg",
+      "PackagePath": "staticwebassets\\images\\banner-02.jpg"
     },
     {
-      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\images\\tải xuống (2).jpg",
-      "PackagePath": "staticwebassets\\images\\tải xuống (2).jpg"
-    },
-    {
-      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\images\\tải xuống (3).jpg",
-      "PackagePath": "staticwebassets\\images\\tải xuống (3).jpg"
-    },
-    {
-      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\images\\tải xuống.jpg",
-      "PackagePath": "staticwebassets\\images\\tải xuống.jpg"
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\images\\banner-03.jpg",
+      "PackagePath": "staticwebassets\\images\\banner-03.jpg"
     },
     {
       "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Customer\\Customer\\Info\\Pagination.js",
@@ -125,6 +117,10 @@
       "PackagePath": "staticwebassets\\js\\Post\\Modification\\Detail\\ChangeImage.js"
     },
     {
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Modification\\Detail\\CreateBooking.js",
+      "PackagePath": "staticwebassets\\js\\Post\\Modification\\Detail\\CreateBooking.js"
+    },
+    {
       "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\Post\\Modification\\Detail\\Map.js",
       "PackagePath": "staticwebassets\\js\\Post\\Modification\\Detail\\Map.js"
     },
@@ -143,6 +139,10 @@
     {
       "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\UserAccount\\UserAccount\\Login\\RememberLogin.js",
       "PackagePath": "staticwebassets\\js\\UserAccount\\UserAccount\\Login\\RememberLogin.js"
+    },
+    {
+      "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\_Layout.js",
+      "PackagePath": "staticwebassets\\js\\_Layout.js"
     },
     {
       "Id": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\wwwroot\\js\\chat.js",

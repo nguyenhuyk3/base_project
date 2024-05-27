@@ -3,24 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\areas\\customer\\views\\customer\\info.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\areas\\customer\\views\\customer\\info.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\areas\\customer\\controllers\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\areas\\customer\\controllers\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\areas\\post\\views\\_modification_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\areas\\post\\views\\_modification_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\areas\\customer\\views\\customer\\payment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\areas\\customer\\views\\customer\\payment.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\areas\\post\\views\\modification\\add.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\areas\\post\\views\\modification\\add.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\areas\\post\\controllers\\modification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\areas\\post\\controllers\\modification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\areas\\post\\views\\home\\favoriteposts.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\areas\\post\\views\\home\\favoriteposts.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\areas\\customer\\views\\accordion\\_accordion_partial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\areas\\customer\\views\\accordion\\_accordion_partial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -42,67 +38,54 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Info.cshtml",
-              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Customer\\Views\\Customer\\Info.cshtml",
-              "RelativeDocumentMoniker": "Motel\\Areas\\Customer\\Views\\Customer\\Info.cshtml",
-              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Customer\\Views\\Customer\\Info.cshtml",
-              "RelativeToolTip": "Motel\\Areas\\Customer\\Views\\Customer\\Info.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAApAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-25T02:25:37.373Z",
+              "DocumentIndex": 2,
+              "Title": "Modification.cs",
+              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Post\\Controllers\\Modification.cs",
+              "RelativeDocumentMoniker": "Motel\\Areas\\Post\\Controllers\\Modification.cs",
+              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Post\\Controllers\\Modification.cs",
+              "RelativeToolTip": "Motel\\Areas\\Post\\Controllers\\Modification.cs",
+              "ViewState": "AQIAAB8AAAAAAAAAAAAQwCoAAABdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-27T07:12:24.569Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Customer.cs",
               "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Customer\\Controllers\\Customer.cs",
               "RelativeDocumentMoniker": "Motel\\Areas\\Customer\\Controllers\\Customer.cs",
               "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Customer\\Controllers\\Customer.cs",
               "RelativeToolTip": "Motel\\Areas\\Customer\\Controllers\\Customer.cs",
-              "ViewState": "AQIAACoAAAAAAAAAAAAYwDYAAAAsAAAA",
+              "ViewState": "AQIAAEsAAAAAAAAAAAAhwF8AAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-25T02:23:42.377Z",
+              "WhenOpened": "2024-05-27T07:11:09.791Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "FavoritePosts.cshtml",
-              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Post\\Views\\Home\\FavoritePosts.cshtml",
-              "RelativeDocumentMoniker": "Motel\\Areas\\Post\\Views\\Home\\FavoritePosts.cshtml",
-              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Post\\Views\\Home\\FavoritePosts.cshtml",
-              "RelativeToolTip": "Motel\\Areas\\Post\\Views\\Home\\FavoritePosts.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAABYAAAA",
+              "DocumentIndex": 1,
+              "Title": "Payment.cshtml",
+              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Customer\\Views\\Customer\\Payment.cshtml",
+              "RelativeDocumentMoniker": "Motel\\Areas\\Customer\\Views\\Customer\\Payment.cshtml",
+              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Customer\\Views\\Customer\\Payment.cshtml",
+              "RelativeToolTip": "Motel\\Areas\\Customer\\Views\\Customer\\Payment.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-25T02:19:48.816Z",
+              "WhenOpened": "2024-05-27T07:08:05.192Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Add.cshtml",
-              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Post\\Views\\Modification\\Add.cshtml",
-              "RelativeDocumentMoniker": "Motel\\Areas\\Post\\Views\\Modification\\Add.cshtml",
-              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Post\\Views\\Modification\\Add.cshtml",
-              "RelativeToolTip": "Motel\\Areas\\Post\\Views\\Modification\\Add.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAmAAAA",
+              "Title": "_Accordion_Partial.cshtml",
+              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Customer\\Views\\Accordion\\_Accordion_Partial.cshtml",
+              "RelativeDocumentMoniker": "Motel\\Areas\\Customer\\Views\\Accordion\\_Accordion_Partial.cshtml",
+              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Customer\\Views\\Accordion\\_Accordion_Partial.cshtml",
+              "RelativeToolTip": "Motel\\Areas\\Customer\\Views\\Accordion\\_Accordion_Partial.cshtml",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAQwBgAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-25T02:19:34.123Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "_Modification_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Post\\Views\\_Modification_Layout.cshtml",
-              "RelativeDocumentMoniker": "Motel\\Areas\\Post\\Views\\_Modification_Layout.cshtml",
-              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Post\\Views\\_Modification_Layout.cshtml",
-              "RelativeToolTip": "Motel\\Areas\\Post\\Views\\_Modification_Layout.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAABdAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-05-25T02:19:25.72Z",
+              "WhenOpened": "2024-05-27T07:05:35.394Z",
               "EditorCaption": ""
             }
           ]

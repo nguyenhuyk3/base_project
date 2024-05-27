@@ -9,11 +9,6 @@
 @section Styles {
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
           rel="stylesheet">
-    <!--Additional CSS files-->
-    <link href="~/css/post/home/index/animate.css"
-          rel="stylesheet" />
-    <link href="~/css/post/home/index/fontawesome.css"
-          rel="stylesheet" />
     <!--Addtional links-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
           rel="stylesheet" />
@@ -21,75 +16,161 @@
           rel="stylesheet" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
           rel='stylesheet'>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          rel="stylesheet">
     <!--Self-written CSS-->
     <link href="~/css/post/home/index/styles.css" rel="stylesheet" />
 }
 
 <div class="container-fluid" style="padding: 0">
-    <div id="carouselExampleCaptions" class="carousel slide">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        </div>
+    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="~/images/banner-01.jpg" class="d-block-background w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block"></div>
             </div>
             <div class="carousel-item">
                 <img src="~/images/banner-02.jpg" class="d-block-background w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block"></div>
             </div>
             <div class="carousel-item">
                 <img src="~/images/banner-03.jpg" class="d-block-background w-100" alt="...">
-                <div class="carousel-caption d-none d-md-block"></div>
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
+        <button class="carousel-control-prev" type="button" data-target="#carouselExampleFade" data-slide="prev">
+            <span class="visually-hidden"></span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
+        <button class="carousel-control-next" type="button" data-target="#carouselExampleFade" data-slide="next">
+            <span class="visually-hidden"></span>
         </button>
-    </div>
 
-</div>
-<!--Search bar-->
-<div class="container-fluid" style="padding: 0">
-    <div class="search-text mb-3">
-        <input type="search" name="Tìm kiếm" placeholder="Tìm kiếm của bạn ...">
-        <a href="#" class="search-btn">
-            <i class="fa-solid fa-magnifying-glass"></i>
-        </a>
-    </div>
-</div>
-<!---->
-<!--Content-->
-<div class="container-fluid" style="padding: 0">
-    <div class="overlay">
-        <div class="search">
-            <select class="select-search" name="muc-gia" id="muc-gia">
-                <option value="">Mức giá</option>
-            </select>
+        <div class="search-bar mt-5">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="nhadatban-tab" data-toggle="tab" href="#nhadatban" role="tab" aria-controls="nhadatban" aria-selected="true">Nhà đất bán</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="nhadatchothue-tab" data-toggle="tab" href="#nhadatchothue" role="tab" aria-controls="nhadatchothue" aria-selected="false">Nhà đất cho thuê</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="duan-tab" data-toggle="tab" href="#duan" role="tab" aria-controls="duan" aria-selected="false">Dự án</a>
+                </li>
+            </ul>
 
-            <select class="select-search" name="khu-vuc" id="khu-vuc">
-                <option value="">Khu vực</option>
-            </select>
-
-            <select class="select-search" name="muc-gia" id="muc-gia">
-                <option value="">Mức giá</option>
-            </select>
-
-            <select class="select-search" name="dien-tich" id="dien-tich">
-                <option value="">Diện tích</option>
-            </select>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="nhadatban" role="tabpanel" aria-labelledby="nhadatban-tab">
+                    <form class="form-row mt-3">
+                        <div class="col-md-2">
+                            <select class="form-control">
+                                <option>Hồ Chí Minh</option>
+                                <!-- other options -->
+                            </select>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" class="form-control" placeholder="Nhập tối đa 5 địa điểm, dự án. Ví dụ: Quận Hoàn Kiếm, Quận Đống Đa">
+                        </div>
+                        <div class="col-md-1">
+                            <button type="submit" class="btn btn-danger btn-block">Tìm kiếm</button>
+                        </div>
+                        <div class="w-100 mt-3"></div>
+                        <div class="col-md-3">
+                            <select class="form-control">
+                                <option>Loại nhà đất</option>
+                                <!-- other options -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control">
+                                <option>Mức giá</option>
+                                <!-- other options -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control">
+                                <option>Diện tích</option>
+                                <!-- other options -->
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="nhadatchothue" role="tabpanel" aria-labelledby="nhadatchothue-tab">
+                    <form class="form-row mt-3">
+                        <div class="col-md-2">
+                            <select class="form-control">
+                                <option>Hồ Chí Minh</option>
+                                <!-- other options -->
+                            </select>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" class="form-control" placeholder="Nhập tối đa 5 địa điểm, dự án. Ví dụ: Quận Hoàn Kiếm, Quận Đống Đa">
+                        </div>
+                        <div class="col-md-1">
+                            <button type="submit" class="btn btn-danger btn-block">Tìm kiếm</button>
+                        </div>
+                        <div class="w-100 mt-3"></div>
+                        <div class="col-md-3">
+                            <select class="form-control">
+                                <option>Loại nhà đất</option>
+                                <!-- other options -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control">
+                                <option>Mức giá</option>
+                                <!-- other options -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control">
+                                <option>Diện tích</option>
+                                <!-- other options -->
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="tab-pane fade" id="duan" role="tabpanel" aria-labelledby="duan-tab">
+                    <form class="form-row mt-3">
+                        <div class="col-md-2">
+                            <select class="form-control">
+                                <option>Hồ Chí Minh</option>
+                                <!-- other options -->
+                            </select>
+                        </div>
+                        <div class="col-md-7">
+                            <input type="text" class="form-control" placeholder="Nhập tối đa 5 địa điểm, dự án. Ví dụ: Quận Hoàn Kiếm, Quận Đống Đa">
+                        </div>
+                        <div class="col-md-1">
+                            <button type="submit" class="btn btn-danger btn-block">Tìm kiếm</button>
+                        </div>
+                        <div class="w-100 mt-3"></div>
+                        <div class="col-md-3">
+                            <select class="form-control">
+                                <option>Loại nhà đất</option>
+                                <!-- other options -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control">
+                                <option>Mức giá</option>
+                                <!-- other options -->
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control">
+                                <option>Diện tích</option>
+                                <!-- other options -->
+                            </select>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="col-md-3 table-price">
+</div>
+
+<!--Content-->
+<div class="container-fluid" style="padding: 0">
+    <div class="col-md-3 table-price" style="top: -1px;">
         <div class="container border mb-3 search-by-price">
             <h6>Lọc theo khoảng giá</h6>
             <ul class="list-unstyled">
@@ -123,10 +204,10 @@
                 <div class="card-body">
                     <h5 class="card-title">@post.SubjectOnSite</h5>
                     <p class="card-text text-danger font-weight-bold">@post.PostDetail.Price triệu/tháng · @post.PostDetail.HomeInformation.SquareMeter m² · @post.PostDetail.HomeInformation.Bedroom 🛏️ ·  @post.PostDetail.HomeInformation.Toilet 🛁 · @post.PostDetail.AddressDetail.City</p>
-                    <p class="card-text">@post.PostDetail.Description</p>
+                    <p class="card-text-description">@post.PostDetail.Description</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="media align-items-center">
-                            <img src="https://via.placeholder.com/40" class="mr-3 rounded-circle" alt="Agent image">
+                            <img src="https://via.placeholder.com/40" class="mr-3 rounded-circle" alt="Avatar">
                             <div class="media-body">
                                 <h6 class="mt-0 mb-0">@post.ContactInfo.Name</h6>
                                 <small>Đăng hôm nay</small>
@@ -148,7 +229,6 @@
             </div>
         }
     </section>
-
 </div>
 <!---->
 <!-- Notification Element -->
