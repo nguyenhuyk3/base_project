@@ -4,19 +4,19 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
 // Connect to group when going to page
 connection.start().then(function () {
-    var sender = document.getElementById("sender")?.value
-    var receiver = document.getElementById("receiver").value;
+    var senderId = document.getElementById("senderId")?.value
+    var receiverId = document.getElementById("receiverId").value;
 
-    console.log(sender, receiver);
+    console.log(senderId, receiverId);
 
     // This is the case where the site owner enters
-    if (sender === undefined) {
-        sender = receiver;
+    if (senderId === undefined) {
+        senderId = receiverId;
     }
 
-    console.log(sender, receiver);
+    console.log(senderId, receiverId);
 
-    connection.invoke("JoinRatingGroup", sender, receiver)
+    connection.invoke("JoinRatingGroup", senderId, receiverId)
         .then(() => {
             if (document.getElementById("sendButton")?.disabled !== undefined) {
                 document.getElementById("sendButton").disabled = false;
@@ -47,25 +47,28 @@ if (document.getElementById("sendButton")?.disabled !== undefined) {
 }
 
 // Listen for events when the `SendRatingToGroup` method is called
-connection.on("ReceiveRating", function (sender, content) {
-    var senderOnsite = document.getElementById("sender")?.value
+connection.on("ReceiveRating", function (senderId, senderFullName, response) {
+    var senderIdOnsite = document.getElementById("senderId")?.value
 
+    console.log(senderFullName);
     // Check if the client on the page is the sender
     // If not, receive this notification
-    if (sender !== senderOnsite) {
+    if (senderId !== senderIdOnsite) {
         toastNotification({
             title: "Thành công!",
-            message: `${sender} vừa mới đánh giá.`,
+            message: `${senderFullName} vừa mới đánh giá.`,
             type: "success",
             duration: 5000
         });
     }
 
+    console.log(senderIdOnsite)
+
     const review = {
-        sender: sender,
+        senderFullName: senderFullName,
         avatar: "/images/images.jpg",
-        rating: content.rating,
-        comment: content.comment
+        rating: response.rating,
+        comment: response.content
     };
 
     // I will create function for this later
@@ -93,7 +96,7 @@ connection.on("ReceiveRating", function (sender, content) {
 
     var cardTitle = document.createElement("h5");
     cardTitle.className = "card-title";
-    cardTitle.innerHTML = "<span>" + review.sender + "</span> đã đánh giá " + review.rating + " sao";
+    cardTitle.innerHTML = "<span>" + review.senderFullName + "</span> đã đánh giá " + review.rating + " sao";
 
     var cardText = document.createElement("p");
     cardText.className = "card-text";
@@ -120,8 +123,8 @@ connection.on("ReceiveRating", function (sender, content) {
 
 // Leave the group when leaving the page 
 window.addEventListener("unload", function (event) {
-    var sender = document.getElementById("sender")?.value
-    var receiver = document.getElementById("receiver")?.value;
+    var senderId = document.getElementById("senderId")?.value
+    var receiverId = document.getElementById("receiverId")?.value;
 
     console.log(sender, receiver)
 
@@ -130,7 +133,7 @@ window.addEventListener("unload", function (event) {
         sender = receiver;
     }
 
-    connection.invoke("LeaveRatingGroup", sender, receiver)
+    connection.invoke("LeaveRatingGroup", senderId, receiverId)
         .catch(function (err) {
             toastNotification({
                 title: "Thất bại!",
@@ -144,29 +147,26 @@ window.addEventListener("unload", function (event) {
 // When clicking send rating, `SendRatingToGroup` will be called on the server
 if (document.getElementById("sendButton")) {
     document.getElementById("sendButton").addEventListener("click", function (event) {
-        var sender = document.getElementById("sender").value;
-        var receiver = document.getElementById("receiver").value;
+        var senderId = document.getElementById("senderId").value;
+        var receiverId = document.getElementById("receiverId").value;
         var ratingString = document.getElementById("ratingValue").value;
         var ratingNumber = parseInt(ratingString);
-        var comment = document.getElementById("comment").value;
+        var content = document.getElementById("content").value;
 
-        const content = {
+        const response = {
             rating: ratingNumber,
-            comment: comment
+            content: content
         };
 
-        console.log(content);
+        console.log(senderId, receiverId, response);
 
-        if (receiver.length > 0) {
+        if (receiverId.length > 0) {
             connection
-                .invoke("SendRatingToGroup", sender, receiver, content)
+                .invoke("SendRatingToGroup", senderId, receiverId, response)
                 .then(() => {
-                    var senderId = document.getElementById("senderId").value;
-                    var receiverId = document.getElementById("receiverId").value;
-
-                    connection.invoke("SendRatingToReceiver", senderId, receiverId, content)
+                    connection.invoke("SendRatingToReceiver", senderId, receiverId, response)
                         .catch(function (err) {
-                            console.error("Errỏr at SendRatingToReceiver:" + err.toString());
+                            console.error("Error at SendRatingToReceiver:" + err.toString());
                         });
                 })
                 .catch(function (err) {

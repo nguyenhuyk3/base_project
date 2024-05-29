@@ -1,10 +1,16 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using System.Text.Json.Serialization;
 
 namespace Motel.Models
 {
     public class ContactInfo
     {
+        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonElement("owner")]
+        [JsonPropertyName("owner")]
+        public string? Owner { get; set; } = null;
+
         [BsonElement("name")]
         [JsonPropertyName("name")]
         public string Name { get; set; } = null!;

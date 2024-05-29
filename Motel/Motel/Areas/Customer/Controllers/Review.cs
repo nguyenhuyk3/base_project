@@ -18,21 +18,21 @@ namespace Motel.Areas.Customer.Controllers
             _databaseConstructor = new DatabaseConstructor(databaseSettings);
         }
 
-        public async Task<JsonResult> SaveReview(string senderId, string receiverId, string content)
+        public async Task<JsonResult> SaveReview(string senderId, string receiverId, string response)
         {
-            var contentObject = JsonConvert.DeserializeObject<Content>(content);
+            var contentObject = JsonConvert.DeserializeObject<Response>(response);
             var sender = _databaseConstructor.UserAccountCollection
-                                .Find(sender => sender.Id == senderId)
-                                .FirstOrDefault();
+                                                .Find(sender => sender.Id == senderId)
+                                                .FirstOrDefault();
             var receiver = _databaseConstructor.UserAccountCollection
-                               .Find(receiver => receiver.Id == receiverId)
-                               .FirstOrDefault();
+                                                .Find(receiver => receiver.Id == receiverId)
+                                                .FirstOrDefault();
             var review = new Motel.Models.Review
             {
                 Sender = senderId,
                 SenderEmail = sender.Email,
-                Comment = contentObject.Comment,
-                Rating = contentObject.Rating
+                Comment = contentObject.Content,
+                Rating = (int)contentObject.Rating
             };
 
             await _databaseConstructor.ReviewCollection.InsertOneAsync(review);
@@ -74,10 +74,9 @@ namespace Motel.Areas.Customer.Controllers
         public async Task<JsonResult> GetUnreadedNotifications(string receiverEmail)
         {
             var receiverDocument = _databaseConstructor.UserAccountCollection
-                               .Find(f => f.Email == receiverEmail)
-                               .FirstOrDefault();
-
-            var unreadNotifications = receiverDocument.Notifications ??= new List<Notification>();
+                                                        .Find(f => f.Email == receiverEmail)
+                                                        .FirstOrDefault();
+            var unreadNotifications = receiverDocument.Notifications ??= new List<Motel.Models.Notification>();
             var unreadedNotificationCount = 0;
 
             foreach (var notification in unreadNotifications)

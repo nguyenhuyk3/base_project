@@ -42,23 +42,18 @@ namespace Motel.Areas.Customer.Controllers
             int pageSize = 5;
             int pageNum = page ?? 1;
 
-            var owner = _databaseConstructor.UserAccountCollection
+            var ownerDoc = _databaseConstructor.UserAccountCollection
                                                 .Find(userAccount => userAccount.Id == userAccountId)
                                                 .FirstOrDefault();
-            var clientId = _getter.GetLoginId();
-            var isClient = owner.Id != clientId;
-            var reversedPassiveReviews = owner.PassiveReviews?.ToList();
+            var reversedPassiveReviews = ownerDoc.PassiveReviews?.ToList();
 
             reversedPassiveReviews?.Reverse();
 
             var pagedReversedPassiveReviews = reversedPassiveReviews?.ToPagedList(pageNum, pageSize);
 
-            ViewData["isClient"] = isClient;
-
             InfoViewModel model = new InfoViewModel()
             {
-                Owner = owner,
-                SenderId = _getter.GetLoginId(),
+                Owner = ownerDoc,
                 ReviewsOnSite = pagedReversedPassiveReviews
             };
 
@@ -89,8 +84,9 @@ namespace Motel.Areas.Customer.Controllers
             var ownerDoc = await _databaseConstructor.UserAccountCollection
                                                         .Find(f => f.Id == ownerId)
                                                         .FirstOrDefaultAsync();
-            var model = new ModificationLayoutViewModel() { 
-                Owner = ownerDoc, 
+            var model = new ModificationLayoutViewModel()
+            {
+                Owner = ownerDoc,
             };
 
             return View(model);
@@ -126,7 +122,13 @@ namespace Motel.Areas.Customer.Controllers
             Booking booking = new Booking()
             {
                 Owner = ownerId,
-                Sender = senderId,
+                ContactInfo = new ContactInfo()
+                {
+                    Owner = senderDoc.Id,
+                    Name = senderDoc.Info.FullName,
+                    Email = senderDoc.Info.Email,
+                    Phone = senderDoc.Info.Phone,
+                },
                 PostId = postId
             };
 
@@ -172,7 +174,7 @@ namespace Motel.Areas.Customer.Controllers
             {
                 var booking = ownerDoc.Bookings[i];
 
-                if (booking.Sender == senderId && booking.PostId == postId)
+                if (booking.ContactInfo.Owner == senderId && booking.PostId == postId)
                 {
                     booking.IsReaded = true;
                     found = true;

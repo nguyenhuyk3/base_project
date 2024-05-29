@@ -201,18 +201,17 @@ namespace Motel.Areas.Post.Controllers
                 {
                     foreach (var booking in ownerDoc.Bookings)
                     {
-                        if (booking.Sender == senderId)
+                        if (booking.ContactInfo.Owner == senderId)
                         {
                             ViewData["Booked"] = true;
 
                             break;
                         }
                     }
-                }
-                else
-                {
+
                     ViewData["Booked"] = false;
                 }
+                
             }
            
             var model = new Models.PostDetail

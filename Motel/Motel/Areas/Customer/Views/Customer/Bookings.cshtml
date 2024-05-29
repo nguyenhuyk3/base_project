@@ -12,29 +12,37 @@
 }
 
 <div class="container-fluid">
-    <div class="container">
-        <h1>Danh sách thông tin</h1>
-        <table class="table mt-3">
-            <thead>
+    <h1>Danh sách thông tin</h1>
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th>Mã bài viết</th>
+                <th>Họ và tên</th>
+                <th>Gửi vào lúc</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var booking in Model.Owner.Bookings)
+            {
                 <tr>
-                    <th>Số điện thoại</th>
-                    <th>Họ và tên</th>
-                    <th>Gửi vào lúc</th>
-                    <th></th>
+                    <td>@booking.PostId</td>
+                    <td>@booking.ContactInfo.Name</td>
+                    <td>@booking.CreatedAt</td>
+                    <td>
+                        <button class="btn btn-primary"
+                                data-toggle="modal"
+                                data-target="#infoModal"
+                                data-phone="@booking.ContactInfo.Phone"
+                                data-email="@booking.ContactInfo.Email"
+                                data-name="@booking.ContactInfo.Name">
+                            Chi tiết
+                        </button>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>0123456789</td>
-                    <td>example@example.com</td>
-                    <td>John Doe</td>
-                    <td><button class="btn btn-primary" data-toggle="modal" data-target="#infoModal">Chi tiết</button></td>
-                </tr>
-                <!-- Thêm các hàng khác ở đây nếu cần -->
-            </tbody>
-        </table>
-    </div>
-
+            }
+        </tbody>
+    </table>
     <!-- Modal -->
     <div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="infoModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -49,15 +57,15 @@
                     <table class="table">
                         <tr>
                             <td>Số điện thoại:</td>
-                            <td>0123456789</td>
+                            <td id="modalPhone"></td>
                         </tr>
                         <tr>
                             <td>Email:</td>
-                            <td>example@example.com</td>
+                            <td id="modalEmail"></td>
                         </tr>
                         <tr>
                             <td>Họ và tên:</td>
-                            <td>John Doe</td>
+                            <td id="modalName"></td>
                         </tr>
                     </table>
                 </div>
@@ -70,5 +78,5 @@
 </div>
 
 @section _Modification_Layout {
-
+    <script src="~/css/customer/customer/booking/showinfoonmodal.js"></script>
 } 

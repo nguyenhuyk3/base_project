@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using DnsClient;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.Options;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
@@ -9,6 +10,8 @@ using Motel.Utility.Checking;
 using Motel.Utility.Database;
 using NuGet.Protocol.Plugins;
 using System;
+using System.Reflection;
+using System.Security.Claims;
 
 namespace Motel.Utility.Hubs
 {
@@ -27,7 +30,7 @@ namespace Motel.Utility.Hubs
         public override Task OnConnectedAsync()
         {
             // This will return the currently logged in email
-            var email = Context.User.Identity.Name;
+            var email = Context.User.Claims.FirstOrDefault(f => f.Type == ClaimTypes.Email)?.Value;
             var userAccountId = Context.UserIdentifier;
 
             if (email == null || userAccountId == null)
@@ -77,52 +80,54 @@ namespace Motel.Utility.Hubs
         }
 
         // Single
-        public async Task SendMessageToReceiver(string sender, string receiver, Content content)
+        public async Task SendMessageToReceiver(string sender, string receiver, Response response)
         {
             // `receiver` is email
             var receiverId = emailToIdsMapping.GetValueOrDefault(receiver);
 
             if (receiverId.Count > 0)
             {
-                await Clients.User(receiverId.FirstOrDefault()).SendAsync("ReceiveMessage", sender, content);
+                await Clients.User(receiverId.FirstOrDefault()).SendAsync("ReceiveMessage", sender, response);
             }
         }
 
         // Single
-        public async Task SendRatingToReceiver(string senderId, string receiverId, Content content)
+        // This function will send rating to receiver and receive notificaiton
+        public async Task SendRatingToReceiver(string senderId, string receiverId, Response response)
         {
             var receiverDocument = await _databaseConstructor.UserAccountCollection
-                                        .Find(userAccount => userAccount.Id == receiverId)
-                                        .FirstOrDefaultAsync();
-            var sender = await _databaseConstructor.UserAccountCollection
-                                        .Find(userAccount => userAccount.Id == senderId)
-                                        .FirstOrDefaultAsync();
-            var receiverIds = emailToIdsMapping.GetValueOrDefault(receiverDocument.Email);
-            int rating = receiverDocument.Rating + content.Rating;
+                                                                .Find(userAccount => userAccount.Id == receiverId)
+                                                                .FirstOrDefaultAsync();
+            var senderDoc = await _databaseConstructor.UserAccountCollection
+                                                        .Find(userAccount => userAccount.Id == senderId)
+                                                        .FirstOrDefaultAsync();
+            //var receiverIds = groups.GetValueOrDefault(senderDoc.Id);
+            var rating = receiverDocument.Rating + response.Rating;
 
             Notification notification = new Notification()
             {
-                Sender = sender.Id,
-                Email = sender.Email,
-                Rating = content.Rating,
-                Comment = content.Comment,
+                SenderId = senderDoc.Id,
+                Rating = response.Rating,
+                Content = response.Content,
             };
 
             receiverDocument?.Notifications?.Add(notification);
 
             var updateDefinition = Builders<UserAccount>.Update
-                             .Combine(
-                                 Builders<UserAccount>.Update.Set(f => f.Rating, rating),
-                                 Builders<UserAccount>.Update.Push(f => f.Notifications, notification)
-                             );
+                                            .Combine(
+                                                Builders<UserAccount>.Update.Set(f => f.Rating, rating),
+                                                Builders<UserAccount>.Update.Push(f => f.Notifications, notification)
+                                                );
             //var filter = Builders<UserAccount>.Filter.Eq(u => u.Id, receiverDocument.Id);
 
             await _databaseConstructor.UserAccountCollection.UpdateOneAsync(f => f.Id == receiverDocument.Id, updateDefinition);
 
-            if (receiverIds.Count > 0)
-            {
-                await Clients.User(receiverIds.FirstOrDefault()).SendAsync("ReceiveNotification", notification);
-            }
+
+            await Clients.User(receiverId).SendAsync("ReceiveNotification", notification);
+            //if (receiverIds.Count > 0)
+            //{
+            //    await Clients.User(receiverIds.FirstOrDefault()).SendAsync("ReceiveNotification", notification);
+            //}
         }
 
         //public async Task SendMessage(string user, string message)
@@ -151,58 +156,96 @@ namespace Motel.Utility.Hubs
         //}
 
         // Group
-        public async Task JoinRatingGroup(string sender, string receiver)
+        public async Task JoinRatingGroup(string senderId, string receiverId)
         {
             List<string> members;
 
-            if (!groups.TryGetValue(receiver, out members))
+            if (!groups.TryGetValue(receiverId, out members))
             {
                 members = new List<string>();
 
-                members.Add(sender);
+                members.Add(senderId);
 
-                groups.Add(receiver, members);
+                groups.Add(receiverId, members);
             }
             // This below line will return a `List<string>` corresponding to `email`
             else
             {
-                members.Add(sender);
+                members.Add(senderId);
             }
 
             Motel.ConnectedUsers.mappings = groups.ToDictionary(pair => pair.Key, pair => pair.Value);
 
-            var senderIds = emailToIdsMapping.GetValueOrDefault(sender);
+            var senderIds = groups.GetValueOrDefault(receiverId);
 
             if (senderIds.Count > 0)
             {
                 // The logged in clients will use their id for joining group
                 // Group name will be email's owner of page 
-                await Groups.AddToGroupAsync(Context.ConnectionId, receiver);
+                await Groups.AddToGroupAsync(Context.ConnectionId, receiverId);
             }
         }
 
-        public async Task LeaveRatingGroup(string sender, string receiver)
+        public async Task LeaveRatingGroup(string senderId, string receiverId)
         {
             List<string> members;
 
-            if (emailToIdsMapping.TryGetValue(receiver, out members))
+            if (emailToIdsMapping.TryGetValue(receiverId, out members))
             {
-                members.Remove(sender);
+                members.Remove(senderId);
             }
 
             Motel.ConnectedUsers.mappings = groups.ToDictionary(pair => pair.Key, pair => pair.Value);
 
-            var senderIds = emailToIdsMapping.GetValueOrDefault(sender);
+            var senderIds = emailToIdsMapping.GetValueOrDefault(senderId);
 
             if (senderIds.Count > 0)
             {
-                await Groups.RemoveFromGroupAsync(senderIds.FirstOrDefault(), receiver);
+                await Groups.RemoveFromGroupAsync(senderIds.FirstOrDefault(), receiverId);
             }
         }
 
-        public async Task SendRatingToGroup(string sender, string receiver, Content content)
+        public async Task SendRatingToGroup(string senderId, string receiverId, Response response)
         {
-            await Clients.Group(receiver).SendAsync("ReceiveRating", sender, content);
+            var senderDoc = await _databaseConstructor.UserAccountCollection
+                                                        .Find(f => f.Id == senderId)
+                                                        .FirstOrDefaultAsync();
+            var senderFullName = senderDoc.Info.FullName;
+
+            await Clients.Group(receiverId).SendAsync("ReceiveRating", senderId, senderFullName, response);
+        }
+
+        public async Task SendReviewPermission(string senderId, string receiverEmail, Response response)
+        {
+            var senderDoc = await _databaseConstructor.UserAccountCollection
+                                                            .Find(f => f.Id == senderId)
+                                                            .FirstOrDefaultAsync();
+            var receiverDoc = await _databaseConstructor.UserAccountCollection
+                                                           .Find(f => f.Email == receiverEmail)
+                                                           .FirstOrDefaultAsync();
+            var notification = new Notification()
+            {
+                SenderId = senderDoc.Id,
+                FullName = senderDoc.Info.FullName,
+                Content = response.Content,
+            };
+
+            senderDoc.ReviewPersons?.Add(receiverDoc.Id);
+            receiverDoc.Notifications?.Add(notification);
+
+            //var updateDefinition = Builders<UserAccount>.Update
+            //                                .Combine(
+            //                                    Builders<UserAccount>.Update.Push(f => f.Notifications, notification)
+            //                                );
+
+            //await _databaseConstructor.UserAccountCollection.UpdateOneAsync(f => f.Id == receiverDoc.Id, updateDefinition);
+
+            var senderIds = emailToIdsMapping.GetValueOrDefault(senderDoc.Email);
+
+            if (senderIds.Count > 0)
+            {
+                Clients.User(senderIds.FirstOrDefault()).SendAsync("ReceiveReviewPermission", notification);
+            }
         }
     }
 }

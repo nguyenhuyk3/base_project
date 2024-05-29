@@ -2,10 +2,10 @@
 
 namespace Motel.Areas.Customer.Models
 {
-    public class Content
+    public class Response
     {
-        public int Rating { get; set; }
-        public string Comment { get; set; }
+        public int? Rating { get; set; } = null;
+        public string Content { get; set; }
     }
 
     public class UnreadedNotification

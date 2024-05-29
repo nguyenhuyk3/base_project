@@ -85,7 +85,7 @@ namespace Motel.Areas.UserAccount.Controllers
                 }
 
                 await _databaseConstuctor.UserAccountCollection.InsertOneAsync(userAccount);
-                
+
 
                 return RedirectToAction("Login", "UserAccount");
             }
@@ -126,10 +126,8 @@ namespace Motel.Areas.UserAccount.Controllers
                         new Claim(ClaimTypes.Email, userAccount.Email),
                         new Claim(ClaimTypes.Role, userAccount.RoleName),
                     };
-
                     // Initialize a new instance of the ClaimsIdentity with the claims and authentication scheme    
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
                     //  //Initialize a new instance of the ClaimsPrincipal with ClaimsIdentity    
                     var principal = new ClaimsPrincipal(identity);
 
@@ -154,11 +152,11 @@ namespace Motel.Areas.UserAccount.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async  Task<IActionResult> Logout()
+        public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-            return RedirectToAction("Index", "Home", new {area = "Post"});
+            return RedirectToAction("Index", "Home", new { area = "Post" });
         }
     }
 }

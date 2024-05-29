@@ -7,27 +7,30 @@ namespace Motel.Models
 {
     public class Notification
     {
-
         [BsonElement("sender")]
         [JsonPropertyName("sender")]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Sender { get; set; } = null!;
+        public string SenderId { get; set; } = null!;
 
-        [BsonElement("email")]
-        [JsonPropertyName("email")]
-        public string Email { get; set; } = null!;
+        [BsonElement("full_name")]
+        [JsonPropertyName("full_name")]
+        public string FullName { get; set; } = null!;
 
         [BsonElement("rating")]
         [JsonPropertyName("rating")]
-        public int Rating { get; set; } = 0;
+        public int? Rating { get; set; } = null;
 
-        [BsonElement("comment")]
-        [JsonPropertyName("comment")]
-        public string Comment { get; set; } = string.Empty;
+        [BsonElement("content")]
+        [JsonPropertyName("content")]
+        public string Content { get; set; } = string.Empty;
 
         [BsonElement("is_readed")]
         [JsonPropertyName("is_readed")]
         public bool IsReaded { get; set; } = false;
+
+        [BsonElement("link")]
+        [JsonPropertyName("link")]
+        public Link? Link { get; set; } = null;
 
         [BsonElement("created_at")]
         [JsonPropertyName("created_at")]

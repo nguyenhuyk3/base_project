@@ -14,11 +14,11 @@ function saveReview() {
     var receiverId = document.getElementById("receiverId").value;
     var ratingString = document.getElementById("ratingValue").value;
     var ratingNumber = parseInt(ratingString);
-    var comment = document.getElementById("comment").value;
+    var content = document.getElementById("content").value;
 
-    const content = {
+    const response = {
         rating: ratingNumber,
-        comment: comment
+        content: content
     };
 
     var xhr = new XMLHttpRequest();
@@ -26,9 +26,10 @@ function saveReview() {
 
     formData.append('senderId', senderId);
     formData.append('receiverId', receiverId);
-    formData.append('content', JSON.stringify(content));
+    formData.append('response', JSON.stringify(response));
 
     console.log(senderId, receiverId, content)
+
     xhr.open('POST', '/Review/SaveReview')
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {

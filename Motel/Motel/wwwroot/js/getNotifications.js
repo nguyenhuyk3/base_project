@@ -5,6 +5,8 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 connection.start().catch(function (err) {
     console.error(err.toString());
 });
+
+// When load page this function will get unreadnotifications of owner
 document.addEventListener('DOMContentLoaded', function () {
     var receiverEmail = document.getElementById("receiverEmail").value;
 
@@ -68,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
         xhr.send();
     }
 });
+
 
 
 connection.on("ReceiveNotification", function (notification) {

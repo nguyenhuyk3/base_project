@@ -11,10 +11,9 @@ namespace Motel.Models
         [JsonPropertyName("owner")]
         public string Owner { get; set; } = null!;
 
-        [BsonRepresentation(BsonType.ObjectId)]
-        [BsonElement("sender")]
-        [JsonPropertyName("sender")]
-        public string Sender { get; set; } = null!;
+        [BsonElement("contact_info")]
+        [JsonPropertyName("contact_info")]
+        public ContactInfo ContactInfo { get; set; } = null!;
 
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonElement("post_id")]
