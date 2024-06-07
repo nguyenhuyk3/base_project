@@ -15,11 +15,16 @@ namespace Motel.Models
         [BsonRepresentation(BsonType.ObjectId)]
         [BsonElement("sender")]
         [JsonPropertyName("sender")]
-        public string Sender { get; set; } = null!;
+        public string SenderId { get; set; } = null!;
 
-        [BsonElement("sender_email")]
-        [JsonPropertyName("sender_email")]
-        public string SenderEmail { get; set; } = null!;
+        [BsonElement("sender_full_name")]
+        [JsonPropertyName("sender_full_name")]
+        public string SenderFullName { get; set; } = null!;
+
+        [BsonElement("sender_avatar")]
+        [BsonIgnoreIfNull]
+        [JsonPropertyName("sender_avatar")]
+        public string? SenderAvatar { get; set; } = null;
 
         [BsonElement("comment")]
         [JsonPropertyName("comment")]

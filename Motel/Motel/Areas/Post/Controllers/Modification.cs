@@ -13,6 +13,7 @@ using Motel.Utility.Database;
 using Motel.ViewModels;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using WebProject.Models.Address;
 
 
 namespace Motel.Areas.Post.Controllers
@@ -66,25 +67,8 @@ namespace Motel.Areas.Post.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add(ModificationLayoutViewModel model, IEnumerable<IFormFile> fileInput)
+        public async Task<List<Image>> ReturnListmagesFromView(IEnumerable<IFormFile> fileInput)
         {
-            var vipDoc = await _databaseConstructor.VipCollection
-                                                    .Find(f => f.Name == model.PostAdd.VipName)
-                                                    .FirstOrDefaultAsync();
-            var ownerDoc = await _databaseConstructor.UserAccountCollection
-                                                        .Find(f => f.Id == _getter.GetLoginId())
-                                                        .FirstOrDefaultAsync();
-            var categoryName = await _databaseConstructor.CategoryCollection
-                                                            .Find(category => category.Id == model.PostAdd.CategoryId)
-                                                            .Project(category => category.Name)
-                                                            .FirstOrDefaultAsync();
-            var cityName = await _databaseConstructor.CityCollection
-                                                        .Find(city => city.ApiId == int.Parse(model.PostAdd.ApiId))
-                                                        .Project(city => city.Name)
-                                                        .FirstOrDefaultAsync();
-
             List<Image> images = new List<Image>();
 
             foreach (var file in fileInput)
@@ -111,11 +95,34 @@ namespace Motel.Areas.Post.Controllers
                 }
             }
 
-            var coordinates = await _getCoordinates.EncodeCoordinates(model.PostAdd.Street,
-                                                                        model.PostAdd.Ward,
-                                                                        model.PostAdd.District,
-                                                                        cityName);
+            return images;
+        }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Add(ModificationLayoutViewModel model, IEnumerable<IFormFile> fileInput)
+        {
+            var vipDoc = await _databaseConstructor.VipCollection
+                                                    .Find(f => f.Name == model.PostAdd.VipName)
+                                                    .FirstOrDefaultAsync();
+            var ownerDoc = await _databaseConstructor.UserAccountCollection
+                                                        .Find(f => f.Id == _getter.GetLoginId())
+                                                        .FirstOrDefaultAsync();
+            var categoryName = await _databaseConstructor.CategoryCollection
+                                                            .Find(category => category.Id == model.PostAdd.CategoryId)
+                                                            .Project(category => category.Name)
+                                                            .FirstOrDefaultAsync();
+            var cityName = await _databaseConstructor.CityCollection
+                                                        .Find(city => city.ApiId == int.Parse(model.PostAdd.ApiId))
+                                                        .Project(city => city.Name)
+                                                        .FirstOrDefaultAsync();
+            var images = await ReturnListmagesFromView(fileInput);
+            var coordinates = await _getCoordinates.EncodeCoordinates(model.PostAdd.Street,
+                                                            model.PostAdd.Ward,
+                                                            model.PostAdd.District,
+                                                            cityName);
+
+            // Missing funitire attribute
             Motel.Models.Post post = new Motel.Models.Post()
             {
                 Owner = _getter.GetLoginId(),
@@ -208,12 +215,11 @@ namespace Motel.Areas.Post.Controllers
                             break;
                         }
                     }
-
-                    ViewData["Booked"] = false;
                 }
-                
+
+                ViewData["Booked"] = false;
             }
-           
+
             var model = new Models.PostDetail
             {
                 Post = postDoc,
@@ -229,6 +235,158 @@ namespace Motel.Areas.Post.Controllers
             ViewBag.Longitude = postDoc.PostDetail.AddressDetail.Longitude;
 
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Edit(string postId)
+        {
+            var ownerDoc = await _databaseConstructor.UserAccountCollection
+                                                      .Find(f => f.Id == _getter.GetLoginId())
+                                                      .FirstOrDefaultAsync();
+            var postDoc = await _databaseConstructor.PostCollection
+                                                        .Find(f => f.Id == postId)
+                                                        .FirstOrDefaultAsync();
+
+            if (ownerDoc.Id != postDoc.Owner)
+            {
+                return RedirectToAction("Index", "Home", new { area = "Post" });
+            }
+
+            var categories = await _databaseConstructor.CategoryCollection
+                                                        .Find(_ => true)
+                                                        .ToListAsync();
+            var cities = await _databaseConstructor.CityCollection
+                                                    .Find(_ => true)
+                                                    .ToListAsync();
+
+            ViewBag.Categories = new SelectList(categories, "Id", "Name");
+            ViewBag.Cities = new SelectList(cities, "ApiId", "Name");
+
+            // Missing funiture attribute
+            ModificationLayoutViewModel model = new ModificationLayoutViewModel()
+            {
+                Owner = ownerDoc,
+                PostAdd = new PostAdd()
+                {
+                    PostId = postId,
+                    CategoryId = categories.Find(f => f.Name == postDoc.CategoryName).Id,
+                    ApiId = cities.Find(f => f.Name == postDoc.PostDetail.AddressDetail.City).ApiId.ToString(),
+                    District = postDoc.PostDetail.AddressDetail.District,
+                    Ward = postDoc.PostDetail.AddressDetail.Ward,
+                    Street = postDoc.PostDetail.AddressDetail.Street,
+                    Address = postDoc.PostDetail.AddressDetail.Address,
+                    SubjectOnSite = postDoc.SubjectOnSite,
+                    Description = postDoc.PostDetail.Description,
+                    SquareMeter = postDoc.PostDetail.HomeInformation.SquareMeter,
+                    Price = postDoc.PostDetail.Price,
+                    Bedroom = postDoc.PostDetail.HomeInformation.Bedroom,
+                    Toilet = postDoc.PostDetail.HomeInformation.Toilet,
+                    Floor = postDoc.PostDetail.HomeInformation.Floor,
+                    Furniture = "Không nội thất",
+                    Name = ownerDoc.Info.FullName,
+                    Phone = ownerDoc.Info.Phone,
+                    Email = ownerDoc.Info.Email,
+                }
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ModificationLayoutViewModel model, IEnumerable<IFormFile> fileInput)
+        {
+            var ownerDoc = await _databaseConstructor.UserAccountCollection
+                                                      .Find(f => f.Id == _getter.GetLoginId())
+                                                      .FirstOrDefaultAsync();
+            var categoryName = await _databaseConstructor.CategoryCollection
+                                                          .Find(category => category.Id == model.PostAdd.CategoryId)
+                                                          .Project(category => category.Name)
+                                                          .FirstOrDefaultAsync();
+            var cityName = await _databaseConstructor.CityCollection
+                                                        .Find(city => city.ApiId == int.Parse(model.PostAdd.ApiId))
+                                                        .Project(city => city.Name)
+                                                        .FirstOrDefaultAsync();
+            var images = await ReturnListmagesFromView(fileInput);
+            var coordinates = await _getCoordinates.EncodeCoordinates(model.PostAdd.Street,
+                                                           model.PostAdd.Ward,
+                                                           model.PostAdd.District,
+                                                           cityName);
+            var postDetail = new Motel.Models.PostDetail
+            {
+                Description = model.PostAdd.Description,
+                AddressDetail = new AddressDetail
+                {
+                    Address = model.PostAdd.Address,
+                    City = cityName,
+                    District = model.PostAdd.District,
+                    Ward = model.PostAdd.Ward,
+                    Street = model.PostAdd.Street,
+                    Latitude = coordinates.Latitude,
+                    Longitude = coordinates.Longitude,
+                },
+                HomeInformation = new HomeInformation
+                {
+                    SquareMeter = model.PostAdd.SquareMeter,
+                    Bedroom = model.PostAdd.Bedroom,
+                    Toilet = model.PostAdd.Toilet,
+                    Floor = model.PostAdd.Floor
+                },
+                Images = images,
+                NumberOfImage = images.Count,
+                Price = model.PostAdd.Price,
+                PriceString = model.PostAdd.Price + " VND",
+            };
+            var contactInfo = new ContactInfo()
+            {
+                Name = model.PostAdd.Name,
+                Email = model.PostAdd.Email,
+                Phone = model.PostAdd.Phone,
+            };
+            var updatePostDefinition = Builders<Motel.Models.Post>.Update
+                                            .Set(f => f.CategoryName, categoryName)
+                                            .Set(f => f.SubjectOnSite, model.PostAdd.SubjectOnSite)
+                                            .Set(f => f.PostDetail, postDetail)
+                                            .Set(f => f.ContactInfo, contactInfo);
+            var postFilter = Builders<Motel.Models.Post>.Filter.Eq(p => p.Id, model.PostAdd.PostId);
+
+            await _databaseConstructor.PostCollection.UpdateOneAsync(postFilter, updatePostDefinition);
+
+            return RedirectToAction("Index", "Home", new { area = "Post" });
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> DeletePost(string postId)
+        {
+            var postDoc = await _databaseConstructor.PostCollection
+                                                        .Find(f => f.Id == postId)
+                                                        .FirstOrDefaultAsync();
+
+            postDoc.State.IsDeleted = true;
+
+            var updatePostDoc = Builders<Motel.Models.Post>.Update.Set(f => f.State, postDoc.State);
+            var filterPostDoc = Builders<Motel.Models.Post>.Filter.Eq(f => f.Id, postDoc.Id);
+
+            await _databaseConstructor.PostCollection.UpdateOneAsync(filterPostDoc, updatePostDoc);
+
+            return Json(new { success = true });
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> Extend(string postId, string vipName)
+        {
+            var postDoc = await _databaseConstructor.PostCollection
+                                                       .Find(f => f.Id == postId)
+                                                       .FirstOrDefaultAsync();
+            var vipDoc = await _databaseConstructor.VipCollection
+                                                       .Find(f => f.Name == vipName)
+                                                       .FirstOrDefaultAsync();
+            var extension = postDoc.ExpiredAt.AddDays(vipDoc.Days);
+            var updatePostDoc = Builders<Motel.Models.Post>.Update.Set(f => f.ExpiredAt, extension);
+            var filterPostDoc = Builders<Motel.Models.Post>.Filter.Eq(f => f.Id, postDoc.Id);
+
+            await _databaseConstructor.PostCollection.UpdateOneAsync(filterPostDoc, updatePostDoc);
+
+            return Json(new { success = true, message = "Gia hạn thành công" });
         }
     }
 }

@@ -23,22 +23,43 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var booking in Model.Owner.Bookings)
+            @if (Model.Owner.Bookings != null)
+            {
+                @foreach (var booking in Model.Owner.Bookings)
+                {
+                    <tr data-senderid="@booking.ContactInfo.Owner" data-postid="@booking.PostId">
+                        <td>@booking.PostId</td>
+                        <td>@booking.ContactInfo.Name</td>
+                        <td>@booking.CreatedAt</td>
+                        <td>
+                            <div class="review-status">
+                                @if (!Model.PeopleDoNotRateYet.ContainsKey(booking.ContactInfo.Owner))
+                                {
+                                    <p>chưa từng tư vấn</p>
+                                }
+                                else
+                                {
+                                    <p>đã từng tư vấn</p>
+                                }
+                            </div>
+                            <button class="btn btn-primary view-details"
+                                    data-toggle="modal"
+                                    data-target="#infoModal"
+                                    data-id="@booking.PostId"
+                                    data-senderid="@booking.ContactInfo.Owner"
+                                    data-phone="@booking.ContactInfo.Phone"
+                                    data-email="@booking.ContactInfo.Email"
+                                    data-name="@booking.ContactInfo.Name">
+                                Chi tiết
+                            </button>
+                        </td>
+                    </tr>
+                }
+            }
+            else
             {
                 <tr>
-                    <td>@booking.PostId</td>
-                    <td>@booking.ContactInfo.Name</td>
-                    <td>@booking.CreatedAt</td>
-                    <td>
-                        <button class="btn btn-primary"
-                                data-toggle="modal"
-                                data-target="#infoModal"
-                                data-phone="@booking.ContactInfo.Phone"
-                                data-email="@booking.ContactInfo.Email"
-                                data-name="@booking.ContactInfo.Name">
-                            Chi tiết
-                        </button>
-                    </td>
+                    <td colspan="4"><h3 class="mt-3">Không có người để tư vấn</h3></td>
                 </tr>
             }
         </tbody>
@@ -75,8 +96,11 @@
             </div>
         </div>
     </div>
+    <!---->
 </div>
 
 @section _Modification_Layout {
-    <script src="~/css/customer/customer/booking/showinfoonmodal.js"></script>
+    <!--Self-written JS-->
+   @*  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> *@
+    <script src="~/js/customer/customer/bookings/sendreviewpermission.js"></script>
 } 

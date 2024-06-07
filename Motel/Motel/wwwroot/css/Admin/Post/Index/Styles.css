@@ -1,0 +1,37 @@
+﻿.info {
+    width: 800px;
+    margin-top: 70px;
+    position: relative;
+}
+
+.d-block {
+    height: 390px;
+}
+
+.vip-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.card {
+   /* height: 650px;*/
+    width: 90%;
+    position: relative;
+}
+
+
+.card-text-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Number of lines to display */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 3.6em; /* Fallback for browsers that do not support -webkit-line-clamp */
+    height: 48px;
+}

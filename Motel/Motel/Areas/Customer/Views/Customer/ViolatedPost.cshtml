@@ -1,0 +1,254 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model Motel.ViewModels.ModificationLayoutViewModel
+
+@{
+    ViewData["Title"] = "Thêm bài viết";
+    Layout = "~/Areas/Post/Views/_Modification_Layout.cshtml";
+}
+
+@{
+    var postId = (string)ViewData["postId"];
+}
+
+@section _Modification_Layout_Styles {
+}
+
+@* <!--PostId-->
+<input type="text" id="PostId" value="@postId" />
+<!--SenderId-->
+<input type="hidden" id="PostId" value="@Model.Owner.Id" />
+<button class="w-100 btn btn-outline-warning w-100 mb-2"
+        id="SendResponse">
+    Gửi phản hồi
+</button> *@
+
+<h1 class="mt-3 mb-2">Chỉnh sửa bài viết</h1>
+
+<main class="container-fluid">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="row">
+        <!--This area will show form-->
+        <div>
+            <input type="text" asp-for="PostAdd.PostId" />
+            <form asp-action="Edit" asp-controller="Modification"
+                  method="post" id="PostForm" enctype="multipart/form-data">
+                @Html.AntiForgeryToken()
+                <!--Address information-->
+                <section class="container-fluid border border-opacity-50 border-1 p-4">
+                    <h4 class="mb-4">Thông tin cơ bản</h4>
+                    <div class="row row-cols-1">
+                        <div class="form-group">
+                            <label class="control-label mb-2">Loại hình cho thuê</label>
+                            <select asp-for="PostAdd.CategoryId"
+                                    class="form-control rounded-1"
+                                    id="CategoryId"
+                                    style="max-width: 100%;" disabled>
+                                <option value=""> </option>
+                                @foreach (var item in ViewBag.Categories)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row row-cols-2">
+                        <div class="form-group">
+                            <label class="control-label my-2" for="ApiId">Tỉnh/Thành phố</label>
+                            <select asp-for="PostAdd.ApiId"
+                                    class="form-control rounded-1"
+                                    id="ApiId">
+                                <option value=""> </option>
+                                @foreach (var item in ViewBag.Cities)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label my-2" for="District">Quận/Huyện</label>
+                            <select class="form-control"
+                                    asp-for="PostAdd.District" id="District"></select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label my-2" for="Ward">Phường/Xã</label>
+                            <select class="form-control"
+                                    asp-for="PostAdd.Ward" id="Ward"></select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label my-2" for="Street">Đường/Phố</label>
+                            <select class="form-control"
+                                    asp-for="PostAdd.Street" id="Street"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label mt-3 mb-2" for="Address">Địa chỉ hiển thị trên tin đăng</label>
+                        <input class="form-control"
+                               asp-for="PostAdd.Address"
+                               id="Address"
+                               style="max-width: 100%">
+                    </div>
+                </section>
+                <!--Post infomation-->
+                <section class="container-fluid border border-opacity-50 border-1 p-4 mt-3">
+                    <h4 class="mb-3">Thông tin bài viết</h4>
+                    <div class="form-group">
+                        <label class="label-control mb-2" for="SubjectOnSite">Tiêu đề</label>
+                        <textarea class="form-control"
+                                  asp-for="PostAdd.SubjectOnSite"
+                                  style="max-width: 100%"
+                                  placeholder="VD: Bán nhà riêng 50m2 chính chủ tại Cầu Giấy"></textarea>
+                        <p class="small mb-0">Đây là thông tin sẽ hiển thị ở đầu bài viết</p>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label class="label-control mb-2" for="Description">Mô tả</label>
+                        <textarea class="form-control"
+                                  asp-for="PostAdd.Description"
+                                  style="max-width: 100%"
+                                  placeholder="Nhập mô tả chung về bất động sản của bạn. Ví dụ: Khu nhà có vị trí thuận lợi, gần công viên, gần trường học" minlength="30" maxlength="3000">
+                                                              </textarea>
+                    </div>
+                </section>
+                <!--Real estate infomation-->
+                <section class="container border border-opacity-50 border-1 p-4 mt-3">
+                    <h4 class="mb-3">Thông tin phòng trọ</h4>
+                    <div class="form-group">
+                        <label class="mb-2" for="SquareMeter">Diện tích</label>
+                        <input type="text" class="form-control"
+                               asp-for="PostAdd.SquareMeter"
+                               value="@(Model.PostAdd.SquareMeter == 0 ? "" : Model.PostAdd.SquareMeter.ToString())"
+                               placeholder="Nhập diện tích, VD: 80m2">
+                    </div>
+                    <div class="form-group">
+                        <label class="my-2" for="PriceString">Mức giá</label>
+                        <div class="d-flex">
+                            <input type="text" class="form-control"
+                                   asp-for="PostAdd.Price"
+                                   value="@(Model.PostAdd.Price == 0 ? "" : Model.PostAdd.Price.ToString())"
+                                   style="margin-right: 15px;"
+                                   placeholder="Nhập giá, VD 1.000.000">
+                            <span class="input-group-text">VND</span>
+                        </div>
+                    </div>
+                    <!--This is 3 buttons allow customer choose furniture for post-->
+                    <div class="form-group">
+                        <label class="my-2" for="Furniture">Nội thất</label>
+                        <div class="row d-flex">
+                            <div class="col-7">
+                                <div class="row-cols-3 d-flex justify-content-start">
+                                    <div class="btn btn-secondary mx-2 btn-custom" id="fully">
+                                        Đầy đủ
+                                    </div>
+                                    <div class="btn btn-secondary mx-2 btn-custom" id="basically">
+                                        Cơ bản
+                                    </div>
+                                    <div class="btn btn-secondary mx-2 w-50 btn-custom" id="none">
+                                        Không nội thất
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" asp-for="PostAdd.Furniture" id="Furniture" />
+                    </div>
+                    <!--These are basic information of (motel room or rental house)-->
+                    <div class="form-group mt-5 d-flex">
+                        <label class="label-control my-2 w-50" for="Bedroom">Phòng ngủ</label>
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-secondary btn-decrease-bedroom">-</button>
+                            </span>
+                            <input type="text" class="form-control text-center mx-3"
+                                   asp-for="PostAdd.Bedroom" id="Bedroom"
+                                   readonly>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-secondary btn-increase-bedroom">+</button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group mt-2 d-flex">
+                        <label class="label-control my-2 w-50" for="Toilet">Toilet</label>
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-secondary btn-decrease-toilet">-</button>
+                            </span>
+                            <input type="text" class="form-control text-center mx-3"
+                                   asp-for="PostAdd.Toilet" id="Toilet"
+                                   readonly>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-secondary btn-increase-toilet">+</button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group mt-2 d-flex">
+                        <label class="label-control my-2 w-50" for="Floor">Tầng</label>
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-secondary btn-decrease-floor">-</button>
+                            </span>
+                            <input type="text" class="form-control text-center mx-3"
+                                   asp-for="PostAdd.Floor" id="Floor"
+                                   readonly>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-secondary btn-increase-floor">+</button>
+                            </span>
+                        </div>
+                    </div>
+                </section>
+                <!--Part of chosing image-->
+                <section class="container border border-opacity-50 border-1 p-4 mt-3">
+                    <h4 class="mb-3">Hình ảnh & Video</h4>
+                    <p>Quy định đăng hình & video</p>
+                    <ul>
+                        <li class="text-danger">Ảnh đầu tiên sẽ là ảnh chính cho bài đăng</li>
+                        <li>Hãy dùng ảnh thật, không trùng, không chèn SĐT</li>
+                        <li>Tối đa là 10 ảnh</li>
+                        <li>Mô tả ảnh tối đa 45 kí tự.</li>
+                    </ul>
+                    <button type="button" id="ChooseImageButton" class="btn btn-primary">Chọn ảnh</button>
+                    <input type="file" id="FileInput" name="FileInput" accept="image/*" multiple style="display: none;">
+                    <div id="ImagePreview"></div>
+                </section>
+                <!--Infomation of owner-->
+                <section class="container border border-opacity-50 border-1 p-4 mt-3">
+                    <h4 class="mb-3">Thông tin liên hệ</h4>
+
+                    <div class="row row-cols-2">
+                        <div class="form-group">
+                            <label class="label-control mb-2" for="Name">Tên liên hệ</label>
+                            <input type="text"
+                                   class="form-control mb-2"
+                                   asp-for="PostAdd.Name"
+                                   placeholder="Nhập tên của bạn" 
+                                   disabled />
+                        </div>
+                        <div class="form-group">
+                            <label class="label-control mb-2" for="Phone">Số điện thoại</label>
+                            <input type="text"
+                                   class="form-control mb-2"
+                                   asp-for="PostAdd.Phone"
+                                   placeholder="Nhập số điện thoại" 
+                                   disabled />
+                        </div>
+                        <div class="form-group">
+                            <label class="label-control mb-2" for="Email">Email</label>
+                            <input type="text"
+                                   class="form-control mb-2"
+                                   asp-for="PostAdd.Email"
+                                   placeholder="Nhập email"
+                                   disabled />
+                        </div>
+                    </div>
+                </section>
+                <div class="text-end">
+                    <button type="submit" class="btn btn-danger mt-3 float-end">Chỉnh sửa bài viết</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+@section _Modification_Layout {
+    <!--Self-written JS-->
+    <script src="~/js/customer/customer/violatedpost/createresponse.js"></script>
+}
+

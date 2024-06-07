@@ -1,6 +1,8 @@
 ﻿using Humanizer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -32,7 +34,7 @@ namespace Motel.Areas.Customer.Controllers
         }
 
         [AllowAnonymous]
-        public IActionResult Info(string userAccountId, int? page)
+        public async Task<IActionResult> Info(string userAccountId, int? page)
         {
             if (page == null)
             {
@@ -46,8 +48,31 @@ namespace Motel.Areas.Customer.Controllers
                                                 .Find(userAccount => userAccount.Id == userAccountId)
                                                 .FirstOrDefault();
             var reversedPassiveReviews = ownerDoc.PassiveReviews?.ToList();
+            var isReviewed = false;
+            var senderId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (!string.IsNullOrEmpty(senderId))
+            {
+                var senderDoc = await _databaseConstructor.UserAccountCollection
+                                                       .Find(f => f.Id == senderId)
+                                                       .FirstOrDefaultAsync();
+
+                senderDoc.ActiveReviewPersons ??= new List<string>();
+
+                foreach (var personIsAllowed in senderDoc.ActiveReviewPersons)
+                {
+                    if (personIsAllowed == ownerDoc.Id)
+                    {
+                        isReviewed = true;
+
+                        break;
+                    }
+                }
+            }
 
             reversedPassiveReviews?.Reverse();
+
+            ViewData["isReviewed"] = isReviewed;
 
             var pagedReversedPassiveReviews = reversedPassiveReviews?.ToPagedList(pageNum, pageSize);
 
@@ -151,23 +176,54 @@ namespace Motel.Areas.Customer.Controllers
         {
             var ownerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var ownerDoc = await _databaseConstructor.UserAccountCollection
-                                                .Find(f => f.Id == ownerId)
-                                                .FirstOrDefaultAsync();
+                                                        .Find(f => f.Id == ownerId)
+                                                        .FirstOrDefaultAsync();
+            var peopleDoNotRateYet = new Dictionary<string, bool>();
+
+            ownerDoc.PassiveReviewPersons ??= new List<string>();
+
+            foreach (var booking in ownerDoc.Bookings)
+            {
+                if (!booking.IsReaded)
+                {
+                    foreach (var passiveReviewPerson in ownerDoc.PassiveReviewPersons)
+                    {
+                        if (booking.ContactInfo.Owner == passiveReviewPerson)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            if (!peopleDoNotRateYet.ContainsKey(booking.ContactInfo.Owner))
+                            {
+                                peopleDoNotRateYet.Add(booking.ContactInfo.Owner, true);
+                            }
+                        }
+                    }
+                }
+            }
+
             var model = new ModificationLayoutViewModel
             {
                 Owner = ownerDoc,
+                PeopleDoNotRateYet = peopleDoNotRateYet
             };
 
             return View(model);
         }
 
+        // When owner click to the detail button for seeing detail of customer 
+        // then owner will allow customer review myself
         [HttpPost]
         public async Task<JsonResult> ReadBooking(string senderId, string postId)
         {
             var ownerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var ownerDoc = await _databaseConstructor.UserAccountCollection
-                                                     .Find(f => f.Id == ownerId)
-                                                     .FirstOrDefaultAsync();
+                                                        .Find(f => f.Id == ownerId)
+                                                        .FirstOrDefaultAsync();
+            var senderDoc = await _databaseConstructor.UserAccountCollection
+                                                        .Find(f => f.Id == senderId)
+                                                        .FirstOrDefaultAsync();
             var found = false;
 
             for (int i = 0; i < ownerDoc.Bookings.Count; i++)
@@ -188,10 +244,16 @@ namespace Motel.Areas.Customer.Controllers
                 }
             }
 
-            var filter = Builders<Motel.Models.UserAccount>.Filter.Eq(f => f.Id, ownerId);
-            var update = Builders<Motel.Models.UserAccount>.Update.Set(f => f.Bookings, ownerDoc.Bookings);
+            senderDoc.ActiveReviewPersons ??= new List<string>();
+            senderDoc.ActiveReviewPersons.Add(ownerDoc.Id);
 
-            await _databaseConstructor.UserAccountCollection.ReplaceOneAsync(filter, ownerDoc);
+            var senderFilter = Builders<Motel.Models.UserAccount>.Filter.Eq(f => f.Id, senderId);
+            var ownerFilter = Builders<Motel.Models.UserAccount>.Filter.Eq(f => f.Id, ownerId);
+            var senderUpdate = Builders<Motel.Models.UserAccount>.Update.Set(f => f.ActiveReviewPersons, senderDoc.ActiveReviewPersons);
+            var ownerUpdate = Builders<Motel.Models.UserAccount>.Update.Set(f => f.Bookings, ownerDoc.Bookings);
+
+            await _databaseConstructor.UserAccountCollection.UpdateOneAsync(senderFilter, senderUpdate);
+            await _databaseConstructor.UserAccountCollection.UpdateOneAsync(ownerFilter, ownerUpdate);
 
             if (found)
             {
@@ -201,6 +263,103 @@ namespace Motel.Areas.Customer.Controllers
             {
                 return Json(new { message = "Bạn có thể đánh giá chủ bài viết!", isFirst = true });
             }
+        }
+
+        //public async Task<ActionResult> ViolatedPost(string postId)
+        //{
+        //    var postDoc = await _databaseConstructor.PostCollection
+        //                                              .Find(f => f.Id == postId)
+        //                                              .FirstOrDefaultAsync();
+
+        //    if (!postDoc.State.IsViolated)
+        //    {
+        //        return RedirectToAction("Index", "Home", new { area = "Post" });
+        //    }
+
+        //    var ownerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //    var ownerDoc = await _databaseConstructor.UserAccountCollection
+        //                                               .Find(f => f.Id == ownerId)
+        //                                               .FirstOrDefaultAsync();
+
+        //    ViewData["postId"] = postId;
+
+        //    ModificationLayoutViewModel model = new ModificationLayoutViewModel()
+        //    {
+        //        Owner = ownerDoc,
+        //    };
+
+        //    return View(model);
+        //}
+
+        [HttpPost]
+        public async Task<JsonResult> CreateReponse(string postId)
+        {
+            //var postDoc = await _databaseConstructor.PostCollection
+            //                                           .Find(f => f.Id == postId)
+            //                                           .FirstOrDefaultAsync();
+
+            //postDoc.State.IsEdited = true;
+
+            //var updatePostDoc = Builders<Motel.Models.Post>.Update.Set(f => f.State, postDoc.State);
+            //var filterPostDoc = Builders<Motel.Models.Post>.Filter.Eq(f => f.Id, postDoc.Id);
+
+            //await _databaseConstructor.PostCollection.UpdateOneAsync(filterPostDoc, updatePostDoc);
+
+            return Json(new { success = true, message = "Thành công" });
+        }
+
+        public async Task<IActionResult> ViolatedPost(string postId)
+        {
+            var postDoc = await _databaseConstructor.PostCollection
+                                                .Find(f => f.Id == postId)
+                                                .FirstOrDefaultAsync();
+
+            if (!postDoc.State.IsViolated)
+            {
+                return RedirectToAction("Index", "Home", new { area = "Post" });
+            }
+
+            var userAccountId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var ownerDoc = await _databaseConstructor.UserAccountCollection
+                                                     .Find(f => f.Id == userAccountId)
+                                                     .FirstOrDefaultAsync();
+            var categories = await _databaseConstructor.CategoryCollection
+                                                      .Find(_ => true)
+                                                      .ToListAsync();
+            var cities = await _databaseConstructor.CityCollection
+                                                    .Find(_ => true)
+                                                    .ToListAsync();
+
+            ViewBag.Categories = new SelectList(categories, "Id", "Name");
+            ViewBag.Cities = new SelectList(cities, "ApiId", "Name");
+
+            ModificationLayoutViewModel model = new ModificationLayoutViewModel()
+            {
+                Owner = ownerDoc,
+                PostAdd = new PostAdd()
+                {
+                    PostId = postId,
+                    CategoryId = categories.Find(f => f.Name == postDoc.CategoryName).Id,
+                    ApiId = cities.Find(f => f.Name == postDoc.PostDetail.AddressDetail.City).ApiId.ToString(),
+                    District = postDoc.PostDetail.AddressDetail.District,
+                    Ward = postDoc.PostDetail.AddressDetail.Ward,
+                    Street = postDoc.PostDetail.AddressDetail.Street,
+                    Address = postDoc.PostDetail.AddressDetail.Address,
+                    SubjectOnSite = postDoc.SubjectOnSite,
+                    Description = postDoc.PostDetail.Description,
+                    SquareMeter = postDoc.PostDetail.HomeInformation.SquareMeter,
+                    Price = postDoc.PostDetail.Price,
+                    Bedroom = postDoc.PostDetail.HomeInformation.Bedroom,
+                    Toilet = postDoc.PostDetail.HomeInformation.Toilet,
+                    Floor = postDoc.PostDetail.HomeInformation.Floor,
+                    Furniture = "Không nội thất",
+                    Name = ownerDoc.Info.FullName,
+                    Phone = ownerDoc.Info.Phone,
+                    Email = ownerDoc.Info.Email,
+                }
+            };
+
+            return View(model);
         }
 
         public IActionResult Checkout(string price)

@@ -1,8 +1,8 @@
 ﻿function initMap() {
-    //var latitude = @ViewBag.Latitude;
-    //var longitude = @ViewBag.Longitude;
-    //console.log(latitude, longitude)
-    var location = { lat: 10.7765436, lng: 106.7050533 };
+    var latitude = parseFloat(document.getElementById('latitude').value);
+    var longitude = parseFloat(document.getElementById('longitude').value);
+    var location = { lat: latitude, lng: longitude };
+    console.log(location)
     var map = new google.maps.Map(document.getElementById('map'), {
         zoom: 20,
         center: location
@@ -14,6 +14,7 @@
 
     map.addListener('click', function () {
         var url = 'https://www.google.com/maps/search/?api=1&query=' + latitude + ',' + longitude;
+
         window.open(url, '_blank');
     });
 }

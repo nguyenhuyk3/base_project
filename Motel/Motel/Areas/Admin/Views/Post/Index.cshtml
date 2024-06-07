@@ -1,0 +1,48 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model Motel.ViewModels.ModificationLayoutViewModel
+
+@{
+    ViewData["Title"] = "Quản lí bài viết";
+    Layout = "~/Areas/Post/Views/_Modification_Layout.cshtml";
+}
+
+@section _Modification_Layout_Styles {
+    <link href="~/css/admin/post/index/styles.css" rel="stylesheet" />
+}
+
+<h1>Quản lí bài viết</h1>
+<section class="info container mt-4">
+    @foreach (var post in Model.Posts)
+    {
+        <div class="card mt-3">
+            <div class="vip-badge">VIP KIM CƯƠNG</div>
+            <img src="@post.PostDetail.Images[0].Url" class="d-block w-100" alt="...">
+            <div class="card-body">
+                <a asp-action="Detail"
+                   asp-controller="Modification"
+                   asp-area="Post"
+                   asp-route-postId="@post.Id" class="text-decoration-none text-dark">
+                    <h5 class="card-title">@post.SubjectOnSite</h5>
+                </a>
+                <p class="card-text text-danger font-weight-bold">
+                    @post.PostDetail.Price triệu/tháng ·
+                    @post.PostDetail.HomeInformation.SquareMeter m² ·
+                    @post.PostDetail.HomeInformation.Bedroom 🛏️ ·
+                    @post.PostDetail.HomeInformation.Toilet 🛁 ·
+                    @post.PostDetail.AddressDetail.City
+                </p>
+                <p class="card-text-description">@post.PostDetail.Description</p>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="media align-items-center">
+                        <img src="https://via.placeholder.com/40" class="mr-3 rounded-circle" alt="Avatar">
+                        <div class="media-body">
+                            <h6 class="mt-0 mb-0">@post.ContactInfo.Name</h6>
+                            <small>Đăng hôm nay</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</section>

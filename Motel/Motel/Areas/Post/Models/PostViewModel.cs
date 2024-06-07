@@ -2,6 +2,7 @@
 {
     public class PostAdd()
     {
+        public string PostId { get; set; } = null!;
         public string CategoryId { get; set; } = null!;
         public string ApiId { get; set; } = null!;
         public string District { get; set; } = null!;

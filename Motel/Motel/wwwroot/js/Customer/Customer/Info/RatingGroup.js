@@ -11,7 +11,7 @@ connection.start().then(function () {
 
     // This is the case where the site owner enters
     if (senderId === undefined) {
-        senderId = receiverId;
+        senderId = null;
     }
 
     console.log(senderId, receiverId);
@@ -50,7 +50,8 @@ if (document.getElementById("sendButton")?.disabled !== undefined) {
 connection.on("ReceiveRating", function (senderId, senderFullName, response) {
     var senderIdOnsite = document.getElementById("senderId")?.value
 
-    console.log(senderFullName);
+    console.log(senderIdOnsite)
+
     // Check if the client on the page is the sender
     // If not, receive this notification
     if (senderId !== senderIdOnsite) {
@@ -62,17 +63,23 @@ connection.on("ReceiveRating", function (senderId, senderFullName, response) {
         });
     }
 
-    console.log(senderIdOnsite)
-
     const review = {
         senderFullName: senderFullName,
-        avatar: "/images/images.jpg",
+        avatar: response.avatar ? response.avatar : "/images/50x50.png",
         rating: response.rating,
         comment: response.content
     };
 
+    console.log(review)
+
     // I will create function for this later
     // ========== || ==========
+    var noCommnetsP = document.getElementById('noComments');
+
+    if (noCommnetsP) {
+        noCommnetsP.parentNode.removeChild(noCommnetsP);
+    }
+
     var cardDiv = document.createElement("div");
 
     cardDiv.className = "card mb-2";
@@ -86,6 +93,7 @@ connection.on("ReceiveRating", function (senderId, senderFullName, response) {
     avatarDiv.className = "avatar rounded-circle overflow-hidden mr-3";
 
     var img = document.createElement("img");
+
     img.src = review.avatar;
     img.alt = "Avatar";
     img.className = "img-fluid avatar-of-commenter";
@@ -95,10 +103,12 @@ connection.on("ReceiveRating", function (senderId, senderFullName, response) {
     var contentDiv = document.createElement("div");
 
     var cardTitle = document.createElement("h5");
+
     cardTitle.className = "card-title";
     cardTitle.innerHTML = "<span>" + review.senderFullName + "</span> đã đánh giá " + review.rating + " sao";
 
     var cardText = document.createElement("p");
+
     cardText.className = "card-text";
     cardText.textContent = review.comment;
 

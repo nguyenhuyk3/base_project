@@ -26,6 +26,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Admin/Views/Post/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUG9zdFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Customer/Views/Accordion/_Accordion_Partial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcQWNjb3JkaW9uXF9BY2NvcmRpb25fUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -50,6 +54,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcQ3VzdG9tZXJcUmV0dXJuVXJsLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Customer/Views/Customer/ViolatedPost.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcQ3VzdG9tZXJcVmlvbGF0ZWRQb3N0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Post/Views/Home/FavoritePosts.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUG9zdFxWaWV3c1xIb21lXEZhdm9yaXRlUG9zdHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -64,6 +72,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Post/Views/Modification/Detail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUG9zdFxWaWV3c1xNb2RpZmljYXRpb25cRGV0YWlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Post/Views/Modification/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUG9zdFxWaWV3c1xNb2RpZmljYXRpb25cRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Post/Views/_Modification_Layout.cshtml]

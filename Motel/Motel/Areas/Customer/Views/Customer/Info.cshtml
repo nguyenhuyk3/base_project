@@ -11,6 +11,7 @@
 @{
     var senderId = User.Claims.FirstOrDefault(f => f.Type == ClaimTypes.NameIdentifier)?.Value;
     var isClient = senderId != @Model.Owner.Id;
+    var isReviewed = (bool)ViewData["isReviewed"];
 }
 
 @section Styles {
@@ -30,9 +31,11 @@
         <div class="col-md-4 mx-4 bg-light">
             <div class="card-body d-flex flex-column align-items-center"
                  style="padding: 20px 0px 0px !important">
+                <!--Avatar-->
                 <div class="rounded-circle overflow-hidden d-flex justify-content-center align-items-center avatar-of-owner">
-                    <!--If else here-->
-                    <img src="~/images/images.jpg" class="img-fluid" alt="Avatar" />
+                    <img src="@(string.IsNullOrEmpty(Model.Owner.Info.Avatar) ? Url.Content("~/images/150x150.png") : Model.Owner.Info.Avatar)"
+                         class="img-fluid"
+                         alt="Avatar" />
                 </div>
                 <div class="card-body text-center">
                     <h5 class="card-title">@Model.Owner.Info.FullName</h5>
@@ -57,7 +60,7 @@
                 </div>
             </div>
         </div>
-        <!---->
+
         <!--Tab-->
         <div class="col-md-7 mx-4 bg-light">
             <ul class="nav nav-tabs mb-1" id="myTab" role="tablist">
@@ -123,34 +126,28 @@
                         </a>
                     </div>
                 </div>
-                <!---->
+
                 <!--Conent of tab 2-->
                 <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
                 </div>
-                <!---->
+
             </div>
         </div>
-        <!---->
+
     </div>
 </div>
 
-<!--Email of the owner of this information page-->
-@* <input type="hidden" asp-for="Email"
-       id="receiver" name="receiver"
-       value="@Model.Owner.Email" /> *@
-<!--Id of receiver-->
 <input type="hidden"
        name="receiverId" id="receiverId"
        value="@Model.Owner.Id" />
 
-@if (isClient && !string.IsNullOrEmpty(senderId))
+@if (isClient && !string.IsNullOrEmpty(senderId) && isReviewed)
 {
     <div class="container-fluid mx-2 mt-3">
         <!--Button to trigger modal-->
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ratingModal">
             Đánh giá người đăng tin
         </button>
-        <!---->
         <!--Modal-->
         <div class="modal fade" id="ratingModal" tabindex="-1" role="dialog" aria-labelledby="ratingModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -198,7 +195,7 @@
     </div>
 }
 
-<!-- Phần hiển thị danh sách đánh giá -->
+<!--Comment part-->
 <div class="container mt-5">
     <h3 class="text-center">Danh sách đánh giá</h3>
     <div id="review-list">
@@ -209,11 +206,11 @@
                 <div class="card mb-2">
                     <div class="card-body d-flex align-items-center">
                         <div class="avatar rounded-circle overflow-hidden mr-3">
-                            <img src="~/images/images.jpg" alt="Avatar" class="img-fluid avatar-of-commenter">
+                            <img src="@(string.IsNullOrEmpty(review.SenderAvatar) ? Url.Content("~/images/50x50.png") : review.SenderAvatar)" />
                         </div>
                         <div>
                             <h5 class="card-title">
-                                <span>@review.SenderEmail</span> đã đánh giá @review.Rating sao
+                                <span>@review.SenderFullName</span> đã đánh giá @review.Rating sao
                             </h5>
                             <p class="card-text">@review.Comment</p>
                         </div>
@@ -230,7 +227,10 @@
         }
         else
         {
-            <p class="text-center">Không có đánh giá nào.</p>
+            <p class="text-center"
+               id="noComments">
+                Không có đánh giá nào.
+            </p>
         }
     </div>
 </div>
@@ -246,7 +246,7 @@
     <!--Font Awesome JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
     <!--Self-written JS-->
-    <script src="~/js/customer/customer/info/info.js"></script>
+    <script src="~/js/customer/customer/info/pagination.js"></script>
     <script src="~/js/customer/customer/info/ratingstarts.js"></script>
     <script src="~/js/customer/customer/info/ratinggroup.js"></script>
     <script>

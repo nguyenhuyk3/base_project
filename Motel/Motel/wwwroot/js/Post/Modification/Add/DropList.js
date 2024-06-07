@@ -8,7 +8,7 @@
         var apiId = this.value;
         // Send GET request to server to get districts
         var xhr = new XMLHttpRequest();
-      
+
         xhr.open('GET', '/Address/GetDistricts?apiId=' + apiId);
 
         xhr.onload = function () {
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var district = this.value;
         var apiId = document.getElementById('ApiId').value;
         var xhr = new XMLHttpRequest();
-            
+
         xhr.open('GET', '/Address/GetAwards?apiId=' + apiId + '&district=' + district, true);
 
         xhr.onreadystatechange = function () {
@@ -76,8 +76,6 @@ document.addEventListener("DOMContentLoaded", function () {
         var district = document.getElementById('District').value;
         var ward = this.value;
         var xhr = new XMLHttpRequest();
-
-        alert(ward)
 
         xhr.open('GET', '/Address/GetStreets?apiId=' + apiId + '&district=' + district + '&ward=' + ward, true);
 

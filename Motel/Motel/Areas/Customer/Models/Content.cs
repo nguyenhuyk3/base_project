@@ -5,7 +5,8 @@ namespace Motel.Areas.Customer.Models
     public class Response
     {
         public int? Rating { get; set; } = null;
-        public string Content { get; set; }
+        public string Content { get; set; } = null!;
+        public string? Avatar { get; set; } = null;
     }
 
     public class UnreadedNotification

@@ -20,6 +20,10 @@ namespace Motel.Models
         [JsonPropertyName("cost")]
         public int Cost { get; set; } = 0;
 
+        [BsonElement("days")]
+        [JsonPropertyName("days")]
+        public int Days { get; set; } = 0;
+
         [BsonElement("is_toggled")]
         [JsonPropertyName("is_toggled")]
         public bool IsToggled { get; set; } = true;

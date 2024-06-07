@@ -6,16 +6,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - WebProject</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-          integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
-          crossorigin="anonymous" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Motel.styles.css" asp-append-version="true" />
     <!--Toast-->
     <link href="~/toast/toast.css" rel="stylesheet" />
-    <!--Notification-->
-    <link href="~/notification/ikr.notification.css" rel="stylesheet" />
     <!--Self-Written CSS-->
     <link href="~/css/_layout.css" rel="stylesheet" />
     @RenderSection("Styles", required: false)
@@ -25,12 +21,16 @@
         var isLogginedIn = User.Identity.IsAuthenticated;
         var receiverEmail = User.Claims.FirstOrDefault(f => f.Type == ClaimTypes.Email)?.Value;
         var receiverName = User.Claims.FirstOrDefault(f => f.Type == ClaimTypes.Name)?.Value;
+        var ownerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
     }
 
     <div id="toast-notification"></div>
     <input type="hidden"
            name="receiverEmail" id="receiverEmail"
            value="@receiverEmail" />
+    <input type="hidden"
+           name="ownerId" id="ownerId"
+           value="@ownerId" />
 
     <header>
         <!--Nav-->
@@ -72,47 +72,58 @@
                     }
                     else
                     {
-                        <div class="d-flex align-items-center justify-content-between">
-                            <div class="d-inline-block favorite-list mr-1">
-                                <button class="btn-list">
-                                    <i class="fa-regular fa-heart"></i>
-                                </button>
-                            </div>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav ml-auto">
+                                <!--Notifications Dropdown-->
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link" href="#" id="notificationsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-bell"></i>
+                                        <span class="badge badge-danger" id="notificationsCounter">0</span>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-notifications" aria-labelledby="notificationsDropdown">
+                                        <div class="no-notifications d-none">
+                                            Không có thông báo
+                                        </div>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item text-center" href="#">See all notifications</a>
+                                    </div>
+                                </li>
+                                <!--Favorites Dropdown-->
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link" href="#" id="favoritesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-heart"></i>
+                                        <span class="badge badge-danger" id="favoritesCounter">0</span>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-favorites" aria-labelledby="favoritesDropdown">
+                                        <!--It will display when no having favorite posts-->
+                                        <div class="no-favorites d-none">
+                                            Không có bài viết yêu thích
+                                        </div>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item text-center" href="#">See all favorites</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
 
-                            <div class="d-inline-block mr-1" id="noti_Container">
-                                <div class="ikrNoti_Counter" id="ikrNoti_Counter">0</div>
-                                <div class="ikrNoti_Button" id="ikrNoti_Button">
-                                    <i class="fas fa-bell"></i>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @receiverName
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Nạp tiền</a>
+                                <div class="dropdown-item">
+                                    <form class="form-inline" asp-area="UserAccount" asp-controller="UserAccount" asp-action="Logout" method="post" id="LogoutForm">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-link text-dark text-decoration-none p-0" id="LogoutButton">
+                                            Đăng xuất
+                                        </button>
+                                    </form>
                                 </div>
-                                <div class="ikrNotifications" style="display: none !important">
-                                    <h3>
-                                        Notifications (<span class="notiCounterOnHead" id="notiCounterOnHead">0</span>)
-                                    </h3>
-                                    <div class="ikrNotificationItems">
-                                        <ul class="list-group" id="notificationList"></ul>
-                                    </div>
-                                    <div class="ikrSeeAll">
-                                        <a href="#">See all</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    @receiverName
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">Nạp tiền</a>
-                                    <div class="dropdown-item">
-                                        <form class="form-inline" asp-area="UserAccount" asp-controller="UserAccount" asp-action="Logout" method="post" id="LogoutForm">
-                                            @Html.AntiForgeryToken()
-                                            <button type="submit" class="btn btn-link text-dark text-decoration-none p-0" id="LogoutButton">
-                                                Đăng xuất
-                                            </button>
-                                        </form>
-                                    </div>
-                                    <a class="dropdown-item" href="#">Another link</a>
-                                </div>
+                                <a class="dropdown-item" href="#">Another link</a>
                             </div>
                         </div>
                     }
@@ -138,20 +149,22 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <!--Toast JS-->
     <script src="~/toast/toast.js"></script>
-    <!--Notification JS-->
-    <script src="~/notification/ikr.notificationplugin.js"></script>
     <!--SingalR-->
     <script src="~/js/signalr/dist/browser/signalr.js"></script>
     <script src="~/js/getnotifications.js"></script>
     <!--Self-written JS-->
+    <script src="~/js/_layout/updatefavorites.js"></script>
+    <script src="~/js/_layout/getfavorites.js"></script>
+    <script src="~/js/_layout/togglefavorite.js"></script>
+    <script src="~/js/_layout/getwarningorresponse.js"></script>
     <script>
-        document.querySelector('.dropdown').addEventListener('mouseover', function () {
-            this.querySelector('.dropdown-menu').style.display = 'block';
-        });
+        // document.querySelector('.dropdown').addEventListener('mouseover', function () {
+        //     this.querySelector('.dropdown-menu').style.display = 'block';
+        // });
 
-        document.querySelector('.dropdown').addEventListener('mouseleave', function () {
-            this.querySelector('.dropdown-menu').style.display = 'none';
-        });
+        // document.querySelector('.dropdown').addEventListener('mouseleave', function () {
+        //     this.querySelector('.dropdown-menu').style.display = 'none';
+        // });
     </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>

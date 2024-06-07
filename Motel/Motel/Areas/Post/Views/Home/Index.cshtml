@@ -1,5 +1,8 @@
-﻿@model List<Motel.Models.Post>
-@using System.Security.Claims
+﻿@using System.Security.Claims
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model IPagedList<Motel.Models.Post>
 
 @{
     ViewData["Title"] = "Index";
@@ -20,6 +23,11 @@
           rel="stylesheet">
     <!--Self-written CSS-->
     <link href="~/css/post/home/index/styles.css" rel="stylesheet" />
+    <link href="~/css/post/home/index/pagination.css" rel="stylesheet" />
+}
+
+@{
+    var UserAccountId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 }
 
 <div class="container-fluid" style="padding: 0">
@@ -44,123 +52,46 @@
         </button>
 
         <div class="search-bar mt-5">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="nhadatban-tab" data-toggle="tab" href="#nhadatban" role="tab" aria-controls="nhadatban" aria-selected="true">Nhà đất bán</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="nhadatchothue-tab" data-toggle="tab" href="#nhadatchothue" role="tab" aria-controls="nhadatchothue" aria-selected="false">Nhà đất cho thuê</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="duan-tab" data-toggle="tab" href="#duan" role="tab" aria-controls="duan" aria-selected="false">Dự án</a>
-                </li>
-            </ul>
-
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="nhadatban" role="tabpanel" aria-labelledby="nhadatban-tab">
-                    <form class="form-row mt-3">
+
+                    <div class="col-md-2">
+                        <select class="form-control">
+                            <option>Hồ Chí Minh</option>
+                            <!-- other options -->
+                        </select>
+                    </div>
+                    <form asp-area="Post" asp-controller="Home" asp-action="SearchBySubjectOnSite"
+                          method="post">
+                        @Html.AntiForgeryToken()
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" placeholder="Nhập tối đa 5 địa điểm, dự án. Ví dụ: Quận Hoàn Kiếm, Quận Đống Đa"
+                                   id="searchInput" name="term">
+                        </div>
                         <div class="col-md-2">
-                            <select class="form-control">
-                                <option>Hồ Chí Minh</option>
-                                <!-- other options -->
-                            </select>
-                        </div>
-                        <div class="col-md-7">
-                            <input type="text" class="form-control" placeholder="Nhập tối đa 5 địa điểm, dự án. Ví dụ: Quận Hoàn Kiếm, Quận Đống Đa">
-                        </div>
-                        <div class="col-md-1">
-                            <button type="submit" class="btn btn-danger btn-block">Tìm kiếm</button>
-                        </div>
-                        <div class="w-100 mt-3"></div>
-                        <div class="col-md-3">
-                            <select class="form-control">
-                                <option>Loại nhà đất</option>
-                                <!-- other options -->
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <select class="form-control">
-                                <option>Mức giá</option>
-                                <!-- other options -->
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <select class="form-control">
-                                <option>Diện tích</option>
-                                <!-- other options -->
-                            </select>
+                            <button type="submit" class="btn btn-danger btn-block" id="searchButton">Tìm kiếm</button>
                         </div>
                     </form>
-                </div>
-                <div class="tab-pane fade" id="nhadatchothue" role="tabpanel" aria-labelledby="nhadatchothue-tab">
-                    <form class="form-row mt-3">
-                        <div class="col-md-2">
-                            <select class="form-control">
-                                <option>Hồ Chí Minh</option>
-                                <!-- other options -->
-                            </select>
-                        </div>
-                        <div class="col-md-7">
-                            <input type="text" class="form-control" placeholder="Nhập tối đa 5 địa điểm, dự án. Ví dụ: Quận Hoàn Kiếm, Quận Đống Đa">
-                        </div>
-                        <div class="col-md-1">
-                            <button type="submit" class="btn btn-danger btn-block">Tìm kiếm</button>
-                        </div>
-                        <div class="w-100 mt-3"></div>
-                        <div class="col-md-3">
-                            <select class="form-control">
-                                <option>Loại nhà đất</option>
-                                <!-- other options -->
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <select class="form-control">
-                                <option>Mức giá</option>
-                                <!-- other options -->
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <select class="form-control">
-                                <option>Diện tích</option>
-                                <!-- other options -->
-                            </select>
-                        </div>
-                    </form>
-                </div>
-                <div class="tab-pane fade" id="duan" role="tabpanel" aria-labelledby="duan-tab">
-                    <form class="form-row mt-3">
-                        <div class="col-md-2">
-                            <select class="form-control">
-                                <option>Hồ Chí Minh</option>
-                                <!-- other options -->
-                            </select>
-                        </div>
-                        <div class="col-md-7">
-                            <input type="text" class="form-control" placeholder="Nhập tối đa 5 địa điểm, dự án. Ví dụ: Quận Hoàn Kiếm, Quận Đống Đa">
-                        </div>
-                        <div class="col-md-1">
-                            <button type="submit" class="btn btn-danger btn-block">Tìm kiếm</button>
-                        </div>
-                        <div class="w-100 mt-3"></div>
-                        <div class="col-md-3">
-                            <select class="form-control">
-                                <option>Loại nhà đất</option>
-                                <!-- other options -->
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <select class="form-control">
-                                <option>Mức giá</option>
-                                <!-- other options -->
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <select class="form-control">
-                                <option>Diện tích</option>
-                                <!-- other options -->
-                            </select>
-                        </div>
-                    </form>
+                    <div class="w-100 mt-3"></div>
+                    <div class="col-md-4">
+                        <select class="form-control">
+                            <option>Loại nhà đất</option>
+                            <!-- other options -->
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <select class="form-control">
+                            <option>Mức giá</option>
+                            <!-- other options -->
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <select class="form-control">
+                            <option>Diện tích</option>
+                            <!-- other options -->
+                        </select>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -214,7 +145,7 @@
                             </div>
                         </div>
                         <div>
-                            <form class="favorite-form" data-postid="@post.Id" data-userid="@ViewData["UserAccountId"]">
+                            <form class="favorite-form" data-postid="@post.Id" data-userid="@UserAccountId">
                                 <div class="d-flex justify-content-end align-items-center h-100">
                                     <input type="hidden" class="post-id" value="@post.Id" />
                                     <input type="hidden" class="is-liked" value="@post.IsLiked" />
@@ -229,86 +160,84 @@
             </div>
         }
     </section>
+
+    <!--Pagination-->
+    <div class="pagination justify-content-center">
+        <ul class="pagination">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.PageNumbersOnly)
+        </ul>
+    </div>
 </div>
-<!---->
-<!-- Notification Element -->
+<!-- Notification Element-->
 <div id="notification" class="notification"></div>
 @section Scripts {
     <script src="~/js/signalr/dist/browser/signalr.js"></script>
     <script src="~/js/createconnection.js"></script>
+    <!--Links-->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.10.0.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/jquery-ui.min.js"></script>
+    <link href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/themes/blitzer/jquery-ui.css" rel="stylesheet" />
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <!--Self-Written JS-->
     <script>
         $(document).ready(function () {
-            // Function to toggle favorite status and update local storage
-            function toggleFavoriteStatus(postId, button) {
-                // Get current liked status from local storage for current user
-                var userId = button.closest(".favorite-form").data("userid");
-                var key = userId + "_" + postId;
-                var isLiked = localStorage.getItem(key) === "true";
+            $.ajax({
+                url: '@Url.Action("GetSubjectOnSite", "Home", new { area = "Post" })',
+                method: 'GET',
+                success: function (data) {
+                    let subjects = data.filter(function (item) {
+                        return item !== undefined && item !== null;
+                    });
 
-                // Toggle liked status
-                isLiked = !isLiked;
+                    $("#searchInput").autocomplete({
+                        source: subjects,
+                        minLength: 1
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching subjects: " + error);
+                }
+            });
+        });
 
-                // Update local storage for current user only
-                localStorage.setItem(key, isLiked.toString());
+    </script>
 
-                // Toggle button color
-                button.toggleClass("active", isLiked);
-
-                return isLiked;
-            }
-
-            // Set initial state of favorite buttons based on local storage
-            $(".favorite-btn").each(function () {
-                var button = $(this);
-                var postId = button.closest(".favorite-form").data("postid");
-                var userId = button.closest(".favorite-form").data("userid");
-                var key = userId + "_" + postId;
-
-                var isLiked = localStorage.getItem(key) === "true";
-                button.toggleClass("active", isLiked);
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '@Url.Action("GetSubjectOnSite", "Home", new { area = "Post" })',
+                method: 'GET',
+                success: function (data) {
+                    $("#searchInput").autocomplete({
+                        source: data,
+                        minLength: 1
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching subjects: " + error);
+                }
             });
 
-            // Handle click event for favorite button
-            $(".favorite-btn").click(function () {
-                var button = $(this);
-                var postId = button.closest(".favorite-form").data("postid");
+            // $('#searchButton').click(function () {
+            //     var subjectOnSite = $('#searchInput').val();
 
-                // Toggle favorite status
-                var isLiked = toggleFavoriteStatus(postId, button);
-
-                // Send AJAX request to add or remove from favorites
-                $.ajax({
-                    type: "POST",
-                    url: isLiked ? "/Post/Home/AddToFavorites" : "/Post/Home/RemoveFromFavorites",
-                    data: { postId: postId },
-                    success: function (response) {
-                        if (response.success) {
-
-                        } else {
-                            // Rollback local storage if server request fails
-                            toggleFavoriteStatus(postId, button);
-                        }
-                    },
-                    error: function (xhr, status, error) {
-                        console.error(error);
-                        // Rollback local storage if server request fails
-                        toggleFavoriteStatus(postId, button);
-                        showNotification("Đã xảy ra lỗi khi thực hiện thao tác.", 'error');
-                    }
-                });
-            });
-
-            function showNotification(message, type) {
-                var notification = $('#notification');
-                notification.removeClass('success error');
-                notification.addClass(type);
-                notification.text(message);
-                notification.fadeIn();
-
-                setTimeout(function () {
-                    notification.fadeOut();
-                }, 3000); // Hide after 3 seconds
-            }
+            //     console.log(subjectOnSite);
+            //     if (subjectOnSite) {
+            //         $.ajax({
+            //             url: '@Url.Action("SearchBySubjectOnSite", "Home", new { area = "Post" })',
+            //             method: 'POST',
+            //             data: { subjectOnSite: subjectOnSite },
+            //             success: function (response) {
+            //                 console.log(response)
+            //                 $('body').html(response);
+            //             },
+            //             error: function (xhr, status, error) {
+            //                 console.error("Error searching posts: " + error);
+            //             }
+            //         });
+            //     }
+            // });
         });
     </script>
 }

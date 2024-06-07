@@ -11,8 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var receiverEmail = document.getElementById("receiverEmail").value;
 
     if (receiverEmail.length !== 0) {
-        console.log(receiverEmail)
-
         var xhr = new XMLHttpRequest();
 
         xhr.open('GET', '/Review/GetUnreadedNotifications?receiverEmail=' + receiverEmail, true);
@@ -26,39 +24,61 @@ document.addEventListener('DOMContentLoaded', function () {
                     console.log(response)
 
                     // This code will update notifications counter
-                    var notiCounterOnHead = document.getElementById("notiCounterOnHead")
-                    var ikrNoti_ounter = document.getElementById("ikrNoti_Counter")
+                    var notificationsCounter = document.getElementById('notificationsCounter');
 
-                    notiCounterOnHead.textContent = response.count.toString();
-                    ikrNoti_ounter.textContent = response.count.toString()
-                    // ==========||==========
-
+                    notificationsCounter.textContent = response.count.toString();
+                    // ========== || ==========
                     response.unreadedNotifications.forEach(function (notification) {
                         // I will create function for this later
                         // ========== || ==========
-                        var listItem = document.createElement('li');
 
-                        listItem.classList.add('list-group-item');
+                        // <div class="notification-item">
+                        var notificationItem = document.createElement("div");
 
-                        var headerDiv = document.createElement('div');
+                        notificationItem.classList.add("notification-item");
 
-                        headerDiv.classList.add('d-flex', 'w-100', 'justify-content-between');
+                        // <div class="d-flex align-items-center">
+                        var itemContent = document.createElement("div");
 
-                        var headerTitle = document.createElement('h5');
+                        itemContent.classList.add("d-flex", "align-items-center");
 
-                        headerTitle.classList.add('mb-1');
-                        headerTitle.textContent = notification.email + ' đã đánh giá cho bạn.';
+                        // <img src="@src" alt="Ảnh người dùng">
+                        var img = document.createElement("img");
 
-                        headerDiv.appendChild(headerTitle);
-                        listItem.appendChild(headerDiv);
+                        img.src = notification.sender_img;
+                        img.alt = "Ảnh người dùng";
 
-                        var list = document.getElementById("notificationList");
+                        // <div>
+                        var textContainer = document.createElement("div");
 
-                        if (list.firstChild) {
-                            list.insertBefore(listItem, list.firstChild);
-                        } else {
-                            list.appendChild(listItem);
-                        }
+                        // <h6>
+                        var h6 = document.createElement("h6");
+                        h6.textContent = notification.sender_full_name + " đã đánh giá cho bạn!";
+
+                        // <p>
+                        var p = document.createElement("p");
+                        var createdAt = new Date(notification.created_at);
+                        var formattedDate = createdAt.toLocaleString('vi-VN', {
+                            year: 'numeric',
+                            month: '2-digit',
+                            day: '2-digit',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                        });
+
+                        p.textContent = formattedDate;
+
+                        textContainer.appendChild(h6);
+                        textContainer.appendChild(p);
+
+                        itemContent.appendChild(img);
+                        itemContent.appendChild(textContainer);
+
+                        notificationItem.appendChild(itemContent);
+
+                        var notificationsMenu = document.querySelector('.dropdown-menu-notifications');
+
+                        notificationsMenu.insertBefore(notificationItem, notificationsMenu.firstChild)
                         // ========== || ==========
                     });
                 } else {
@@ -72,55 +92,96 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-
+// This function receive notification when having notification
 connection.on("ReceiveNotification", function (notification) {
-    console.log(notification)
+    // Set notification counter
+    // ========== || ==========
+    var notificationsCounter = document.getElementById("notificationsCounter")
+    var numberOfNotifications = parseInt(notificationsCounter.textContent);
 
-    var ikrNotiCounter = document.getElementById("ikrNoti_Counter")
-    var count = parseInt(ikrNotiCounter.textContent);
-
-    console.log(ikrNotiCounter.textContent)
-
-    count += 1;
-
-    ikrNotiCounter.textContent = count.toString();
+    numberOfNotifications++;
+    notificationsCounter.textContent = numberOfNotifications.toString();
+    // ========== || ==========
 
     // I will create function for this later
     // ========== || ==========
-    var listItem = document.createElement('li');
 
-    listItem.classList.add('list-group-item');
+    // <div class="notification-item">
+    var notificationItem = document.createElement("div");
 
-    var headerDiv = document.createElement('div');
+    notificationItem.classList.add("notification-item");
 
-    headerDiv.classList.add('d-flex', 'w-100', 'justify-content-between');
+    // <div class="d-flex align-items-center">
+    var itemContent = document.createElement("div");
 
-    var headerTitle = document.createElement('h5');
+    itemContent.classList.add("d-flex", "align-items-center");
 
-    headerTitle.classList.add('mb-1');
-    headerTitle.textContent = notification.email + ' đã đánh giá cho bạn.';
+    // <img src="@src" alt="Ảnh người dùng">
+    var img = document.createElement("img");
 
-    headerDiv.appendChild(headerTitle);
-    listItem.appendChild(headerDiv);
+    img.src = notification.sender_img;
+    img.alt = "Ảnh người dùng";
 
-    var list = document.getElementById("notificationList");
+    // <div>
+    var textContainer = document.createElement("div");
 
-    if (list.firstChild) {
-        list.insertBefore(listItem, list.firstChild);
-    } else {
-        list.appendChild(listItem);
-    }
+    // <h6>
+    var h6 = document.createElement("h6");
+    h6.textContent = notification.sender_full_name + " đã đánh giá cho bạn!";
+
+    // <p>
+    var p = document.createElement("p");
+    var createdAt = new Date(notification.created_at);
+    var formattedDate = createdAt.toLocaleString('vi-VN', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+    });
+
+    p.textContent = formattedDate;
+
+    textContainer.appendChild(h6);
+    textContainer.appendChild(p);
+
+    itemContent.appendChild(img);
+    itemContent.appendChild(textContainer);
+
+    notificationItem.appendChild(itemContent);
+
+    var notificationsMenu = document.querySelector('.dropdown-menu-notifications');
+
+    notificationsMenu.insertBefore(notificationItem, notificationsMenu.firstChild)
     // ========== || ==========
 });
 
-if (document.getElementById("ikrNoti_Button")) {
-    document.getElementById("ikrNoti_Button").addEventListener("click", () => {
-        var notiCounterOnHead = document.getElementById("notiCounterOnHead")
-        var ikrNoti_ounter = document.getElementById("ikrNoti_Counter")
 
-        console.log(notiCounterOnHead.textContent + " " + ikrNoti_ounter.textContent);
+// When clicking into notification icon then this function will set counter to 0 
+// and transform all posts have IsRead = 'false' to 'true'
+if (document.getElementById("notificationsCounter")) {
+    document.getElementById("notificationsCounter").addEventListener("click", () => {
+        var ownerId = document.getElementById('ownerId').value;
+        var xhr = new XMLHttpRequest();
 
-        notiCounterOnHead.textContent = 0;
-        ikrNoti_ounter.textContent = 0;
-    })
+        xhr.open('POST', '/Customer/Notification/CreateReponse?ownerId=' + ownerId, true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+
+                    console.log(response)
+
+                    if (response.success) {
+                        var notificationsCounter = document.getElementById('notificationsCounter');
+
+                        notificationsCounter.textContent = response.count;
+                    }
+                }
+            }
+        }
+
+        xhr.send();
+    });
 }

@@ -10,6 +10,7 @@ using Motel.Utility.Checking;
 using Motel.Utility.Database;
 using NuGet.Protocol.Plugins;
 using System;
+using System.Net.Mail;
 using System.Reflection;
 using System.Security.Claims;
 
@@ -79,7 +80,6 @@ namespace Motel.Utility.Hubs
             return base.OnDisconnectedAsync(exception);
         }
 
-        // Single
         public async Task SendMessageToReceiver(string sender, string receiver, Response response)
         {
             // `receiver` is email
@@ -91,7 +91,7 @@ namespace Motel.Utility.Hubs
             }
         }
 
-        // Single
+
         // This function will send rating to receiver and receive notificaiton
         public async Task SendRatingToReceiver(string senderId, string receiverId, Response response)
         {
@@ -106,7 +106,10 @@ namespace Motel.Utility.Hubs
 
             Notification notification = new Notification()
             {
-                SenderId = senderDoc.Id,
+                SenderId = senderId,
+                ReceiverId = receiverId,
+                SenderImg = !string.IsNullOrEmpty(senderDoc.Info.Avatar) ? senderDoc.Info.Avatar : "/images/50x50.png",
+                SenderFullName = senderDoc.Info.FullName,
                 Rating = response.Rating,
                 Content = response.Content,
             };
@@ -121,8 +124,6 @@ namespace Motel.Utility.Hubs
             //var filter = Builders<UserAccount>.Filter.Eq(u => u.Id, receiverDocument.Id);
 
             await _databaseConstructor.UserAccountCollection.UpdateOneAsync(f => f.Id == receiverDocument.Id, updateDefinition);
-
-
             await Clients.User(receiverId).SendAsync("ReceiveNotification", notification);
             //if (receiverIds.Count > 0)
             //{
@@ -212,6 +213,8 @@ namespace Motel.Utility.Hubs
                                                         .FirstOrDefaultAsync();
             var senderFullName = senderDoc.Info.FullName;
 
+            response.Avatar = !string.IsNullOrEmpty(senderDoc.Info.Avatar) ? senderDoc.Info.Avatar : response.Avatar;
+
             await Clients.Group(receiverId).SendAsync("ReceiveRating", senderId, senderFullName, response);
         }
 
@@ -226,11 +229,11 @@ namespace Motel.Utility.Hubs
             var notification = new Notification()
             {
                 SenderId = senderDoc.Id,
-                FullName = senderDoc.Info.FullName,
+                SenderFullName = senderDoc.Info.FullName,
                 Content = response.Content,
             };
 
-            senderDoc.ReviewPersons?.Add(receiverDoc.Id);
+            senderDoc.PassiveReviewPersons?.Add(receiverDoc.Id);
             receiverDoc.Notifications?.Add(notification);
 
             //var updateDefinition = Builders<UserAccount>.Update
@@ -246,6 +249,61 @@ namespace Motel.Utility.Hubs
             {
                 Clients.User(senderIds.FirstOrDefault()).SendAsync("ReceiveReviewPermission", notification);
             }
+        }
+
+        class Noti
+        {
+            public int Type { get; set; } = 1;
+            public string SenderImg { get; set; } = null!;
+            public string Content { get; set; } = null;
+            public DateTime CreatedAt { get; set; }
+        }
+
+
+        public async Task SendWarning(string senderId, string receiverId, string content)
+        {
+            var receiverDoc = await _databaseConstructor.UserAccountCollection
+                                                            .Find(f => f.Id == receiverId)
+                                                            .FirstOrDefaultAsync();
+            var senderDoc = await _databaseConstructor.UserAccountCollection
+                                                            .Find(f => f.Id == senderId)
+                                                            .FirstOrDefaultAsync();
+            var notification = new Notification()
+            {
+                SenderId = senderId,
+                ReceiverId = receiverId,
+                SenderImg = !string.IsNullOrEmpty(senderDoc.Info.Avatar) ?
+                                        senderDoc.Info.Avatar : "/images/50x50.png",
+                SenderFullName = senderDoc.Info.FullName,
+                Content = content,
+            };
+            var receiverDocUpdateDefinition = Builders<UserAccount>.Update.Push(f => f.Notifications, notification);
+
+            await _databaseConstructor.UserAccountCollection.UpdateOneAsync(f => f.Id == receiverDoc.Id, receiverDocUpdateDefinition);
+            await Clients.User(receiverId).SendAsync("ReceiveWarning", notification);
+        }
+
+        public async Task SendResponse(string senderId, string receiverId, string content)
+        {
+            var receiverDoc = await _databaseConstructor.UserAccountCollection
+                                                            .Find(f => f.Id == receiverId)
+                                                            .FirstOrDefaultAsync();
+            var senderDoc = await _databaseConstructor.UserAccountCollection
+                                                            .Find(f => f.Id == senderId)
+                                                            .FirstOrDefaultAsync();
+            var notification = new Notification()
+            {
+                SenderId = senderId,
+                ReceiverId = receiverId,
+                SenderImg = !string.IsNullOrEmpty(senderDoc.Info.Avatar) ?
+                                        senderDoc.Info.Avatar : "/images/50x50.png",
+                SenderFullName = senderDoc.Info.FullName,
+                Content = content,
+            };
+            var receiverDocUpdateDefinition = Builders<UserAccount>.Update.Push(f => f.Notifications, notification);
+
+            await _databaseConstructor.UserAccountCollection.UpdateOneAsync(f => f.Id == receiverDoc.Id, receiverDocUpdateDefinition);
+            await Clients.User(receiverId).SendAsync("ReceiveResponse", notification);
         }
     }
 }

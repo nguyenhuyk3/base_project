@@ -1,5 +1,10 @@
-﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@using System.Security.Claims
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model Motel.Models.UserAccount
+
+@{
+    var role = User.FindFirstValue(ClaimTypes.Role);
+}
 
 <div class="left position-fixed mt-3">
     <div class="avatar-container">
@@ -11,7 +16,7 @@
             <p>@Model.Rating điểm đánh giá trung bình</p>
         </div>
     </div>
-    <div class="card mt-3">
+    <div class="card mt-3 mb-3">
         <div class="card-body">
             <h6>Số dư tài khoản</h6>
             <input type="hidden"
@@ -23,34 +28,50 @@
                class="btn btn-danger float-end text-decoration-none">
                 Nạp tiền
             </a>
-            @*  <button class="btn btn-danger float-end">Nạp tiền</button> *@
         </div>
     </div>
-    <div class="left-item emp-info"></div>
-    <div class="left-item services">
-        <a asp-area="Post" asp-controller="Modification" asp-action="Add" class="link-service">
-            <i class="fa-solid fa-list"></i>
-            <p>Đăng Tin</p>
-            <i class="fa-solid fa-angle-right"></i>
-        </a>
-    </div>
-    <div class="section">
-        <div class="dropdown" onclick="toggleDropdown()">
+    @if (role == "Customer")
+    {
+        <div class="left-item emp-info"></div>
+        <div class="left-item services">
+            <a asp-area="Post" asp-controller="Modification" asp-action="Add" class="link-service">
+                <i class="fa-solid fa-list"></i>
+                <p>Đăng Tin</p>
+                <i class="fa-solid fa-angle-right"></i>
+            </a>
+        </div>
+
+        <div class="section">
+            <div class="dropdown" onclick="toggleDropdownPost()">
             <i class="fa-regular fa-circle-user"></i>
             <p>Danh Sách Tin</p>
             <i class="fa-solid fa-angle-right"></i>
         </div>
-        <div class="dropdown-content" id="dropdown-content">
-            <a href="#">Tin đăng</a>
-            <a href="#">Tin bị cấm</a>
-            <a href="#">Tin hết hạn</a>
-            <a href="#">Tin bị xóa</a>
+        <div class="dropdown-content" id="dropdown-post">
+            <a href="#" class="link-service">Tin đăng</a>
+            <a href="#" class="link-service">Tin bị cấm</a>
+            <a href="#" class="link-service">Tin hết hạn</a>
+            <a href="#" class="link-service">Tin bị xóa</a>
+        </div>
+    </div>
+    }
+
+    <div class="section">
+        <div class="dropdown" onclick="toggleDropdownPostManagement()">
+            <i class="fa-solid fa-gear"></i>
+            <p>Quản lí bài viết</p>
+            <i class="fa-solid fa-angle-right"></i>
+        </div>
+        <div class="dropdown-content" id="dropdown-post-management">
+            <a href="#" class="link-service">Tất cả tin đăng</a>
+            <a href="#" class="link-service">Tin vi phạm</a>
+            <a href="#" class="link-service">Tin đã chỉnh sửa</a>
         </div>
     </div>
     <div class="left-item services">
         <a asp-area="Customer" asp-controller="Customer" asp-action="PostingList" asp-route-ownerId="@Model.Id" class="link-service">
-            <i class="fa-regular fa-circle-user"></i>
-            <p>Danh Sách Tin</p>
+            <i class="fa-solid fa-gear"></i>
+            <p>Danh sách tin đăng</p>
             <i class="fa-solid fa-angle-right"></i>
         </a>
     </div>
@@ -63,48 +84,9 @@
     </div>
     <div class="left-item services">
         <a href="#" class="link-service">
-            <i class="fa-solid fa-chart-line"></i>
-            <p>Nạp tiền</p>
-            <i class="fa-solid fa-angle-right"></i>
-        </a>
-    </div>
-    @* <div class="left-item services">
-    <a href="#" class="link-service">
-    <i class="fa-solid fa-user"></i>
-    <p>Cài Đặt Tài Khoản</p>
-    <i class="fa-solid fa-angle-right"></i>
-    </a>
-    </div> *@
-    <div class="left-item services">
-        <a href="#" class="link-service">
             <i class="fa-solid fa-building"></i>
             <p>Lịch Sử Giao Dịch</p>
             <i class="fa-solid fa-angle-right"></i>
         </a>
     </div>
-    @* <div class="left-item services">
-    <a href="#" class="link-service">
-    <i class="fa-solid fa-paperclip"></i>
-    <p>Hướng Dẫn</p>
-    <i class="fa-solid fa-angle-right"></i>
-    </a>
-    </div> *@
-    <div class="left-item services">
-        <a href="#" class="link-service">
-            <i class="fa-solid fa-gear"></i>
-            <p>Tiện Ích</p>
-            <i class="fa-solid fa-angle-right"></i>
-        </a>
-    </div>
 </div>
-
-<script>
-    function toggleDropdown() {
-        var content = document.getElementById("dropdown-content");
-        if (content.style.display === "block") {
-            content.style.display = "none";
-        } else {
-            content.style.display = "block";
-        }
-    }
-</script>

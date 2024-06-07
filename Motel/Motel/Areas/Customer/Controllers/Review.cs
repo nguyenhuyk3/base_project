@@ -21,16 +21,17 @@ namespace Motel.Areas.Customer.Controllers
         public async Task<JsonResult> SaveReview(string senderId, string receiverId, string response)
         {
             var contentObject = JsonConvert.DeserializeObject<Response>(response);
-            var sender = _databaseConstructor.UserAccountCollection
+            var senderDoc = _databaseConstructor.UserAccountCollection
                                                 .Find(sender => sender.Id == senderId)
                                                 .FirstOrDefault();
-            var receiver = _databaseConstructor.UserAccountCollection
+            var receiverDoc = _databaseConstructor.UserAccountCollection
                                                 .Find(receiver => receiver.Id == receiverId)
                                                 .FirstOrDefault();
             var review = new Motel.Models.Review
             {
-                Sender = senderId,
-                SenderEmail = sender.Email,
+                SenderId = senderId,
+                SenderFullName = senderDoc.Info.FullName,
+                SenderAvatar = senderDoc.Info.Avatar,
                 Comment = contentObject.Content,
                 Rating = (int)contentObject.Rating
             };
@@ -42,7 +43,7 @@ namespace Motel.Areas.Customer.Controllers
 
             var updateTasks = new List<Task<UpdateResult>>();
 
-            if (sender != null)
+            if (senderDoc != null)
             {
                 var senderUpdateTask = _databaseConstructor.UserAccountCollection.UpdateOneAsync(
                     u => u.Id == senderId,
@@ -51,7 +52,7 @@ namespace Motel.Areas.Customer.Controllers
                 updateTasks.Add(senderUpdateTask);
             }
 
-            if (receiver != null)
+            if (receiverDoc != null)
             {
                 var receiverUpdateTask = _databaseConstructor.UserAccountCollection.UpdateOneAsync(
                     u => u.Id == receiverId,
@@ -85,30 +86,19 @@ namespace Motel.Areas.Customer.Controllers
                 {
                     notification.IsReaded = true;
                     unreadedNotificationCount++;
-
-                    var filterNotification = Builders<Motel.Models.UserAccount>.Filter.Eq(f => f.Id, receiverDocument.Id);
-                    var updateNotification = Builders<Motel.Models.UserAccount>.Update.Set(u => u.Notifications, unreadNotifications);
-
-                    await _databaseConstructor.UserAccountCollection.UpdateOneAsync(filterNotification, updateNotification);
                 }
             }
+
+            var filterNotification = Builders<Motel.Models.UserAccount>.Filter.Eq(f => f.Id, receiverDocument.Id);
+            var updateNotification = Builders<Motel.Models.UserAccount>.Update.Set(u => u.Notifications, unreadNotifications);
+
+            await _databaseConstructor.UserAccountCollection.UpdateOneAsync(filterNotification, updateNotification);
 
             var NotiData = new
             {
                 Count = unreadedNotificationCount,
                 UnreadedNotifications = unreadNotifications
             };
-
-            //receiverDocument.ReadedNotifications ??= new List<Notification>();
-            //receiverDocument.ReadedNotifications.AddRange(unreadNotifications);
-            //receiverDocument.UnreadedNotifications.Clear();
-
-            //var filter = Builders<Motel.Models.UserAccount>.Filter.Eq(u => u.Id, receiverDocument.Id);
-            //var update = Builders<Motel.Models.UserAccount>.Update
-            //           .Set(u => u.ReadedNotifications, receiverDocument.ReadedNotifications)
-            //           .Set(u => u.UnreadedNotifications, receiverDocument.UnreadedNotifications);
-
-            //await _databaseConstructor.UserAccountCollection.UpdateOneAsync(filter, update);
 
             return new JsonResult(NotiData);
         }

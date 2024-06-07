@@ -110,7 +110,6 @@ a {
     border-radius: 5px;
 }
 
-/*************************************************/
 /*
 ảnh nền và thanh tìm kiếm
 */
@@ -228,10 +227,11 @@ button.btn.btn-danger.btn-block {
 }
 
 .card {
-    height: 600px;
+    height: 650px;
     width: 90%;
     position: relative;
 }
+
 
 .card-text-description {
     display: -webkit-box;

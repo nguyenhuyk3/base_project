@@ -76,10 +76,19 @@ namespace Motel.Models
         [JsonPropertyName("bills")]
         public List<Bill>? Bills { get; set; } = null;
 
-        [BsonElement("review_persons")]
+        // This field will save persons who owner rate them
+        [BsonElement("active_review_persons")]
         [BsonIgnoreIfNull]
-        [JsonPropertyName("review_persons")]
-        public List<String>? ReviewPersons { get; set; } = null;
+        [BsonRepresentation(BsonType.ObjectId)]
+        [JsonPropertyName("active_review_persons")]
+        public List<string>? ActiveReviewPersons { get; set; } = null;
+
+        // This field will save persons who rate myself
+        [BsonElement("passive_review_persons")]
+        [BsonIgnoreIfNull]
+        [BsonRepresentation(BsonType.ObjectId)]
+        [JsonPropertyName("passive_review_persons")]
+        public List<string>? PassiveReviewPersons { get; set; } = null;
 
         // This field will save the reviews that users leave to rate 
         [BsonElement("active_reviews")]

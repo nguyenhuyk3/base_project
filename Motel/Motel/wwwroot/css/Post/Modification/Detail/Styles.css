@@ -45,3 +45,21 @@
     vertical-align: middle;
     margin-right: 10px;
 }
+
+/*
+    Hr
+*/
+.thin-hr {
+    height: 0 !important;
+    border-top: 0.1px solid #dee2e6;
+}
+
+/*
+    Danger button
+*/
+button.btn-danger:disabled {
+    background-color: #dc3545; /* Màu nền đỏ của btn-danger */
+    color: #fff; /* Màu chữ trắng */
+    opacity: 1; /* Giữ nguyên độ trong suốt */
+    cursor: not-allowed; /* Thêm biểu tượng không cho phép */
+}

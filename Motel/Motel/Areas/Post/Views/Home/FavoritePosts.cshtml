@@ -14,9 +14,8 @@
     <link href="https://localhost:7244//css/post/home/favoriteposts/styles.css" rel="stylesheet" />
 }
 
-<h2>Tin Đăng Đã Lưu</h2>
-
 <div class="container-fluid">
+    <h3>Tin Đăng Đã Lưu</h3>
     @if (Model.FavoritePosts != null)
     {
         @foreach (var post in Model.FavoritePosts)
@@ -39,12 +38,19 @@
                             </p>
                             <p class="card-text describe text-truncate-custom">@post.PostDetail.Description</p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <div class="text-muted" style="padding-bottom: 10px">@post.ContactInfo.Name</div>
+                                <div class="media align-items-center">
+                                    <img src="https://via.placeholder.com/40" class="mr-3 rounded-circle" alt="Avatar">
+                                    <div class="d-block">
+                                        <div class="text-muted" style="padding-bottom: 10px">@post.ContactInfo.Name</div>
+                                        <p>@post.CreatedAt<p/>
+                                    </div>
+                                   
+                                </div>
                                 <div class="d-flex">
                                     <p class="btn btn-success mt-2 mx-2">@post.ContactInfo.Phone 123123</p>
                                     <div type="button" class="favorite-btn mt-2"
-                                            data-postid="@post.Id"
-                                            data-userid="@ViewData["UserId"]">
+                                         data-postid="@post.Id"
+                                         data-userid="@ViewData["UserId"]">
                                         <i class="bx @(post.IsLiked ? "bxs-heart" : "bx-heart")"></i>
                                     </div>
                                 </div>
@@ -62,7 +68,6 @@
 </div>
 
 @section _Modification_Layout {
-                                                                                                        s
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!--Self-written JS-->
     <script>
