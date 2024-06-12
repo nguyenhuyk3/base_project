@@ -127,10 +127,20 @@ document.addEventListener("DOMContentLoaded", function () {
                             // Adding 'click event' to 'removeButton' when it is created
                             removeButton.addEventListener('click', function () {
                                 var favoriteItem = removeButton.closest('.favorite-item');
-                                var userId = document.getElementById('ownerId').value;
+                                var userId = document.getElementById('OwnerId').value;
                                 var postId = favoriteItem.getAttribute('data-postid');
 
                                 favoriteItem.parentNode.removeChild(favoriteItem);
+
+                                // Set favorite counter
+                                // ========== || ==========
+                                var favoritesCounter = document.getElementById('favoritesCounter');
+                                var numberOfFavorites = parseInt(favoritesCounter.textContent);
+
+                                numberOfFavorites--;
+
+                                favoritesCounter.textContent = numberOfFavorites.toString();
+                                // ========== || ==========
 
                                 var xhr = new XMLHttpRequest();
 
@@ -158,7 +168,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     } else {
                         var favoriteItem = document.querySelector('.favorite-item[data-postid="' + postId + '"]');
 
-
                         if (favoriteItem) {
 
                             favoriteItem.parentNode.removeChild(favoriteItem);
@@ -166,8 +175,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         // Set counter when favorite post is minus
                         setFavoriteCounter(response.success);
-
-
                     }
 
                     updateFavorites();

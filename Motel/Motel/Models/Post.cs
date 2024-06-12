@@ -12,10 +12,10 @@ namespace Motel.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
 
-        [BsonElement("owner")]
-        [JsonPropertyName("owner")]
+        [BsonElement("owner_id")]
+        [JsonPropertyName("owner_id")]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Owner { get; set; } = null!;
+        public string OwnerId { get; set; } = null!;
 
         [BsonElement("vip_name")]
         [JsonPropertyName("vip_name")]
@@ -44,10 +44,6 @@ namespace Motel.Models
         [BsonElement("contact_info")]
         [JsonPropertyName("contact_info")]
         public ContactInfo ContactInfo { get; set; } = null!;
-
-        [BsonElement("is_liked")]
-        [JsonPropertyName("is_liked")]
-        public bool IsLiked { get; set; } = false;
 
         [BsonElement("bookings")]
         [BsonIgnoreIfNull]

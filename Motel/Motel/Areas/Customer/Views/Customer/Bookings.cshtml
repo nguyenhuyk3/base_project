@@ -8,12 +8,14 @@
 }
 
 @section _Modification_Layout_Styles {
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!--Self-written CSS-->
+    <link href="~/css/customer/customer/booking/styles.css" rel="stylesheet" />
 }
 
-<div class="container-fluid">
+<div class="container-fluid mt-2">
     <h1>Danh sách thông tin</h1>
-    <table class="table mt-3">
+    <table class="table mt-5">
         <thead>
             <tr>
                 <th>Mã bài viết</th>
@@ -27,31 +29,38 @@
             {
                 @foreach (var booking in Model.Owner.Bookings)
                 {
-                    <tr data-senderid="@booking.ContactInfo.Owner" data-postid="@booking.PostId">
+                    <tr data-senderid="@booking.ContactInfo.OwnerId" data-postid="@booking.PostId">
                         <td>@booking.PostId</td>
                         <td>@booking.ContactInfo.Name</td>
                         <td>@booking.CreatedAt</td>
                         <td>
-                            <div class="review-status">
-                                @if (!Model.PeopleDoNotRateYet.ContainsKey(booking.ContactInfo.Owner))
-                                {
-                                    <p>chưa từng tư vấn</p>
-                                }
-                                else
-                                {
-                                    <p>đã từng tư vấn</p>
-                                }
+                            <div class="d-flex">
+                                <button class="btn btn-primary view-details"
+                                        data-toggle="modal"
+                                        data-target="#infoModal"
+                                        data-id="@booking.PostId"
+                                        data-senderid="@booking.ContactInfo.OwnerId"
+                                        data-phone="@booking.ContactInfo.Phone"
+                                        data-email="@booking.ContactInfo.Email"
+                                        data-name="@booking.ContactInfo.Name">
+                                    Chi tiết
+                                </button>
+                                <div class="review-status mx-3 mt-2">
+                                    @{
+                                        var key = booking.OwnerId + "_" + booking.PostId;
+                                        var haveKey = Model.PeopleBooked.ContainsKey(key);
+
+                                        if (haveKey && !booking.IsReaded)
+                                        {
+                                            <i class="bi bi-x-circle-fill icon-red"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="bi bi-check-circle-fill icon-green"></i>
+                                        }
+                                    }
+                                </div>
                             </div>
-                            <button class="btn btn-primary view-details"
-                                    data-toggle="modal"
-                                    data-target="#infoModal"
-                                    data-id="@booking.PostId"
-                                    data-senderid="@booking.ContactInfo.Owner"
-                                    data-phone="@booking.ContactInfo.Phone"
-                                    data-email="@booking.ContactInfo.Email"
-                                    data-name="@booking.ContactInfo.Name">
-                                Chi tiết
-                            </button>
                         </td>
                     </tr>
                 }
@@ -101,6 +110,6 @@
 
 @section _Modification_Layout {
     <!--Self-written JS-->
-   @*  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> *@
+    @*  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> *@
     <script src="~/js/customer/customer/bookings/sendreviewpermission.js"></script>
 } 

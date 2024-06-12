@@ -251,8 +251,10 @@ C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\bin\Debug\net8.0\Motel.dll
 C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\bin\Debug\net8.0\Motel.pdb
 C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\bin\Debug\net8.0\AWSSDK.Core.dll
 C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\bin\Debug\net8.0\AWSSDK.SecurityToken.dll
+C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\bin\Debug\net8.0\BCrypt.Net-Next.dll
 C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\bin\Debug\net8.0\DnsClient.dll
 C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\bin\Debug\net8.0\Humanizer.dll
+C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.Google.dll
 C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\bin\Debug\net8.0\Microsoft.AspNetCore.Razor.Language.dll
 C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\CYBORG\Desktop\MotelProject\Motel\Motel\bin\Debug\net8.0\Microsoft.Build.dll

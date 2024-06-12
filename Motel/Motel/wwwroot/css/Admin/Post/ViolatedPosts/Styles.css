@@ -1,0 +1,28 @@
+﻿/*.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.overlay-text {
+    position: absolute;
+    top: 10px;  You can adjust this value to position the text 
+    left: 10px;  You can adjust this value to position the text 
+    background-color: rgba(255, 0, 0, 0.7);  Red background with transparency 
+    color: white;
+    padding: 5px 10px;
+    font-size: 16px;  You can adjust the font size 
+    font-weight: bold;
+    border-radius: 5px;
+}
+*/
+
+.violating-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    font-weight: bold;
+    border-radius: 5px;
+}

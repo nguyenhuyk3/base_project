@@ -30,8 +30,20 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUG9zdFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Admin/Views/Post/ResponsePosts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUG9zdFxSZXNwb25zZVBvc3RzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Admin/Views/Post/ViolatedPosts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUG9zdFxWaW9sYXRlZFBvc3RzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Customer/Views/Accordion/_Accordion_Partial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcQWNjb3JkaW9uXF9BY2NvcmRpb25fUGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Customer/Views/Customer/Bills.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcQ3VzdG9tZXJcQmlsbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Customer/Views/Customer/Bookings.cshtml]
@@ -42,12 +54,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcQ3VzdG9tZXJcSW5mby5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Customer/Views/Customer/Payment.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcQ3VzdG9tZXJcUGF5bWVudC5jc2h0bWw=
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Customer/Views/Customer/InfoOfOwner.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcQ3VzdG9tZXJcSW5mb09mT3duZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Customer/Views/Customer/PostingList.cshtml]
-build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcQ3VzdG9tZXJcUG9zdGluZ0xpc3QuY3NodG1s
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Customer/Views/Customer/Payment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcQ3VzdG9tZXJcUGF5bWVudC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Customer/Views/Customer/ReturnUrl.cshtml]
@@ -56,6 +68,22 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Customer/Views/Customer/ViolatedPost.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcQ3VzdG9tZXJcVmlvbGF0ZWRQb3N0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Customer/Views/Post/DeletedPosts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcUG9zdFxEZWxldGVkUG9zdHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Customer/Views/Post/ExpiredPosts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcUG9zdFxFeHBpcmVkUG9zdHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Customer/Views/Post/PostingList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcUG9zdFxQb3N0aW5nTGlzdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Customer/Views/Post/ViolatedPosts.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQ3VzdG9tZXJcVmlld3NcUG9zdFxWaW9sYXRlZFBvc3RzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/Post/Views/Home/FavoritePosts.cshtml]
@@ -82,12 +110,28 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcUG9zdFxWaWV3c1xfTW9kaWZpY2F0aW9uX0xheW91dC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/UserAccount/Views/UserAccount/ForgotPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlckFjY291bnRcVmlld3NcVXNlckFjY291bnRcRm9yZ290UGFzc3dvcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/UserAccount/Views/UserAccount/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlckFjY291bnRcVmlld3NcVXNlckFjY291bnRcTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/UserAccount/Views/UserAccount/NotificationForgotPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlckFjY291bnRcVmlld3NcVXNlckFjY291bnRcTm90aWZpY2F0aW9uRm9yZ290UGFzc3dvcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/UserAccount/Views/UserAccount/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlckFjY291bnRcVmlld3NcVXNlckFjY291bnRcUmVnaXN0ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/UserAccount/Views/UserAccount/ResetPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlckFjY291bnRcVmlld3NcVXNlckFjY291bnRcUmVzZXRQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Areas/UserAccount/Views/UserAccount/ResetPasswordError.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVXNlckFjY291bnRcVmlld3NcVXNlckFjY291bnRcUmVzZXRQYXNzd29yZEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/CYBORG/Desktop/MotelProject/Motel/Motel/Views/Home/Privacy.cshtml]

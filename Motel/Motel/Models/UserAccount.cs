@@ -36,6 +36,12 @@ namespace Motel.Models
         // public ObjectId 
         public string? Id { get; set; }
 
+        [BsonElement("reset_token")]
+        [BsonIgnoreIfNull]
+        [JsonPropertyName("reset_token")]
+        public string? ResetToken { get; set; } = null;
+
+
         [BsonElement("info")]
         [BsonIgnoreIfNull]
         [JsonPropertyName("info")]
@@ -53,9 +59,14 @@ namespace Motel.Models
         [JsonPropertyName("role_name")]
         public string RoleName { get; set; } = null!;
 
+        [BsonElement("total_rating")]
+        [JsonPropertyName("total_rating")]
+        [BsonIgnoreIfNull]
+        public int TotalRating { get; set; } = 0;
+
         [BsonElement("rating")]
         [JsonPropertyName("rating")]
-        public int Rating { get; set; } = 0;
+        public float Rating { get; set; } = 0;
 
         [BsonElement("balance")]
         [JsonPropertyName("balance")]
@@ -63,13 +74,15 @@ namespace Motel.Models
 
         [BsonElement("posts")]
         [BsonIgnoreIfNull]
+        [BsonRepresentation(BsonType.ObjectId)]
         [JsonPropertyName("posts")]
-        public List<Post>? Posts { get; set; } = null;
+        public List<string>? Posts { get; set; } = null;
 
-        [BsonElement("preference_list")]
+        [BsonElement("favorite_list")]
         [BsonIgnoreIfNull]
-        [JsonPropertyName("preference_list")]
-        public List<Post>? PreferenceList { get; set; } = null;
+        [BsonRepresentation(BsonType.ObjectId)]
+        [JsonPropertyName("favorite_list")]
+        public List<string>? FavoriteList { get; set; } = null;
 
         [BsonElement("bills")]
         [BsonIgnoreIfNull]

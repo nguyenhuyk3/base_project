@@ -218,36 +218,46 @@ namespace Motel.Utility.Hubs
             await Clients.Group(receiverId).SendAsync("ReceiveRating", senderId, senderFullName, response);
         }
 
-        public async Task SendReviewPermission(string senderId, string receiverEmail, Response response)
+        public async Task SendReviewPermission(string senderId, string receiverId)
         {
             var senderDoc = await _databaseConstructor.UserAccountCollection
                                                             .Find(f => f.Id == senderId)
                                                             .FirstOrDefaultAsync();
             var receiverDoc = await _databaseConstructor.UserAccountCollection
-                                                           .Find(f => f.Email == receiverEmail)
+                                                           .Find(f => f.Id == receiverId)
                                                            .FirstOrDefaultAsync();
-            var notification = new Notification()
+
+            receiverDoc.PassiveReviewPersons ??= new List<string>();
+
+            if (!receiverDoc.PassiveReviewPersons.Contains(senderId))
             {
-                SenderId = senderDoc.Id,
-                SenderFullName = senderDoc.Info.FullName,
-                Content = response.Content,
-            };
 
-            senderDoc.PassiveReviewPersons?.Add(receiverDoc.Id);
-            receiverDoc.Notifications?.Add(notification);
+                var notification = new Notification()
+                {
+                    SenderId = senderId,
+                    ReceiverId = receiverId,
+                    SenderImg = !string.IsNullOrEmpty(senderDoc.Info.Avatar) ?
+                                       senderDoc.Info.Avatar : "/images/50x50.png",
+                    SenderFullName = senderDoc.Info.FullName,
+                    Content = "Bạn có thể đánh giá " + senderDoc.Info.FullName,
+                };
 
-            //var updateDefinition = Builders<UserAccount>.Update
-            //                                .Combine(
-            //                                    Builders<UserAccount>.Update.Push(f => f.Notifications, notification)
-            //                                );
+                senderDoc.PassiveReviewPersons?.Add(receiverId);
+                receiverDoc.Notifications?.Add(notification);
 
-            //await _databaseConstructor.UserAccountCollection.UpdateOneAsync(f => f.Id == receiverDoc.Id, updateDefinition);
+                var receiverDocUpdateDefinition = Builders<UserAccount>.Update
+                                                            .Combine(
+                                                                Builders<UserAccount>
+                                                                            .Update
+                                                                            .Push(f => f.Notifications,
+                                                                                    notification)
+                                                            );
 
-            var senderIds = emailToIdsMapping.GetValueOrDefault(senderDoc.Email);
+                await _databaseConstructor.UserAccountCollection.UpdateOneAsync(f => f.Id == receiverId, receiverDocUpdateDefinition);
 
-            if (senderIds.Count > 0)
-            {
-                Clients.User(senderIds.FirstOrDefault()).SendAsync("ReceiveReviewPermission", notification);
+                //var senderIds = emailToIdsMapping.GetValueOrDefault(senderDoc.Email);
+
+                Clients.User(receiverId).SendAsync("ReceiveReviewPermission", notification);
             }
         }
 
@@ -258,7 +268,6 @@ namespace Motel.Utility.Hubs
             public string Content { get; set; } = null;
             public DateTime CreatedAt { get; set; }
         }
-
 
         public async Task SendWarning(string senderId, string receiverId, string content)
         {
@@ -283,7 +292,7 @@ namespace Motel.Utility.Hubs
             await Clients.User(receiverId).SendAsync("ReceiveWarning", notification);
         }
 
-        public async Task SendResponse(string senderId, string receiverId, string content)
+        public async Task SendResponse(string senderId, string receiverId)
         {
             var receiverDoc = await _databaseConstructor.UserAccountCollection
                                                             .Find(f => f.Id == receiverId)
@@ -298,7 +307,7 @@ namespace Motel.Utility.Hubs
                 SenderImg = !string.IsNullOrEmpty(senderDoc.Info.Avatar) ?
                                         senderDoc.Info.Avatar : "/images/50x50.png",
                 SenderFullName = senderDoc.Info.FullName,
-                Content = content,
+                Content = senderDoc.Info.FullName + " đã gửi phản hồi cho vi phạm!",
             };
             var receiverDocUpdateDefinition = Builders<UserAccount>.Update.Push(f => f.Notifications, notification);
 

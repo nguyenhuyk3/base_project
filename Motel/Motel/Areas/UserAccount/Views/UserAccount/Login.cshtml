@@ -70,25 +70,29 @@
                                 <input type="hidden" id="RememberMeInput" name="RememberMe" value="false" asp-for="RememberMe" />
                                 @* <input type="hidden" asp-for="ReturnUrl" /> *@
 
-                                <a asp-action="Register" asp-controller="UserAccount" class="d-block mb-3">Bạn chưa có tài khoản?</a>
+                               @*  <a asp-action="Register" asp-controller="UserAccount" class="d-block mb-3">Bạn chưa có tài khoản?</a> *@
+
+                                <div class="d-flex justify-content-between mb-3">
+                                    <a class="d-block" href="/UserAccount/UserAccount/Register">Bạn chưa có tài khoản?</a>
+                                    <a class="forgot-password-link" href="/UserAccount/UserAccount/ForgotPassword">Forgot Password?</a>
+                                </div>
 
                                 <button type="submit" class="btn btn-primary btn-lg">Login</button>
 
                                 <hr class="my-4">
-
-                                <div class="d-flex justify-content-between">
+                            </form>
+                            <div class="d-flex justify-content-between">
+                                <a href="@Url.Action("GoogleLogin", "UserAccount")">
                                     <button type="button" class="btn btn-lg btn-block btn-primary"
-                                            style="background-color: #dd4b39;"
-                                            onclick="redirectToGoogle()">
+                                            style="background-color: #dd4b39;">
                                         <i class="fab fa-google me-2"></i> Sign in with google
                                     </button>
-
-                                    <button type="submit" class="btn btn-lg btn-block btn-primary"
-                                            style="background-color: #3b5998;">
-                                        <i class="fab fa-facebook-f me-2"></i>Sign in with facebook
-                                    </button>
-                                </div>
-                            </form>
+                                </a>
+                                @*   <button type="submit" class="btn btn-lg btn-block btn-primary"
+                                style="background-color: #3b5998;">
+                                <i class="fab fa-facebook-f me-2"></i>Sign in with facebook
+                                </button> *@
+                            </div>
                         </div>
                     </div>
                 </div>

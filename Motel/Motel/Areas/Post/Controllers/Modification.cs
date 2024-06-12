@@ -51,7 +51,7 @@ namespace Motel.Areas.Post.Controllers
                                                     .ToListAsync();
 
             ViewBag.Categories = new SelectList(categories, "Id", "Name");
-            ViewBag.Cities = new SelectList(cities, "ApiId", "Name");
+            ViewBag.Cities = new SelectList(cities, "ProvinceId", "Name");
 
             ModificationLayoutViewModel model = new ModificationLayoutViewModel()
             {
@@ -105,15 +105,16 @@ namespace Motel.Areas.Post.Controllers
             var vipDoc = await _databaseConstructor.VipCollection
                                                     .Find(f => f.Name == model.PostAdd.VipName)
                                                     .FirstOrDefaultAsync();
+            var ownerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var ownerDoc = await _databaseConstructor.UserAccountCollection
-                                                        .Find(f => f.Id == _getter.GetLoginId())
+                                                        .Find(f => f.Id == ownerId)
                                                         .FirstOrDefaultAsync();
             var categoryName = await _databaseConstructor.CategoryCollection
                                                             .Find(category => category.Id == model.PostAdd.CategoryId)
                                                             .Project(category => category.Name)
                                                             .FirstOrDefaultAsync();
             var cityName = await _databaseConstructor.CityCollection
-                                                        .Find(city => city.ApiId == int.Parse(model.PostAdd.ApiId))
+                                                        .Find(city => city.ProvinceId == model.PostAdd.ProvinceId)
                                                         .Project(city => city.Name)
                                                         .FirstOrDefaultAsync();
             var images = await ReturnListmagesFromView(fileInput);
@@ -125,7 +126,7 @@ namespace Motel.Areas.Post.Controllers
             // Missing funitire attribute
             Motel.Models.Post post = new Motel.Models.Post()
             {
-                Owner = _getter.GetLoginId(),
+                OwnerId = _getter.GetLoginId(),
                 VipName = vipDoc.Name,
                 CategoryName = categoryName,
                 SubjectOnSite = model.PostAdd.SubjectOnSite,
@@ -146,6 +147,7 @@ namespace Motel.Areas.Post.Controllers
                     HomeInformation = new HomeInformation
                     {
                         SquareMeter = model.PostAdd.SquareMeter,
+                        Furniture = model.PostAdd.Furniture,
                         Bedroom = model.PostAdd.Bedroom,
                         Toilet = model.PostAdd.Toilet,
                         Floor = model.PostAdd.Floor
@@ -161,32 +163,33 @@ namespace Motel.Areas.Post.Controllers
                     Email = model.PostAdd.Email,
                     Phone = model.PostAdd.Phone,
                 },
-                ExpiredAt = DateTime.Now,
+                ExpiredAt = DateTime.UtcNow,
             };
 
             await _databaseConstructor.PostCollection.InsertOneAsync(post);
 
-            ownerDoc.Posts ??= new List<Motel.Models.Post>();
-            ownerDoc.Posts.Add(post);
+            ownerDoc.Posts ??= new List<string>();
 
-            var ownerId = new ObjectId(_getter.GetLoginId());
-            var ownerFilter = Builders<Motel.Models.UserAccount>.Filter.Eq("_id", ownerId);
+            //var postId = new ObjectId(post.Id);
+            ownerDoc.Posts.Add(post.Id);
+
             var ownerUpdate = Builders<Motel.Models.UserAccount>.Update.Set("posts", ownerDoc.Posts)
                                                                        .Inc("balance", -vipDoc.Cost);
 
-            await _databaseConstructor.UserAccountCollection.UpdateOneAsync(ownerFilter, ownerUpdate);
+            await _databaseConstructor.UserAccountCollection.UpdateOneAsync(f => f.Id == ownerId, ownerUpdate);
 
             return RedirectToAction("Index", "Home");
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Detail(string postId)
         {
             var postDoc = await _databaseConstructor.PostCollection
                                                         .Find(f => f.Id == postId)
                                                         .FirstOrDefaultAsync();
             var ownerDoc = await _databaseConstructor.UserAccountCollection
-                                                        .Find(f => f.Id == postDoc.Owner)
+                                                        .Find(f => f.Id == postDoc.OwnerId)
                                                         .FirstOrDefaultAsync();
             var senderId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -204,20 +207,29 @@ namespace Motel.Areas.Post.Controllers
             // Check if this user has received advice for this post
             if (!string.IsNullOrEmpty(senderId))
             {
+                ownerDoc.Bookings ??= new List<Motel.Models.Booking>();
+
                 if (ownerDoc.Bookings != null)
                 {
+                    bool have = false;
+
                     foreach (var booking in ownerDoc.Bookings)
                     {
-                        if (booking.ContactInfo.Owner == senderId)
+                        if (booking.ContactInfo.OwnerId == senderId && booking.PostId == postId)
                         {
                             ViewData["Booked"] = true;
+
+                            have = true;
 
                             break;
                         }
                     }
-                }
 
-                ViewData["Booked"] = false;
+                    if (!have)
+                    {
+                        ViewData["Booked"] = false;
+                    }
+                }
             }
 
             var model = new Models.PostDetail
@@ -238,16 +250,26 @@ namespace Motel.Areas.Post.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "RequireCustomer")]
         public async Task<ActionResult> Edit(string postId)
         {
+            var ownerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var ownerDoc = await _databaseConstructor.UserAccountCollection
-                                                      .Find(f => f.Id == _getter.GetLoginId())
+                                                      .Find(f => f.Id == ownerId)
                                                       .FirstOrDefaultAsync();
+
+            ownerDoc.Posts ??= new List<string>();
+
+            if (!ownerDoc.Posts.Contains(postId))
+            {
+                return RedirectToAction("Index", "Home", new { area = "Post" });
+            }
+
             var postDoc = await _databaseConstructor.PostCollection
                                                         .Find(f => f.Id == postId)
                                                         .FirstOrDefaultAsync();
 
-            if (ownerDoc.Id != postDoc.Owner)
+            if (ownerDoc.Id != postDoc.OwnerId)
             {
                 return RedirectToAction("Index", "Home", new { area = "Post" });
             }
@@ -260,7 +282,7 @@ namespace Motel.Areas.Post.Controllers
                                                     .ToListAsync();
 
             ViewBag.Categories = new SelectList(categories, "Id", "Name");
-            ViewBag.Cities = new SelectList(cities, "ApiId", "Name");
+            ViewBag.Cities = new SelectList(cities, "ProvinceId", "Name");
 
             // Missing funiture attribute
             ModificationLayoutViewModel model = new ModificationLayoutViewModel()
@@ -270,7 +292,7 @@ namespace Motel.Areas.Post.Controllers
                 {
                     PostId = postId,
                     CategoryId = categories.Find(f => f.Name == postDoc.CategoryName).Id,
-                    ApiId = cities.Find(f => f.Name == postDoc.PostDetail.AddressDetail.City).ApiId.ToString(),
+                    ProvinceId = cities.Find(f => f.Name == postDoc.PostDetail.AddressDetail.City).ProvinceId,
                     District = postDoc.PostDetail.AddressDetail.District,
                     Ward = postDoc.PostDetail.AddressDetail.Ward,
                     Street = postDoc.PostDetail.AddressDetail.Street,
@@ -303,10 +325,23 @@ namespace Motel.Areas.Post.Controllers
                                                           .Project(category => category.Name)
                                                           .FirstOrDefaultAsync();
             var cityName = await _databaseConstructor.CityCollection
-                                                        .Find(city => city.ApiId == int.Parse(model.PostAdd.ApiId))
+                                                        .Find(city => city.ProvinceId == model.PostAdd.ProvinceId)
                                                         .Project(city => city.Name)
                                                         .FirstOrDefaultAsync();
-            var images = await ReturnListmagesFromView(fileInput);
+            var postDoc = await _databaseConstructor.PostCollection
+                                                        .Find(f => f.Id == model.PostAdd.PostId)
+                                                        .FirstOrDefaultAsync();
+            var images = new List<Image>();
+
+            if (fileInput.Count() > 0)
+            {
+                images = await ReturnListmagesFromView(fileInput);
+            }
+            else
+            {
+                images = postDoc.PostDetail.Images;
+            }
+
             var coordinates = await _getCoordinates.EncodeCoordinates(model.PostAdd.Street,
                                                            model.PostAdd.Ward,
                                                            model.PostAdd.District,
@@ -354,40 +389,40 @@ namespace Motel.Areas.Post.Controllers
             return RedirectToAction("Index", "Home", new { area = "Post" });
         }
 
-        [HttpPost]
-        public async Task<JsonResult> DeletePost(string postId)
-        {
-            var postDoc = await _databaseConstructor.PostCollection
-                                                        .Find(f => f.Id == postId)
-                                                        .FirstOrDefaultAsync();
+        //[HttpPost]
+        //public async Task<JsonResult> DeletePost(string postId)
+        //{
+        //    var postDoc = await _databaseConstructor.PostCollection
+        //                                                .Find(f => f.Id == postId)
+        //                                                .FirstOrDefaultAsync();
 
-            postDoc.State.IsDeleted = true;
+        //    postDoc.State.IsDeleted = true;
 
-            var updatePostDoc = Builders<Motel.Models.Post>.Update.Set(f => f.State, postDoc.State);
-            var filterPostDoc = Builders<Motel.Models.Post>.Filter.Eq(f => f.Id, postDoc.Id);
+        //    var updatePostDoc = Builders<Motel.Models.Post>.Update.Set(f => f.State, postDoc.State);
+        //    var filterPostDoc = Builders<Motel.Models.Post>.Filter.Eq(f => f.Id, postDoc.Id);
 
-            await _databaseConstructor.PostCollection.UpdateOneAsync(filterPostDoc, updatePostDoc);
+        //    await _databaseConstructor.PostCollection.UpdateOneAsync(filterPostDoc, updatePostDoc);
 
-            return Json(new { success = true });
-        }
+        //    return Json(new { success = true });
+        //}
 
-        [HttpPost]
-        public async Task<JsonResult> Extend(string postId, string vipName)
-        {
-            var postDoc = await _databaseConstructor.PostCollection
-                                                       .Find(f => f.Id == postId)
-                                                       .FirstOrDefaultAsync();
-            var vipDoc = await _databaseConstructor.VipCollection
-                                                       .Find(f => f.Name == vipName)
-                                                       .FirstOrDefaultAsync();
-            var extension = postDoc.ExpiredAt.AddDays(vipDoc.Days);
-            var updatePostDoc = Builders<Motel.Models.Post>.Update.Set(f => f.ExpiredAt, extension);
-            var filterPostDoc = Builders<Motel.Models.Post>.Filter.Eq(f => f.Id, postDoc.Id);
+        //[HttpPost]
+        //public async Task<JsonResult> Extend(string postId, string vipName)
+        //{
+        //    var postDoc = await _databaseConstructor.PostCollection
+        //                                               .Find(f => f.Id == postId)
+        //                                               .FirstOrDefaultAsync();
+        //    var vipDoc = await _databaseConstructor.VipCollection
+        //                                               .Find(f => f.Name == vipName)
+        //                                               .FirstOrDefaultAsync();
+        //    var extension = postDoc.ExpiredAt.AddDays(vipDoc.Days);
+        //    var updatePostDoc = Builders<Motel.Models.Post>.Update.Set(f => f.ExpiredAt, extension);
+        //    var filterPostDoc = Builders<Motel.Models.Post>.Filter.Eq(f => f.Id, postDoc.Id);
 
-            await _databaseConstructor.PostCollection.UpdateOneAsync(filterPostDoc, updatePostDoc);
+        //    await _databaseConstructor.PostCollection.UpdateOneAsync(filterPostDoc, updatePostDoc);
 
-            return Json(new { success = true, message = "Gia hạn thành công" });
-        }
+        //    return Json(new { success = true, message = "Gia hạn thành công" });
+        //}
     }
 }
 

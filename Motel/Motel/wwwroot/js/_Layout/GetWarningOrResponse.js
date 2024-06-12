@@ -11,6 +11,7 @@ connection.start().then(function () {
 connection.on("ReceiveWarning", function (notification) {
     console.log(notification);
 
+    // Set notification counter 
     // ==========||==========
     var notificationcounter = document.getElementById('notificationsCounter');
     var numberOfNotificationcounter = parseInt(notificationcounter.textContent);
@@ -22,59 +23,130 @@ connection.on("ReceiveWarning", function (notification) {
 
     // I will create function for this later
     // ==========||==========
-    // <div class="notification-item">
-    var notificationItem = document.createElement('div');
-   
-    notificationItem.classList.add('notification-item');
 
-    //  <div class="d-flex align-items-center">
-    var contentContainer = document.createElement('div');
-   
-    contentContainer.classList.add('d-flex', 'align-items-center');
+    //  <div class="notification-item mt-2">
+    const notificationItem = document.createElement('div');
+
+    notificationItem.classList.add('notification-item', 'mt-2');
+
+    const flexDiv = document.createElement('div');
+
+    //  <div class="d-flex align-items-center" style="margin-bottom: 0;">
+    flexDiv.classList.add('d-flex', 'align-items-center');
+    flexDiv.style.marginBottom = '0';
 
     // <img src="notification.sender_img" alt="Ảnh admin">
-    var imgElement = document.createElement('img');
-   
-    imgElement.src = notification.sender_img;
-    imgElement.alt = 'Ảnh admin';
+    const img = document.createElement('img');
 
-    // <div>
-    var textContainer = document.createElement('div');
-   
+    img.src = notification.sender_img;
+    img.alt = 'Ảnh người dùng';
+
+    // <div class="d-block">
+    const textDiv = document.createElement('div');
+
+    textDiv.classList.add('d-block', 'content-block');
+
     // <h6>
-    var h6Element = document.createElement('h6');
-   
-    h6Element.textContent = notification.content;
+    const title = document.createElement('h6');
 
-    // <p>
-    var pElement = document.createElement('p');
-    var createdAt = new Date(notification.created_at);
-    var formattedDate = createdAt.toLocaleString('vi-VN', {
+    title.textContent = notification.content;
+
+    // <p class="mt-3">
+    const description = document.createElement('p');
+    const createdAt = new Date(notification.created_at);
+    const formattedDate = createdAt.toLocaleString('vi-VN', {
         year: 'numeric',
         month: '2-digit',
         day: '2-digit',
         hour: '2-digit',
         minute: '2-digit',
     });
-   
-    pElement.textContent = formattedDate;
 
-    textContainer.appendChild(h6Element);
-    textContainer.appendChild(pElement);
-    contentContainer.appendChild(imgElement);
-    contentContainer.appendChild(textContainer);
-    notificationItem.appendChild(contentContainer);
+    description.classList.add('mt-3');
+    description.textContent = formattedDate;
+
+    textDiv.appendChild(title);
+    textDiv.appendChild(description);
+
+    flexDiv.appendChild(img);
+    flexDiv.appendChild(textDiv);
+
+    notificationItem.appendChild(flexDiv);
 
     var notificationsDropdownMenu = document.querySelector('.dropdown-menu-notifications');
-    
+
     notificationsDropdownMenu.insertBefore(notificationItem, notificationsDropdownMenu.firstChild);
+
+    updateNotifications();
 });
 
-connection.on("ReceiveReponse", function (notification) {
+connection.on("ReceiveResponse", function (notification) {
     console.log(notification);
 
+    // Set notification counter
+    // ==========||==========
     var notificationsCounter = document.getElementById('notificationsCounter');
     var numberOfNotification = parseInt(notificationsCounter.textContent);
 
     notificationsCounter.textContent = numberOfNotification.toString();
+    // ==========||==========
+
+    // I will create function for this later
+    // ==========||==========
+
+    //  <div class="notification-item mt-2">
+    const notificationItem = document.createElement('div');
+
+    notificationItem.classList.add('notification-item', 'mt-2');
+
+    //  <div class="d-flex align-items-center" style="margin-bottom: 0;">
+    const flexDiv = document.createElement('div');
+
+    flexDiv.classList.add('d-flex', 'align-items-center');
+    flexDiv.style.marginBottom = '0';
+
+    // <img src="notification.sender_img" alt="Ảnh admin">
+    const img = document.createElement('img');
+
+    img.src = notification.sender_img;
+    img.alt = 'Ảnh người dùng';
+
+    // <div class="d-block">
+    const textDiv = document.createElement('div');
+
+    textDiv.classList.add('d-block', 'content-block');
+
+    // <h6>
+    const title = document.createElement('h6');
+
+    title.textContent = notification.content;
+
+    // <p class="mt-3">
+    const description = document.createElement('p');
+    const createdAt = new Date(notification.created_at);
+    const formattedDate = createdAt.toLocaleString('vi-VN', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+    });
+
+    description.classList.add('mt-3');
+    description.textContent = formattedDate;
+
+    textDiv.appendChild(title);
+    textDiv.appendChild(description);
+
+    flexDiv.appendChild(img);
+    flexDiv.appendChild(textDiv);
+
+    notificationItem.appendChild(flexDiv);
+
+    var notificationsDropdownMenu = document.querySelector('.dropdown-menu-notifications');
+
+    notificationsDropdownMenu.insertBefore(notificationItem, notificationsDropdownMenu.firstChild);
+    // ========== || ==========
+
+    updateNotifications();
 });

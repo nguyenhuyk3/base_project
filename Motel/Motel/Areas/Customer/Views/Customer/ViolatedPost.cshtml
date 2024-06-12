@@ -3,7 +3,7 @@
 @model Motel.ViewModels.ModificationLayoutViewModel
 
 @{
-    ViewData["Title"] = "Thêm bài viết";
+    ViewData["Title"] = "Chỉnh sửa bài viết vi phạm";
     Layout = "~/Areas/Post/Views/_Modification_Layout.cshtml";
 }
 
@@ -14,81 +14,17 @@
 @section _Modification_Layout_Styles {
 }
 
-@* <!--PostId-->
-<input type="text" id="PostId" value="@postId" />
-<!--SenderId-->
-<input type="hidden" id="PostId" value="@Model.Owner.Id" />
-<button class="w-100 btn btn-outline-warning w-100 mb-2"
-        id="SendResponse">
-    Gửi phản hồi
-</button> *@
-
-<h1 class="mt-3 mb-2">Chỉnh sửa bài viết</h1>
+<h1 class="mt-3 mb-2">Chỉnh sửa bài viết vi phạm</h1>
 
 <main class="container-fluid">
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="row">
         <!--This area will show form-->
         <div>
-            <input type="text" asp-for="PostAdd.PostId" />
-            <form asp-action="Edit" asp-controller="Modification"
+            <form asp-action="ViolatedPost" asp-controller="Customer"
                   method="post" id="PostForm" enctype="multipart/form-data">
                 @Html.AntiForgeryToken()
-                <!--Address information-->
-                <section class="container-fluid border border-opacity-50 border-1 p-4">
-                    <h4 class="mb-4">Thông tin cơ bản</h4>
-                    <div class="row row-cols-1">
-                        <div class="form-group">
-                            <label class="control-label mb-2">Loại hình cho thuê</label>
-                            <select asp-for="PostAdd.CategoryId"
-                                    class="form-control rounded-1"
-                                    id="CategoryId"
-                                    style="max-width: 100%;" disabled>
-                                <option value=""> </option>
-                                @foreach (var item in ViewBag.Categories)
-                                {
-                                    <option value="@item.Value">@item.Text</option>
-                                }
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row row-cols-2">
-                        <div class="form-group">
-                            <label class="control-label my-2" for="ApiId">Tỉnh/Thành phố</label>
-                            <select asp-for="PostAdd.ApiId"
-                                    class="form-control rounded-1"
-                                    id="ApiId">
-                                <option value=""> </option>
-                                @foreach (var item in ViewBag.Cities)
-                                {
-                                    <option value="@item.Value">@item.Text</option>
-                                }
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label my-2" for="District">Quận/Huyện</label>
-                            <select class="form-control"
-                                    asp-for="PostAdd.District" id="District"></select>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label my-2" for="Ward">Phường/Xã</label>
-                            <select class="form-control"
-                                    asp-for="PostAdd.Ward" id="Ward"></select>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label my-2" for="Street">Đường/Phố</label>
-                            <select class="form-control"
-                                    asp-for="PostAdd.Street" id="Street"></select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label mt-3 mb-2" for="Address">Địa chỉ hiển thị trên tin đăng</label>
-                        <input class="form-control"
-                               asp-for="PostAdd.Address"
-                               id="Address"
-                               style="max-width: 100%">
-                    </div>
-                </section>
+                <input type="hidden" asp-for="PostAdd.PostId" />
                 <!--Post infomation-->
                 <section class="container-fluid border border-opacity-50 border-1 p-4 mt-3">
                     <h4 class="mb-3">Thông tin bài viết</h4>
@@ -200,13 +136,15 @@
                     <p>Quy định đăng hình & video</p>
                     <ul>
                         <li class="text-danger">Ảnh đầu tiên sẽ là ảnh chính cho bài đăng</li>
+                        <li class="text-danger">Nếu không chọn ảnh thì ảnh cũ sẽ được sử dụng lại</li>
                         <li>Hãy dùng ảnh thật, không trùng, không chèn SĐT</li>
                         <li>Tối đa là 10 ảnh</li>
                         <li>Mô tả ảnh tối đa 45 kí tự.</li>
                     </ul>
                     <button type="button" id="ChooseImageButton" class="btn btn-primary">Chọn ảnh</button>
                     <input type="file" id="FileInput" name="FileInput" accept="image/*" multiple style="display: none;">
-                    <div id="ImagePreview"></div>
+                    <div class="mt-3"
+                         id="ImagePreview"></div>
                 </section>
                 <!--Infomation of owner-->
                 <section class="container border border-opacity-50 border-1 p-4 mt-3">
@@ -218,29 +156,29 @@
                             <input type="text"
                                    class="form-control mb-2"
                                    asp-for="PostAdd.Name"
-                                   placeholder="Nhập tên của bạn" 
-                                   disabled />
+                                   placeholder="Nhập tên của bạn" />
                         </div>
                         <div class="form-group">
                             <label class="label-control mb-2" for="Phone">Số điện thoại</label>
                             <input type="text"
                                    class="form-control mb-2"
                                    asp-for="PostAdd.Phone"
-                                   placeholder="Nhập số điện thoại" 
-                                   disabled />
+                                   placeholder="Nhập số điện thoại" />
                         </div>
                         <div class="form-group">
                             <label class="label-control mb-2" for="Email">Email</label>
                             <input type="text"
                                    class="form-control mb-2"
                                    asp-for="PostAdd.Email"
-                                   placeholder="Nhập email"
-                                   disabled />
+                                   placeholder="Nhập email" />
                         </div>
                     </div>
                 </section>
                 <div class="text-end">
-                    <button type="submit" class="btn btn-danger mt-3 float-end">Chỉnh sửa bài viết</button>
+                    <button type="submit" class="btn btn-danger mt-3 float-end"
+                            id="SendResponse">
+                        Gửi phản hồi
+                    </button>
                 </div>
             </form>
         </div>
@@ -250,5 +188,8 @@
 @section _Modification_Layout {
     <!--Self-written JS-->
     <script src="~/js/customer/customer/violatedpost/createresponse.js"></script>
+    <script src="~/js/customer/customer/violatedpost/updatevalue.js"></script>
+    <script src="~/js/post/modification/edit/setfurniture.js"></script>
 }
+
 

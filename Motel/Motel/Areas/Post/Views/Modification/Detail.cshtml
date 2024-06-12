@@ -9,6 +9,8 @@
     var isOwner = (bool)ViewData["IsOwner"];
     var booked = (bool)ViewData["Booked"];
     var adminId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+    var role = User.FindFirstValue(ClaimTypes.Role);
+    var postId = (string)ViewData["PostId"];
 }
 
 @section Styles {
@@ -30,7 +32,7 @@
     <script type="text/javascript" src="~/js/post/modification/detail/map.js"></script>
 }
 
-<div class="container">
+<div class="container" style="margin-top: 70px">
     <div class="row">
         <!--PostId-->
         <input type="hidden" id="PostId" value="@Model.Post.Id" />
@@ -191,7 +193,7 @@
                 </div>
                 <div class="col-3">
                     <span class="font-weight-bold">Ngày hết hạn</span><br>
-                    <span>Ngày hết hạn</span>
+                    <span>@Model.Post.ExpiredAt.ToString("dd/MM/yyyy")</span>
                 </div>
                 <div class="col-2">
                     <span class="font-weight-bold">Loại tin</span><br>
@@ -210,20 +212,20 @@
                 <div class="card-body d-flex flex-column align-items-center">
                     <div class="d-flex flex-column align-items-center mb-3">
                         <img src="@(!string.IsNullOrEmpty(Model.Avatar) ? Model.Avatar : Url.Content("~/images/50x50.png"))" alt="Avatar" class="avatar mb-2">
-                        <!--OwnerId-->
-                        <input type="hidden"  id="OwnerId" value="@Model.OwnerId"  />
+                        <!--OwnerId of post-->
+                        <input type="hidden" id="OwnerIdOnSite" value="@Model.OwnerId" />
                         <h5 class="card-title mt-1 mb-0 text-center">@Model.Name</h5>
                     </div>
                     <p class="text-center"><strong>Liên hệ:</strong> Do info chưa có SDT</p>
                     <div class="d-flex flex-column align-items-center w-100">
                         <p class="w-100 btn btn-primary w-100 mb-2">Hiện số</p>
-                        @if (!isOwner)
+                        @if (!isOwner && role == "Customer")
                         {
                             if (booked)
                             {
                                 <button class="w-100 btn mb-2 btn-success"
                                         id="GetBooking" disabled>
-                                    Đã nhận tư vấn
+                                    Đã gửi tư vấn
                                 </button>
                             }
                             else
@@ -234,7 +236,20 @@
                                 </button>
                             }
                         }
-                        <authorize role="Admin" class="w-100">
+                        @if (isOwner)
+                        {
+                            <a asp-area="Post"
+                               asp-controller="Modification"
+                               asp-action="Edit"
+                               asp-route-postId="@postId"
+                               class="w-100">
+                                <button class="btn mb-2 btn-warning w-100">
+                                    Chỉnh sửa
+                                </button>
+                            </a>
+                        }
+                        @if (role == "Admin")
+                        {
                             @if (!Model.Post.State.IsViolated)
                             {
                                 <button class="w-100 btn btn-outline-warning w-100 mb-2"
@@ -245,10 +260,24 @@
                             else
                             {
                                 <button class="w-100 btn btn-danger w-100 mb-2 disabled">
-                                    Đã cảnh báo vi phạm
+                                    Hủy cảnh báo vi phạm
                                 </button>
                             }
-                        </authorize>
+
+                            @if (!Model.Post.State.IsAuthenticated)
+                            {
+                                <button class="w-100 btn btn-outline-success w-100 mb-2"
+                                        id="CreateAuthenticating">
+                                    Xác thực tin
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="w-100 btn btn-success w-100 mb-2 disabled">
+                                    Tin đã xác thực
+                                </button>
+                            }
+                        }
                     </div>
                 </div>
             </div>

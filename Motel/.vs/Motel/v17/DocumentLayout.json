@@ -3,28 +3,68 @@
   "WorkspaceRootPath": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\areas\\customer\\views\\accordion\\_accordion_partial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\areas\\customer\\views\\accordion\\_accordion_partial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\models\\useraccount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\models\\useraccount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\areas\\useraccount\\controllers\\useraccount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\areas\\useraccount\\controllers\\useraccount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\models\\state.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\models\\state.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\areas\\customer\\views\\customer\\violatedpost.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\areas\\customer\\views\\customer\\violatedpost.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\areas\\customer\\controllers\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\areas\\customer\\controllers\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\models\\postdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\models\\postdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\areas\\post\\controllers\\modification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\areas\\post\\controllers\\modification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\models\\post.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\models\\post.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\areas\\post\\views\\modification\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\areas\\post\\views\\modification\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\models\\notification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\models\\link.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\models\\link.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\models\\image.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\models\\image.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\models\\info.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\models\\info.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\models\\homeinformation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\models\\homeinformation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\models\\contactinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\models\\contactinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\models\\catergory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\models\\catergory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\models\\booking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\models\\booking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\models\\bill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\models\\bill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|c:\\users\\cyborg\\desktop\\motelproject\\motel\\motel\\models\\addressdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5DA4379E-88B0-4303-A206-63D60FBB87D0}|Motel\\Motel.csproj|solutionrelative:motel\\models\\addressdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +74,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,80 +86,210 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UserAccount.cs",
-              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\UserAccount\\Controllers\\UserAccount.cs",
-              "RelativeDocumentMoniker": "Motel\\Areas\\UserAccount\\Controllers\\UserAccount.cs",
-              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\UserAccount\\Controllers\\UserAccount.cs",
-              "RelativeToolTip": "Motel\\Areas\\UserAccount\\Controllers\\UserAccount.cs",
-              "ViewState": "AQIAACMAAAAAAAAAAAAgwH8AAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-07T08:16:05.737Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "_Accordion_Partial.cshtml",
-              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Customer\\Views\\Accordion\\_Accordion_Partial.cshtml",
-              "RelativeDocumentMoniker": "Motel\\Areas\\Customer\\Views\\Accordion\\_Accordion_Partial.cshtml",
-              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Customer\\Views\\Accordion\\_Accordion_Partial.cshtml",
-              "RelativeToolTip": "Motel\\Areas\\Customer\\Views\\Accordion\\_Accordion_Partial.cshtml",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAACEAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-07T08:15:37.954Z",
+              "Title": "UserAccount.cs",
+              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\UserAccount.cs",
+              "RelativeDocumentMoniker": "Motel\\Models\\UserAccount.cs",
+              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\UserAccount.cs",
+              "RelativeToolTip": "Motel\\Models\\UserAccount.cs",
+              "ViewState": "AQIAAEsAAAAAAAAAAAAIwCkAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-12T16:12:36.981Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Edit.cshtml",
-              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Post\\Views\\Modification\\Edit.cshtml",
-              "RelativeDocumentMoniker": "Motel\\Areas\\Post\\Views\\Modification\\Edit.cshtml",
-              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Post\\Views\\Modification\\Edit.cshtml",
-              "RelativeToolTip": "Motel\\Areas\\Post\\Views\\Modification\\Edit.cshtml",
-              "ViewState": "AQIAANAAAAAAAAAAAAAAAOcAAAAHAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-07T08:09:58.847Z",
+              "DocumentIndex": 1,
+              "Title": "State.cs",
+              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\State.cs",
+              "RelativeDocumentMoniker": "Motel\\Models\\State.cs",
+              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\State.cs",
+              "RelativeToolTip": "Motel\\Models\\State.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAxwBkAAAA8AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-12T16:12:31.17Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "ViolatedPost.cshtml",
-              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Customer\\Views\\Customer\\ViolatedPost.cshtml",
-              "RelativeDocumentMoniker": "Motel\\Areas\\Customer\\Views\\Customer\\ViolatedPost.cshtml",
-              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Customer\\Views\\Customer\\ViolatedPost.cshtml",
-              "RelativeToolTip": "Motel\\Areas\\Customer\\Views\\Customer\\ViolatedPost.cshtml",
-              "ViewState": "AQIAABUAAAAAAAAAAAAAACAAAAA6AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-07T08:09:35.349Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Modification.cs",
-              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Post\\Controllers\\Modification.cs",
-              "RelativeDocumentMoniker": "Motel\\Areas\\Post\\Controllers\\Modification.cs",
-              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Post\\Controllers\\Modification.cs",
-              "RelativeToolTip": "Motel\\Areas\\Post\\Controllers\\Modification.cs",
-              "ViewState": "AQIAAPMAAAAAAAAAAAAswAYBAABFAAAA",
+              "Title": "Role.cs",
+              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\Role.cs",
+              "RelativeDocumentMoniker": "Motel\\Models\\Role.cs",
+              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\Role.cs",
+              "RelativeToolTip": "Motel\\Models\\Role.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-07T08:07:12.21Z",
+              "WhenOpened": "2024-06-12T16:12:29.994Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Customer.cs",
-              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Customer\\Controllers\\Customer.cs",
-              "RelativeDocumentMoniker": "Motel\\Areas\\Customer\\Controllers\\Customer.cs",
-              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Areas\\Customer\\Controllers\\Customer.cs",
-              "RelativeToolTip": "Motel\\Areas\\Customer\\Controllers\\Customer.cs",
-              "ViewState": "AQIAAE0BAAAAAAAAAAArwE0BAABFAAAA",
+              "Title": "PostDetail.cs",
+              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\PostDetail.cs",
+              "RelativeDocumentMoniker": "Motel\\Models\\PostDetail.cs",
+              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\PostDetail.cs",
+              "RelativeToolTip": "Motel\\Models\\PostDetail.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAAwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-07T07:58:51.307Z",
+              "WhenOpened": "2024-06-12T16:12:14.042Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Post.cs",
+              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\Post.cs",
+              "RelativeDocumentMoniker": "Motel\\Models\\Post.cs",
+              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\Post.cs",
+              "RelativeToolTip": "Motel\\Models\\Post.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABEAAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-12T16:12:00.625Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Notification.cs",
+              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\Notification.cs",
+              "RelativeDocumentMoniker": "Motel\\Models\\Notification.cs",
+              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\Notification.cs",
+              "RelativeToolTip": "Motel\\Models\\Notification.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAAwAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-12T16:11:57.132Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Link.cs",
+              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\Link.cs",
+              "RelativeDocumentMoniker": "Motel\\Models\\Link.cs",
+              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\Link.cs",
+              "RelativeToolTip": "Motel\\Models\\Link.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAQwAoAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-12T16:11:49.022Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Info.cs",
+              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\Info.cs",
+              "RelativeDocumentMoniker": "Motel\\Models\\Info.cs",
+              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\Info.cs",
+              "RelativeToolTip": "Motel\\Models\\Info.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAAA1wAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-12T16:11:43.323Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Image.cs",
+              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\Image.cs",
+              "RelativeDocumentMoniker": "Motel\\Models\\Image.cs",
+              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\Image.cs",
+              "RelativeToolTip": "Motel\\Models\\Image.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-12T16:11:41.82Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "HomeInformation.cs",
+              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\HomeInformation.cs",
+              "RelativeDocumentMoniker": "Motel\\Models\\HomeInformation.cs",
+              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\HomeInformation.cs",
+              "RelativeToolTip": "Motel\\Models\\HomeInformation.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-12T16:11:38.107Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ErrorViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\ErrorViewModel.cs",
+              "RelativeDocumentMoniker": "Motel\\Models\\ErrorViewModel.cs",
+              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\ErrorViewModel.cs",
+              "RelativeToolTip": "Motel\\Models\\ErrorViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-12T16:11:37.403Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ContactInfo.cs",
+              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\ContactInfo.cs",
+              "RelativeDocumentMoniker": "Motel\\Models\\ContactInfo.cs",
+              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\ContactInfo.cs",
+              "RelativeToolTip": "Motel\\Models\\ContactInfo.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-12T16:11:26.99Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Catergory.cs",
+              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\Catergory.cs",
+              "RelativeDocumentMoniker": "Motel\\Models\\Catergory.cs",
+              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\Catergory.cs",
+              "RelativeToolTip": "Motel\\Models\\Catergory.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-12T16:11:25.141Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Bill.cs",
+              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\Bill.cs",
+              "RelativeDocumentMoniker": "Motel\\Models\\Bill.cs",
+              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\Bill.cs",
+              "RelativeToolTip": "Motel\\Models\\Bill.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAAwA8AAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-12T16:11:08.614Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "AddressDetail.cs",
+              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\AddressDetail.cs",
+              "RelativeDocumentMoniker": "Motel\\Models\\AddressDetail.cs",
+              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\AddressDetail.cs",
+              "RelativeToolTip": "Motel\\Models\\AddressDetail.cs",
+              "ViewState": "AQIAABEAAAAAAAAAAAA3wAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-12T16:11:04.48Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Booking.cs",
+              "DocumentMoniker": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\Booking.cs",
+              "RelativeDocumentMoniker": "Motel\\Models\\Booking.cs",
+              "ToolTip": "C:\\Users\\CYBORG\\Desktop\\MotelProject\\Motel\\Motel\\Models\\Booking.cs",
+              "RelativeToolTip": "Motel\\Models\\Booking.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAAwAoAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-12T16:10:48.771Z",
               "EditorCaption": ""
             }
           ]

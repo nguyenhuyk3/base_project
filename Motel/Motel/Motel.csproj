@@ -7,6 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\Post\Modification\Edit\SetFurniture.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\Post\Modification\Edit\SetFurniture.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="8.0.6" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
     <PackageReference Include="MongoDB.Driver" Version="2.25.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
@@ -20,10 +30,12 @@
     <Folder Include="Areas\Post\Data\" />
     <Folder Include="Areas\UserAccount\Data\" />
     <Folder Include="wwwroot\css\Customer\Customer\Accordion\" />
-    <Folder Include="wwwroot\css\Customer\Customer\Booking\" />
     <Folder Include="wwwroot\css\UserAccount\" />
     <Folder Include="wwwroot\images\" />
-    <Folder Include="wwwroot\js\Post\Home\Index\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\Post\Modification\Edit\SetFurniture.js" />
   </ItemGroup>
 
 </Project>

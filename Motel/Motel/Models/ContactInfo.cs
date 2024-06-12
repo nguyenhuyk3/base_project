@@ -7,9 +7,9 @@ namespace Motel.Models
     public class ContactInfo
     {
         [BsonRepresentation(BsonType.ObjectId)]
-        [BsonElement("owner")]
-        [JsonPropertyName("owner")]
-        public string? Owner { get; set; } = null;
+        [BsonElement("owner_id")]
+        [JsonPropertyName("owner_id")]
+        public string? OwnerId { get; set; } = null;
 
         [BsonElement("name")]
         [JsonPropertyName("name")]

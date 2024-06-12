@@ -1,9 +1,13 @@
-﻿using Humanizer;
+﻿using Amazon.Runtime.Internal.Transform;
+using Humanizer;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using Motel.Areas.Customer.Models;
@@ -25,12 +29,12 @@ namespace Motel.Areas.Customer.Controllers
     public class Customer : Controller
     {
         private readonly DatabaseConstructor _databaseConstructor;
-        private readonly Getter _getter;
+        private readonly IWebHostEnvironment _hostingEnvironment;
 
-        public Customer(IOptions<DatabaseSettings> databaseSettings)
+        public Customer(IOptions<DatabaseSettings> databaseSettings, IWebHostEnvironment hostingEnvironment)
         {
             _databaseConstructor = new DatabaseConstructor(databaseSettings);
-            _getter = new Getter(new HttpContextAccessor());
+            _hostingEnvironment = hostingEnvironment;
         }
 
         [AllowAnonymous]
@@ -47,6 +51,10 @@ namespace Motel.Areas.Customer.Controllers
             var ownerDoc = _databaseConstructor.UserAccountCollection
                                                 .Find(userAccount => userAccount.Id == userAccountId)
                                                 .FirstOrDefault();
+
+            ownerDoc.Posts ??= new List<string>();
+
+            var posts = await GetPostsByIds(ownerDoc.Posts);
             var reversedPassiveReviews = ownerDoc.PassiveReviews?.ToList();
             var isReviewed = false;
             var senderId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -79,26 +87,19 @@ namespace Motel.Areas.Customer.Controllers
             InfoViewModel model = new InfoViewModel()
             {
                 Owner = ownerDoc,
-                ReviewsOnSite = pagedReversedPassiveReviews
+                ReviewsOnSite = pagedReversedPassiveReviews,
+                Posts = posts,
             };
 
             return View(model);
         }
 
-        [HttpGet]
-        [Authorize(Policy = "RequireCustomer")]
-        public async Task<IActionResult> PostingList(string ownerId)
+        public async Task<List<Motel.Models.Post>> GetPostsByIds(List<string> postIds)
         {
-            var ownerDoc = await _databaseConstructor.UserAccountCollection
-                                                      .Find(f => f.Id == ownerId)
-                                                      .FirstOrDefaultAsync();
+            var filter = Builders<Motel.Models.Post>.Filter.In(post => post.Id, postIds);
+            var posts = await _databaseConstructor.PostCollection.Find(filter).ToListAsync();
 
-            ModificationLayoutViewModel model = new ModificationLayoutViewModel()
-            {
-                Owner = ownerDoc,
-            };
-
-            return View(model);
+            return posts;
         }
 
         [HttpGet]
@@ -120,19 +121,17 @@ namespace Motel.Areas.Customer.Controllers
         // In the post detail page, when clicking the "Nhận tư vấn" button,
         // it will activate this function
         [HttpPost]
-        public async Task<JsonResult> CreateBooking(string ownerId, string postId)
+        public async Task<JsonResult> CreateBooking(string senderId, string receiverId, string postId)
         {
-            var senderId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
             // Check if the person accessing the page is the owner or not
-            if (senderId == ownerId)
+            if (senderId == receiverId)
             {
                 return Json(new { logginedIn = false });
             }
 
             if (string.IsNullOrEmpty(senderId))
             {
-                return Json(new { message = "Bạn phải đăng nhập để có thể nhận tư vấn!", sucess = false });
+                return Json(new { message = "Bạn phải đăng nhập để có thể nhận tư vấn!", success = false });
             }
 
             var senderDoc = await _databaseConstructor.UserAccountCollection
@@ -141,15 +140,15 @@ namespace Motel.Areas.Customer.Controllers
 
             if (string.IsNullOrEmpty(senderDoc.Info.Phone))
             {
-                return Json(new { message = "Bạn chưa cập nhập số điện thoại!", sucess = false });
+                return Json(new { message = "Bạn chưa cập nhập số điện thoại!", success = false });
             }
 
             Booking booking = new Booking()
             {
-                Owner = ownerId,
+                OwnerId = receiverId,
                 ContactInfo = new ContactInfo()
                 {
-                    Owner = senderDoc.Id,
+                    OwnerId = senderDoc.Id,
                     Name = senderDoc.Info.FullName,
                     Email = senderDoc.Info.Email,
                     Phone = senderDoc.Info.Phone,
@@ -160,11 +159,11 @@ namespace Motel.Areas.Customer.Controllers
             // I will reverse List<Booking> later
 
             var ownerDoc = await _databaseConstructor.UserAccountCollection
-                                                        .Find(f => f.Id == ownerId)
+                                                        .Find(f => f.Id == receiverId)
                                                         .FirstOrDefaultAsync();
 
             await _databaseConstructor.UserAccountCollection.UpdateOneAsync(
-                    f => f.Id == ownerId,
+                    f => f.Id == receiverId,
                     Builders<Motel.Models.UserAccount>.Update.Push(f => f.Bookings, booking)
                   );
 
@@ -172,41 +171,56 @@ namespace Motel.Areas.Customer.Controllers
         }
 
         [HttpGet]
+        [Authorize(Policy = "RequireCustomer")]
         public async Task<IActionResult> Bookings()
         {
             var ownerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var ownerDoc = await _databaseConstructor.UserAccountCollection
                                                         .Find(f => f.Id == ownerId)
                                                         .FirstOrDefaultAsync();
-            var peopleDoNotRateYet = new Dictionary<string, bool>();
+            var peopleHaveNoAppointmenetYet = new Dictionary<string, bool>();
+            // userAccountId, booked, postId
+            var peopleBooked = new Dictionary<string, bool>();
 
-            ownerDoc.PassiveReviewPersons ??= new List<string>();
+            ownerDoc.Bookings ??= new List<Booking>();
 
             foreach (var booking in ownerDoc.Bookings)
             {
-                if (!booking.IsReaded)
+                var key = booking.OwnerId + "_" + booking.PostId;
+
+                if (!peopleBooked.ContainsKey(key))
                 {
-                    foreach (var passiveReviewPerson in ownerDoc.PassiveReviewPersons)
-                    {
-                        if (booking.ContactInfo.Owner == passiveReviewPerson)
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            if (!peopleDoNotRateYet.ContainsKey(booking.ContactInfo.Owner))
-                            {
-                                peopleDoNotRateYet.Add(booking.ContactInfo.Owner, true);
-                            }
-                        }
-                    }
+                    peopleBooked.Add(key, booking.IsReaded);
                 }
             }
+
+            //ownerDoc.PassiveReviewPersons ??= new List<string>();
+
+            //foreach (var booking in ownerDoc.Bookings)
+            //{
+            //    if (!booking.IsReaded)
+            //    {
+            //        foreach (var passiveReviewPerson in ownerDoc.PassiveReviewPersons)
+            //        {
+            //            if (booking.ContactInfo.Owner == passiveReviewPerson)
+            //            {
+            //                continue;
+            //            }
+            //            else
+            //            {
+            //                if (!peopleDoNotRateYet.ContainsKey(booking.ContactInfo.Owner))
+            //                {
+            //                    peopleDoNotRateYet.Add(booking.ContactInfo.Owner, true);
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
 
             var model = new ModificationLayoutViewModel
             {
                 Owner = ownerDoc,
-                PeopleDoNotRateYet = peopleDoNotRateYet
+                PeopleBooked = peopleBooked
             };
 
             return View(model);
@@ -230,27 +244,44 @@ namespace Motel.Areas.Customer.Controllers
             {
                 var booking = ownerDoc.Bookings[i];
 
-                if (booking.ContactInfo.Owner == senderId && booking.PostId == postId)
+                if (!booking.IsReaded)
                 {
-                    booking.IsReaded = true;
-                    found = true;
+                    if (booking.ContactInfo.OwnerId == senderId && booking.PostId == postId)
+                    {
+                        booking.IsReaded = true;
+                        found = true;
 
-                    break;
-                }
+                        break;
+                    }
 
-                if (i == ownerDoc.Bookings.Count - 1)
-                {
-                    booking.IsReaded = true;
+                    if (i == ownerDoc.Bookings.Count - 1)
+                    {
+                        booking.IsReaded = true;
+                    }
                 }
             }
 
             senderDoc.ActiveReviewPersons ??= new List<string>();
-            senderDoc.ActiveReviewPersons.Add(ownerDoc.Id);
+
+            if (!senderDoc.ActiveReviewPersons.Contains(ownerDoc.Id))
+            {
+                senderDoc.ActiveReviewPersons.Add(ownerDoc.Id);
+            }
+
+            ownerDoc.PassiveReviewPersons ??= new List<string>();
+
+            if (!ownerDoc.PassiveReviewPersons.Contains(senderDoc.Id))
+            {
+                ownerDoc.PassiveReviewPersons.Add(senderDoc.Id);
+            }
 
             var senderFilter = Builders<Motel.Models.UserAccount>.Filter.Eq(f => f.Id, senderId);
             var ownerFilter = Builders<Motel.Models.UserAccount>.Filter.Eq(f => f.Id, ownerId);
             var senderUpdate = Builders<Motel.Models.UserAccount>.Update.Set(f => f.ActiveReviewPersons, senderDoc.ActiveReviewPersons);
-            var ownerUpdate = Builders<Motel.Models.UserAccount>.Update.Set(f => f.Bookings, ownerDoc.Bookings);
+            var ownerUpdate = Builders<Motel.Models.UserAccount>.Update.Combine(
+                                        Builders<Motel.Models.UserAccount>.Update.Set(f => f.Bookings, ownerDoc.Bookings),
+                                        Builders<Motel.Models.UserAccount>.Update.Set(f => f.PassiveReviewPersons, ownerDoc.PassiveReviewPersons)
+                                        );
 
             await _databaseConstructor.UserAccountCollection.UpdateOneAsync(senderFilter, senderUpdate);
             await _databaseConstructor.UserAccountCollection.UpdateOneAsync(ownerFilter, ownerUpdate);
@@ -308,6 +339,8 @@ namespace Motel.Areas.Customer.Controllers
             return Json(new { success = true, message = "Thành công" });
         }
 
+        [HttpGet]
+        [Authorize(Policy = "RequireCustomer")]
         public async Task<IActionResult> ViolatedPost(string postId)
         {
             var postDoc = await _databaseConstructor.PostCollection
@@ -323,15 +356,13 @@ namespace Motel.Areas.Customer.Controllers
             var ownerDoc = await _databaseConstructor.UserAccountCollection
                                                      .Find(f => f.Id == userAccountId)
                                                      .FirstOrDefaultAsync();
-            var categories = await _databaseConstructor.CategoryCollection
-                                                      .Find(_ => true)
-                                                      .ToListAsync();
-            var cities = await _databaseConstructor.CityCollection
-                                                    .Find(_ => true)
-                                                    .ToListAsync();
 
-            ViewBag.Categories = new SelectList(categories, "Id", "Name");
-            ViewBag.Cities = new SelectList(cities, "ApiId", "Name");
+            ownerDoc.Posts ??= new List<string>();
+
+            if (!ownerDoc.Posts.Contains(postId))
+            {
+                return RedirectToAction("Index", "Home", new { area = "Post" });
+            }
 
             ModificationLayoutViewModel model = new ModificationLayoutViewModel()
             {
@@ -339,12 +370,6 @@ namespace Motel.Areas.Customer.Controllers
                 PostAdd = new PostAdd()
                 {
                     PostId = postId,
-                    CategoryId = categories.Find(f => f.Name == postDoc.CategoryName).Id,
-                    ApiId = cities.Find(f => f.Name == postDoc.PostDetail.AddressDetail.City).ApiId.ToString(),
-                    District = postDoc.PostDetail.AddressDetail.District,
-                    Ward = postDoc.PostDetail.AddressDetail.Ward,
-                    Street = postDoc.PostDetail.AddressDetail.Street,
-                    Address = postDoc.PostDetail.AddressDetail.Address,
                     SubjectOnSite = postDoc.SubjectOnSite,
                     Description = postDoc.PostDetail.Description,
                     SquareMeter = postDoc.PostDetail.HomeInformation.SquareMeter,
@@ -360,6 +385,170 @@ namespace Motel.Areas.Customer.Controllers
             };
 
             return View(model);
+        }
+
+        public async Task<List<Image>> ReturnListmagesFromView(IEnumerable<IFormFile> fileInput)
+        {
+            List<Image> images = new List<Image>();
+
+            foreach (var file in fileInput)
+            {
+                if (file != null && file.Length > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var uploadPath = Path.Combine(_hostingEnvironment.WebRootPath, "images");
+                    var filePath = Path.Combine(uploadPath, fileName);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(fileStream);
+                    }
+
+                    filePath = "\\images\\" + fileName;
+
+                    Image image = new Image()
+                    {
+                        Url = filePath,
+                    };
+
+                    images.Add(image);
+                }
+            }
+
+            return images;
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ViolatedPost(ModificationLayoutViewModel model, IEnumerable<IFormFile> fileInput)
+        {
+            var userAccountId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var postDoc = await _databaseConstructor.PostCollection
+                                                        .Find(f => f.Id == model.PostAdd.PostId)
+                                                        .FirstOrDefaultAsync();
+            var images = new List<Motel.Models.Image>();
+
+            if (fileInput.Count() != 0)
+            {
+                images = await ReturnListmagesFromView(fileInput);
+            }
+            else
+            {
+                images = postDoc.PostDetail.Images;
+            }
+
+            var postDetail = new Motel.Models.PostDetail
+            {
+                Description = model.PostAdd.Description,
+                HomeInformation = new HomeInformation
+                {
+                    SquareMeter = model.PostAdd.SquareMeter,
+                    Bedroom = model.PostAdd.Bedroom,
+                    Toilet = model.PostAdd.Toilet,
+                    Floor = model.PostAdd.Floor
+                },
+                Images = images,
+                NumberOfImage = images.Count,
+                Price = model.PostAdd.Price,
+                PriceString = model.PostAdd.Price + " VND",
+            };
+            var contactInfo = new ContactInfo()
+            {
+                Name = model.PostAdd.Name,
+                Email = model.PostAdd.Email,
+                Phone = model.PostAdd.Phone,
+            };
+            var updatePostDefinition = Builders<Motel.Models.Post>.Update
+                                          .Set(f => f.SubjectOnSite, model.PostAdd.SubjectOnSite)
+                                          .Set(f => f.PostDetail, postDetail)
+                                          .Set(f => f.ContactInfo, contactInfo)
+                                          .Set(f => f.State.IsEdited, true);
+            var postFilter = Builders<Motel.Models.Post>.Filter.Eq(p => p.Id, model.PostAdd.PostId);
+
+            await _databaseConstructor.PostCollection.UpdateOneAsync(postFilter, updatePostDefinition);
+
+            return RedirectToAction("PostingList", "Post", new { area = "Customer" });
+        }
+
+        public async Task<ActionResult> InfoOfOwner()
+        {
+            var ownerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var ownerDoc = await _databaseConstructor.UserAccountCollection
+                                                        .Find(f => f.Id == ownerId)
+                                                        .FirstOrDefaultAsync();
+            var info = new Motel.Areas.Customer.Models.Info()
+            {
+                OwnerId = ownerId,
+                Avatar = !string.IsNullOrEmpty(ownerDoc.Info.Avatar) ?
+                                                ownerDoc.Info.Avatar : "/images/150x150.png",
+                FullName = ownerDoc.Info.FullName,
+                Sex = ownerDoc.Info.Sex,
+                Email = ownerDoc.Info.Email,
+                Phone = !string.IsNullOrEmpty(ownerDoc.Info.Phone) ?
+                                                ownerDoc.Info.Phone : ""
+            };
+
+            ModificationLayoutViewModel model = new ModificationLayoutViewModel()
+            {
+                Owner = ownerDoc,
+                Info = info
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> UpdateInfo(ModificationLayoutViewModel model, IFormFile avatarFile)
+        {
+            var ownerDoc = await _databaseConstructor.UserAccountCollection
+                                                        .Find(f => f.Id == model.Info.OwnerId)
+                                                        .FirstOrDefaultAsync();
+
+            if (avatarFile != null)
+            {
+                var fileName = Path.GetFileName(avatarFile.FileName);
+                var uploadPath = Path.Combine(_hostingEnvironment.WebRootPath, "images");
+                var filePath = Path.Combine(uploadPath, fileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await avatarFile.CopyToAsync(fileStream);
+                }
+
+                filePath = "\\images\\" + fileName;
+
+                ownerDoc.Info.Avatar = filePath;
+            }
+
+
+            ownerDoc.Info.FullName = model.Info.FullName;
+            ownerDoc.Info.Email = model.Info.Email;
+            ownerDoc.Info.Phone = model.Info.Phone;
+            ownerDoc.Info.Sex = model.Info.Sex;
+
+            var filter = Builders<Motel.Models.UserAccount>.Filter.Eq(u => u.Id, model.Info.OwnerId);
+            var update = Builders<Motel.Models.UserAccount>.Update
+                                                            .Set(u => u.Info, ownerDoc.Info);
+
+            await _databaseConstructor.UserAccountCollection.UpdateOneAsync(filter, update);
+
+            var claims = new List<Claim>()
+            {
+                new Claim(ClaimTypes.NameIdentifier, ownerDoc.Id.ToString()),
+                new Claim(ClaimTypes.Name, ownerDoc.Info.FullName),
+                new Claim(ClaimTypes.Email, ownerDoc.Email),
+                new Claim(ClaimTypes.Role, ownerDoc.RoleName)
+            };
+
+            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var principal = new ClaimsPrincipal(identity);
+
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, new AuthenticationProperties()
+            {
+                IsPersistent = true
+            });
+
+            return RedirectToAction("InfoOfOwner", "Customer", new { area = "Customer" });
         }
 
         public IActionResult Checkout(string price)
@@ -465,7 +654,7 @@ namespace Motel.Areas.Customer.Controllers
 
                 Bill bill = new Bill()
                 {
-                    Owner = ownerId,
+                    OwnerId = ownerId,
                     Cost = int.Parse(price),
                     CostString = price + " VND"
                 };
@@ -487,6 +676,44 @@ namespace Motel.Areas.Customer.Controllers
             }
 
             return View();
+        }
+
+        public async Task<IActionResult> Bills()
+        {
+            var ownerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(ownerId))
+            {
+                return RedirectToAction("Index", "Home", new { area = "Post" });
+            }
+
+            var ownerDoc = await _databaseConstructor.UserAccountCollection
+                                                        .Find(f => f.Id == ownerId)
+                                                        .FirstOrDefaultAsync();
+            var bills = new List<Bill>();
+
+            if (ownerDoc.RoleName == "Customer")
+            {
+                bills = ownerDoc.Bills;
+            }
+            else
+            {
+                var billDocs = await _databaseConstructor.BillCollection
+                                                     .Find(_ => true)
+                                                     .ToListAsync();
+
+                billDocs.Reverse();
+
+                bills = billDocs;
+            }
+
+            var model = new ModificationLayoutViewModel()
+            {
+                Owner = ownerDoc,
+                Bills = bills
+            };
+
+            return View(model);
         }
     }
 }

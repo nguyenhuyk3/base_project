@@ -1,4 +1,5 @@
 ﻿@using System.Security.Claims
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,8 +29,9 @@
     <input type="hidden"
            name="receiverEmail" id="receiverEmail"
            value="@receiverEmail" />
+    <!--Id of logined in user account-->
     <input type="hidden"
-           name="ownerId" id="ownerId"
+           name="OwnerId" id="OwnerId"
            value="@ownerId" />
 
     <header>
@@ -40,27 +42,28 @@
                    asp-area="Post" asp-controller="Home" asp-action="Index">
                     Trang chủ
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                @*  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark"
-                               asp-area="" asp-controller="Home" asp-action="Index">
-                                Home
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark"
-                               asp-area="" asp-controller="Home" asp-action="Privacy">
-                                Privacy
-                            </a>
-                        </li>
-                    </ul>
-                    @if (!isLogginedIn)
-                    {
+                <ul class="navbar-nav flex-grow-1">
+                <li class="nav-item">
+                <a class="nav-link text-dark"
+                asp-area="" asp-controller="Home" asp-action="Index">
+                Home
+                </a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link text-dark"
+                asp-area="" asp-controller="Home" asp-action="Privacy">
+                Privacy
+                </a>
+                </li>
+                </ul> *@
+                @if (!isLogginedIn)
+                {
+                    <div class="d-flex">
                         <a class="nav-link text-dark mx-2"
                            asp-area="UserAccount" asp-controller="UserAccount" asp-action="Login">
                             Đăng nhập
@@ -69,72 +72,86 @@
                            asp-area="UserAccount" asp-controller="UserAccount" asp-action="Register">
                             Đăng kí
                         </a>
-                    }
-                    else
-                    {
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav ml-auto">
-                                <!--Notifications Dropdown-->
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link" href="#" id="notificationsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-bell"></i>
-                                        <span class="badge badge-danger" id="notificationsCounter">0</span>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-notifications" aria-labelledby="notificationsDropdown">
-                                        <div class="no-notifications d-none">
-                                            Không có thông báo
-                                        </div>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item text-center" href="#">See all notifications</a>
-                                    </div>
-                                </li>
-                                <!--Favorites Dropdown-->
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link" href="#" id="favoritesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="fas fa-heart"></i>
-                                        <span class="badge badge-danger" id="favoritesCounter">0</span>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-favorites" aria-labelledby="favoritesDropdown">
-                                        <!--It will display when no having favorite posts-->
-                                        <div class="no-favorites d-none">
-                                            Không có bài viết yêu thích
-                                        </div>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item text-center" href="#">See all favorites</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                @receiverName
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Nạp tiền</a>
-                                <div class="dropdown-item">
-                                    <form class="form-inline" asp-area="UserAccount" asp-controller="UserAccount" asp-action="Logout" method="post" id="LogoutForm">
-                                        @Html.AntiForgeryToken()
-                                        <button type="submit" class="btn btn-link text-dark text-decoration-none p-0" id="LogoutButton">
-                                            Đăng xuất
-                                        </button>
-                                    </form>
+                    </div>
+                }
+                else
+                {
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ml-auto">
+                            <!--Notifications Dropdown-->
+                            <li class="nav-item dropdown">
+                                <div class="nav-link" id="notificationsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-bell"></i>
+                                    <span class="badge badge-danger" id="notificationsCounter">0</span>
                                 </div>
-                                <a class="dropdown-item" href="#">Another link</a>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-notifications" aria-labelledby="notificationsDropdown">
+                                    <div class="no-notifications d-none">
+                                        Không có thông báo
+                                    </div>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item text-center" href="#">See all notifications</a>
+                                </div>
+                            </li>
+                            <!--Favorites Dropdown-->
+                            <li class="nav-item dropdown">
+                                <div class="nav-link" id="favoritesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-heart"></i>
+                                    <span class="badge badge-danger" id="favoritesCounter">0</span>
+                                </div>
+                                <div class="dropdown-menu dropdown-menu-right dropdown-menu-favorites" aria-labelledby="favoritesDropdown">
+                                    <!--It will display when no having favorite posts-->
+                                    <div class="no-favorites d-none">
+                                        Không có bài viết yêu thích
+                                    </div>
+                                    <div class="dropdown-divider"></div>
+                                    <a asp-area="Post" asp-controller="Home" asp-action="FavoritePosts"
+                                       class="dropdown-item text-center">See all notifications</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="dropdown mx-2">
+                        <button type="button" class="btn btn-info dropdown-toggle"
+                                id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @receiverName
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a asp-area="Customer" asp-controller="Customer" asp-action="InfoOfOwner"
+                               class="dropdown-item">Thông tin cá nhân</a>
+                            <a asp-area="Customer" asp-controller="Post" asp-action="PostingList"
+                               class="dropdown-item">Xem bài viết</a>
+                            <a asp-area="Customer" asp-controller="Customer" asp-action="Payment"
+                               class="dropdown-item"> Nạp tiền</a>
+                            <div class="dropdown-divider"></div>
+                            <div class="dropdown-item">
+                                <form class="form-inline" asp-area="UserAccount" asp-controller="UserAccount" asp-action="Logout" method="post" id="LogoutForm">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-link text-dark text-decoration-none p-0" id="LogoutButton">
+                                        Đăng xuất
+                                    </button>
+                                </form>
                             </div>
                         </div>
-                    }
-                </div>
+                    </div>
+
+                    <button class="btn btn-outline-success mx-2">
+                        <a asp-area="Post" asp-controller="Modification" asp-action="Add"
+                           class="text-decoration-none text-black">Đăng tin</a>
+                    </button>
+                }
+            </div>
             </div>
         </nav>
         <!---->
     </header>
 
     <div class="container-fluid" style="padding: 0">
-        <main role="main" class="pb-3" style="margin-top: 70px">
+        <main role="main" class="pb-3" @* style="margin-top: 70px" *@>
             @RenderBody()
         </main>
     </div>
@@ -151,21 +168,13 @@
     <script src="~/toast/toast.js"></script>
     <!--SingalR-->
     <script src="~/js/signalr/dist/browser/signalr.js"></script>
-    <script src="~/js/getnotifications.js"></script>
     <!--Self-written JS-->
     <script src="~/js/_layout/updatefavorites.js"></script>
+    <script src="~/js/_layout/updatenotifications.js"></script>
     <script src="~/js/_layout/getfavorites.js"></script>
     <script src="~/js/_layout/togglefavorite.js"></script>
     <script src="~/js/_layout/getwarningorresponse.js"></script>
-    <script>
-        // document.querySelector('.dropdown').addEventListener('mouseover', function () {
-        //     this.querySelector('.dropdown-menu').style.display = 'block';
-        // });
-
-        // document.querySelector('.dropdown').addEventListener('mouseleave', function () {
-        //     this.querySelector('.dropdown-menu').style.display = 'none';
-        // });
-    </script>
+    <script src="~/js/_layout/getnotifications.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

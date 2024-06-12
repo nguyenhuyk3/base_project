@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             // When clicking to remove favorite post on heart shape then it will perfom this function
                             removeButton.addEventListener('click', function () {
                                 var favoriteItem = removeButton.closest('.favorite-item');
-                                var userId = document.getElementById('ownerId').value;
+                                var userId = document.getElementById('OwnerId').value;
                                 var postId = favoriteItem.getAttribute('data-postid');
 
                                 favoriteItem.parentNode.removeChild(favoriteItem);

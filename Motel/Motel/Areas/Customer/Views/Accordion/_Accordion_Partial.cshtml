@@ -24,17 +24,21 @@
                    value="@Model.Balance" />
             <p>Tài khoản chính: <strong>@Model.Balance</strong> VND</p>
             <p>Id: <strong>@Model.Id</strong></p>
+            <input type="hidden" id="OwnerId" value="@Model.Id" />
             <a asp-area="Customer" asp-controller="Customer" asp-action="Payment"
                class="btn btn-danger float-end text-decoration-none">
                 Nạp tiền
             </a>
         </div>
     </div>
+
     @if (role == "Customer")
     {
         <div class="left-item emp-info"></div>
         <div class="left-item services">
-            <a asp-area="Post" asp-controller="Modification" asp-action="Add" class="link-service">
+            <a asp-area="Post"
+               asp-controller="Modification"
+               asp-action="Add" class="link-service">
                 <i class="fa-solid fa-list"></i>
                 <p>Đăng Tin</p>
                 <i class="fa-solid fa-angle-right"></i>
@@ -43,49 +47,84 @@
 
         <div class="section">
             <div class="dropdown" onclick="toggleDropdownPost()">
-            <i class="fa-regular fa-circle-user"></i>
-            <p>Danh Sách Tin</p>
-            <i class="fa-solid fa-angle-right"></i>
+                <i class="fa-regular fa-circle-user"></i>
+                <p>Danh Sách Tin</p>
+                <i class="fa-solid fa-angle-right"></i>
+            </div>
+            <div class="dropdown-content" id="dropdown-post">
+                <a asp-area="Customer"
+                   asp-controller="Post"
+                   asp-action="PostingList"
+                   class="link-service">
+                    Tin đăng
+                </a>
+                <a asp-area="Customer"
+                   asp-controller="Post"
+                   asp-action="ViolatedPosts"
+                   class="link-service">
+                    Tin bị cấm
+                </a>
+                <a asp-area="Customer"
+                   asp-controller="Post"
+                   asp-action="ExpiredPosts"
+                   class="link-service">
+                    Tin hết hạn
+                </a>
+                <a asp-area="Customer"
+                   asp-controller="Post"
+                   asp-action="DeletedPosts"
+                   class="link-service">
+                    Tin đã xóa
+                </a>
+            </div>
         </div>
-        <div class="dropdown-content" id="dropdown-post">
-            <a href="#" class="link-service">Tin đăng</a>
-            <a href="#" class="link-service">Tin bị cấm</a>
-            <a href="#" class="link-service">Tin hết hạn</a>
-            <a href="#" class="link-service">Tin bị xóa</a>
+
+        <div class="left-item services">
+            <a asp-area="Customer"
+               asp-controller="Customer"
+               asp-action="Bookings"
+               class="link-service">
+                <i class="far fa-calendar-check"></i>
+                <p>Nhận tư vấn</p>
+                <i class="fa-solid fa-angle-right"></i>
+            </a>
         </div>
-    </div>
     }
 
-    <div class="section">
-        <div class="dropdown" onclick="toggleDropdownPostManagement()">
-            <i class="fa-solid fa-gear"></i>
-            <p>Quản lí bài viết</p>
-            <i class="fa-solid fa-angle-right"></i>
+    @if (role == "Admin")
+    {
+        <div class="section">
+            <div class="dropdown" onclick="toggleDropdownPostManagement()">
+                <i class="fa-solid fa-gear"></i>
+                <p>Quản lí bài viết</p>
+                <i class="fa-solid fa-angle-right"></i>
+            </div>
+            <div class="dropdown-content" id="dropdown-post-management">
+                <a asp-area="Admin" asp-controller="Post" asp-action="Index" class="link-service">
+                    Danh sách tin
+                </a>
+                <a asp-area="Admin" asp-controller="Post" asp-action="ViolatedPosts" class="link-service">
+                    Tin vi phạm
+                </a>
+                <a asp-area="Admin" asp-controller="Post" asp-action="ResponsePosts" class="link-service">
+                    Tin phản hồi vi phạm
+                </a>
+            </div>
         </div>
-        <div class="dropdown-content" id="dropdown-post-management">
-            <a href="#" class="link-service">Tất cả tin đăng</a>
-            <a href="#" class="link-service">Tin vi phạm</a>
-            <a href="#" class="link-service">Tin đã chỉnh sửa</a>
-        </div>
-    </div>
+    }
+
     <div class="left-item services">
-        <a asp-area="Customer" asp-controller="Customer" asp-action="PostingList" asp-route-ownerId="@Model.Id" class="link-service">
-            <i class="fa-solid fa-gear"></i>
-            <p>Danh sách tin đăng</p>
-            <i class="fa-solid fa-angle-right"></i>
-        </a>
-    </div>
-    <div class="left-item services">
-        <a href="#" class="link-service">
-            <i class="fa-solid fa-star"></i>
+        <a asp-area="Customer" asp-controller="Customer" asp-action="InfoOfOwner" class="link-service">
+            <i class="fa-regular fa-circle-user"></i>
             <p>Thông Tin Tài Khoản</p>
             <i class="fa-solid fa-angle-right"></i>
         </a>
     </div>
+
     <div class="left-item services">
-        <a href="#" class="link-service">
-            <i class="fa-solid fa-building"></i>
-            <p>Lịch Sử Giao Dịch</p>
+        <a asp-area="Customer" asp-controller="Customer" asp-action="Bills" class="link-service">
+            <i class="fa-regular fa-circle-user"></i>
+            <p>Lịch Sử Nạp Tiền</p>
             <i class="fa-solid fa-angle-right"></i>
         </a>
     </div>

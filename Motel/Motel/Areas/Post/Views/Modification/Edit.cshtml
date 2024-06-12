@@ -17,10 +17,12 @@
     <div class="row">
         <!--This area will show form-->
         <div>
-            <input type="text" asp-for="PostAdd.PostId" />
-            <form asp-action="Edit" asp-controller="Modification"
-                  method="post" id="PostForm" enctype="multipart/form-data">
+            <form asp-action="Edit"
+                  asp-controller="Modification"
+                  method="post" id="PostForm"
+                  enctype="multipart/form-data">
                 @Html.AntiForgeryToken()
+                <input type="hidden" asp-for="PostAdd.PostId" />
                 <!--Address information-->
                 <section class="container-fluid border border-opacity-50 border-1 p-4">
                     <h4 class="mb-4">Thông tin cơ bản</h4>
@@ -42,9 +44,9 @@
                     <div class="row row-cols-2">
                         <div class="form-group">
                             <label class="control-label my-2" for="ApiId">Tỉnh/Thành phố</label>
-                            <select asp-for="PostAdd.ApiId"
+                            <select asp-for="PostAdd.ProvinceId"
                                     class="form-control rounded-1"
-                                    id="ApiId">
+                                    id="ProvinceId">
                                 <option value=""> </option>
                                 @foreach (var item in ViewBag.Cities)
                                 {
@@ -187,13 +189,14 @@
                     <p>Quy định đăng hình & video</p>
                     <ul>
                         <li class="text-danger">Ảnh đầu tiên sẽ là ảnh chính cho bài đăng</li>
+                        <li class="text-danger">Nếu không chọn ảnh thì ảnh cũ sẽ được sử dụng lại</li>
                         <li>Hãy dùng ảnh thật, không trùng, không chèn SĐT</li>
                         <li>Tối đa là 10 ảnh</li>
                         <li>Mô tả ảnh tối đa 45 kí tự.</li>
                     </ul>
                     <button type="button" id="ChooseImageButton" class="btn btn-primary">Chọn ảnh</button>
                     <input type="file" id="FileInput" name="FileInput" accept="image/*" multiple style="display: none;">
-                    <div id="ImagePreview"></div>
+                    <div class="mt-3" id="ImagePreview"></div>
                 </section>
                 <!--Infomation of owner-->
                 <section class="container border border-opacity-50 border-1 p-4 mt-3">
@@ -236,4 +239,5 @@
     <script src="~/js/post/modification/add/updatevalue.js"></script>
     <script src="~/js/post/modification/edit/getwards.js"></script>
     <script src="~/js/post/modification/edit/setaddress.js"></script>
+     <script src="~/js/post/modification/edit/setfurniture.js"></script>
 }

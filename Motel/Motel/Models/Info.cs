@@ -16,8 +16,9 @@ namespace Motel.Models
         public string FullName { get; set; } = null!;
 
         [BsonElement("day_of_birth")]
+        [BsonIgnoreIfNull]
         [JsonPropertyName("day_of_birth")]
-        public DateTime DayOfBirth { get; set; }
+        public DateTime? DayOfBirth { get; set; } = null;
 
         [BsonElement("sex")]
         [JsonPropertyName("sex")]

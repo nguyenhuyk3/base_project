@@ -1,15 +1,15 @@
 ﻿document.addEventListener('DOMContentLoaded', function () {
     // Select the dropdown for cities
-    var apiIdDropdown = document.getElementById('ApiId');
+    var provinceIdDropdown = document.getElementById('ProvinceId');
 
     // Add event listener for change event
     // Get districts
-    apiIdDropdown.addEventListener('change', function () {
-        var apiId = this.value;
+    provinceIdDropdown.addEventListener('change', function () {
+        var provinceId = this.value;
         // Send GET request to server to get districts
         var xhr = new XMLHttpRequest();
 
-        xhr.open('GET', '/Address/GetDistricts?apiId=' + apiId);
+        xhr.open('GET', '/Address/GetDistricts?provinceId=' + provinceId);
 
         xhr.onload = function () {
             if (xhr.status === 200) {
@@ -40,10 +40,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // it will retrieve the awards in the city
     document.getElementById('District').addEventListener('change', function () {
         var district = this.value;
-        var apiId = document.getElementById('ApiId').value;
+        var provinceId = document.getElementById('ProvinceId').value;
         var xhr = new XMLHttpRequest();
 
-        xhr.open('GET', '/Address/GetAwards?apiId=' + apiId + '&district=' + district, true);
+        xhr.open('GET', '/Address/GetWards?provinceId=' + provinceId + '&districtName=' + district, true);
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
@@ -72,12 +72,12 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
     // Gets streets
     document.getElementById('Ward').addEventListener('change', function () {
-        var apiId = document.getElementById('ApiId').value;
+        var provinceId = document.getElementById('ProvinceId').value;
         var district = document.getElementById('District').value;
         var ward = this.value;
         var xhr = new XMLHttpRequest();
 
-        xhr.open('GET', '/Address/GetStreets?apiId=' + apiId + '&district=' + district + '&ward=' + ward, true);
+        xhr.open('GET', '/Address/GetStreets?provinceId=' + provinceId + '&district=' + district + '&ward=' + ward, true);
 
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {

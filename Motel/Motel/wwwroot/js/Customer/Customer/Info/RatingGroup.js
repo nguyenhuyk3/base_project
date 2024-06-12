@@ -49,7 +49,6 @@ if (document.getElementById("sendButton")?.disabled !== undefined) {
 // Listen for events when the `SendRatingToGroup` method is called
 connection.on("ReceiveRating", function (senderId, senderFullName, response) {
     var senderIdOnsite = document.getElementById("senderId")?.value
-
     console.log(senderIdOnsite)
 
     // Check if the client on the page is the sender

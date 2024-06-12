@@ -6,8 +6,25 @@ namespace WebProject.Models.Address
 {
     public class City
     {
+        //[BsonId]
+        //[BsonElement("id")]
+        //[BsonRepresentation(BsonType.ObjectId)]
+        //public string? Id { get; set; }
+
+        //[BsonElement("name")]
+        //[JsonPropertyName("name")]
+        //public string Name { get; set; } = null!;
+
+        //[BsonElement("api_id")]
+        //[JsonPropertyName("api_id")]
+        //public int ApiId { get; set; } = 0;
+
+        //[BsonElement("is_toggled")]
+        //[JsonPropertyName("is_toggled")]
+        //public bool IsToggled { get; set; } = true; 
+
         [BsonId]
-        [BsonElement("id")]
+        [BsonElement("_id")]
         [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
 
@@ -15,13 +32,12 @@ namespace WebProject.Models.Address
         [JsonPropertyName("name")]
         public string Name { get; set; } = null!;
 
-        [BsonElement("api_id")]
-        [JsonPropertyName("api_id")]
-        public int ApiId { get; set; } = 0;
+        [BsonElement("province_id")]
+        [JsonPropertyName("province_id")]
+        public string ProvinceId { get; set; } = null!;
 
         [BsonElement("is_toggled")]
         [JsonPropertyName("is_toggled")]
-        public bool IsToggled { get; set; } = true; 
-
+        public bool IsToggled { get; set; } = true;
     }
 }

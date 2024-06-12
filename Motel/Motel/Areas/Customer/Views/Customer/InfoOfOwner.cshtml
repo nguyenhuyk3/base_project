@@ -1,0 +1,68 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Motel.ViewModels.ModificationLayoutViewModel
+
+@{
+    ViewData["Title"] = "Thông tin người dùng";
+    Layout = "~/Areas/Post/Views/_Modification_Layout.cshtml";
+}
+
+@section _Modification_Layout_Styles {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!--Self-written CSS-->
+    <link href="~/css/customer/customer/infoofowner/styles.css" rel="stylesheet" />
+}
+
+<div class="container-fluid">
+    <div class="form-container">
+        <form method="post"
+              asp-action="UpdateInfo"
+              asp-controller="Customer"
+              asp-area="Customer"
+            enctype="multipart/form-data" >
+            @Html.AntiForgeryToken();
+            <!--OwnerId-->
+            <input type="hidden" asp-for="Info.OwnerId" />
+            <!--Value of image-->
+            <input type="hidden"
+                   name="Info.Avatar" id="Info.Avatar" />
+            <div class="form-group text-center" style="display: block; margin: 0 auto;">
+                <div>
+                    <img src="@Model.Info.Avatar" alt="Avatar" style="border-radius: 50%; width: 150px; height: 150px" id="avatarPreview" />
+                </div>
+                <div>
+                    <button type="button" id="ChooseImageButton" class="btn btn-primary mt-2">Chọn ảnh</button>
+                </div>
+                <input type="file" id="AvatarFile" name="AvatarFile" accept="image/*" style="display: none;">
+            </div>
+            <div class="form-group">
+                <label asp-for="Info.FullName">Tên</label>
+                <input asp-for="Info.FullName"
+                       class="form-control"
+                       placeholder="Nhập tên">
+            </div>
+            <div class="form-group">
+                <label asp-for="Info.Email"></label>
+                <input type="email" asp-for="Info.Email"
+                       class="form-control"
+                       placeholder="Nhập email">
+            </div>
+            <div class="form-group">
+                <label asp-for="Info.Phone"></label>
+                <input type="tel" asp-for="Info.Phone"
+                       class="form-control" placeholder="Nhập số điện thoại">
+            </div>
+            <div class="form-group">
+                <label for="gender">Giới tính</label>
+                <select class="form-control" id="gender" asp-for="Info.Sex">
+                    <option value="true">Nam</option>
+                    <option value="false">Nữ</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Cập nhật</button>
+        </form>
+    </div>
+</div>
+
+@section _Modification_Layout {
+    <script src="~/js/customer/customer/infoofowner/functioin.js"></script>
+}

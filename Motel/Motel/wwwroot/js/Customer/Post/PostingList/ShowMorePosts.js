@@ -19,8 +19,14 @@
 
 document.addEventListener("DOMContentLoaded", function () {
     var articlesPerPage = 4;
-    var totalArticles = document.querySelectorAll(".article").length;
+    var articles = document.querySelectorAll(".article");
+    var totalArticles = articles.length;
     var loadMoreButton = document.getElementById("loadMore");
+
+    if (totalArticles === 0 || totalArticles <= 4) {
+        loadMoreButton.parentNode.classList.add("hidden");
+        return;
+    }
 
     var loadMoreClickHandler = function (e) {
         e.preventDefault();

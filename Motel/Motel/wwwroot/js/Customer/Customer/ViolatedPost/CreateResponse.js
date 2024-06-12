@@ -11,8 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var sendResponseButton = document.getElementById('SendResponse');
 
     sendResponseButton.addEventListener('click', function (event) {
-        event.preventDefault();
-
         var postId = document.getElementById('PostId').value;
         var xhr = new XMLHttpRequest();
 
@@ -22,11 +20,18 @@ document.addEventListener('DOMContentLoaded', function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
                     var response = JSON.parse(xhr.responseText);
-                    console.log(response)
-                    if (response.success) {
-                        var senderId = document.getElementById('SenderId').value;
 
-                        console.log(senderId)
+                    console.log(response)
+
+                    if (response.success) {
+                        var senderId = document.getElementById('OwnerId').value;
+                        var receiverId = '6665d522d46c081fab03e981';
+
+                        connection
+                            .invoke("SendResponse", senderId, receiverId)
+                            .catch(function (err) {
+                                return console.error(err.toString());
+                            });
                     }
                 }
             }

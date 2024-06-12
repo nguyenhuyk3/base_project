@@ -61,16 +61,33 @@ namespace Motel.Areas.UserAccount.Models
 
         [Display(Name = "Nhớ mật khẩu")]
         public bool RememberMe { get; set; } = false;
-        //public string ReturnUrl
-        //{
-        //    get
-        //    {
-        //        return string.IsNullOrEmpty(ReturnUrl) ? "Post" : ReturnUrl;
-        //    }
-        //    set
-        //    {
-        //        ReturnUrl = value;
-        //    }
-        //}
+        //public string ReturnUrl { get; set; }
+    }
+
+    public class ResetPasswordViewModel
+    {
+        [Required(ErrorMessage = "Email không được để trống")]
+        public string Email { get; set; }
+
+        [Required(ErrorMessage = "Mã thông báo không được để trống")]
+        public string Token { get; set; }
+
+        [Required(ErrorMessage = "Mật khẩu không được để trống")]
+        [DataType(DataType.Password)]
+        [StringLength(100, ErrorMessage = "Mật khẩu phải có ít nhất {2} ký tự.", MinimumLength = 8)]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$", ErrorMessage = "Mật khẩu phải có ít nhất 8 ký tự, bao gồm ít nhất một chữ thường, một số và một ký tự đặc biệt.")]
+        public string Password { get; set; }
+
+        [Required(ErrorMessage = "Xác nhận mật khẩu không được để trống")]
+        [DataType(DataType.Password)]
+        [Compare("Password", ErrorMessage = "Mật khẩu và xác nhận mật khẩu không khớp.")]
+        public string ConfirmPassword { get; set; }
+    }
+
+    public class ForgotPasswordViewModel
+    {
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress(ErrorMessage = "Invalid email address")]
+        public string Email { get; set; }
     }
 }

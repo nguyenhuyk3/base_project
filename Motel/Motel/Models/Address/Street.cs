@@ -7,7 +7,7 @@ namespace WebProject.Models.Address
     public class Street
     {
         [BsonId]
-        [BsonElement("id")]
+        [BsonElement("_id")]
         [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
 

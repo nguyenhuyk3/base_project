@@ -1,4 +1,14 @@
-﻿$(document).ready(function () {
+﻿"use strict";
+
+var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+
+connection
+    .start()
+    .catch(function (err) {
+        return console.error(err.toString());
+    });
+
+$(document).ready(function () {
     $('#infoModal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Nút đã kích hoạt modal
         var postId = button.data('id');
@@ -12,7 +22,6 @@
         $('#modalEmail').text(email);
         $('#modalName').text(name);
 
-        // Thực hiện yêu cầu AJAX
         $.ajax({
             url: '/Customer/Customer/ReadBooking',
             type: 'POST',
@@ -21,13 +30,23 @@
                 postId: postId
             },
             success: function (response) {
-                // Cập nhật trạng thái của tất cả các hàng có cùng senderId
-                $('tr[data-senderid="' + senderId + '"]').each(function () {
-                    var reviewStatus = $(this).find('.review-status');
-                    if (!response.isFirst) {
-                        reviewStatus.html('<p>Bạn đã tư vấn</p>');
-                    }
-                });
+                var reviewStatus = button.closest('tr').find('.review-status');
+                console.log(response);
+
+                if (!response.isFirst) {
+                    reviewStatus.html('<i class="bi bi-check-circle-fill icon-green"></i>');
+
+                    var receiverId = button.data('senderid');
+                    var senderId = document.getElementById('OwnerId').value;
+
+                    console.log(receiverId + " " + senderId);
+
+                    connection
+                        .invoke("SendReviewPermission", senderId, receiverId)
+                        .catch(function (err) {
+                            return console.error(err.toString());
+                        });
+                }
             },
             error: function () {
                 toastNotification({
@@ -35,7 +54,7 @@
                     message: "Có lỗi xảy ra, vui lòng thử lại sau.",
                     type: "error",
                     duration: 5000
-                })
+                });
             }
         });
     });

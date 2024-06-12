@@ -1,6 +1,6 @@
 ﻿// Automatically fill in information from DropList into the address box
 function updateAddress() {
-    var city = document.getElementById("ApiId").options[document.getElementById("ApiId").selectedIndex].text;
+    var city = document.getElementById("ProvinceId").options[document.getElementById("ProvinceId").selectedIndex].text;
 
     var districtElement = document.getElementById("District");
     let district = "";
@@ -22,7 +22,7 @@ function updateAddress() {
     document.getElementById("Address").value = address;
 }
 
-document.getElementById("ApiId").addEventListener("change", updateAddress);
+document.getElementById("ProvinceId").addEventListener("change", updateAddress);
 document.getElementById("District").addEventListener("change", updateAddress);
 document.getElementById("Ward").addEventListener("change", updateAddress);
 document.getElementById("Street").addEventListener("change", updateAddress);
@@ -108,7 +108,13 @@ document.getElementById('FileInput').addEventListener('change', function () {
 
     // Check the number of new files with the number of selected files
     if (selectedImages.length + files.length > 10) {
-        alert('Bạn chỉ được chọn tối đa 10 ảnh!');
+        toastNotification({
+            title: "Thất bại",
+            message: "Bạn chỉ được chọn tối đa 10 ảnh!",
+            type: "error",
+            duration: "5000",
+        });
+
         return;
     }
 

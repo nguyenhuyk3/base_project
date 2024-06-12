@@ -2,7 +2,7 @@
 @using X.PagedList
 @using X.PagedList.Mvc.Core
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model IPagedList<Motel.Models.Post>
+@model Motel.Areas.Post.Models.PostIndex
 
 @{
     ViewData["Title"] = "Index";
@@ -61,15 +61,18 @@
                             <!-- other options -->
                         </select>
                     </div>
-                    <form asp-area="Post" asp-controller="Home" asp-action="SearchBySubjectOnSite"
-                          method="post">
+                    <form asp-area="Post" asp-controller="Home" asp-action="Index"
+                          method="get">
                         @Html.AntiForgeryToken()
                         <div class="col-md-8">
-                            <input type="text" class="form-control" placeholder="Nhập tối đa 5 địa điểm, dự án. Ví dụ: Quận Hoàn Kiếm, Quận Đống Đa"
+                            @*  <input type="text" class="form-control" placeholder="Nhập tối đa 5 địa điểm, dự án. Ví dụ: Quận Hoàn Kiếm, Quận Đống Đa"
+                            id="searchInput" name="term"> *@
+                            <input type="text" class="form-control"
+                                   placeholder="Nhập tối đa 5 địa điểm, dự án. Ví dụ: Quận Hoàn Kiếm, Quận Đống Đa"
                                    id="searchInput" name="term">
                         </div>
                         <div class="col-md-2">
-                            <button type="submit" class="btn btn-danger btn-block" id="searchButton">Tìm kiếm</button>
+                            <button type="submit" class="btn btn-danger btn-block" @* id="searchButton" *@>Tìm kiếm</button>
                         </div>
                     </form>
                     <div class="w-100 mt-3"></div>
@@ -127,29 +130,52 @@
     </div>
 
     <section class="info container mt-4">
-        @foreach (var post in Model)
+        @foreach (var post in Model.Posts)
         {
             <div class="card mt-3">
-                <div class="vip-badge">VIP KIM CƯƠNG</div>
+                @if (post.VipName == "v6" || post.VipName == "v5")
+                {
+                    <div class="vip-badge">VIP KIM CƯƠNG</div>
+                }
+
                 <img src="@post.PostDetail.Images[0].Url" class="d-block w-100" alt="...">
+
                 <div class="card-body">
-                    <h5 class="card-title">@post.SubjectOnSite</h5>
-                    <p class="card-text text-danger font-weight-bold">@post.PostDetail.Price triệu/tháng · @post.PostDetail.HomeInformation.SquareMeter m² · @post.PostDetail.HomeInformation.Bedroom 🛏️ ·  @post.PostDetail.HomeInformation.Toilet 🛁 · @post.PostDetail.AddressDetail.City</p>
-                    <p class="card-text-description">@post.PostDetail.Description</p>
+                    <a asp-area="Post"
+                       asp-controller="Modification"
+                       asp-action="Detail"
+                       asp-route-postId="@post.Id"
+                       class="text-decoration-none text-black">
+                        <h5 class="card-title">@post.SubjectOnSite</h5>
+                        <p class="card-text text-danger font-weight-bold">
+                            @post.PostDetail.Price VND/tháng ·
+                            @post.PostDetail.HomeInformation.SquareMeter m² ·
+                            @post.PostDetail.HomeInformation.Bedroom 🛏️ ·
+                            @post.PostDetail.HomeInformation.Toilet 🛁 ·
+                            @post.PostDetail.AddressDetail.City
+                        </p>
+                        <p class="card-text-description">@post.PostDetail.Description</p>
+                    </a>
                     <div class="d-flex justify-content-between align-items-center">
-                        <div class="media align-items-center">
-                            <img src="https://via.placeholder.com/40" class="mr-3 rounded-circle" alt="Avatar">
-                            <div class="media-body">
-                                <h6 class="mt-0 mb-0">@post.ContactInfo.Name</h6>
-                                <small>Đăng hôm nay</small>
+                        <a asp-area="Customer"
+                           asp-controller="Customer"
+                           asp-action="Info"
+                           asp-route-userAccountId="@post.OwnerId"
+                           class="text-decoration-none text-black">
+                            <div class="media align-items-center">
+                                <img src="https://via.placeholder.com/40" class="mr-3 rounded-circle" alt="Avatar">
+                                <div class="media-body">
+                                    <h6 class="mt-0 mb-0">@post.ContactInfo.Name</h6>
+                                    <small>@post.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss")</small>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                         <div>
                             <form class="favorite-form" data-postid="@post.Id" data-userid="@UserAccountId">
                                 <div class="d-flex justify-content-end align-items-center h-100">
-                                    <input type="hidden" class="post-id" value="@post.Id" />
-                                    <input type="hidden" class="is-liked" value="@post.IsLiked" />
-                                    <button type="button" class="favorite-btn @(post.IsLiked ? "active" : "")">
+                                    @*  <input type="hidden" class="post-id" value="@post.Id" /> *@
+                                    @*   <input type="hidden" class="is-liked" value="@post.IsLiked" /> *@
+                                    <button type="button" class="favorite-btn @(Model.FavoritePosts.Contains(post.Id) ? "active" : "")">
                                         <i class='bx bxs-heart'></i>
                                     </button>
                                 </div>
@@ -157,6 +183,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         }
     </section>
@@ -164,7 +191,7 @@
     <!--Pagination-->
     <div class="pagination justify-content-center">
         <ul class="pagination">
-            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.PageNumbersOnly)
+            @Html.PagedListPager(Model.Posts, page => Url.Action("Index", new { page, term = Model.CurrentTerm }), PagedListRenderOptions.PageNumbersOnly)
         </ul>
     </div>
 </div>
@@ -183,7 +210,7 @@
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: '@Url.Action("GetSubjectOnSite", "Home", new { area = "Post" })',
+                url: '@Url.Action("GetTerm", "Home", new { area = "Post" })',
                 method: 'GET',
                 success: function (data) {
                     let subjects = data.filter(function (item) {
@@ -200,13 +227,12 @@
                 }
             });
         });
-
     </script>
 
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: '@Url.Action("GetSubjectOnSite", "Home", new { area = "Post" })',
+                url: '@Url.Action("GetTerm", "Home", new { area = "Post" })',
                 method: 'GET',
                 success: function (data) {
                     $("#searchInput").autocomplete({

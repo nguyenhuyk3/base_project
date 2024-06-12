@@ -7,13 +7,12 @@ namespace WebProject.Models.Address
     public class Ward
     {
         [BsonId]
-        [BsonElement("id")]
+        [BsonElement("_id")]
         [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
 
         [BsonElement("district_id")]
         [JsonPropertyName("district_id")]
-        [BsonRepresentation(BsonType.ObjectId)]
         public string DistrictId { get; set; } = null!;
 
         [BsonElement("name")]

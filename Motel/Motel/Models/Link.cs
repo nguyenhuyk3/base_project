@@ -19,8 +19,15 @@ namespace Motel.Models
         public string Action { get; set; } = null!;
 
         [BsonRepresentation(BsonType.ObjectId)]
-        [BsonElement("id")]
-        [JsonPropertyName("id")]
-        public string Id { get; set; } = null!;
+        [BsonIgnoreIfNull]
+        [BsonElement("owner_id")]
+        [JsonPropertyName("owner_id")]
+        public string? OwnerId { get; set; } = null;
+
+        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonIgnoreIfNull]
+        [BsonElement("post_id")]
+        [JsonPropertyName("post_id")]
+        public string? PostId { get; set; } = null;
     }
 }

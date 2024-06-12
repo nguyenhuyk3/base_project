@@ -17,7 +17,7 @@ namespace Motel.Models
 
         [BsonElement("address_detail")]
         [JsonPropertyName("address_detail")]
-        public AddressDetail AddressDetail { get; set; } = null!;
+        public AddressDetail? AddressDetail { get; set; } = null;
 
         [BsonElement("home_information")]
         [JsonPropertyName("home_information")]

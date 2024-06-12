@@ -17,9 +17,9 @@ namespace Motel.Models
         [JsonPropertyName("square_meter")]
         public float SquareMeter { get; set; } = 0;
 
-        //[BsonElement("furniture")]
-        //[JsonPropertyName("furniture")]
-        //public string Furniture { get; set; } = "Không nội thất";
+        [BsonElement("furniture")]
+        [JsonPropertyName("furniture")]
+        public string Furniture { get; set; } = null!;
 
         [BsonElement("bedroom")]
         [JsonPropertyName("bedroom")]

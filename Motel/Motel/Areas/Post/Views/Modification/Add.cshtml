@@ -40,9 +40,9 @@
                     <div class="row row-cols-2">
                         <div class="form-group">
                             <label class="control-label my-2" for="ApiId">Tỉnh/Thành phố</label>
-                            <select asp-for="PostAdd.ApiId"
+                            <select asp-for="PostAdd.ProvinceId"
                                     class="form-control rounded-1"
-                                    id="ApiId">
+                                    id="ProvinceId">
                                 <option value=""> </option>
                                 @foreach (var item in ViewBag.Cities)
                                 {
@@ -192,7 +192,7 @@
                     </ul>
                     <button type="button" id="ChooseImageButton" class="btn btn-primary">Chọn ảnh</button>
                     <input type="file" id="FileInput" name="FileInput" accept="image/*" multiple style="display: none;">
-                    <div id="ImagePreview"></div>
+                    <div class="mt-3" id="ImagePreview"></div>
                 </section>
                 <!--Infomation of owner-->
                 <section class="container border border-opacity-50 border-1 p-4 mt-3">

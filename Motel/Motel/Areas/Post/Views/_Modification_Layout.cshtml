@@ -15,12 +15,12 @@
     @RenderSection("_Modification_Layout_Styles", required: false)
 }
 
-<div class="container-fluid mt-5">
+<div class="container-fluid" style="margin-top: 75px;">
     <div class="row-cols-2 d-flex">
         <div class="col-3">
             @await Html.PartialAsync("~/Areas/Customer/Views/Accordion/_Accordion_Partial.cshtml", Model.Owner)
         </div>
-        <div class="col-9">
+        <div class="col-9 mx-3">
             @RenderBody()
         </div>
     </div>

@@ -22,11 +22,11 @@ namespace Motel.Areas.Customer.Controllers
         {
             var contentObject = JsonConvert.DeserializeObject<Response>(response);
             var senderDoc = _databaseConstructor.UserAccountCollection
-                                                .Find(sender => sender.Id == senderId)
-                                                .FirstOrDefault();
+                                                    .Find(sender => sender.Id == senderId)
+                                                    .FirstOrDefault();
             var receiverDoc = _databaseConstructor.UserAccountCollection
-                                                .Find(receiver => receiver.Id == receiverId)
-                                                .FirstOrDefault();
+                                                    .Find(receiver => receiver.Id == receiverId)
+                                                    .FirstOrDefault();
             var review = new Motel.Models.Review
             {
                 SenderId = senderId,
@@ -36,10 +36,11 @@ namespace Motel.Areas.Customer.Controllers
                 Rating = (int)contentObject.Rating
             };
 
-            await _databaseConstructor.ReviewCollection.InsertOneAsync(review);
+            var totalRating = receiverDoc.TotalRating + (int)contentObject.Rating;
+            var numberOfRatings = receiverDoc.PassiveReviews.Count + 1;
+            var newRating = (float)totalRating / numberOfRatings;
 
-            //sender?.ActiveReviews?.Add(review);
-            //receiver?.PassiveReviews?.Add(review);
+            await _databaseConstructor.ReviewCollection.InsertOneAsync(review);
 
             var updateTasks = new List<Task<UpdateResult>>();
 
@@ -56,7 +57,10 @@ namespace Motel.Areas.Customer.Controllers
             {
                 var receiverUpdateTask = _databaseConstructor.UserAccountCollection.UpdateOneAsync(
                     u => u.Id == receiverId,
-                    Builders<Motel.Models.UserAccount>.Update.Push(u => u.PassiveReviews, review));
+                    Builders<Motel.Models.UserAccount>.Update
+                                                            .Push(u => u.PassiveReviews, review)
+                                                            .Set(u => u.TotalRating, totalRating)
+                                                            .Set(u => u.Rating, newRating));
 
                 updateTasks.Add(receiverUpdateTask);
             }

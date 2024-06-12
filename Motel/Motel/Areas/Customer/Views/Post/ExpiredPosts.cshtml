@@ -1,0 +1,192 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Motel.ViewModels.ModificationLayoutViewModel
+
+@{
+    ViewData["Title"] = "Danh sách tin hết hạn";
+    Layout = "~/Areas/Post/Views/_Modification_Layout.cshtml";
+}
+
+@section _Modification_Layout_Styles {
+    <!--Self-written CSS-->
+    <link rel="stylesheet" href="~/css/customer/customer/postinglist/styles.css" />
+}
+
+<div class="container-fluid mt-3">
+    @if (Model.Posts.Count != 0)
+    {
+        <h1 class="mt-1 mb-5">Tin hết hạn</h1>
+
+        <div class="row" id="articles">
+            @foreach (var post in Model.Posts)
+            {
+                <div class="col-md-6 mb-3 article">
+                    <a asp-area="Post" asp-controller="Modification" asp-action="Detail" asp-route-postId="@post.Id">
+                        <div class="card">
+                            @if (post.VipName == "v6")
+                            {
+                                <div class="vip-badge">VIP KIM CƯƠNG</div>
+                            }
+                            <div id="carousel-@post.Id" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    @for (int i = 0; i < post.PostDetail.Images.Count; i++)
+                                    {
+                                        <div class="carousel-item @(i == 0 ? "active" : "")">
+                                            <img src="@post.PostDetail.Images[i].Url" class="d-block w-100" alt="Hình ảnh @(i + 1)">
+                                        </div>
+                                    }
+                                </div>
+                                <a class="carousel-control-prev" href="#carousel-@post.Id" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Trước</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carousel-@post.Id" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Tiếp</span>
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title text-truncate-custom">@post.PostDetail.Description</h5>
+                                <p class="card-text text-danger font-weight-bold">
+                                    @post.PostDetail.PriceString/tháng ·
+                                    @post.PostDetail.HomeInformation.SquareMeter m² ·
+                                    @post.PostDetail.HomeInformation.Bedroom 🛏️ ·
+                                    @post.PostDetail.HomeInformation.Toilet 🛁 ·
+                                    @post.PostDetail.AddressDetail.Address
+                                </p>
+                                <p class="card-text text-truncate-custom">@post.PostDetail.Description</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="media align-items-center">
+                                        <div class="media-body">
+                                            <small>Đăng vào lúc @post.CreatedAt</small>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-danger delete-button"
+                                            data-postid="@post.Id"
+                                            data-toggle="modal"
+                                            data-target="#confirmDeleteModal">
+                                        Xóa
+                                    </button>
+                                    <button class="btn btn-primary"
+                                            data-toggle="modal"
+                                            data-target="#extendPostModal"
+                                            data-postid="@post.Id">
+                                        Gia hạn bài viết
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+            <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirmDeleteModalLabel">Xác nhận xóa bài viết</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Bạn có chắc chắn muốn xóa bài viết này?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                            <button type="button" class="btn btn-danger" id="confirmDelete">Xác nhận xóa</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Confirmation modal-->
+            <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="confirmDeleteModalLabel">Xác nhận xóa bài viết</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Bạn có chắc chắn muốn xóa bài viết này?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                            <button type="button" class="btn btn-danger" id="confirmDelete">Xác nhận xóa</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Extension modal-->
+            <div class="modal fade" id="extendPostModal" tabindex="-1" aria-labelledby="extendPostModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="extendPostModalLabel">Gia hạn bài viết</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Chọn gói gia hạn:</p>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="btn btn-outline-primary btn-block">
+                                        <input type="radio" name="vipOption" class="extend-option" value="v1">1 ngày 10.000VND
+                                    </label>
+                                </div>
+                                <div class="col-4">
+                                    <label class="btn btn-outline-primary btn-block">
+                                        <input type="radio" name="vipOption" class="extend-option" value="v2">2 ngày 20.000VND
+                                    </label>
+                                </div>
+                                <div class="col-4">
+                                    <label class="btn btn-outline-primary btn-block">
+                                        <input type="radio" name="vipOption" class="extend-option" value="v3">3 ngày 30.000VND
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-4">
+                                    <label class="btn btn-outline-primary btn-block">
+                                        <input type="radio" name="vipOption" class="extend-option" value="v4">4 ngày 40.000VND
+                                    </label>
+                                </div>
+                                <div class="col-4">
+                                    <label class="btn btn-outline-primary btn-block">
+                                        <input type="radio" name="vipOption" class="extend-option" value="v5">5 ngày 50.000VND
+                                    </label>
+                                </div>
+                                <div class="col-4">
+                                    <label class="btn btn-outline-primary btn-block">
+                                        <input type="radio" name="vipOption" class="extend-option" value="v6">6 ngày 60.000VND
+                                    </label>
+                                </div>
+                            </div>
+                            <button class="btn btn-success float-end mt-3" id="extendButton">
+                                Gia hạn
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <h2>Không có bài viết nào</h2>
+    }
+    <div class="text-center mt-4" id="loadMoreButtonContainer">
+        <button id="loadMore" class="btn btn-primary">Xem Thêm</button>
+    </div>
+</div>
+
+@section _Modification_Layout {
+    <!--Self-written JS-->
+    <script src="~/js/customer/post/postinglist/showmoreposts.js"></script>
+    <script src="~/js/customer/post/expiredposts/extendpost.js"></script>
+    <script src="~/js/customer/post/expiredposts/deletepost.js"></script>
+}
+
+
+

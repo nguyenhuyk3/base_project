@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Razor.Language.Intermediate;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using Motel.Areas.Post.Models;
+using Motel.Utility.Comparer;
 using Motel.Utility.Database;
 using Motel.ViewModels;
 using Newtonsoft.Json;
@@ -16,26 +18,58 @@ namespace Motel.Areas.Post.Controllers
     public class Home : Controller
     {
         private readonly DatabaseConstructor _databaseConstructor;
+        private readonly Motel.Utility.Sort.Post _postSort;
 
         public Home(IOptions<DatabaseSettings> databaseSettings)
         {
             _databaseConstructor = new DatabaseConstructor(databaseSettings);
+            _postSort = new Utility.Sort.Post(_databaseConstructor);
         }
 
+        [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Index(int? page)
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(int? page, string? term)
         {
+            var userAccountId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var favoritePosts = new List<string>();
+
+            Motel.Models.UserAccount userAccountDoc = null;
+
+            if (!string.IsNullOrEmpty(userAccountId))
+            {
+                userAccountDoc = await _databaseConstructor.UserAccountCollection
+                                                                .Find(f => f.Id == userAccountId)
+                                                                .FirstOrDefaultAsync();
+                if (userAccountDoc.FavoriteList != null)
+                {
+                    favoritePosts = userAccountDoc.FavoriteList;
+                }
+            }
+
             List<Motel.Models.Post> posts = new List<Motel.Models.Post>();
 
-            if (TempData["posts"] != null)
-            {
-                posts = posts = JsonConvert.DeserializeObject<List<Motel.Models.Post>>(TempData["posts"].ToString());
-            }
-            else
+            if (string.IsNullOrEmpty(term))
             {
                 posts = await _databaseConstructor.PostCollection
                                                     .Find(_ => true)
                                                     .ToListAsync();
+            }
+            else
+            {
+                var postBySubjectOnSite = await _databaseConstructor.PostCollection
+                                                    .Find(f => f.SubjectOnSite.Contains(term))
+                                                    .ToListAsync();
+                var postByAddress = await _databaseConstructor.PostCollection
+                                                                .Find(f => f.PostDetail.AddressDetail.Address.Contains(term))
+                                                                .ToListAsync();
+
+                var combinedPosts = postBySubjectOnSite
+                                        .Concat(postByAddress)
+                                        .Distinct(new PostEqualityComparer())
+                                        .ToList();
+
+                posts = combinedPosts;
             }
 
             if (page == null)
@@ -43,17 +77,75 @@ namespace Motel.Areas.Post.Controllers
                 page = 1;
             }
 
-            int pageSize = 1;
-            int pageNum = page ?? 1;
-
+            var pageSize = 1;
+            var pageNum = page ?? 1;
             var pagedPosts = posts?.ToPagedList(pageNum, pageSize);
 
-            return View(pagedPosts);
+            PostIndex model = new PostIndex()
+            {
+                Posts = pagedPosts,
+                FavoritePosts = favoritePosts,
+                CurrentTerm = term
+            };
+
+            return View(model);
         }
 
+        //[AllowAnonymous]
+        //public async Task<IActionResult> Index(int? page)
+        //{
+        //    var userAccountId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        //    Motel.Models.UserAccount userAccountDoc = null;
+
+        //    List<string> favoritePosts = new List<string>();
+
+        //    if (!string.IsNullOrEmpty(userAccountId))
+        //    {
+        //        userAccountDoc = await _databaseConstructor.UserAccountCollection
+        //                                                        .Find(f => f.Id == userAccountId)
+        //                                                        .FirstOrDefaultAsync();
+        //        if (userAccountDoc.FavoriteList != null)
+        //        {
+        //            favoritePosts = userAccountDoc.FavoriteList;
+        //        }
+        //    }
+
+        //    List<Motel.Models.Post> posts = new List<Motel.Models.Post>();
+
+        //    if (TempData["posts"] != null)
+        //    {
+        //        posts = posts = JsonConvert.DeserializeObject<List<Motel.Models.Post>>(TempData["posts"].ToString());
+        //    }
+        //    else
+        //    {
+        //        posts = await _databaseConstructor.PostCollection
+        //                                            .Find(_ => true)
+        //                                            .ToListAsync();
+        //    }
+
+        //    posts = await _postSort.SortPosts(posts);
+
+        //    if (page == null)
+        //    {
+        //        page = 1;
+        //    }
+
+        //    var pageSize = 1;
+        //    var pageNum = page ?? 1;
+        //    var pagedPosts = posts?.ToPagedList(pageNum, pageSize);
+
+        //    PostIndex model = new PostIndex()
+        //    {
+        //        Posts = pagedPosts,
+        //        FavoritePosts = favoritePosts,
+        //    };
+
+        //    return View(model);
+        //}
+
         [HttpGet]
-        [AllowAnonymous]
-        public async Task<IActionResult> GetSubjectOnSite()
+        public async Task<IActionResult> GetTerm()
         {
             try
             {
@@ -67,10 +159,11 @@ namespace Motel.Areas.Post.Controllers
                                                             .ToListAsync();
                 var distinctSubjects = subjects.Where(s => !string.IsNullOrEmpty(s)).Distinct().ToList();
                 var distinctAddresses = addresses.Where(s => !string.IsNullOrEmpty(s)).Distinct().ToList();
-                var combinedList = new List<string>();
+                var combinedSet = new HashSet<string>(distinctSubjects);
 
-                combinedList.AddRange(distinctSubjects);
-                combinedList.AddRange(distinctAddresses);
+                combinedSet.UnionWith(distinctAddresses);
+
+                var combinedList = combinedSet.ToList();
 
                 return Json(combinedList);
             }
@@ -80,44 +173,45 @@ namespace Motel.Areas.Post.Controllers
             }
         }
 
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> SearchBySubjectOnSite(string term)
+        //{
+        //    try
+        //    {
+        //        if (string.IsNullOrEmpty(term))
+        //        {
+        //            return RedirectToAction("Index");
+        //        }
+
+        //        var postsBySubjectOnSite = await _databaseConstructor.PostCollection
+        //                                                                .Find(p => p.SubjectOnSite.Contains(term))
+        //                                                                .ToListAsync();
+        //        var postByAddress = await _databaseConstructor.PostCollection
+        //                                                        .Find(p => p.PostDetail.AddressDetail.Address.Contains(term))
+        //                                                        .ToListAsync();
+        //        var combinedList = new List<Motel.Models.Post>();
+
+        //        combinedList.AddRange(postsBySubjectOnSite);
+        //        combinedList.AddRange(postByAddress);
+        //        combinedList = combinedList
+        //                            .GroupBy(p => p.Id)
+        //                            .Select(g => g.First())
+        //                            .ToList();
+
+        //        TempData["posts"] = JsonConvert.SerializeObject(combinedList);
+
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
+        //    }
+        //}
+
         [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SearchBySubjectOnSite(string term)
-        {
-            try
-            {
-                if (string.IsNullOrEmpty(term))
-                {
-                    return RedirectToAction("Index");
-                }
-
-                var postsBySubjectOnSite = await _databaseConstructor.PostCollection
-                                                                        .Find(p => p.SubjectOnSite.Contains(term))
-                                                                        .ToListAsync();
-                var postByAddress = await _databaseConstructor.PostCollection
-                                                                .Find(p => p.PostDetail.AddressDetail.Address.Contains(term))
-                                                                .ToListAsync();
-                var combinedList = new List<Motel.Models.Post>();
-
-                combinedList.AddRange(postsBySubjectOnSite);
-                combinedList.AddRange(postByAddress);
-                combinedList = combinedList
-                                    .GroupBy(p => p.Id)
-                                    .Select(g => g.First())
-                                    .ToList();
-
-                TempData["posts"] = JsonConvert.SerializeObject(combinedList);
-
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred while processing your request.");
-            }
-        }
-
-        [HttpPost]
+        [Authorize(Policy = "RequireCustomer")]
         public async Task<IActionResult> AddToFavorites(string postId)
         {
             var userAccountId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -136,20 +230,19 @@ namespace Motel.Areas.Post.Controllers
                                                             .Find(p => p.Id == postId)
                                                             .FirstOrDefaultAsync();
 
-                userAccountDoc.PreferenceList ??= new List<Motel.Models.Post>();
+                userAccountDoc.FavoriteList ??= new List<string>();
 
-                if (userAccountDoc.PreferenceList.All(p => p.Id != postId))
+                if (!userAccountDoc.FavoriteList.Contains(postId))
                 {
-                    userAccountDoc.PreferenceList.Add(postDoc);
+                    userAccountDoc.FavoriteList.Add(postId);
 
-                    postDoc.IsLiked = true;
-
-                    var updateDefinition = Builders<Motel.Models.UserAccount>
-                                                    .Update
-                                                    .Set(u => u.PreferenceList, userAccountDoc.PreferenceList);
+                    var userAccountDocUpdateDefinition
+                        = Builders<Motel.Models.UserAccount>
+                                     .Update
+                                     .Set(u => u.FavoriteList, userAccountDoc.FavoriteList);
 
                     await _databaseConstructor.UserAccountCollection
-                                                .UpdateOneAsync(u => u.Id == userAccountId, updateDefinition);
+                                                .UpdateOneAsync(u => u.Id == userAccountId, userAccountDocUpdateDefinition);
 
                     var favoritePost = new
                     {
@@ -175,28 +268,34 @@ namespace Motel.Areas.Post.Controllers
         {
             var userAccountId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
+            if (string.IsNullOrEmpty(userAccountId))
+            {
+                return Unauthorized();
+            }
+
             try
             {
-                var userAccount = await _databaseConstructor.UserAccountCollection
+                var userAccountDoc = await _databaseConstructor.UserAccountCollection
                                                                 .Find(f => f.Id == userAccountId)
                                                                 .FirstOrDefaultAsync();
                 var postDoc = await _databaseConstructor.PostCollection
                                                             .Find(p => p.Id == postId)
                                                             .FirstOrDefaultAsync();
 
-                userAccount.PreferenceList.RemoveAll(p => p.Id == postId);
+                userAccountDoc.FavoriteList.RemoveAll(f => f == postId);
 
-                if (userAccount.PreferenceList.Count == 0)
+                if (userAccountDoc.FavoriteList.Count == 0)
                 {
-                    userAccount.PreferenceList = null;
+                    userAccountDoc.FavoriteList = null;
                 }
 
-                var updateDefinition = Builders<Motel.Models.UserAccount>
-                                        .Update
-                                        .Set(u => u.PreferenceList, userAccount.PreferenceList);
+                var userAccountDocUpdateDefinition
+                                    = Builders<Motel.Models.UserAccount>
+                                                .Update
+                                                .Set(u => u.FavoriteList, userAccountDoc.FavoriteList);
 
                 await _databaseConstructor.UserAccountCollection
-                                            .UpdateOneAsync(u => u.Id == userAccountId, updateDefinition);
+                                            .UpdateOneAsync(u => u.Id == userAccountId, userAccountDocUpdateDefinition);
 
                 return Json(new { success = false });
             }
@@ -204,6 +303,14 @@ namespace Motel.Areas.Post.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
+        }
+
+        public async Task<List<Motel.Models.Post>> GetPostsByIds(List<string> postIds)
+        {
+            var filter = Builders<Motel.Models.Post>.Filter.In(post => post.Id, postIds);
+            var posts = await _databaseConstructor.PostCollection.Find(filter).ToListAsync();
+
+            return posts;
         }
 
         public async Task<IActionResult> FavoritePosts()
@@ -222,15 +329,13 @@ namespace Motel.Areas.Post.Controllers
                 var ownerDoc = await _databaseConstructor.UserAccountCollection
                                                                 .Find(f => f.Id == userAccountId)
                                                                 .FirstOrDefaultAsync();
-                var favoritePosts = ownerDoc.PreferenceList?
-                                                        .GroupBy(f => f.Id)
-                                                        .Select(f => f.First())
-                                                        .ToList();
+                var favoritePosts = await GetPostsByIds(ownerDoc.FavoriteList);
 
                 ModificationLayoutViewModel model = new ModificationLayoutViewModel()
                 {
                     Owner = ownerDoc,
-                    FavoritePosts = favoritePosts
+                    FavoritePosts = favoritePosts,
+                    FavoritePostIds = ownerDoc.FavoriteList
                 };
 
                 return View(model);
@@ -243,9 +348,9 @@ namespace Motel.Areas.Post.Controllers
 
         class FavoritePost
         {
-            public string PostId { get; set; }
-            public string Img { get; set; }
-            public string SubjectOnSite { get; set; }
+            public string PostId { get; set; } = null!;
+            public string Img { get; set; } = null!;
+            public string SubjectOnSite { get; set; } = null!;
             public DateTime CreatedAt { get; set; }
         }
 
@@ -264,15 +369,16 @@ namespace Motel.Areas.Post.Controllers
                                                         .Find(f => f.Id == ownerId)
                                                         .FirstOrDefaultAsync();
 
-            if (ownerDoc.PreferenceList == null)
+            if (ownerDoc.FavoriteList == null)
             {
                 return Json(new { success = false, count = 0 });
             }
             else
             {
-                List<FavoritePost> favoritePosts = new List<FavoritePost>();
+                var favoritePostsOfOwner = await GetPostsByIds(ownerDoc.FavoriteList);
+                var favoritePosts = new List<FavoritePost>();
 
-                foreach (var post in ownerDoc.PreferenceList)
+                foreach (var post in favoritePostsOfOwner)
                 {
                     FavoritePost favoritePost = new FavoritePost()
                     {
@@ -291,31 +397,31 @@ namespace Motel.Areas.Post.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<JsonResult> ShowFavoritePosts()
-        {
-            var ownerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        //[HttpPost]
+        //public async Task<JsonResult> ShowFavoritePosts()
+        //{
+        //    var ownerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            if (string.IsNullOrEmpty(ownerId))
-            {
-                return Json(new { success = false });
-            }
+        //    if (string.IsNullOrEmpty(ownerId))
+        //    {
+        //        return Json(new { success = false });
+        //    }
 
-            var ownerDoc = await _databaseConstructor.UserAccountCollection
-                                                 .Find(f => f.Id == ownerId)
-                                                 .FirstOrDefaultAsync();
+        //    var ownerDoc = await _databaseConstructor.UserAccountCollection
+        //                                                .Find(f => f.Id == ownerId)
+        //                                                .FirstOrDefaultAsync();
 
-            if (ownerDoc.PreferenceList == null)
-            {
-                return Json(new { success = false, count = 0 });
-            }
+        //    if (ownerDoc.FavoriteList == null)
+        //    {
+        //        return Json(new { success = false, count = 0 });
+        //    }
 
-            return Json(new
-            {
-                favoritePosts = ownerDoc.PreferenceList,
-                count = ownerDoc.PreferenceList.Count,
-                sucess = true
-            });
-        }
+        //    return Json(new
+        //    {
+        //        favoritePosts = ownerDoc.PreferenceList,
+        //        count = ownerDoc.PreferenceList.Count,
+        //        sucess = true
+        //    });
+        //}
     }
 }

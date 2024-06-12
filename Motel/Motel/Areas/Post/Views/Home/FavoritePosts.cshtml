@@ -14,8 +14,9 @@
     <link href="https://localhost:7244//css/post/home/favoriteposts/styles.css" rel="stylesheet" />
 }
 
+<h3 class="mt-3 mb-5">Tin đăng đã yêu thích</h3>
+
 <div class="container-fluid">
-    <h3>Tin Đăng Đã Lưu</h3>
     @if (Model.FavoritePosts != null)
     {
         @foreach (var post in Model.FavoritePosts)
@@ -51,7 +52,7 @@
                                     <div type="button" class="favorite-btn mt-2"
                                          data-postid="@post.Id"
                                          data-userid="@ViewData["UserId"]">
-                                        <i class="bx @(post.IsLiked ? "bxs-heart" : "bx-heart")"></i>
+                                        <i class="bx @(Model.FavoritePostIds.Contains(post.Id) ? "bxs-heart" : "bx-heart")"></i>
                                     </div>
                                 </div>
                             </div>

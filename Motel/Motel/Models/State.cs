@@ -20,5 +20,9 @@ namespace Motel.Models
         [BsonElement("is_deleted")]
         [JsonPropertyName("is_deleted")]
         public bool IsDeleted { get; set; } = false;
+
+        [BsonElement("is_authenticated")]
+        [JsonPropertyName("is_authenticated")]
+        public bool IsAuthenticated { get; set; } = false;
     }
 }
